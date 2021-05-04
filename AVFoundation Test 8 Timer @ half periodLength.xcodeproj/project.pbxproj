@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA6C96122641BB5400114B08 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C96112641BB5400114B08 /* Metronome.swift */; };
 		FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */; };
 		FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */; };
 		FA8D6E7F263EF2B5000FFFE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E7E263EF2B5000FFFE3 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA6C96112641BB5400114B08 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		FA8D6E72263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA6C96062641B63100114B08 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D6E9B263EF2E8000FFFE3 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FA6C96082641B64000114B08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
+				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
+				FA6C96112641BB5400114B08 /* Metronome.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA6C960A2641B64600114B08 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */,
+				FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */,
+				FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		FA6C960D2641B66900114B08 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D6E8B263EF2C9000FFFE3 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FA6C960E2641B69300114B08 /* etc. */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D6E7E263EF2B5000FFFE3 /* Assets.xcassets */,
+				FA8D6E80263EF2B5000FFFE3 /* LaunchScreen.storyboard */,
+			);
+			path = etc.;
+			sourceTree = "<group>";
+		};
+		FA6C960F2641B6B600114B08 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */,
+				FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		FA8D6E69263EF2B4000FFFE3 = {
 			isa = PBXGroup;
 			children = (
@@ -72,19 +128,14 @@
 		FA8D6E74263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength */ = {
 			isa = PBXGroup;
 			children = (
-				FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */,
-				FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */,
-				FA8D6E9B263EF2E8000FFFE3 /* ViewController.swift */,
-				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
-				FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */,
-				FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */,
-				FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */,
-				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
-				FA8D6E8B263EF2C9000FFFE3 /* Main.storyboard */,
-				FA8D6E7E263EF2B5000FFFE3 /* Assets.xcassets */,
-				FA8D6E80263EF2B5000FFFE3 /* LaunchScreen.storyboard */,
-				FA8D6E8E263EF2CF000FFFE3 /* sounds */,
+				FA6C960F2641B6B600114B08 /* Delegates */,
+				FA6C96082641B64000114B08 /* Model */,
+				FA6C960D2641B66900114B08 /* View */,
+				FA6C96062641B63100114B08 /* Controller */,
+				FA6C960A2641B64600114B08 /* Helper */,
+				FA6C960E2641B69300114B08 /* etc. */,
 				FA8D6E83263EF2B5000FFFE3 /* Info.plist */,
+				FA8D6E8E263EF2CF000FFFE3 /* sounds */,
 			);
 			path = "AVFoundation Test 8 Timer @ half periodLength";
 			sourceTree = "<group>";
@@ -172,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA6C96122641BB5400114B08 /* Metronome.swift in Sources */,
 				FA8D6E9C263EF2E8000FFFE3 /* ViewController.swift in Sources */,
 				FA8D6E99263EF2D9000FFFE3 /* RoundFunction.swift in Sources */,
 				FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */,

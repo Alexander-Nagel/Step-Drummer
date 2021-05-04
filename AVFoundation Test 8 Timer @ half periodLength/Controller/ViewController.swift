@@ -97,6 +97,9 @@ class ViewController: UIViewController{
         engine.prepare()
         do { try engine.start() } catch { print(error) }
         
+        preScheduleFirstBuffer()
+
+        
     }
     
     func loadBuffers() {
@@ -204,6 +207,8 @@ class ViewController: UIViewController{
             timerEventCounter = 1
             currentBeat = 1
             
+            preScheduleFirstBuffer()
+            
         } else {
             
             //
@@ -214,6 +219,7 @@ class ViewController: UIViewController{
 
             
             scheduleFirstBuffer()
+            
             startTimer()
             
         }
@@ -296,18 +302,25 @@ class ViewController: UIViewController{
     
     private func scheduleFirstBuffer() {
         
-        player.stop()
-        
-        //
-        // pre-load accented main sound (for beat "1") before trigger starts
-        //
-        player.scheduleBuffer(buffer1, at: nil, options: [], completionHandler: nil)
+//        player.stop()
+//
+//        //
+//        // pre-load accented main sound (for beat "1") before trigger starts
+//        //
+//        player.scheduleBuffer(buffer1, at: nil, options: [], completionHandler: nil)
         player.play()
         beat1Label.text = String(currentBeat)
         beatLabels[currentBeat-1].flash(intervalDuration: 0.05, intervals: 2)
         //print("currentBeat = \(currentBeat)")
     }
-    
+ 
+    private func preScheduleFirstBuffer() {
+        
+        player.stop()
+        player.scheduleBuffer(buffer1, at: nil, options: [], completionHandler: nil)
+        player.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
+        
+    }
 }
 
 //
