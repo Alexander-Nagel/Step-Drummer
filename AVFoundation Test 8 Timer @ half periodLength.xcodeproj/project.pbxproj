@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA30280A2642FD7300406561 /* snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028082642FD7300406561 /* snare.wav */; };
+		FA30280B2642FD7300406561 /* kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028092642FD7300406561 /* kick.wav */; };
 		FA6C96122641BB5400114B08 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C96112641BB5400114B08 /* Metronome.swift */; };
 		FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */; };
 		FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA3028082642FD7300406561 /* snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snare.wav; sourceTree = "<group>"; };
+		FA3028092642FD7300406561 /* kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick.wav; sourceTree = "<group>"; };
 		FA6C96112641BB5400114B08 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		FA8D6E72263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 		FA8D6E8E263EF2CF000FFFE3 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FA3028092642FD7300406561 /* kick.wav */,
+				FA3028082642FD7300406561 /* snare.wav */,
 				FA8D6E8F263EF2CF000FFFE3 /* sound2.wav */,
 				FA8D6E90263EF2CF000FFFE3 /* sound1.wav */,
 				FA8D6E91263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav */,
@@ -207,6 +213,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA30280B2642FD7300406561 /* kick.wav in Resources */,
+				FA30280A2642FD7300406561 /* snare.wav in Resources */,
 				FA8D6E93263EF2CF000FFFE3 /* sound1.wav in Resources */,
 				FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */,
 				FA8D6E8C263EF2C9000FFFE3 /* Main.storyboard in Resources */,

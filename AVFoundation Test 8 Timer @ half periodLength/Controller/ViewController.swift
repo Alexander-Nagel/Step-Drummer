@@ -20,20 +20,31 @@ fileprivate let DEBUG = false
 class ViewController: UIViewController{
     
     private var engine = AVAudioEngine()
-    private var player = AVAudioPlayerNode()
+    
+    private var player1 = AVAudioPlayerNode()
+    private var player2 = AVAudioPlayerNode()
+    private var player3 = AVAudioPlayerNode()
+    private var player4 = AVAudioPlayerNode()
+    
     private var mixer = AVAudioMixerNode()
     
     private var bpmDetector = BpmDetector()
 
     private let fileName1 = "sound1.wav"
     private let fileName2 = "sound2.wav"
-    private let fileName3 = "pcm stereo 16 bit 44.1kHz.wav"
+    private let fileName3 = "kick.wav"
+    private let fileName4 = "snare.wav"
+//    private let fileNameLong = "pcm stereo 16 bit 44.1kHz.wav"
     private var file1: AVAudioFile! = nil
     private var file2: AVAudioFile! = nil
     private var file3: AVAudioFile! = nil
+    private var file4: AVAudioFile! = nil
+    
     private var buffer1: AVAudioPCMBuffer! = nil
     private var buffer2: AVAudioPCMBuffer! = nil
     private var buffer3: AVAudioPCMBuffer! = nil
+    private var buffer4: AVAudioPCMBuffer! = nil
+    
     private let sampleRate: Double = 44100
     private var tempo: Tempo?
   
@@ -86,16 +97,25 @@ class ViewController: UIViewController{
         bpmLabel.text = String(tempo!.bpm)
         
         loadBuffers()
-        
+    
         //
         // MARK: Configure + start engine
         //
-        engine.attach(player)
-        //engine.attach(player2)
-        engine.connect(player, to: engine.mainMixerNode, format: file1.processingFormat)
-        //engine.connect(player2, to: engine.mainMixerNode, format: file2.processingFormat)
+        let session = AVAudioSession.sharedInstance()
+        do { try session.setCategory(AVAudioSession.Category.playAndRecord) }
+        catch { fatalError("Can't set Audio Session category") }
+        
+        do { try session.setPreferredIOBufferDuration(2e-3) }
+        catch { fatalError("Can't set preferred buffer size") }
+        print(session.ioBufferDuration)
+
+        engine.attach(player1)
+        engine.attach(player2)
+        engine.connect(player1, to: engine.mainMixerNode, format: file1.processingFormat)
+        engine.connect(player2, to: engine.mainMixerNode, format: file3.processingFormat)
         engine.prepare()
         do { try engine.start() } catch { print(error) }
+        
         
         preScheduleFirstBuffer()
 
@@ -131,18 +151,44 @@ class ViewController: UIViewController{
         } catch { print("Error loading buffer2 \(error)") }
         
         //
-        // MARK: Loading buffer3 (8 seconds!)
+        // MARK: Loading buffer3
         //
         let path3 = Bundle.main.path(forResource: fileName3, ofType: nil)!
         let url3 = URL(fileURLWithPath: path3)
         do {file3 = try AVAudioFile(forReading: url3)
             buffer3 = AVAudioPCMBuffer(
                 pcmFormat: file3.processingFormat,
-                frameCapacity: AVAudioFrameCount(file3.length))
+                frameCapacity: AVAudioFrameCount(tempo!.periodLengthInSamples))
             try file3.read(into: buffer3!)
-            buffer3.frameLength = AVAudioFrameCount(file3.length)
-        } catch { print("Error loading buffer2 \(error)") }
+            buffer3.frameLength = AVAudioFrameCount(tempo!.periodLengthInSamples)
+        } catch { print("Error loading buffer3 \(error)") }
         
+        //
+        // MARK: Loading buffer4
+        //
+        let path4 = Bundle.main.path(forResource: fileName4, ofType: nil)!
+        let url4 = URL(fileURLWithPath: path4)
+        do {file4 = try AVAudioFile(forReading: url4)
+            buffer4 = AVAudioPCMBuffer(
+                pcmFormat: file4.processingFormat,
+                frameCapacity: AVAudioFrameCount(tempo!.periodLengthInSamples))
+            try file4.read(into: buffer4!)
+            buffer4.frameLength = AVAudioFrameCount(tempo!.periodLengthInSamples)
+        } catch { print("Error loading buffer4 \(error)") }
+        
+        //
+        // MARK: Loading buffer3 (8 seconds!)
+        //
+//        let path3 = Bundle.main.path(forResource: fileName3, ofType: nil)!
+//        let url3 = URL(fileURLWithPath: path3)
+//        do {file3 = try AVAudioFile(forReading: url3)
+//            buffer3 = AVAudioPCMBuffer(
+//                pcmFormat: file3.processingFormat,
+//                frameCapacity: AVAudioFrameCount(file3.length))
+//            try file3.read(into: buffer3!)
+//            buffer3.frameLength = AVAudioFrameCount(file3.length)
+//        } catch { print("Error loading buffer2 \(error)") }
+//
     }
     
     //
@@ -218,7 +264,7 @@ class ViewController: UIViewController{
             playPauseButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
 
             
-            scheduleFirstBuffer()
+            startPlayers()
             
             startTimer()
             
@@ -241,7 +287,7 @@ class ViewController: UIViewController{
             // Compute & dump debug values
             //
             // Values at begin of timer event
-            var currentTime = round(self.player.currentTimeInSeconds, toDigits: 3)
+            var currentTime = round(self.player1.currentTimeInSeconds, toDigits: 3)
             if DEBUG {
                 print("@start \tbpm: \(self.tempo!.bpm)\ttimerEvent: \(self.timerEventCounter) \tbeat: \(self.currentBeat) \tcurrTime: \(currentTime)")
             }
@@ -256,7 +302,7 @@ class ViewController: UIViewController{
                 //
                 // Schedule main sound
                 //
-                self.player.scheduleBuffer(self.buffer1, at:nil, options: [], completionHandler: nil)
+                self.player1.scheduleBuffer(self.buffer1, at:nil, options: [], completionHandler: nil)
                 bufferScheduled = "buffer1"
                 
             case 1, 3, 5:
@@ -264,12 +310,34 @@ class ViewController: UIViewController{
                 //
                 // Schedule subdivision sound
                 //
-                self.player.scheduleBuffer(self.buffer2, at:nil, options: [], completionHandler: nil)
+                self.player1.scheduleBuffer(self.buffer2, at:nil, options: [], completionHandler: nil)
                 bufferScheduled = "buffer2"
                 
             default:
                 bufferScheduled = ""
             }
+            
+            switch self.timerEventCounter {
+            case 7, 3:
+                
+                //
+                // Schedule main sound
+                //
+                self.player2.scheduleBuffer(self.buffer3, at:nil, options: [], completionHandler: nil)
+                bufferScheduled = "buffer1"
+                
+            case 1, 5:
+                
+                //
+                // Schedule subdivision sound
+                //
+                self.player2.scheduleBuffer(self.buffer4, at:nil, options: [], completionHandler: nil)
+                bufferScheduled = "buffer2"
+                
+            default:
+                bufferScheduled = ""
+            }
+            
             
             //
             // Display current beat & increase currentBeat (1...4) at 2nd, 4th, 6th & 8th timerEvent
@@ -292,7 +360,7 @@ class ViewController: UIViewController{
            
             // Values at end of timer event
             if DEBUG {
-                currentTime = round(self.player.currentTimeInSeconds, toDigits: 3)
+                currentTime = round(self.player1.currentTimeInSeconds, toDigits: 3)
                 print("@end \tbpm: \(self.tempo!.bpm)\ttimerEvent: \(self.timerEventCounter) \tbeat: \(self.currentBeat) \tcurrTime: \(currentTime) \t\(bufferScheduled)")
                 print()
             }
@@ -300,7 +368,7 @@ class ViewController: UIViewController{
         }
     }
     
-    private func scheduleFirstBuffer() {
+    private func startPlayers() {
         
 //        player.stop()
 //
@@ -308,17 +376,26 @@ class ViewController: UIViewController{
 //        // pre-load accented main sound (for beat "1") before trigger starts
 //        //
 //        player.scheduleBuffer(buffer1, at: nil, options: [], completionHandler: nil)
-        player.play()
+        player1.play()
         beat1Label.text = String(currentBeat)
         beatLabels[currentBeat-1].flash(intervalDuration: 0.05, intervals: 2)
+        
+        player2.play()
+        //beat1Label.text = String(currentBeat)
+        //beatLabels[currentBeat-1].flash(intervalDuration: 0.05, intervals: 2)
+        
         //print("currentBeat = \(currentBeat)")
     }
  
     private func preScheduleFirstBuffer() {
         
-        player.stop()
-        player.scheduleBuffer(buffer1, at: nil, options: [], completionHandler: nil)
-        player.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
+        player1.stop()
+        player1.scheduleBuffer(buffer1, at: nil, options: [], completionHandler: nil)
+        player1.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
+        
+        player2.stop()
+        player2.scheduleBuffer(buffer3, at: nil, options: [], completionHandler: nil)
+        player2.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
         
     }
 }
@@ -408,7 +485,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         //  Start again
         //
         if state == .run {
-            scheduleFirstBuffer()
+            startPlayers()
             startTimer()
         }
         
