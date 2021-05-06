@@ -10,6 +10,14 @@ import UIKit
 //
 struct K {
     
+    struct Sequencer {
+        static let numberOfTracks = 4
+        static let numberOfCellsPerTrack = 16
+        static let sampleRate = 44100.0
+        static let trackColors: [UIColor] = [.red, .green, .yellow, .orange]
+        static let playingCellColor: UIColor = .lightGray
+    }
+    
     struct BpmDtctr {
         static let bpmArrayMaxSize = 200 // BPM is calculated from the last ... values
         static let tapTolerance = 0.2 // if tap tempo varie more than 20%, a new measurement begins

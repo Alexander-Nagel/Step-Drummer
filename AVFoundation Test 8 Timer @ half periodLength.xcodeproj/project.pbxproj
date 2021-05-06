@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
+		FA02EC902644A56000B416D3 /* hihat.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA02EC8F2644A56000B416D3 /* hihat.wav */; };
+		FA02EC942644A84E00B416D3 /* open_hihat.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA02EC932644A84E00B416D3 /* open_hihat.wav */; };
 		FA30280A2642FD7300406561 /* snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028082642FD7300406561 /* snare.wav */; };
 		FA30280B2642FD7300406561 /* kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028092642FD7300406561 /* kick.wav */; };
+		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
 		FA6C96122641BB5400114B08 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C96112641BB5400114B08 /* Metronome.swift */; };
 		FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */; };
 		FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */; };
@@ -24,11 +28,16 @@
 		FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E9F263F3262000FFFE3 /* Constants.swift */; };
 		FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */; };
 		FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */; };
+		FAB22319264413D300708387 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAB22318264413D300708387 /* silence.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
+		FA02EC8F2644A56000B416D3 /* hihat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat.wav; sourceTree = "<group>"; };
+		FA02EC932644A84E00B416D3 /* open_hihat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open_hihat.wav; sourceTree = "<group>"; };
 		FA3028082642FD7300406561 /* snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snare.wav; sourceTree = "<group>"; };
 		FA3028092642FD7300406561 /* kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick.wav; sourceTree = "<group>"; };
+		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		FA6C96112641BB5400114B08 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
 		FA8D6E72263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +55,7 @@
 		FA8D6E9F263F3262000FFFE3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashExtension.swift; sourceTree = "<group>"; };
 		FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BpmDetector.swift; sourceTree = "<group>"; };
+		FAB22318264413D300708387 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,7 @@
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
 				FA6C96112641BB5400114B08 /* Metronome.swift */,
+				FA30281026433C0D00406561 /* Sequencer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -83,6 +94,7 @@
 				FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */,
 				FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */,
 				FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */,
+				FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -147,6 +159,9 @@
 		FA8D6E8E263EF2CF000FFFE3 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FAB22318264413D300708387 /* silence.wav */,
+				FA02EC932644A84E00B416D3 /* open_hihat.wav */,
+				FA02EC8F2644A56000B416D3 /* hihat.wav */,
 				FA3028092642FD7300406561 /* kick.wav */,
 				FA3028082642FD7300406561 /* snare.wav */,
 				FA8D6E8F263EF2CF000FFFE3 /* sound2.wav */,
@@ -213,14 +228,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAB22319264413D300708387 /* silence.wav in Resources */,
 				FA30280B2642FD7300406561 /* kick.wav in Resources */,
 				FA30280A2642FD7300406561 /* snare.wav in Resources */,
 				FA8D6E93263EF2CF000FFFE3 /* sound1.wav in Resources */,
+				FA02EC942644A84E00B416D3 /* open_hihat.wav in Resources */,
 				FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */,
 				FA8D6E8C263EF2C9000FFFE3 /* Main.storyboard in Resources */,
 				FA8D6E92263EF2CF000FFFE3 /* sound2.wav in Resources */,
 				FA8D6E82263EF2B5000FFFE3 /* LaunchScreen.storyboard in Resources */,
 				FA8D6E7F263EF2B5000FFFE3 /* Assets.xcassets in Resources */,
+				FA02EC902644A56000B416D3 /* hihat.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,8 +256,10 @@
 				FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */,
 				FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
+				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
 				FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */,
+				FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
