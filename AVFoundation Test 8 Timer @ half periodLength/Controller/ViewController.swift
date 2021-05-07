@@ -16,6 +16,8 @@ class ViewController: UIViewController{
     private var player2 = AVAudioPlayerNode()
     private var player3 = AVAudioPlayerNode()
     
+    private var players: [AVAudioPlayerNode] = []
+    
     private var mixer = AVAudioMixerNode()
     
     private var bpmDetector = BpmDetector()
@@ -183,11 +185,21 @@ class ViewController: UIViewController{
     
     private var track3Buttons: [UIButton] = []
     
+    private var trackButtonMatrix: [[UIButton]] = []
+    
     @IBOutlet weak var bpmLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var tapButton: UIButton!
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var playPauseButton: UIButton!
+    
+    
+    @IBOutlet weak var mute0Button: UIButton!
+    @IBOutlet weak var mute1Button: UIButton!
+    @IBOutlet weak var mute2Button: UIButton!
+    @IBOutlet weak var mute3Button: UIButton!
+    
+    private var muteButtons: [UIButton] = []
     
     private var controlButtons: [UIView] = []
     
@@ -199,6 +211,8 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
         
         seq.tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         
@@ -217,7 +231,7 @@ class ViewController: UIViewController{
                                .OFF, .OFF, .OFF, .OFF
         ]
         
-        seq.tracks[2].numberOfCellsActive = 16 // click1
+        seq.tracks[2].numberOfCellsActive = 6 // click1
         seq.tracks[2].cells = [.OFF, .OFF, .OFF, .OFF,
                                .ON, .OFF, .OFF, .OFF,
                                .OFF, .OFF, .OFF, .OFF,
@@ -226,10 +240,10 @@ class ViewController: UIViewController{
         ]
         
         seq.tracks[3].numberOfCellsActive = 16 // click2
-        seq.tracks[3].cells = [.ON, .OFF, .OFF, .OFF,
-                               .ON, .OFF, .OFF, .OFF,
-                               .ON, .OFF, .OFF, .OFF,
-                               .ON, .OFF, .OFF, .OFF
+        seq.tracks[3].cells = [.OFF, .OFF, .ON, .OFF,
+                               .OFF, .OFF, .ON, .OFF,
+                               .OFF, .OFF, .ON, .OFF,
+                               .OFF, .OFF, .ON, .OFF
                                
         ]
 
@@ -280,7 +294,13 @@ class ViewController: UIViewController{
                          button3_8, button3_9, button3_10, button3_11,
                          button3_12, button3_13, button3_14, button3_15]
         
+        trackButtonMatrix = [track0Buttons, track1Buttons, track2Buttons, track3Buttons]
+        
+        muteButtons = [mute0Button, mute1Button, mute2Button, mute3Button]
+        
         controlButtons = [playPauseButton, tapButton, bpmLabel, stepper, picker]
+        
+        players = [player0, player1, player2, player3]
         
         //
         // player0: Style & hide all buttons
@@ -365,13 +385,40 @@ class ViewController: UIViewController{
             track3Buttons[i].isHidden = false
         }
         
+        //
+        // muteButtons
+        //
+        for (index, button) in muteButtons.enumerated() {
+            print("Index: \(index)")
+            button.backgroundColor = K.Sequencer.muteButtonColor
+            button.layer.borderColor = K.Sequencer.muteButtonColor.cgColor
+            button.layer.borderWidth = 2
+            button.isHidden = false
+            button.titleLabel?.text = ""
+            button.layer.cornerRadius = 15
+            button.tag = index
+//            button.setBackgroundColor(color: .clear, forState: .normal)
+//            button.setBackgroundColor(color: .orange, forState: .selected)
+        }
+        
+        
         for uielement in controlButtons{
             uielement.backgroundColor = .lightGray
             if let label = uielement as? UILabel {
                 label.textColor = .white
+                label.backgroundColor = K.Sequencer.controlButtonsColor
             }
             if let button = uielement as? UIButton {
                 button.setTitleColor(.white, for: .normal)
+                button.backgroundColor = K.Sequencer.controlButtonsColor
+            }
+            if let stepper = uielement as? UIStepper {
+                stepper.tintColor = .white
+                stepper.backgroundColor = K.Sequencer.controlButtonsColor
+            }
+            if let picker = uielement as? UIPickerView {
+                picker.tintColor = .white
+                picker.backgroundColor = K.Sequencer.controlButtonsColor
             }
            
         }
@@ -1168,6 +1215,44 @@ class ViewController: UIViewController{
     }
     
     //
+    // MARK:- muteButton action
+    //
+    @IBAction func muteButtonPressed(_ sender: UIButton) {
+        
+        seq.tracks[sender.tag].muted = !seq.tracks[sender.tag].muted
+
+        if seq.tracks[sender.tag].muted {
+            //
+            // Mute row / player
+            //
+            players[sender.tag].volume = 0
+            muteButtons[sender.tag].backgroundColor = .none
+            
+            let buttonRowToBeMuted = trackButtonMatrix[sender.tag]
+            for button in buttonRowToBeMuted {
+                button.alpha = 0.3
+            }
+            
+        } else {
+            //
+            // Un-mute row / player
+            //
+            players[sender.tag].volume = 1
+            muteButtons[sender.tag].backgroundColor = K.Sequencer.muteButtonColor
+            
+            let buttonRowToBeUnmuted = trackButtonMatrix[sender.tag]
+            for button in buttonRowToBeUnmuted {
+                button.alpha = 1
+            }
+
+        }
+        
+        print(sender.tag)
+
+        
+    }
+    
+    //
     // MARK:- updateUI
     //
     func updateUI() {
@@ -1284,6 +1369,13 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         tempoChanged(to: newTempo)
         
     }
+    
+    @objc func onDidReceiveData(_ notification: Notification) {
+        print(#function)
+        print(notification)
+        print()
+    }
+    
     
     private func tempoChanged(to newTempo: Double) {
         
