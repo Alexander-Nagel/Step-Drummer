@@ -67,7 +67,7 @@ class BpmDetector {
             if let currentAverageBpmUnwrapped = currentAverageBpm{
                 if !currentAverageBpmUnwrapped.isNaN {
                     if DEBUG { print(#function) }
-                    return round(currentAverageBpmUnwrapped, toDigits:1)
+                    return round(currentAverageBpmUnwrapped, toDigits:0)
                     
                 } else {
                     return 0

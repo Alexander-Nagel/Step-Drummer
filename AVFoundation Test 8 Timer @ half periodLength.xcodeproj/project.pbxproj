@@ -10,6 +10,7 @@
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
 		FA02EC902644A56000B416D3 /* hihat.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA02EC8F2644A56000B416D3 /* hihat.wav */; };
 		FA02EC942644A84E00B416D3 /* open_hihat.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA02EC932644A84E00B416D3 /* open_hihat.wav */; };
+		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
 		FA30280A2642FD7300406561 /* snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028082642FD7300406561 /* snare.wav */; };
 		FA30280B2642FD7300406561 /* kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028092642FD7300406561 /* kick.wav */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
@@ -35,6 +36,7 @@
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
 		FA02EC8F2644A56000B416D3 /* hihat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat.wav; sourceTree = "<group>"; };
 		FA02EC932644A84E00B416D3 /* open_hihat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open_hihat.wav; sourceTree = "<group>"; };
+		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
 		FA3028082642FD7300406561 /* snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snare.wav; sourceTree = "<group>"; };
 		FA3028092642FD7300406561 /* kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick.wav; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
 				FA6C96112641BB5400114B08 /* Metronome.swift */,
 				FA30281026433C0D00406561 /* Sequencer.swift */,
+				FA0E89442646218200B7CD45 /* DefaultPatterns.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */,
 				FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */,
 				FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */,
+				FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
 				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,

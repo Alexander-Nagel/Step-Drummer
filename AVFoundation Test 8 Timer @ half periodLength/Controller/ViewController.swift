@@ -5,7 +5,7 @@
 import UIKit
 import AVFoundation
 
-fileprivate let DEBUG = true
+fileprivate let DEBUG = false
 
 class ViewController: UIViewController{
     
@@ -187,6 +187,7 @@ class ViewController: UIViewController{
     
     private var trackButtonMatrix: [[UIButton]] = []
     
+    @IBOutlet weak var settings: UIButton!
     @IBOutlet weak var bpmLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var tapButton: UIButton!
@@ -216,36 +217,17 @@ class ViewController: UIViewController{
         
         seq.tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         
-        seq.tracks[0].numberOfCellsActive = 16 // kick
-        seq.tracks[0].cells = [
-            .ON, .OFF, .OFF, .ON,
-            .OFF, .OFF, .ON, .OFF,
-            .OFF, .OFF, .OFF, .OFF,
-            .OFF, .ON, .OFF, .OFF
-        ]
+        seq.tracks[0].numberOfCellsActive = DefaultPatterns.kick1.length
+        seq.tracks[0].cells = DefaultPatterns.kick1.data
         
-        seq.tracks[1].numberOfCellsActive = 16 // snare
-        seq.tracks[1].cells = [.OFF, .OFF, .OFF, .OFF,
-                               .ON, .OFF, .OFF, .OFF,
-                               .OFF, .OFF, .OFF, .ON,
-                               .OFF, .OFF, .OFF, .OFF
-        ]
+        seq.tracks[1].numberOfCellsActive = DefaultPatterns.snare1.length
+        seq.tracks[1].cells = DefaultPatterns.snare1.data
         
-        seq.tracks[2].numberOfCellsActive = 6 // click1
-        seq.tracks[2].cells = [.OFF, .OFF, .OFF, .OFF,
-                               .ON, .OFF, .OFF, .OFF,
-                               .OFF, .OFF, .OFF, .OFF,
-                               .ON, .OFF, .OFF, .OFF
-                               
-        ]
+        seq.tracks[2].numberOfCellsActive = DefaultPatterns.closedHihat1.length
+        seq.tracks[2].cells = DefaultPatterns.closedHihat1.data
         
-        seq.tracks[3].numberOfCellsActive = 16 // click2
-        seq.tracks[3].cells = [.OFF, .OFF, .ON, .OFF,
-                               .OFF, .OFF, .ON, .OFF,
-                               .OFF, .OFF, .ON, .OFF,
-                               .OFF, .OFF, .ON, .OFF
-                               
-        ]
+        seq.tracks[3].numberOfCellsActive = DefaultPatterns.openHihat1.length
+        seq.tracks[3].cells = DefaultPatterns.openHihat1.data
 
         print(seq.getPeriodLengthInSamples(forTrack: 0))
         print(seq.getPeriodLengthInSamples(forTrack: 1))
@@ -308,7 +290,7 @@ class ViewController: UIViewController{
         for (index, button) in track0Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.trackColors[0].cgColor
+            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[0].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -328,7 +310,7 @@ class ViewController: UIViewController{
         for (index, button) in track1Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.trackColors[1].cgColor
+            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[1].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -349,7 +331,7 @@ class ViewController: UIViewController{
         for (index, button) in track2Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.trackColors[2].cgColor
+            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[2].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -370,7 +352,7 @@ class ViewController: UIViewController{
         for (index, button) in track3Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.trackColors[3].cgColor
+            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[3].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -391,8 +373,8 @@ class ViewController: UIViewController{
         for (index, button) in muteButtons.enumerated() {
             print("Index: \(index)")
             button.backgroundColor = K.Sequencer.muteButtonColor
-            button.layer.borderColor = K.Sequencer.muteButtonColor.cgColor
-            button.layer.borderWidth = 2
+            button.layer.borderColor = K.Sequencer.muteButtonBorderColor.cgColor
+            button.layer.borderWidth = 1.0
             button.isHidden = false
             button.titleLabel?.text = ""
             button.layer.cornerRadius = 15
@@ -400,6 +382,8 @@ class ViewController: UIViewController{
 //            button.setBackgroundColor(color: .clear, forState: .normal)
 //            button.setBackgroundColor(color: .orange, forState: .selected)
         }
+        
+        //settingsButton.backgroundColor = .red
         
         
         for uielement in controlButtons{
@@ -600,7 +584,7 @@ class ViewController: UIViewController{
     // MARK: Tap button pressed
     //
     
-    @IBAction func tappedPressed(_ sender: UIButton) {
+    @IBAction func tapButtonPressed(_ sender: UIButton) {
         
         tapButton.flash(intervalDuration: 0.05, intervals: 1)
         
@@ -608,18 +592,16 @@ class ViewController: UIViewController{
         if DEBUG {print("newTempo: \(newTempo)")}
         
         if newTempo >= 30.0 && newTempo <= 300.0 {
-            tempoChanged(to: newTempo)
             
+            //state = .stop
+            //playPauseButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
+        
+            seq.tempo?.bpm = newTempo
+            
+            tempoChangedUpdateUITempoElements(to: newTempo, restart: true)
             print(newTempo)
             
-            let leftSide = floor(newTempo)
-            let rightSide = (newTempo - leftSide) * 10
-            
-            print("\(leftSide) \(rightSide)")
-            
-            picker.selectRow(Int(leftSide) - 30, inComponent: 0, animated: true) //
-            picker.selectRow(0, inComponent: 1, animated: true) // decimal point
-            picker.selectRow(Int(rightSide), inComponent: 2, animated: true) // start at 0 as decimal
+            //preScheduleFirstBuffer()
         }
     }
     
@@ -629,7 +611,9 @@ class ViewController: UIViewController{
     //
     @IBAction func stepperPressed(_ sender: UIStepper) {
         
-        tempoChanged(to: stepper.value)
+        let newTempo = stepper.value
+        seq.tempo?.bpm = newTempo
+        tempoChangedUpdateUITempoElements(to: newTempo)
     }
     
     //
@@ -644,7 +628,6 @@ class ViewController: UIViewController{
             //
             // Stop!
             //
-            
             state = .stop
             playPauseButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
             //for label in self.beatLabels {label.text = ""}
@@ -685,7 +668,7 @@ class ViewController: UIViewController{
         
         if DEBUG {
             print("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  ")
-            print()
+            print(buffer0.frameLength, buffer1.frameLength, buffer2.frameLength, buffer3.frameLength)
         }
         
         //
@@ -699,6 +682,15 @@ class ViewController: UIViewController{
             //
             // Values at begin of timer event
             var currentTime = round(self.player0.currentTimeInSeconds, toDigits: 3)
+            
+            print(#function)
+            
+            print(self.buffer0.frameLength, self.buffer0Silence.frameLength, "  ",
+                  self.buffer1.frameLength, self.buffer1Silence.frameLength, "  ",
+                  self.buffer2.frameLength, self.buffer2Silence.frameLength, "  ",
+                  self.buffer3.frameLength, self.buffer3Silence.frameLength
+                  )
+            
             if DEBUG {
                 print("player 0 timerEvent #\(self.timerEventCounter0) at \(self.seq.tempo!.bpm) BPM")
                 print("Entering \ttimerEvent: \(self.timerEventCounter0) \tstep: \(self.currentStep0) \tcurrTime: \(currentTime)")
@@ -1035,6 +1027,14 @@ class ViewController: UIViewController{
     //
     private func preScheduleFirstBuffer() {
         
+        print(#function)
+        
+        print(self.buffer0.frameLength, self.buffer0Silence.frameLength, "  ",
+              self.buffer1.frameLength, self.buffer1Silence.frameLength, "  ",
+              self.buffer2.frameLength, self.buffer2Silence.frameLength, "  ",
+              self.buffer3.frameLength, self.buffer3Silence.frameLength
+              )
+        
         //
         // player0
         //
@@ -1084,7 +1084,7 @@ class ViewController: UIViewController{
             //
             player2.scheduleBuffer(buffer2Silence, at: nil, options: [], completionHandler: nil)
         }
-        player2.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
+        player2.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))
         
         //
         // player3
@@ -1129,7 +1129,7 @@ class ViewController: UIViewController{
             //
             // Set Step
             //
-            track0Buttons[sender.tag].backgroundColor = K.Sequencer.trackColors[0]
+            track0Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[0]
             seq.tracks[0].cells[sender.tag] = .ON
             
         } else {
@@ -1153,7 +1153,7 @@ class ViewController: UIViewController{
             //
             // Set Step
             //
-            track1Buttons[sender.tag].backgroundColor = K.Sequencer.trackColors[1]
+            track1Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[1]
             seq.tracks[1].cells[sender.tag] = .ON
             
         } else {
@@ -1177,7 +1177,7 @@ class ViewController: UIViewController{
             //
             // Set Step
             //
-            track2Buttons[sender.tag].backgroundColor = K.Sequencer.trackColors[2]
+            track2Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[2]
             seq.tracks[2].cells[sender.tag] = .ON
             
         } else {
@@ -1201,7 +1201,7 @@ class ViewController: UIViewController{
             //
             // Set Step
             //
-            track3Buttons[sender.tag].backgroundColor = K.Sequencer.trackColors[3]
+            track3Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[3]
             seq.tracks[3].cells[sender.tag] = .ON
             
         } else {
@@ -1264,7 +1264,7 @@ class ViewController: UIViewController{
             
             if seq.tracks[0].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.trackColors[0]
+                button.backgroundColor = K.Sequencer.playerButtonColors[0]
                 
             } else {
                 
@@ -1275,7 +1275,7 @@ class ViewController: UIViewController{
             
             if seq.tracks[1].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.trackColors[1]
+                button.backgroundColor = K.Sequencer.playerButtonColors[1]
                 
             } else {
                 
@@ -1286,7 +1286,7 @@ class ViewController: UIViewController{
             
             if seq.tracks[2].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.trackColors[2]
+                button.backgroundColor = K.Sequencer.playerButtonColors[2]
                 
             } else {
                 
@@ -1297,7 +1297,7 @@ class ViewController: UIViewController{
             
             if seq.tracks[3].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.trackColors[3]
+                button.backgroundColor = K.Sequencer.playerButtonColors[3]
                 
             } else {
                 
@@ -1306,6 +1306,12 @@ class ViewController: UIViewController{
         }
         
     }
+    
+    @IBAction func settingsPressed(_ sender: UIButton) {
+        
+        print(#function)
+    }
+    
 }
 
 //
@@ -1339,11 +1345,11 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         if component == 0 {
-            return 60
+            return 50
         } else if component == 1 {
             return 15
         } else if component == 2 {
-            return 60
+            return 50
         } else {
             print("This is quite unlikely to happen.")
             return 30
@@ -1366,7 +1372,8 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         let newTempo = Double(pickedLeft) + Double(pickedRight) / 10.0
         if DEBUG {print(newTempo)}
-        tempoChanged(to: newTempo)
+        seq.tempo?.bpm = newTempo
+        tempoChangedUpdateUITempoElements(to: newTempo)
         
     }
     
@@ -1377,18 +1384,34 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     
-    private func tempoChanged(to newTempo: Double) {
+    private func tempoChangedUpdateUITempoElements(to newTempo: Double, restart: Bool? = true) {
         
         //
         // Set new tempo, display value, load new buffers
         //
         seq.tempo?.bpm = newTempo
         bpmLabel.text = String(seq.tempo!.bpm)
+        
+        //
+        // Update stepper display
+        //
+        stepper.value = seq.tempo!.bpm
   
+        //
+        // Update picker display
+        //
+        let leftSide = floor(newTempo)
+        let rightSide = (newTempo - leftSide) * 10
+        print("\(leftSide) \(rightSide)")
+        picker.selectRow(Int(leftSide) - 30, inComponent: 0, animated: true) //
+        picker.selectRow(0, inComponent: 1, animated: true) // decimal point
+        picker.selectRow(Int(rightSide), inComponent: 2, animated: true) // start at 0 as decimal
+        
+        //
+        // Load new buffers
+        //
         loadBuffers()
 
-        //        for label in self.beatLabels {label.text = ""}
-        
         //
         // Stop timer
         //

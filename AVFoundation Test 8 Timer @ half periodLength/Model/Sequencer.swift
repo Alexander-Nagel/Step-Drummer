@@ -80,3 +80,8 @@ struct Sequencer {
         return length
     }
 }
+
+struct Pattern {
+    var length: Int
+    var data: [Cell]
+}

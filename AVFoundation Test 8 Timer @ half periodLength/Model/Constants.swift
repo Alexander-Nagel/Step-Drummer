@@ -14,8 +14,10 @@ struct K {
         static let numberOfTracks = 4
         static let numberOfCellsPerTrack = 16
         static let sampleRate = 44100.0
-        static let trackColors: [UIColor] = [.orange, .orange, .orange, .orange]
+        static let playerButtonColors: [UIColor] = [.orange, .orange, .orange, .orange]
+        static let playerButtonBorderColors: [UIColor] = [.lightGray, .lightGray, .lightGray, .lightGray]
         static let muteButtonColor: UIColor = .red
+        static let muteButtonBorderColor: UIColor = .lightGray
         static let controlButtonsColor: UIColor = .red
         static let playingCellColor: UIColor = .lightGray
     }
