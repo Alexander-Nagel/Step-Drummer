@@ -22,32 +22,41 @@ class ViewController: UIViewController{
     
     private var bpmDetector = BpmDetector()
     
-    private let fileName0 = "sound1.wav"
-    private let fileName1 = "sound2.wav"
-    private let fileName2 = "kick.wav"
-    private let fileName3 = "snare.wav"
-    private let fileName4 = "hihat.wav"
-    private let fileName5 = "open_hihat.wav"
+    //private let fileName0 = "sound1.wav"
+    //private let fileName1 = "sound2.wav"
+//    private let fileName0 = "kick_2156samples.wav"
+//    private let fileName1 = "snare_2152samples.wav"
+//    private let fileName2 = "hihat_2154samples.wav"
+//    private let fileName3 = "open_hihat_2181samples.wav"
     private let fileNameSilence = "silence.wav"
+    private let fileNames = ["kick_2156samples.wav",
+                             "snare_2152samples.wav",
+                             "hihat_2154samples.wav",
+                             "open_hihat_2181samples.wav"]
     
     //    private let fileNameLong = "pcm stereo 16 bit 44.1kHz.wav"
-    private var file0: AVAudioFile! = nil
-    private var file1: AVAudioFile! = nil
-    private var file2: AVAudioFile! = nil
-    private var file3: AVAudioFile! = nil
+//    private var file0: AVAudioFile! = nil
+//    private var file1: AVAudioFile! = nil
+//    private var file2: AVAudioFile! = nil
+//    private var file3: AVAudioFile! = nil
+    private var files =  [AVAudioFile]()
+    
     private var fileSilence: AVAudioFile! = nil
     
-    private var buffer0: AVAudioPCMBuffer! = nil
-    private var buffer1: AVAudioPCMBuffer! = nil
-    private var buffer2: AVAudioPCMBuffer! = nil
-    private var buffer3: AVAudioPCMBuffer! = nil
-    private var buffer0Silence: AVAudioPCMBuffer! = nil
-    private var buffer1Silence: AVAudioPCMBuffer! = nil
-    private var buffer2Silence: AVAudioPCMBuffer! = nil
-    private var buffer3Silence: AVAudioPCMBuffer! = nil
+//    private var buffer0: AVAudioPCMBuffer! = nil
+//    private var buffer1: AVAudioPCMBuffer! = nil
+//    private var buffer2: AVAudioPCMBuffer! = nil
+//    private var buffer3: AVAudioPCMBuffer! = nil
     
-    private var buffers = [AVAudioPCMBuffer]()
+    private var soundBuffers = [AVAudioPCMBuffer]()
     
+//    private var buffer0Silence: AVAudioPCMBuffer! = nil
+//    private var buffer1Silence: AVAudioPCMBuffer! = nil
+//    private var buffer2Silence: AVAudioPCMBuffer! = nil
+//    private var buffer3Silence: AVAudioPCMBuffer! = nil
+    
+    private var silenceBuffers = [AVAudioPCMBuffer]()
+
     //private let sampleRate: Double = 44100
     //private var tempo: Tempo?
     
@@ -77,25 +86,6 @@ class ViewController: UIViewController{
     private let pickerRightDecimals = 0...9 // 10 elements
     private var pickedLeft: Int = 120
     private var pickedRight: Int = 0
-    
-    
-//    @IBOutlet weak var beat1Label: UILabel!
-//    @IBOutlet weak var beat2Label: UILabel!
-//    @IBOutlet weak var beat3Label: UILabel!
-//    @IBOutlet weak var beat4Label: UILabel!
-//    @IBOutlet weak var beat5Label: UILabel!
-//    @IBOutlet weak var beat6Label: UILabel!
-//    @IBOutlet weak var beat7Label: UILabel!
-//    @IBOutlet weak var beat8Label: UILabel!
-    
-//    @IBOutlet weak var beat1LabelB: UILabel!
-//    @IBOutlet weak var beat2LabelB: UILabel!
-//    @IBOutlet weak var beat3LabelB: UILabel!
-//    @IBOutlet weak var beat4LabelB: UILabel!
-//    @IBOutlet weak var beat5LabelB: UILabel!
-//    @IBOutlet weak var beat6LabelB: UILabel!
-//    @IBOutlet weak var beat7LabelB: UILabel!
-//    @IBOutlet weak var beat8LabelB: UILabel!
     
     //
     // player0
@@ -189,7 +179,11 @@ class ViewController: UIViewController{
     
     @IBOutlet weak var settings: UIButton!
     @IBOutlet weak var bpmLabel: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
+    
+    @IBOutlet weak var bpmStepper: UIStepper!
+    @IBOutlet weak var bpmStepperView: UIView!
+   
+    
     @IBOutlet weak var tapButton: UIButton!
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -202,6 +196,22 @@ class ViewController: UIViewController{
     
     private var muteButtons: [UIButton] = []
     
+    
+    @IBOutlet weak var stepper0Button: UIStepper!
+    @IBOutlet weak var stepper1Button: UIStepper!
+    @IBOutlet weak var stepper2Button: UIStepper!
+    @IBOutlet weak var stepper3Button: UIStepper!
+    
+    private var stepperButtons: [UIStepper] = []
+    
+    @IBOutlet weak var stepper0View: UIView!
+    @IBOutlet weak var stepper1View: UIView!
+    @IBOutlet weak var stepper2View: UIView!
+    @IBOutlet weak var stepper3View: UIView!
+    
+    private var stepperViews: [UIView] = []
+    
+    
     private var controlButtons: [UIView] = []
     
     //private var beatLabels: [UILabel] = []
@@ -213,7 +223,11 @@ class ViewController: UIViewController{
         
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
+        files = [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()]
+        soundBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
+        silenceBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
+        
+       // NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
         
         seq.tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         
@@ -280,7 +294,11 @@ class ViewController: UIViewController{
         
         muteButtons = [mute0Button, mute1Button, mute2Button, mute3Button]
         
-        controlButtons = [playPauseButton, tapButton, bpmLabel, stepper, picker]
+        stepperButtons = [stepper0Button, stepper1Button, stepper2Button, stepper3Button]
+        
+        stepperViews = [stepper0View, stepper1View, stepper2View, stepper3View ]
+        
+        controlButtons = [playPauseButton, tapButton, bpmLabel, bpmStepper, picker]
         
         players = [player0, player1, player2, player3]
         
@@ -379,8 +397,19 @@ class ViewController: UIViewController{
             button.titleLabel?.text = ""
             button.layer.cornerRadius = 15
             button.tag = index
-//            button.setBackgroundColor(color: .clear, forState: .normal)
-//            button.setBackgroundColor(color: .orange, forState: .selected)
+        }
+        
+        for view in stepperViews {
+            view.backgroundColor = K.Sequencer.muteButtonColor
+        }
+        for (index, stepper) in stepperButtons.enumerated() {
+            stepper.backgroundColor = K.Sequencer.muteButtonColor
+            
+            stepper.minimumValue = 1
+            stepper.maximumValue = 16
+            stepper.stepValue = 1
+            stepper.tag = index
+            stepper.value = Double(seq.tracks[index].numberOfCellsActive)
         }
         
         //settingsButton.backgroundColor = .red
@@ -397,26 +426,36 @@ class ViewController: UIViewController{
                 button.backgroundColor = K.Sequencer.controlButtonsColor
             }
             if let stepper = uielement as? UIStepper {
-                stepper.tintColor = .white
+                //stepper.tintColor = .white
                 stepper.backgroundColor = K.Sequencer.controlButtonsColor
             }
             if let picker = uielement as? UIPickerView {
                 picker.tintColor = .white
                 picker.backgroundColor = K.Sequencer.controlButtonsColor
             }
+            tapButton.setTitleColor(.black, for: .normal)
            
         }
+        //stepperOuterStackView.backgroundColor = .white
+        //stepperInnerStackView.backgroundColor = .green
+        //stepperView.backgroundColor = K.Sequencer.controlButtonsColor
         
         
         updateUI()
         
-        stepper.minimumValue = 30
-        stepper.maximumValue = 300
-        stepper.stepValue = 1
-        stepper.value = seq.tempo!.bpm
+        bpmStepper.minimumValue = 30
+        bpmStepper.maximumValue = 300
+        bpmStepper.stepValue = 1
+        bpmStepper.value = seq.tempo!.bpm
         bpmLabel.text = String(seq.tempo!.bpm)
+        bpmStepperView.backgroundColor = K.Sequencer.controlButtonsColor
         
-        loadBuffers()
+        //loadBuffersTO_BE_REFACTORED()
+        
+        loadBuffer(ofPlayer: 0, withFile: 0)
+        loadBuffer(ofPlayer: 1, withFile: 1)
+        loadBuffer(ofPlayer: 2, withFile: 2)
+        loadBuffer(ofPlayer: 3, withFile: 3)
         
         
         //        buffers = [buffer0, buffer0Silence,
@@ -447,10 +486,10 @@ class ViewController: UIViewController{
         engine.attach(player2)
         engine.attach(player3)
         
-        engine.connect(player0, to: engine.mainMixerNode, format: file0.processingFormat)
-        engine.connect(player1, to: engine.mainMixerNode, format: file1.processingFormat)
-        engine.connect(player2, to: engine.mainMixerNode, format: file2.processingFormat)
-        engine.connect(player3, to: engine.mainMixerNode, format: file3.processingFormat)
+        engine.connect(player0, to: engine.mainMixerNode, format: files[0].processingFormat)
+        engine.connect(player1, to: engine.mainMixerNode, format: files[1].processingFormat)
+        engine.connect(player2, to: engine.mainMixerNode, format: files[2].processingFormat)
+        engine.connect(player3, to: engine.mainMixerNode, format: files[3].processingFormat)
         
         engine.prepare()
         do { try engine.start() } catch { print(error) }
@@ -461,58 +500,58 @@ class ViewController: UIViewController{
         
     }
     
-    func loadBuffers() {
+    func loadBuffersTO_BE_REFACTORED() {
         
         //
         // MARK: Loading buffer0 - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
         //
-        let path0 = Bundle.main.path(forResource: fileName2, ofType: nil)!
+        let path0 = Bundle.main.path(forResource: fileNames[0], ofType: nil)!
         let url0 = URL(fileURLWithPath: path0)
-        do {file0 = try AVAudioFile(forReading: url0)
-            buffer0 = AVAudioPCMBuffer(
-                pcmFormat: file0.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))
-            try file0.read(into: buffer0!)
-            buffer0.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0))
+        do {files[0] = try AVAudioFile(forReading: url0)
+            soundBuffers[0] = AVAudioPCMBuffer(
+                pcmFormat: files[0].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))!
+            try files[0].read(into: soundBuffers[0])
+            soundBuffers[0].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0))
         } catch { print("Error loading buffer0 \(error)") }
         
         //
         // MARK: Loading buffer1 - etc...
         //
-        let path1 = Bundle.main.path(forResource: fileName3, ofType: nil)!
+        let path1 = Bundle.main.path(forResource: fileNames[1], ofType: nil)!
         let url1 = URL(fileURLWithPath: path1)
-        do {file1 = try AVAudioFile(forReading: url1)
-            buffer1 = AVAudioPCMBuffer(
-                pcmFormat: file1.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
-            try file1.read(into: buffer1!)
-            buffer1.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1))
+        do {files[1] = try AVAudioFile(forReading: url1)
+            soundBuffers[1] = AVAudioPCMBuffer(
+                pcmFormat: files[1].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))!
+            try files[1].read(into: soundBuffers[1])
+            soundBuffers[1].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1))
         } catch { print("Error loading buffer1 \(error)") }
         
         //
         // MARK: Loading buffer2
         //
-        let path2 = Bundle.main.path(forResource: fileName4, ofType: nil)!
+        let path2 = Bundle.main.path(forResource: fileNames[2], ofType: nil)!
         let url2 = URL(fileURLWithPath: path2)
-        do {file2 = try AVAudioFile(forReading: url2)
-            buffer2 = AVAudioPCMBuffer(
-                pcmFormat: file2.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))
-            try file2.read(into: buffer2!)
-            buffer2.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2))
+        do {files[2] = try AVAudioFile(forReading: url2)
+            soundBuffers[2] = AVAudioPCMBuffer(
+                pcmFormat: files[2].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))!
+            try files[2].read(into: soundBuffers[2])
+            soundBuffers[2].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2))
         } catch { print("Error loading buffer2 \(error)") }
         
         //
         // MARK: Loading buffer3
         //
-        let path3 = Bundle.main.path(forResource: fileName5, ofType: nil)!
+        let path3 = Bundle.main.path(forResource: fileNames[3], ofType: nil)!
         let url3 = URL(fileURLWithPath: path3)
-        do {file3 = try AVAudioFile(forReading: url3)
-            buffer3 = AVAudioPCMBuffer(
-                pcmFormat: file3.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3)))
-            try file3.read(into: buffer3!)
-            buffer3.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3))
+        do {files[3] = try AVAudioFile(forReading: url3)
+            soundBuffers[3] = AVAudioPCMBuffer(
+                pcmFormat: files[3].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3)))!
+            try files[3].read(into: soundBuffers[3])
+            soundBuffers[3].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3))
         } catch { print("Error loading buffer3 \(error)") }
         
         //
@@ -522,11 +561,11 @@ class ViewController: UIViewController{
         let urlSilence0 = URL(fileURLWithPath: pathSilence0)
         do {
             fileSilence = try AVAudioFile(forReading: urlSilence0)
-            buffer0Silence = AVAudioPCMBuffer(
+            silenceBuffers[0] = AVAudioPCMBuffer(
                 pcmFormat: fileSilence.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))
-            try fileSilence.read(into: buffer0Silence!)
-            buffer0Silence.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0))
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))!
+            try fileSilence.read(into: silenceBuffers[0])
+            silenceBuffers[0].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0))
         } catch {
             print("Error loading buffer0 \(error)")
         }
@@ -538,11 +577,11 @@ class ViewController: UIViewController{
         let urlSilence1 = URL(fileURLWithPath: pathSilence1)
         do {
             fileSilence = try AVAudioFile(forReading: urlSilence1)
-            buffer1Silence = AVAudioPCMBuffer(
+            silenceBuffers[1] = AVAudioPCMBuffer(
                 pcmFormat: fileSilence.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
-            try fileSilence.read(into: buffer1Silence!)
-            buffer1Silence.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1))
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))!
+            try fileSilence.read(into: silenceBuffers[1])
+            silenceBuffers[1].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1))
         } catch {
             print("Error loading buffer1 \(error)")
         }
@@ -554,11 +593,11 @@ class ViewController: UIViewController{
         let urlSilence2 = URL(fileURLWithPath: pathSilence2)
         do {
             fileSilence = try AVAudioFile(forReading: urlSilence2)
-            buffer2Silence = AVAudioPCMBuffer(
+            silenceBuffers[2] = AVAudioPCMBuffer(
                 pcmFormat: fileSilence.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))
-            try fileSilence.read(into: buffer2Silence!)
-            buffer2Silence.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2))
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))!
+            try fileSilence.read(into: silenceBuffers[2])
+            silenceBuffers[2].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2))
         } catch {
             print("Error loading buffer2 \(error)")
         }
@@ -570,15 +609,55 @@ class ViewController: UIViewController{
         let urlSilence3 = URL(fileURLWithPath: pathSilence3)
         do {
             fileSilence = try AVAudioFile(forReading: urlSilence3)
-            buffer3Silence = AVAudioPCMBuffer(
+            silenceBuffers[3] = AVAudioPCMBuffer(
                 pcmFormat: fileSilence.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3)))
-            try fileSilence.read(into: buffer3Silence!)
-            buffer3Silence.frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3))
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3)))!
+            try fileSilence.read(into: silenceBuffers[3])
+            silenceBuffers[3].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3))
         } catch {
             print("Error loading buffer3 \(error)")
         }
     }
+    
+    //
+    // load buffers (with parameter)
+    //
+    func loadBuffer(ofPlayer player_to_be_loaded: Int, withFile file_to_load: Int) {
+        
+        //
+        // MARK: Loading buffer - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
+        //
+        let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
+        let url = URL(fileURLWithPath: path)
+        do {files[file_to_load] = try AVAudioFile(forReading: url)
+            soundBuffers[player_to_be_loaded] = AVAudioPCMBuffer(
+                pcmFormat: files[file_to_load].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))!
+            try files[file_to_load].read(into: soundBuffers[player_to_be_loaded])
+            soundBuffers[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
+        } catch { print("Error loading buffer \(player_to_be_loaded) \(error)") }
+
+        
+        //
+        // MARK: Loading silence buffer
+        //
+        let pathSilence = Bundle.main.path(forResource: fileNameSilence, ofType: nil)!
+        let urlSilence = URL(fileURLWithPath: pathSilence)
+        do {
+            fileSilence = try AVAudioFile(forReading: urlSilence)
+            silenceBuffers[player_to_be_loaded] = AVAudioPCMBuffer(
+                pcmFormat: fileSilence.processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded)))!
+            try fileSilence.read(into: silenceBuffers[player_to_be_loaded])
+            silenceBuffers[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
+        } catch {
+            print("Error loading buffer0 \(player_to_be_loaded) \(error)")
+        }
+
+        
+    }
+    
+    
     
     //
     // MARK: Tap button pressed
@@ -611,7 +690,7 @@ class ViewController: UIViewController{
     //
     @IBAction func stepperPressed(_ sender: UIStepper) {
         
-        let newTempo = stepper.value
+        let newTempo = bpmStepper.value
         seq.tempo?.bpm = newTempo
         tempoChangedUpdateUITempoElements(to: newTempo)
     }
@@ -668,7 +747,7 @@ class ViewController: UIViewController{
         
         if DEBUG {
             print("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  ")
-            print(buffer0.frameLength, buffer1.frameLength, buffer2.frameLength, buffer3.frameLength)
+            print(soundBuffers[0].frameLength, soundBuffers[1].frameLength, soundBuffers[2].frameLength, soundBuffers[3].frameLength)
         }
         
         //
@@ -685,10 +764,10 @@ class ViewController: UIViewController{
             
             print(#function)
             
-            print(self.buffer0.frameLength, self.buffer0Silence.frameLength, "  ",
-                  self.buffer1.frameLength, self.buffer1Silence.frameLength, "  ",
-                  self.buffer2.frameLength, self.buffer2Silence.frameLength, "  ",
-                  self.buffer3.frameLength, self.buffer3Silence.frameLength
+            print(self.soundBuffers[0].frameLength, self.silenceBuffers[0].frameLength, "  ",
+                  self.soundBuffers[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
+                  self.soundBuffers[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
+                  self.soundBuffers[3].frameLength, self.silenceBuffers[3].frameLength
                   )
             
             if DEBUG {
@@ -712,10 +791,10 @@ class ViewController: UIViewController{
                 let nextCell = self.seq.tracks[0].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.player0.scheduleBuffer(self.buffer0, at: nil, options: [], completionHandler: nil)
+                    self.player0.scheduleBuffer(self.soundBuffers[0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer0"
                 } else {
-                    self.player0.scheduleBuffer(self.buffer0Silence, at: nil, options: [], completionHandler: nil)
+                    self.player0.scheduleBuffer(self.silenceBuffers[0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer0Silence"
                 }
             } else {
@@ -790,10 +869,10 @@ class ViewController: UIViewController{
                 let nextCell = self.seq.tracks[1].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.player1.scheduleBuffer(self.buffer1, at: nil, options: [], completionHandler: nil)
+                    self.player1.scheduleBuffer(self.soundBuffers[1], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer1"
                 } else {
-                    self.player1.scheduleBuffer(self.buffer1Silence, at: nil, options: [], completionHandler: nil)
+                    self.player1.scheduleBuffer(self.silenceBuffers[1], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer1Silence"
                 }
             } else {
@@ -865,10 +944,10 @@ class ViewController: UIViewController{
                 let nextCell = self.seq.tracks[2].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.player2.scheduleBuffer(self.buffer2, at: nil, options: [], completionHandler: nil)
+                    self.player2.scheduleBuffer(self.soundBuffers[2], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer2"
                 } else {
-                    self.player2.scheduleBuffer(self.buffer2Silence, at: nil, options: [], completionHandler: nil)
+                    self.player2.scheduleBuffer(self.silenceBuffers[2], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer2Silence"
                 }
             } else {
@@ -943,10 +1022,10 @@ class ViewController: UIViewController{
                 let nextCell = self.seq.tracks[3].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.player3.scheduleBuffer(self.buffer3, at: nil, options: [], completionHandler: nil)
+                    self.player3.scheduleBuffer(self.soundBuffers[3], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer3"
                 } else {
-                    self.player3.scheduleBuffer(self.buffer3Silence, at: nil, options: [], completionHandler: nil)
+                    self.player3.scheduleBuffer(self.silenceBuffers[3], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer3Silence"
                 }
             } else {
@@ -1029,10 +1108,10 @@ class ViewController: UIViewController{
         
         print(#function)
         
-        print(self.buffer0.frameLength, self.buffer0Silence.frameLength, "  ",
-              self.buffer1.frameLength, self.buffer1Silence.frameLength, "  ",
-              self.buffer2.frameLength, self.buffer2Silence.frameLength, "  ",
-              self.buffer3.frameLength, self.buffer3Silence.frameLength
+        print(self.soundBuffers[0].frameLength, self.silenceBuffers[0].frameLength, "  ",
+              self.soundBuffers[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
+              self.soundBuffers[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
+              self.soundBuffers[3].frameLength, self.silenceBuffers[3].frameLength
               )
         
         //
@@ -1043,12 +1122,12 @@ class ViewController: UIViewController{
             //
             // Schedule sound
             //
-            player0.scheduleBuffer(buffer0, at: nil, options: [], completionHandler: nil)
+            player0.scheduleBuffer(soundBuffers[0], at: nil, options: [], completionHandler: nil)
         } else {
             //
             // Schedule silence
             //
-            player0.scheduleBuffer(buffer0Silence, at: nil, options: [], completionHandler: nil)
+            player0.scheduleBuffer(silenceBuffers[0], at: nil, options: [], completionHandler: nil)
         }
         player0.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))
 
@@ -1060,12 +1139,12 @@ class ViewController: UIViewController{
             //
             // Schedule sound
             //
-            player1.scheduleBuffer(buffer1, at: nil, options: [], completionHandler: nil)
+            player1.scheduleBuffer(soundBuffers[1], at: nil, options: [], completionHandler: nil)
         } else {
             //
             // Schedule silence
             //
-            player1.scheduleBuffer(buffer1Silence, at: nil, options: [], completionHandler: nil)
+            player1.scheduleBuffer(silenceBuffers[1], at: nil, options: [], completionHandler: nil)
         }
         player1.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
 
@@ -1077,12 +1156,12 @@ class ViewController: UIViewController{
             //
             // Schedule sound
             //
-            player2.scheduleBuffer(buffer2, at: nil, options: [], completionHandler: nil)
+            player2.scheduleBuffer(soundBuffers[2], at: nil, options: [], completionHandler: nil)
         } else {
             //
             // Schedule silence
             //
-            player2.scheduleBuffer(buffer2Silence, at: nil, options: [], completionHandler: nil)
+            player2.scheduleBuffer(silenceBuffers[2], at: nil, options: [], completionHandler: nil)
         }
         player2.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))
         
@@ -1094,12 +1173,12 @@ class ViewController: UIViewController{
             //
             // Schedule sound
             //
-            player3.scheduleBuffer(buffer3, at: nil, options: [], completionHandler: nil)
+            player3.scheduleBuffer(soundBuffers[3], at: nil, options: [], completionHandler: nil)
         } else {
             //
             // Schedule silence
             //
-            player3.scheduleBuffer(buffer3Silence, at: nil, options: [], completionHandler: nil)
+            player3.scheduleBuffer(silenceBuffers[3], at: nil, options: [], completionHandler: nil)
         }
         player3.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3)))
         
@@ -1312,6 +1391,14 @@ class ViewController: UIViewController{
         print(#function)
     }
     
+    @IBAction func changeNumberOfCells(_ sender: UIStepper) {
+        print(#function)
+        print(sender.tag, " ", sender.value)
+        let selectedPlayer = sender.tag
+        let newNumberOfCells = sender.value
+        seq.tracks[selectedPlayer].numberOfCellsActive = Int(newNumberOfCells)
+    }
+        
 }
 
 //
@@ -1395,7 +1482,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         //
         // Update stepper display
         //
-        stepper.value = seq.tempo!.bpm
+        bpmStepper.value = seq.tempo!.bpm
   
         //
         // Update picker display
@@ -1410,7 +1497,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         //
         // Load new buffers
         //
-        loadBuffers()
+        loadBuffersTO_BE_REFACTORED()
 
         //
         // Stop timer

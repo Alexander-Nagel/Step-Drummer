@@ -8,20 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
-		FA02EC902644A56000B416D3 /* hihat.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA02EC8F2644A56000B416D3 /* hihat.wav */; };
-		FA02EC942644A84E00B416D3 /* open_hihat.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA02EC932644A84E00B416D3 /* open_hihat.wav */; };
 		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
-		FA30280A2642FD7300406561 /* snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028082642FD7300406561 /* snare.wav */; };
-		FA30280B2642FD7300406561 /* kick.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA3028092642FD7300406561 /* kick.wav */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
 		FA6C96122641BB5400114B08 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C96112641BB5400114B08 /* Metronome.swift */; };
+		FA70CD84264829EA007A212F /* hihat_2154samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD80264829E9007A212F /* hihat_2154samples.wav */; };
+		FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD81264829E9007A212F /* kick_2156samples.wav */; };
+		FA70CD86264829EA007A212F /* open_hihat_2181samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD82264829EA007A212F /* open_hihat_2181samples.wav */; };
+		FA70CD87264829EA007A212F /* snare_2152samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD83264829EA007A212F /* snare_2152samples.wav */; };
+		FA70CD8C26482B25007A212F /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD8B26482B25007A212F /* Notes.rtf */; };
 		FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */; };
 		FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */; };
 		FA8D6E7F263EF2B5000FFFE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E7E263EF2B5000FFFE3 /* Assets.xcassets */; };
 		FA8D6E82263EF2B5000FFFE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E80263EF2B5000FFFE3 /* LaunchScreen.storyboard */; };
 		FA8D6E8C263EF2C9000FFFE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E8B263EF2C9000FFFE3 /* Main.storyboard */; };
-		FA8D6E92263EF2CF000FFFE3 /* sound2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E8F263EF2CF000FFFE3 /* sound2.wav */; };
-		FA8D6E93263EF2CF000FFFE3 /* sound1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E90263EF2CF000FFFE3 /* sound1.wav */; };
 		FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E91263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav */; };
 		FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */; };
 		FA8D6E99263EF2D9000FFFE3 /* RoundFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */; };
@@ -34,13 +33,14 @@
 
 /* Begin PBXFileReference section */
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
-		FA02EC8F2644A56000B416D3 /* hihat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat.wav; sourceTree = "<group>"; };
-		FA02EC932644A84E00B416D3 /* open_hihat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open_hihat.wav; sourceTree = "<group>"; };
 		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
-		FA3028082642FD7300406561 /* snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snare.wav; sourceTree = "<group>"; };
-		FA3028092642FD7300406561 /* kick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick.wav; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		FA6C96112641BB5400114B08 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
+		FA70CD80264829E9007A212F /* hihat_2154samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat_2154samples.wav; sourceTree = "<group>"; };
+		FA70CD81264829E9007A212F /* kick_2156samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick_2156samples.wav; sourceTree = "<group>"; };
+		FA70CD82264829EA007A212F /* open_hihat_2181samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open_hihat_2181samples.wav; sourceTree = "<group>"; };
+		FA70CD83264829EA007A212F /* snare_2152samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snare_2152samples.wav; sourceTree = "<group>"; };
+		FA70CD8B26482B25007A212F /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
 		FA8D6E72263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8D6E75263EF2B4000FFFE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA8D6E77263EF2B4000FFFE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,8 +48,6 @@
 		FA8D6E81263EF2B5000FFFE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA8D6E83263EF2B5000FFFE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA8D6E8B263EF2C9000FFFE3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		FA8D6E8F263EF2CF000FFFE3 /* sound2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound2.wav; sourceTree = "<group>"; };
-		FA8D6E90263EF2CF000FFFE3 /* sound1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound1.wav; sourceTree = "<group>"; };
 		FA8D6E91263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pcm stereo 16 bit 44.1kHz.wav"; sourceTree = "<group>"; };
 		FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Audio Time Extensions.swift"; sourceTree = "<group>"; };
 		FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundFunction.swift; sourceTree = "<group>"; };
@@ -155,6 +153,7 @@
 				FA6C960E2641B69300114B08 /* etc. */,
 				FA8D6E83263EF2B5000FFFE3 /* Info.plist */,
 				FA8D6E8E263EF2CF000FFFE3 /* sounds */,
+				FA70CD8B26482B25007A212F /* Notes.rtf */,
 			);
 			path = "AVFoundation Test 8 Timer @ half periodLength";
 			sourceTree = "<group>";
@@ -163,12 +162,10 @@
 			isa = PBXGroup;
 			children = (
 				FAB22318264413D300708387 /* silence.wav */,
-				FA02EC932644A84E00B416D3 /* open_hihat.wav */,
-				FA02EC8F2644A56000B416D3 /* hihat.wav */,
-				FA3028092642FD7300406561 /* kick.wav */,
-				FA3028082642FD7300406561 /* snare.wav */,
-				FA8D6E8F263EF2CF000FFFE3 /* sound2.wav */,
-				FA8D6E90263EF2CF000FFFE3 /* sound1.wav */,
+				FA70CD80264829E9007A212F /* hihat_2154samples.wav */,
+				FA70CD81264829E9007A212F /* kick_2156samples.wav */,
+				FA70CD82264829EA007A212F /* open_hihat_2181samples.wav */,
+				FA70CD83264829EA007A212F /* snare_2152samples.wav */,
 				FA8D6E91263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav */,
 			);
 			path = sounds;
@@ -232,16 +229,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB22319264413D300708387 /* silence.wav in Resources */,
-				FA30280B2642FD7300406561 /* kick.wav in Resources */,
-				FA30280A2642FD7300406561 /* snare.wav in Resources */,
-				FA8D6E93263EF2CF000FFFE3 /* sound1.wav in Resources */,
-				FA02EC942644A84E00B416D3 /* open_hihat.wav in Resources */,
+				FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */,
+				FA70CD87264829EA007A212F /* snare_2152samples.wav in Resources */,
 				FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */,
+				FA70CD86264829EA007A212F /* open_hihat_2181samples.wav in Resources */,
 				FA8D6E8C263EF2C9000FFFE3 /* Main.storyboard in Resources */,
-				FA8D6E92263EF2CF000FFFE3 /* sound2.wav in Resources */,
+				FA70CD8C26482B25007A212F /* Notes.rtf in Resources */,
 				FA8D6E82263EF2B5000FFFE3 /* LaunchScreen.storyboard in Resources */,
 				FA8D6E7F263EF2B5000FFFE3 /* Assets.xcassets in Resources */,
-				FA02EC902644A56000B416D3 /* hihat.wav in Resources */,
+				FA70CD84264829EA007A212F /* hihat_2154samples.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +328,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -387,7 +383,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
