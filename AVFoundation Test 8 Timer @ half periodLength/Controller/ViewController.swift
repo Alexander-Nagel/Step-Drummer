@@ -19,7 +19,7 @@ class ViewController: UIViewController{
     private var players = [AVAudioPlayerNode(), AVAudioPlayerNode(),
                            AVAudioPlayerNode(), AVAudioPlayerNode()]
     
-    private var reverb2 = AVAudioUnitReverb()
+    //private var reverb2 = AVAudioUnitReverb()
     
     private var reverbs = [AVAudioUnitReverb(), AVAudioUnitReverb(),
                            AVAudioUnitReverb(), AVAudioUnitReverb()]
@@ -28,44 +28,20 @@ class ViewController: UIViewController{
     
     private var bpmDetector = BpmDetector()
     
-    //private let fileName0 = "sound1.wav"
-    //private let fileName1 = "sound2.wav"
-//    private let fileName0 = "kick_2156samples.wav"
-//    private let fileName1 = "snare_2152samples.wav"
-//    private let fileName2 = "hihat_2154samples.wav"
-//    private let fileName3 = "open_hihat_2181samples.wav"
     private let fileNameSilence = "silence.wav"
     private let fileNames = ["kick_2156samples.wav",
                              "snare_2152samples.wav",
                              "hihat_2154samples.wav",
                              "open_hihat_2181samples.wav"]
     
-    //    private let fileNameLong = "pcm stereo 16 bit 44.1kHz.wav"
-//    private var file0: AVAudioFile! = nil
-//    private var file1: AVAudioFile! = nil
-//    private var file2: AVAudioFile! = nil
-//    private var file3: AVAudioFile! = nil
     private var files =  [AVAudioFile]()
     
     private var fileSilence: AVAudioFile! = nil
     
-//    private var buffer0: AVAudioPCMBuffer! = nil
-//    private var buffer1: AVAudioPCMBuffer! = nil
-//    private var buffer2: AVAudioPCMBuffer! = nil
-//    private var buffer3: AVAudioPCMBuffer! = nil
-    
     private var soundBuffers = [AVAudioPCMBuffer]()
-    
-//    private var buffer0Silence: AVAudioPCMBuffer! = nil
-//    private var buffer1Silence: AVAudioPCMBuffer! = nil
-//    private var buffer2Silence: AVAudioPCMBuffer! = nil
-//    private var buffer3Silence: AVAudioPCMBuffer! = nil
-    
+        
     private var silenceBuffers = [AVAudioPCMBuffer]()
 
-    //private let sampleRate: Double = 44100
-    //private var tempo: Tempo?
-    
     private var timerEventCounter0: Int = 1
     private var currentStep0: Int = 1
     private var timerEventCounter1: Int = 1
@@ -479,21 +455,52 @@ class ViewController: UIViewController{
         }
         print("BufferDuration: \(round(session.ioBufferDuration, toDigits: 3)) s")
         
-        
+        //var mixer = engine.mainMixerNode
+        //var input = engine.inputNode
+        var output = engine.outputNode
+        var format = reverbs[2].inputFormat(forBus: 0)
         
         engine.attach(players[0])
         engine.attach(players[1])
         engine.attach(players[2])
         engine.attach(players[3])
+        engine.attach(reverbs[0])
+        engine.attach(reverbs[1])
+        engine.attach(reverbs[2])
+        engine.attach(reverbs[3])
         
 //        let format = reverb2.inputFormat(forBus: 0)
 //        engine.connect(players[1], to: reverb2, format: format)
 //        engine.connect(reverb2, to: engine.outputNode, format: format)
-//        
-        engine.connect(players[0], to: engine.mainMixerNode, format: files[0].processingFormat)
-        engine.connect(players[1], to: engine.mainMixerNode, format: files[1].processingFormat)
-        engine.connect(players[2], to: engine.mainMixerNode, format: files[2].processingFormat)
-        engine.connect(players[3], to: engine.mainMixerNode, format: files[3].processingFormat)
+
+        engine.connect(players[0], to: reverbs[0], format: format)
+        engine.connect(reverbs[0], to: engine.mainMixerNode, format: format)
+
+        engine.connect(players[1], to: reverbs[1], format: format)
+        engine.connect(reverbs[1], to: engine.mainMixerNode, format: format)
+
+        engine.connect(players[2], to: reverbs[2], format: format)
+        engine.connect(reverbs[2], to: engine.mainMixerNode, format: format)
+
+        engine.connect(players[3], to: reverbs[3], format: format)
+        engine.connect(reverbs[3], to: engine.mainMixerNode, format: format)
+
+        reverbs[0].loadFactoryPreset(.mediumChamber)
+        reverbs[0].wetDryMix = 50
+        
+        reverbs[1].loadFactoryPreset(.largeHall)
+        reverbs[1].wetDryMix = 50
+        
+        reverbs[2].loadFactoryPreset(.mediumHall)
+        reverbs[2].wetDryMix = 50
+        
+        reverbs[3].loadFactoryPreset(.largeHall2)
+        reverbs[3].wetDryMix = 50
+        
+      //  engine.connect(players[0], to: engine.mainMixerNode, format: files[0].processingFormat)
+//        engine.connect(players[1], to: engine.mainMixerNode, format: files[1].processingFormat)
+      //  engine.connect(players[2], to: engine.mainMixerNode, format: files[2].processingFormat)
+      //  engine.connect(players[3], to: engine.mainMixerNode, format: files[3].processingFormat)
         
         engine.prepare()
         do { try engine.start() } catch { print(error) }
