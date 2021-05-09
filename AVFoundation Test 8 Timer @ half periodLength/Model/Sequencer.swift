@@ -28,9 +28,14 @@ struct Track {
     var numberOfCellsActive: Int = 16
 
     var selectedSound: String?
-    var volume: Int = 1
+    var volume: Double = 1
     var muted: Bool = false
     var soloed: Bool = false
+    var isReverbOn = true
+    var isDelayOn = true
+    var reverbMix = 0.5
+    var delayMix = 0.5
+    
     var cells = [Cell]()
     
     init() {

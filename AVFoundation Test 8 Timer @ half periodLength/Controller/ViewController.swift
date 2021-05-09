@@ -198,6 +198,14 @@ class ViewController: UIViewController{
     private var stepperViews: [UIView] = []
     
     
+    @IBOutlet weak var volume0: UISlider!
+    @IBOutlet weak var volume1: UISlider!
+    @IBOutlet weak var volume2: UISlider!
+    @IBOutlet weak var volume3: UISlider!
+    
+    private var trackVolumes = [UISlider]()
+    
+    
     private var controlButtons: [UIView] = []
     
     //private var beatLabels: [UILabel] = []
@@ -286,6 +294,8 @@ class ViewController: UIViewController{
         
         controlButtons = [playPauseButton, tapButton, bpmLabel, bpmStepper, picker]
         
+        trackVolumes = [volume0, volume1, volume2, volume3]
+
         //players = [player0, player1, player2, player3]
         
         //
@@ -396,6 +406,10 @@ class ViewController: UIViewController{
             stepper.stepValue = 1
             stepper.tag = index
             stepper.value = Double(seq.tracks[index].numberOfCellsActive)
+        }
+        
+        for (index, slider) in trackVolumes.enumerated() {
+            slider.tag = index
         }
         
         //settingsButton.backgroundColor = .red
@@ -1368,6 +1382,19 @@ class ViewController: UIViewController{
         
     }
       
+    //
+    // MARK:- trackVolumeChanged()
+    //
+    @IBAction func trackVolumeChanged(_ sender: UISlider) {
+        print(#function)
+        print(sender.tag, sender.value)
+        seq.tracks[sender.tag].volume = Double(sender.value)
+        players[sender.tag].volume = sender.value
+        
+        
+        
+    }
+    
     @objc func onDidReceiveData(_ notification: Notification) {
         print(#function)
         print(notification)
