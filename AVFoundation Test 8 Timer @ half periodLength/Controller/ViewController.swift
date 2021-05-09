@@ -24,6 +24,9 @@ class ViewController: UIViewController{
     private var reverbs = [AVAudioUnitReverb(), AVAudioUnitReverb(),
                            AVAudioUnitReverb(), AVAudioUnitReverb()]
     
+    private var delays = [AVAudioUnitDelay(), AVAudioUnitDelay(),
+                          AVAudioUnitDelay(), AVAudioUnitDelay()]
+    
     private var mixer = AVAudioMixerNode()
     
     private var bpmDetector = BpmDetector()
@@ -464,44 +467,67 @@ class ViewController: UIViewController{
         engine.attach(players[1])
         engine.attach(players[2])
         engine.attach(players[3])
+
         engine.attach(reverbs[0])
         engine.attach(reverbs[1])
         engine.attach(reverbs[2])
         engine.attach(reverbs[3])
+
+        engine.attach(delays[0])
+        engine.attach(delays[1])
+        engine.attach(delays[2])
+        engine.attach(delays[3])
+
         
 //        let format = reverb2.inputFormat(forBus: 0)
 //        engine.connect(players[1], to: reverb2, format: format)
 //        engine.connect(reverb2, to: engine.outputNode, format: format)
 
-        engine.connect(players[0], to: reverbs[0], format: format)
+        
+        engine.connect(players[0], to: delays[0], format: format)
+        engine.connect(delays[0], to: reverbs[0], format: format)
         engine.connect(reverbs[0], to: engine.mainMixerNode, format: format)
 
-        engine.connect(players[1], to: reverbs[1], format: format)
+        engine.connect(players[1], to: delays[1], format: format)
+        engine.connect(delays[1], to: reverbs[1], format: format)
         engine.connect(reverbs[1], to: engine.mainMixerNode, format: format)
 
-        engine.connect(players[2], to: reverbs[2], format: format)
+        engine.connect(players[2], to: delays[2], format: format)
+        engine.connect(delays[2], to: reverbs[2], format: format)
         engine.connect(reverbs[2], to: engine.mainMixerNode, format: format)
 
-        engine.connect(players[3], to: reverbs[3], format: format)
+        engine.connect(players[3], to: delays[3], format: format)
+        engine.connect(delays[3], to: reverbs[3], format: format)
         engine.connect(reverbs[3], to: engine.mainMixerNode, format: format)
 
         reverbs[0].loadFactoryPreset(.mediumChamber)
-        reverbs[0].wetDryMix = 50
+        reverbs[0].wetDryMix = 0
         
-        reverbs[1].loadFactoryPreset(.largeHall)
-        reverbs[1].wetDryMix = 50
+        reverbs[1].loadFactoryPreset(.plate)
+        reverbs[1].wetDryMix = 10
         
         reverbs[2].loadFactoryPreset(.mediumHall)
-        reverbs[2].wetDryMix = 50
+        reverbs[2].wetDryMix = 10
         
-        reverbs[3].loadFactoryPreset(.largeHall2)
-        reverbs[3].wetDryMix = 50
+        reverbs[3].loadFactoryPreset(.mediumChamber)
+        reverbs[3].wetDryMix = 10
         
-      //  engine.connect(players[0], to: engine.mainMixerNode, format: files[0].processingFormat)
-//        engine.connect(players[1], to: engine.mainMixerNode, format: files[1].processingFormat)
-      //  engine.connect(players[2], to: engine.mainMixerNode, format: files[2].processingFormat)
-      //  engine.connect(players[3], to: engine.mainMixerNode, format: files[3].processingFormat)
+        delays[0].delayTime = 0.375
+        delays[0].feedback = 10
+        delays[0].wetDryMix = 0
         
+        delays[1].delayTime = 0.375
+        delays[1].feedback = 5
+        delays[1].wetDryMix = 0
+
+        delays[2].delayTime = 0.375
+        delays[2].feedback = 25
+        delays[2].wetDryMix = 10
+        
+        delays[3].delayTime = 0.375
+        delays[3].feedback = 20
+        delays[3].wetDryMix = 20
+
         engine.prepare()
         do { try engine.start() } catch { print(error) }
         
