@@ -11,15 +11,8 @@ class ViewController: UIViewController{
     
     private var engine = AVAudioEngine()
     
-//    private var player0 = AVAudioPlayerNode()
-//    private var player1 = AVAudioPlayerNode()
-//    private var player2 = AVAudioPlayerNode()
-//    private var player3 = AVAudioPlayerNode()
-//
     private var players = [AVAudioPlayerNode(), AVAudioPlayerNode(),
                            AVAudioPlayerNode(), AVAudioPlayerNode()]
-    
-    //private var reverb2 = AVAudioUnitReverb()
     
     private var reverbs = [AVAudioUnitReverb(), AVAudioUnitReverb(),
                            AVAudioUnitReverb(), AVAudioUnitReverb()]
@@ -42,9 +35,9 @@ class ViewController: UIViewController{
     private var fileSilence: AVAudioFile! = nil
     
     private var soundBuffers = [AVAudioPCMBuffer]()
-        
+    
     private var silenceBuffers = [AVAudioPCMBuffer]()
-
+    
     private var timerEventCounter0: Int = 1
     private var currentStep0: Int = 1
     private var timerEventCounter1: Int = 1
@@ -64,16 +57,16 @@ class ViewController: UIViewController{
     private var timer2: Timer! = nil
     private var timer3: Timer! = nil
     
-    //    private var interruptBuffers = false
-    //    private var needsFileScheduled: Bool = true
-    //
     private let pickerLeftInts = 30...300 // 271 elements
     private let pickerRightDecimals = 0...9 // 10 elements
     private let pickerDataArray = [Array(30...300).map{String($0)}, ["."], Array(0...9).map{String($0)}]
     private var pickedLeft: Int = 120
     private var pickedRight: Int = 0
-    
+
     //
+    // MARK: - OUTLETS
+    //
+    
     // player0
     //
     @IBOutlet weak var button0_0: UIButton!
@@ -168,7 +161,7 @@ class ViewController: UIViewController{
     
     @IBOutlet weak var bpmStepper: UIStepper!
     @IBOutlet weak var bpmStepperView: UIView!
-   
+    
     
     @IBOutlet weak var tapButton: UIButton!
     @IBOutlet weak var picker: UIPickerView!
@@ -208,20 +201,24 @@ class ViewController: UIViewController{
     
     private var controlButtons: [UIView] = []
     
-    //private var beatLabels: [UILabel] = []
-    //private var beatLabelsB: [UILabel] = []
     
     var seq = Sequencer()
     
+    var controlsHidden = true
+    
+    //
+    // MARK: - LIFECYCLE
+    //
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         files = [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()]
         soundBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
         silenceBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
         
-       // NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
         
         seq.tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         
@@ -236,7 +233,7 @@ class ViewController: UIViewController{
         
         seq.tracks[3].numberOfCellsActive = DefaultPatterns.openHihat1.length
         seq.tracks[3].cells = DefaultPatterns.openHihat1.data
-
+        
         print(seq.getPeriodLengthInSamples(forTrack: 0))
         print(seq.getPeriodLengthInSamples(forTrack: 1))
         print(seq.getPeriodLengthInSamples(forTrack: 2))
@@ -253,16 +250,16 @@ class ViewController: UIViewController{
         //beatLabels = [beat1Label, beat2Label, beat3Label, beat4Label, beat5Label, beat6Label, beat7Label, beat8Label]
         //beatLabelsB = [beat1LabelB, beat2LabelB, beat3LabelB, beat4LabelB, beat5LabelB, beat6LabelB, beat7LabelB, beat8LabelB]
         
-//        for label in beatLabels {
-//            label.backgroundColor = .none
-//            label.layer.borderColor = UIColor.orange.cgColor
-//            label.layer.borderWidth = 3.0
-//        }
-//        for label in beatLabelsB {
-//            label.backgroundColor = .none
-//            label.layer.borderColor = UIColor.orange.cgColor
-//            label.layer.borderWidth = 3.0
-//        }
+        //        for label in beatLabels {
+        //            label.backgroundColor = .none
+        //            label.layer.borderColor = UIColor.orange.cgColor
+        //            label.layer.borderWidth = 3.0
+        //        }
+        //        for label in beatLabelsB {
+        //            label.backgroundColor = .none
+        //            label.layer.borderColor = UIColor.orange.cgColor
+        //            label.layer.borderWidth = 3.0
+        //        }
         
         track0Buttons = [button0_0, button0_1, button0_2, button0_3,
                          button0_4, button0_5, button0_6, button0_7,
@@ -295,7 +292,7 @@ class ViewController: UIViewController{
         controlButtons = [playPauseButton, tapButton, bpmLabel, bpmStepper, picker]
         
         trackVolumes = [volume0, volume1, volume2, volume3]
-
+        
         //players = [player0, player1, player2, player3]
         
         //
@@ -309,8 +306,8 @@ class ViewController: UIViewController{
             button.isHidden = true
             button.titleLabel?.text = ""
             button.tag = index
-//            button.setBackgroundColor(color: .clear, forState: .normal)
-//            button.setBackgroundColor(color: .orange, forState: .selected)
+            //            button.setBackgroundColor(color: .clear, forState: .normal)
+            //            button.setBackgroundColor(color: .orange, forState: .selected)
         }
         //
         // Show only active buttons
@@ -434,7 +431,7 @@ class ViewController: UIViewController{
                 picker.backgroundColor = K.Sequencer.controlButtonsColor
             }
             tapButton.setTitleColor(.black, for: .normal)
-           
+            
         }
         //stepperOuterStackView.backgroundColor = .white
         //stepperInnerStackView.backgroundColor = .green
@@ -465,8 +462,8 @@ class ViewController: UIViewController{
         do { try session.setCategory(AVAudioSession.Category.playAndRecord) }
         catch { fatalError("Can't set Audio Session category") }
         
-       do { try session.setPreferredIOBufferDuration(2e-3) } // about 2,3 ms latency
- //       do { try session.setPreferredIOBufferDuration(2e-2) } //  about 23 ms latency
+        do { try session.setPreferredIOBufferDuration(2e-3) } // about 2,3 ms latency
+        //       do { try session.setPreferredIOBufferDuration(2e-2) } //  about 23 ms latency
         catch {
             fatalError("Can't set preferred buffer size")
         }
@@ -481,39 +478,39 @@ class ViewController: UIViewController{
         engine.attach(players[1])
         engine.attach(players[2])
         engine.attach(players[3])
-
+        
         engine.attach(reverbs[0])
         engine.attach(reverbs[1])
         engine.attach(reverbs[2])
         engine.attach(reverbs[3])
-
+        
         engine.attach(delays[0])
         engine.attach(delays[1])
         engine.attach(delays[2])
         engine.attach(delays[3])
-
         
-//        let format = reverb2.inputFormat(forBus: 0)
-//        engine.connect(players[1], to: reverb2, format: format)
-//        engine.connect(reverb2, to: engine.outputNode, format: format)
-
+        
+        //        let format = reverb2.inputFormat(forBus: 0)
+        //        engine.connect(players[1], to: reverb2, format: format)
+        //        engine.connect(reverb2, to: engine.outputNode, format: format)
+        
         
         engine.connect(players[0], to: delays[0], format: format)
         engine.connect(delays[0], to: reverbs[0], format: format)
         engine.connect(reverbs[0], to: engine.mainMixerNode, format: format)
-
+        
         engine.connect(players[1], to: delays[1], format: format)
         engine.connect(delays[1], to: reverbs[1], format: format)
         engine.connect(reverbs[1], to: engine.mainMixerNode, format: format)
-
+        
         engine.connect(players[2], to: delays[2], format: format)
         engine.connect(delays[2], to: reverbs[2], format: format)
         engine.connect(reverbs[2], to: engine.mainMixerNode, format: format)
-
+        
         engine.connect(players[3], to: delays[3], format: format)
         engine.connect(delays[3], to: reverbs[3], format: format)
         engine.connect(reverbs[3], to: engine.mainMixerNode, format: format)
-
+        
         reverbs[0].loadFactoryPreset(.mediumChamber)
         reverbs[0].wetDryMix = 0
         
@@ -533,7 +530,7 @@ class ViewController: UIViewController{
         delays[1].delayTime = 0.375
         delays[1].feedback = 5
         delays[1].wetDryMix = 0
-
+        
         delays[2].delayTime = 0.375
         delays[2].feedback = 25
         delays[2].wetDryMix = 10
@@ -541,7 +538,7 @@ class ViewController: UIViewController{
         delays[3].delayTime = 0.375
         delays[3].feedback = 20
         delays[3].wetDryMix = 20
-
+        
         engine.prepare()
         do { try engine.start() } catch { print(error) }
         
@@ -553,6 +550,13 @@ class ViewController: UIViewController{
         preScheduleFirstBuffer(forPlayer: 3)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+
+        showOrHideControls()
+
+    }
+    
     
     //
     // MARK:- Load buffers (with parameter)
@@ -571,7 +575,7 @@ class ViewController: UIViewController{
             try files[file_to_load].read(into: soundBuffers[player_to_be_loaded])
             soundBuffers[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
         } catch { print("Error loading buffer \(player_to_be_loaded) \(error)") }
-
+        
         
         //
         // MARK: Loading silence buffer
@@ -588,7 +592,7 @@ class ViewController: UIViewController{
         } catch {
             print("Error loading buffer0 \(player_to_be_loaded) \(error)")
         }
-
+        
         
     }
     
@@ -608,14 +612,14 @@ class ViewController: UIViewController{
             
             //state = .stop
             //playPauseButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-        
+            
             seq.tempo?.bpm = newTempo
-
+            
             preScheduleFirstBuffer(forPlayer: 0)
             preScheduleFirstBuffer(forPlayer: 1)
             preScheduleFirstBuffer(forPlayer: 2)
             preScheduleFirstBuffer(forPlayer: 3)
-
+            
             updateUIAfterTempoChange(to: newTempo, restart: true)
             print(newTempo)
             
@@ -660,12 +664,12 @@ class ViewController: UIViewController{
             timer2.invalidate()
             timerEventCounter2 = 1
             currentStep2 = 1
-
+            
             timer3.invalidate()
             timerEventCounter3 = 1
             currentStep3 = 1
-
-//            preScheduleFirstBuffer_OLD()
+            
+            //            preScheduleFirstBuffer_OLD()
             preScheduleFirstBuffer(forPlayer: 0)
             preScheduleFirstBuffer(forPlayer: 1)
             preScheduleFirstBuffer(forPlayer: 2)
@@ -711,7 +715,7 @@ class ViewController: UIViewController{
                   self.soundBuffers[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
                   self.soundBuffers[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
                   self.soundBuffers[3].frameLength, self.silenceBuffers[3].frameLength
-                  )
+            )
             
             if DEBUG {
                 print("player 0 timerEvent #\(self.timerEventCounter0) at \(self.seq.tempo!.bpm) BPM")
@@ -838,7 +842,7 @@ class ViewController: UIViewController{
             }
             
             //
-//                        if self.timerEventCounter0 % 2 == 0 {
+            //                        if self.timerEventCounter0 % 2 == 0 {
             //                for label in self.beatLabels {label.text = ""}
             DispatchQueue.main.async {
                 //self.beatLabels[self.currentStep0-1].text = String(self.currentStep0)
@@ -932,7 +936,7 @@ class ViewController: UIViewController{
                 print()
             }
         }
-
+        
         //
         //  Timer for player3
         //
@@ -1010,7 +1014,7 @@ class ViewController: UIViewController{
                 print()
             }
         }
-
+        
         
     }
     
@@ -1037,95 +1041,95 @@ class ViewController: UIViewController{
     //
     // MARK:- preScheduleFirstBuffer
     //
-//    private func preScheduleFirstBuffer_OLD() {
-//
-//        print(#function)
-//
-//        printFrameLengths()
-//
-//        //
-//        // player0
-//        //
-//        player0.stop()
-//        if seq.tracks[0].cells[0] == .ON {
-//            //
-//            // Schedule sound
-//            //
-//            player0.scheduleBuffer(soundBuffers[0], at: nil, options: [], completionHandler: nil)
-//        } else {
-//            //
-//            // Schedule silence
-//            //
-//            player0.scheduleBuffer(silenceBuffers[0], at: nil, options: [], completionHandler: nil)
-//        }
-//        player0.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))
-//
-//        //
-//        // player1
-//        //
-//        player1.stop()
-//        if seq.tracks[1].cells[0] == .ON {
-//            //
-//            // Schedule sound
-//            //
-//            player1.scheduleBuffer(soundBuffers[1], at: nil, options: [], completionHandler: nil)
-//        } else {
-//            //
-//            // Schedule silence
-//            //
-//            player1.scheduleBuffer(silenceBuffers[1], at: nil, options: [], completionHandler: nil)
-//        }
-//        player1.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
-//
-//        //
-//        // player2
-//        //
-//        player2.stop()
-//        if seq.tracks[2].cells[0] == .ON {
-//            //
-//            // Schedule sound
-//            //
-//            player2.scheduleBuffer(soundBuffers[2], at: nil, options: [], completionHandler: nil)
-//        } else {
-//            //
-//            // Schedule silence
-//            //
-//            player2.scheduleBuffer(silenceBuffers[2], at: nil, options: [], completionHandler: nil)
-//        }
-//        player2.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))
-//
-//        //
-//        // player3
-//        //
-//        player3.stop()
-//        if seq.tracks[3].cells[0] == .ON {
-//            //
-//            // Schedule sound
-//            //
-//            player3.scheduleBuffer(soundBuffers[3], at: nil, options: [], completionHandler: nil)
-//        } else {
-//            //
-//            // Schedule silence
-//            //
-//            player3.scheduleBuffer(silenceBuffers[3], at: nil, options: [], completionHandler: nil)
-//        }
-//        player3.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3)))
-//
-//
-//        //        player1.stop()
-//        //        player1.scheduleBuffer(buffer3, at: nil, options: [], completionHandler: nil)
-//        //        player1.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
-//
-//        //        player3.stop()
-//        //        player3.scheduleBuffer(buffer3, at: nil, options: [], completionHandler: nil)
-//        //        player3.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
-//        //
-//        //        player4.stop()
-//        //        player4.scheduleBuffer(buffer4, at: nil, options: [], completionHandler: nil)
-//        //        player4.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
-//        //
-//    }
-//
+    //    private func preScheduleFirstBuffer_OLD() {
+    //
+    //        print(#function)
+    //
+    //        printFrameLengths()
+    //
+    //        //
+    //        // player0
+    //        //
+    //        player0.stop()
+    //        if seq.tracks[0].cells[0] == .ON {
+    //            //
+    //            // Schedule sound
+    //            //
+    //            player0.scheduleBuffer(soundBuffers[0], at: nil, options: [], completionHandler: nil)
+    //        } else {
+    //            //
+    //            // Schedule silence
+    //            //
+    //            player0.scheduleBuffer(silenceBuffers[0], at: nil, options: [], completionHandler: nil)
+    //        }
+    //        player0.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 0)))
+    //
+    //        //
+    //        // player1
+    //        //
+    //        player1.stop()
+    //        if seq.tracks[1].cells[0] == .ON {
+    //            //
+    //            // Schedule sound
+    //            //
+    //            player1.scheduleBuffer(soundBuffers[1], at: nil, options: [], completionHandler: nil)
+    //        } else {
+    //            //
+    //            // Schedule silence
+    //            //
+    //            player1.scheduleBuffer(silenceBuffers[1], at: nil, options: [], completionHandler: nil)
+    //        }
+    //        player1.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
+    //
+    //        //
+    //        // player2
+    //        //
+    //        player2.stop()
+    //        if seq.tracks[2].cells[0] == .ON {
+    //            //
+    //            // Schedule sound
+    //            //
+    //            player2.scheduleBuffer(soundBuffers[2], at: nil, options: [], completionHandler: nil)
+    //        } else {
+    //            //
+    //            // Schedule silence
+    //            //
+    //            player2.scheduleBuffer(silenceBuffers[2], at: nil, options: [], completionHandler: nil)
+    //        }
+    //        player2.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 2)))
+    //
+    //        //
+    //        // player3
+    //        //
+    //        player3.stop()
+    //        if seq.tracks[3].cells[0] == .ON {
+    //            //
+    //            // Schedule sound
+    //            //
+    //            player3.scheduleBuffer(soundBuffers[3], at: nil, options: [], completionHandler: nil)
+    //        } else {
+    //            //
+    //            // Schedule silence
+    //            //
+    //            player3.scheduleBuffer(silenceBuffers[3], at: nil, options: [], completionHandler: nil)
+    //        }
+    //        player3.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 3)))
+    //
+    //
+    //        //        player1.stop()
+    //        //        player1.scheduleBuffer(buffer3, at: nil, options: [], completionHandler: nil)
+    //        //        player1.prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: 1)))
+    //
+    //        //        player3.stop()
+    //        //        player3.scheduleBuffer(buffer3, at: nil, options: [], completionHandler: nil)
+    //        //        player3.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
+    //        //
+    //        //        player4.stop()
+    //        //        player4.scheduleBuffer(buffer4, at: nil, options: [], completionHandler: nil)
+    //        //        player4.prepare(withFrameCount: AVAudioFrameCount(tempo!.periodLengthInSamples))
+    //        //
+    //    }
+    //
     private func preScheduleFirstBuffer(forPlayer seletedPlayer: Int) {
         
         print(#function)
@@ -1163,7 +1167,7 @@ class ViewController: UIViewController{
             seq.tracks[0].cells[sender.tag] = .ON
             
         } else {
-
+            
             //
             // Delete Step
             //
@@ -1171,7 +1175,7 @@ class ViewController: UIViewController{
             seq.tracks[0].cells[sender.tag] = .OFF
         }
     }
-
+    
     //
     // MARK:- player1 button pressed action
     //
@@ -1187,7 +1191,7 @@ class ViewController: UIViewController{
             seq.tracks[1].cells[sender.tag] = .ON
             
         } else {
-
+            
             //
             // Delete Step
             //
@@ -1195,7 +1199,7 @@ class ViewController: UIViewController{
             seq.tracks[1].cells[sender.tag] = .OFF
         }
     }
-
+    
     //
     // MARK:- player2 button pressed action
     //
@@ -1211,7 +1215,7 @@ class ViewController: UIViewController{
             seq.tracks[2].cells[sender.tag] = .ON
             
         } else {
-
+            
             //
             // Delete Step
             //
@@ -1235,7 +1239,7 @@ class ViewController: UIViewController{
             seq.tracks[3].cells[sender.tag] = .ON
             
         } else {
-
+            
             //
             // Delete Step
             //
@@ -1250,7 +1254,7 @@ class ViewController: UIViewController{
     @IBAction func muteButtonPressed(_ sender: UIButton) {
         
         seq.tracks[sender.tag].muted = !seq.tracks[sender.tag].muted
-
+        
         if seq.tracks[sender.tag].muted {
             //
             // Mute row / player
@@ -1274,11 +1278,11 @@ class ViewController: UIViewController{
             for button in buttonRowToBeUnmuted {
                 button.alpha = 1
             }
-
+            
         }
         
         print(sender.tag)
-
+        
         
     }
     
@@ -1340,9 +1344,40 @@ class ViewController: UIViewController{
     //
     // MARK:- Settings
     //
-    @IBAction func settingsPressed(_ sender: UIButton) {
+    @IBAction func showControlsToggle(_ sender: UIButton?) {
         
         print(#function)
+        controlsHidden = !controlsHidden
+        showOrHideControls()
+    }
+        
+    private func showOrHideControls() {
+    
+        if !controlsHidden {
+            //
+            // Show controls
+            //
+            for slider in trackVolumes {
+                slider.isHidden = false
+            }
+            for view in stepperViews {
+                view.isHidden = false
+            }
+            
+            
+        } else {
+            //
+            // Hide controls
+            //
+            for slider in trackVolumes {
+                slider.isHidden = true
+            }
+            for view in stepperViews {
+                view.isHidden = true
+            }
+            
+            
+        }
     }
     
     //
@@ -1381,7 +1416,7 @@ class ViewController: UIViewController{
         stopAndRestartAllTimers()
         
     }
-      
+    
     //
     // MARK:- trackVolumeChanged()
     //
@@ -1416,7 +1451,7 @@ class ViewController: UIViewController{
         // Update stepper display
         //
         bpmStepper.value = seq.tempo!.bpm
-  
+        
         //
         // Update picker display
         //
@@ -1428,7 +1463,7 @@ class ViewController: UIViewController{
         picker.selectRow(Int(rightSide), inComponent: 2, animated: true) // start at 0 as decimal
         
         loadAllBuffers()
-
+        
         stopAndRestartAllTimers()
     }
     
@@ -1454,13 +1489,13 @@ class ViewController: UIViewController{
         }
         timerEventCounter2 = 1
         currentStep2 = 1
- 
+        
         if timer3 != nil {
             timer3.invalidate()
         }
         timerEventCounter3 = 1
         currentStep3 = 1
- 
+        
         //
         //  Start again
         //
@@ -1480,7 +1515,7 @@ extension ViewController {
               self.soundBuffers[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
               self.soundBuffers[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
               self.soundBuffers[3].frameLength, self.silenceBuffers[3].frameLength
-              )
+        )
     }
     
 }
@@ -1504,15 +1539,15 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
     
-//    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        if component == 0 {
-//            return "\(Array(pickerLeftInts)[row])"
-//        } else if component == 1 {
-//            return "."
-//        } else {
-//            return "\(Array(pickerRightDecimals)[row])"
-//        }
-//    }
+    //    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    //        if component == 0 {
+    //            return "\(Array(pickerLeftInts)[row])"
+    //        } else if component == 1 {
+    //            return "."
+    //        } else {
+    //            return "\(Array(pickerRightDecimals)[row])"
+    //        }
+    //    }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var pickerLabel: UILabel? = (view as? UILabel)
@@ -1532,7 +1567,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         pickerLabel?.text = pickerDataArray[component][row]
         pickerLabel?.textColor = UIColor(named: "Your Color Name")
-
+        
         return pickerLabel!
     }
     

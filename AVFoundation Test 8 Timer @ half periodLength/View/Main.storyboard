@@ -602,7 +602,7 @@
                                                     <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="settingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p2n-iO-6ct"/>
+                                                    <action selector="showControlsToggle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7tJ-U2-iA4"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="dev-gT-hsS">
