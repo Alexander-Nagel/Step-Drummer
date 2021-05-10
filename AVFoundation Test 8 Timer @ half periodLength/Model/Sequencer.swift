@@ -26,7 +26,7 @@ enum Cell {
 struct Track {
     
     var numberOfCellsActive: Int = 16
-
+    
     var selectedSound: String?
     var volume: Double = 1
     var muted: Bool = false
@@ -37,6 +37,7 @@ struct Track {
     var delayMix = 0.5
     
     var cells = [Cell]()
+    var patterns = Patterns()
     
     init() {
         for _ in 0...(K.Sequencer.numberOfCellsPerTrack-1) {
@@ -52,19 +53,56 @@ struct Track {
         }
         return output
     }
+    
+    
 }
 
 struct Sequencer {
     
     var tracks = [Track]()
+    var patterns = Patterns()
+    var activePattern = 0
+    
+    mutating func loadPattern(number: Int) {
+        
+        tracks[0].numberOfCellsActive = patterns.kick[number].length
+        tracks[0].cells = patterns.kick[number].data
+        
+        tracks[1].numberOfCellsActive = patterns.snare[number].length
+        tracks[1].cells = patterns.snare[number].data
+        
+        tracks[2].numberOfCellsActive = patterns.closed_hihat[number].length
+        tracks[2].cells = patterns.closed_hihat[number].data
+        
+        tracks[3].numberOfCellsActive = patterns.open_hihat[number].length
+        tracks[3].cells = patterns.open_hihat[number].data
+    }
+    
+    mutating func saveToPattern(number: Int) {
+        
+        patterns.kick[number].length = tracks[0].numberOfCellsActive
+        patterns.kick[number].data = tracks[0].cells
+        
+        patterns.snare[number].length = tracks[1].numberOfCellsActive
+        patterns.snare[number].data = tracks[1].cells
+        
+        patterns.closed_hihat[number].length = tracks[2].numberOfCellsActive
+        patterns.closed_hihat[number].data = tracks[2].cells
+        
+        patterns.open_hihat[number].length = tracks[3].numberOfCellsActive
+        patterns.open_hihat[number].data = tracks[3].cells
+    }
+    
+    
     
     var tempo: Tempo?
- 
+    
     init() {
         for _ in 0...(K.Sequencer.numberOfTracks-1) {
             let track = Track()
             self.tracks.append(track)
         }
+        
     }
     
     func printTracks() {
@@ -84,6 +122,11 @@ struct Sequencer {
         let length = (4.0 / activeCells) * (60.0 / bpm) * sampleRate
         return length
     }
+    
+    func rubbish(a: Int, b: Int) -> Int {
+        return a + b
+    }
+    
 }
 
 struct Pattern {

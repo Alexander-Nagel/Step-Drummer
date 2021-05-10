@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
-		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
+		FA0E89452646218200B7CD45 /* Patterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* Patterns.swift */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
-		FA6C96122641BB5400114B08 /* Metronome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C96112641BB5400114B08 /* Metronome.swift */; };
+		FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */; };
+		FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D44264933BD000497C8 /* SequencerTests.swift */; };
 		FA70CD84264829EA007A212F /* hihat_2154samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD80264829E9007A212F /* hihat_2154samples.wav */; };
 		FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD81264829E9007A212F /* kick_2156samples.wav */; };
 		FA70CD86264829EA007A212F /* open_hihat_2181samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD82264829EA007A212F /* open_hihat_2181samples.wav */; };
@@ -31,11 +32,24 @@
 		FAB22319264413D300708387 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAB22318264413D300708387 /* silence.wav */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FA562D3D264932C4000497C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA8D6E6A263EF2B4000FFFE3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA8D6E71263EF2B4000FFFE3;
+			remoteInfo = "AVFoundation Test 8 Timer @ half periodLength";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
-		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
+		FA0E89442646218200B7CD45 /* Patterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patterns.swift; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
-		FA6C96112641BB5400114B08 /* Metronome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metronome.swift; sourceTree = "<group>"; };
+		FA562D38264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation_Test_8_Timer___half_periodLength_Tests.swift"; sourceTree = "<group>"; };
+		FA562D3C264932C4000497C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA562D44264933BD000497C8 /* SequencerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerTests.swift; sourceTree = "<group>"; };
 		FA70CD80264829E9007A212F /* hihat_2154samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat_2154samples.wav; sourceTree = "<group>"; };
 		FA70CD81264829E9007A212F /* kick_2156samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick_2156samples.wav; sourceTree = "<group>"; };
 		FA70CD82264829EA007A212F /* open_hihat_2181samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open_hihat_2181samples.wav; sourceTree = "<group>"; };
@@ -59,6 +73,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FA562D35264932C4000497C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8D6E6F263EF2B4000FFFE3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,6 +90,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA562D39264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */,
+				FA562D3C264932C4000497C8 /* Info.plist */,
+				FA562D44264933BD000497C8 /* SequencerTests.swift */,
+			);
+			path = "AVFoundation Test 8 Timer @ half periodLength Tests";
+			sourceTree = "<group>";
+		};
 		FA6C96062641B63100114B08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,9 +113,8 @@
 			children = (
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
-				FA6C96112641BB5400114B08 /* Metronome.swift */,
 				FA30281026433C0D00406561 /* Sequencer.swift */,
-				FA0E89442646218200B7CD45 /* DefaultPatterns.swift */,
+				FA0E89442646218200B7CD45 /* Patterns.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -130,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				FA8D6E74263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength */,
+				FA562D39264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests */,
 				FA8D6E73263EF2B4000FFFE3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				FA8D6E72263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength.app */,
+				FA562D38264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +206,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FA562D37264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA562D41264932C4000497C8 /* Build configuration list for PBXNativeTarget "AVFoundation Test 8 Timer @ half periodLength Tests" */;
+			buildPhases = (
+				FA562D34264932C4000497C8 /* Sources */,
+				FA562D35264932C4000497C8 /* Frameworks */,
+				FA562D36264932C4000497C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA562D3E264932C4000497C8 /* PBXTargetDependency */,
+			);
+			name = "AVFoundation Test 8 Timer @ half periodLength Tests";
+			productName = "AVFoundation Test 8 Timer @ half periodLength Tests";
+			productReference = FA562D38264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FA8D6E71263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA8D6E86263EF2B5000FFFE3 /* Build configuration list for PBXNativeTarget "AVFoundation Test 8 Timer @ half periodLength" */;
@@ -200,6 +250,10 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					FA562D37264932C4000497C8 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = FA8D6E71263EF2B4000FFFE3;
+					};
 					FA8D6E71263EF2B4000FFFE3 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -219,11 +273,19 @@
 			projectRoot = "";
 			targets = (
 				FA8D6E71263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength */,
+				FA562D37264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FA562D36264932C4000497C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8D6E70263EF2B4000FFFE3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -244,17 +306,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FA562D34264932C4000497C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */,
+				FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA8D6E6E263EF2B4000FFFE3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA6C96122641BB5400114B08 /* Metronome.swift in Sources */,
 				FA8D6E9C263EF2E8000FFFE3 /* ViewController.swift in Sources */,
 				FA8D6E99263EF2D9000FFFE3 /* RoundFunction.swift in Sources */,
 				FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */,
 				FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */,
 				FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */,
-				FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */,
+				FA0E89452646218200B7CD45 /* Patterns.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
 				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
@@ -264,6 +334,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA562D3E264932C4000497C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA8D6E71263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength */;
+			targetProxy = FA562D3D264932C4000497C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FA8D6E80263EF2B5000FFFE3 /* LaunchScreen.storyboard */ = {
@@ -277,6 +355,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FA562D3F264932C4000497C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 48K2Q8B3WH;
+				INFOPLIST_FILE = "AVFoundation Test 8 Timer @ half periodLength Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.nagel.AVFoundation-Test-8-Timer---half-periodLength-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AVFoundation Test 8 Timer @ half periodLength.app/AVFoundation Test 8 Timer @ half periodLength";
+			};
+			name = Debug;
+		};
+		FA562D40264932C4000497C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 48K2Q8B3WH;
+				INFOPLIST_FILE = "AVFoundation Test 8 Timer @ half periodLength Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.nagel.AVFoundation-Test-8-Timer---half-periodLength-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AVFoundation Test 8 Timer @ half periodLength.app/AVFoundation Test 8 Timer @ half periodLength";
+			};
+			name = Release;
+		};
 		FA8D6E84263EF2B5000FFFE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -436,6 +556,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FA562D41264932C4000497C8 /* Build configuration list for PBXNativeTarget "AVFoundation Test 8 Timer @ half periodLength Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA562D3F264932C4000497C8 /* Debug */,
+				FA562D40264932C4000497C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FA8D6E6D263EF2B4000FFFE3 /* Build configuration list for PBXProject "AVFoundation Test 8 Timer @ half periodLength" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

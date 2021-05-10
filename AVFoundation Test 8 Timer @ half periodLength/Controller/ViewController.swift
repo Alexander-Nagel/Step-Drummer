@@ -7,7 +7,7 @@ import AVFoundation
 
 fileprivate let DEBUG = false
 
-class ViewController: UIViewController{
+class ViewController: UIViewController {
     
     private var engine = AVAudioEngine()
     
@@ -163,9 +163,12 @@ class ViewController: UIViewController{
     @IBOutlet weak var bpmStepperView: UIView!
     
     
+    @IBOutlet weak var playPauseButton: UIButton!
+
+    @IBOutlet weak var partSegmentedControl: UISegmentedControl!
+    
     @IBOutlet weak var tapButton: UIButton!
     @IBOutlet weak var picker: UIPickerView!
-    @IBOutlet weak var playPauseButton: UIButton!
     
     
     @IBOutlet weak var mute0Button: UIButton!
@@ -214,6 +217,8 @@ class ViewController: UIViewController{
     //
     // MARK: - LIFECYCLE
     //
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -226,18 +231,8 @@ class ViewController: UIViewController{
         // NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
         
         seq.tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
-        
-        seq.tracks[0].numberOfCellsActive = DefaultPatterns.kick1.length
-        seq.tracks[0].cells = DefaultPatterns.kick1.data
-        
-        seq.tracks[1].numberOfCellsActive = DefaultPatterns.snare1.length
-        seq.tracks[1].cells = DefaultPatterns.snare1.data
-        
-        seq.tracks[2].numberOfCellsActive = DefaultPatterns.closedHihat1.length
-        seq.tracks[2].cells = DefaultPatterns.closedHihat1.data
-        
-        seq.tracks[3].numberOfCellsActive = DefaultPatterns.openHihat1.length
-        seq.tracks[3].cells = DefaultPatterns.openHihat1.data
+                
+        seq.loadPattern(number: 0)
         
         print(seq.getPeriodLengthInSamples(forTrack: 0))
         print(seq.getPeriodLengthInSamples(forTrack: 1))
@@ -421,6 +416,8 @@ class ViewController: UIViewController{
         
         //settingsButton.backgroundColor = .red
         
+        partSegmentedControl.backgroundColor = K.Sequencer.controlButtonsColor
+        partSegmentedControl.selectedSegmentTintColor = .orange
         
         for uielement in controlButtons{
             uielement.backgroundColor = .lightGray
@@ -456,6 +453,8 @@ class ViewController: UIViewController{
         bpmStepper.value = seq.tempo!.bpm
         bpmLabel.text = String(seq.tempo!.bpm)
         bpmStepperView.backgroundColor = K.Sequencer.controlButtonsColor
+        bpmStepper.isHidden = true
+        bpmStepperView.isHidden = true
         
         //loadBuffersTO_BE_REFACTORED()
         
@@ -635,6 +634,21 @@ class ViewController: UIViewController{
             
         }
     }
+    
+    //
+    // MARK:- Part changed
+    //
+    
+    @IBAction func partChanged(_ sender: UISegmentedControl) {
+        
+        print(#function)
+        seq.saveToPattern(number: seq.activePattern)
+        print(partSegmentedControl.selectedSegmentIndex)
+        seq.loadPattern(number: partSegmentedControl.selectedSegmentIndex)
+        seq.activePattern = partSegmentedControl.selectedSegmentIndex
+        updateUI()
+    }
+    
     
     
     //

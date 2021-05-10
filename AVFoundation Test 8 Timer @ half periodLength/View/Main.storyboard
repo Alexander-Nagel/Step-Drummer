@@ -641,11 +641,11 @@
                                                     <action selector="showControlsToggle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7tJ-U2-iA4"/>
                                                 </connections>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="dev-gT-hsS">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dev-gT-hsS">
                                                 <rect key="frame" x="45" y="0.0" width="503" height="52"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dD-e1-zaT">
-                                                        <rect key="frame" x="0.0" y="0.0" width="123.5" height="52"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -656,9 +656,24 @@
                                                             <action selector="buttonPresed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ptA-WZ-X1h"/>
                                                         </connections>
                                                     </button>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="B1g-OU-6w4">
+                                                        <rect key="frame" x="101.5" y="0.0" width="96.5" height="53"/>
+                                                        <segments>
+                                                            <segment title="A"/>
+                                                            <segment title="B"/>
+                                                            <segment title="C"/>
+                                                            <segment title="D"/>
+                                                        </segments>
+                                                        <connections>
+                                                            <action selector="partChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="E5w-2x-Oax"/>
+                                                        </connections>
+                                                    </segmentedControl>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ozo-XU-6KX" userLabel="TAP">
-                                                        <rect key="frame" x="126.5" y="0.0" width="123.5" height="52"/>
+                                                        <rect key="frame" x="203" y="0.0" width="97" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="MIf-cq-SJy"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Tap">
@@ -670,17 +685,17 @@
                                                         </connections>
                                                     </button>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQo-5m-Rf9" userLabel="BPM">
-                                                        <rect key="frame" x="251.5" y="0.0" width="0.0" height="52"/>
+                                                        <rect key="frame" x="302.5" y="0.0" width="0.0" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAV-2s-gw6">
-                                                        <rect key="frame" x="253" y="0.0" width="123.5" height="52"/>
+                                                        <rect key="frame" x="305" y="0.0" width="96.5" height="52"/>
                                                         <subviews>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="a6p-DL-ihA">
-                                                                <rect key="frame" x="15" y="10" width="94" height="32"/>
+                                                                <rect key="frame" x="1" y="10" width="94" height="32"/>
                                                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                 <connections>
                                                                     <action selector="stepperPressed:" destination="BYZ-38-t0r" eventType="valueChanged" id="nIL-rc-cd1"/>
@@ -693,7 +708,7 @@
                                                         </constraints>
                                                     </view>
                                                     <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="bEc-yE-UTb">
-                                                        <rect key="frame" x="379.5" y="0.0" width="123.5" height="52"/>
+                                                        <rect key="frame" x="406.5" y="0.0" width="96.5" height="52"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <connections>
                                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="wjW-iT-CxO"/>
@@ -788,6 +803,7 @@
                         <outlet property="mute1Button" destination="OF7-ES-xHR" id="3V9-5p-kEF"/>
                         <outlet property="mute2Button" destination="h5V-ph-Iwo" id="Qqf-N1-FB5"/>
                         <outlet property="mute3Button" destination="xqU-q8-OOg" id="CQV-g3-CBw"/>
+                        <outlet property="partSegmentedControl" destination="B1g-OU-6w4" id="9wb-9M-Tbe"/>
                         <outlet property="picker" destination="bEc-yE-UTb" id="mpb-vs-uUM"/>
                         <outlet property="playPauseButton" destination="7dD-e1-zaT" id="iSK-Be-86u"/>
                         <outlet property="reverbSlider0" destination="HPU-C4-gfH" id="izU-sU-7yV"/>
