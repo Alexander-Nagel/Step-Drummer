@@ -205,9 +205,7 @@ class ViewController: UIViewController{
 
     private var trackReverbSliders = [UISlider]()
     
-    
     private var controlButtons: [UIView] = []
-    
     
     var seq = Sequencer()
     
@@ -646,6 +644,12 @@ class ViewController: UIViewController{
         
         let newTempo = bpmStepper.value
         seq.tempo?.bpm = newTempo
+        
+        preScheduleFirstBuffer(forPlayer: 0)
+        preScheduleFirstBuffer(forPlayer: 1)
+        preScheduleFirstBuffer(forPlayer: 2)
+        preScheduleFirstBuffer(forPlayer: 3)
+        
         updateUIAfterTempoChange(to: newTempo)
     }
     
@@ -1477,7 +1481,7 @@ class ViewController: UIViewController{
         // Set new tempo, display value, load new buffers
         //
         seq.tempo?.bpm = newTempo
-        bpmLabel.text = String(seq.tempo!.bpm)
+        //bpmLabel.text = String(seq.tempo!.bpm)
         
         //
         // Update stepper display
@@ -1497,6 +1501,16 @@ class ViewController: UIViewController{
         loadAllBuffers()
         
         stopAndRestartAllTimers()
+        
+        //
+        // Recalculate delay time (to dotted 8th note)
+        //
+        print("Delay old: ", delays[0].delayTime)
+        let newDelayTime = 60.0 / seq.tempo!.bpm * 0.75
+        for delay in delays {
+            delay.delayTime = newDelayTime
+        }
+        print("Delay new: ", delays[0].delayTime)
     }
     
     func stopAndRestartAllTimers() {
@@ -1634,6 +1648,12 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let newTempo = Double(pickedLeft) + Double(pickedRight) / 10.0
         if DEBUG {print(newTempo)}
         seq.tempo?.bpm = newTempo
+        
+        preScheduleFirstBuffer(forPlayer: 0)
+        preScheduleFirstBuffer(forPlayer: 1)
+        preScheduleFirstBuffer(forPlayer: 2)
+        preScheduleFirstBuffer(forPlayer: 3)
+        
         updateUIAfterTempoChange(to: newTempo)
     }
 }
