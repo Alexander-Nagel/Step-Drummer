@@ -156,7 +156,7 @@ class ViewController: UIViewController{
     
     private var trackButtonMatrix: [[UIButton]] = []
     
-    @IBOutlet weak var settings: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var bpmLabel: UILabel!
     
     @IBOutlet weak var bpmStepper: UIStepper!
@@ -191,12 +191,19 @@ class ViewController: UIViewController{
     private var stepperViews: [UIView] = []
     
     
-    @IBOutlet weak var volume0: UISlider!
-    @IBOutlet weak var volume1: UISlider!
-    @IBOutlet weak var volume2: UISlider!
-    @IBOutlet weak var volume3: UISlider!
+    @IBOutlet weak var volumeSlider0: UISlider!
+    @IBOutlet weak var volumeSlider1: UISlider!
+    @IBOutlet weak var volumeSlider2: UISlider!
+    @IBOutlet weak var volumeSlider3: UISlider!
     
-    private var trackVolumes = [UISlider]()
+    private var trackVolumeSliders = [UISlider]()
+    
+    @IBOutlet weak var reverbSlider0: UISlider!
+    @IBOutlet weak var reverbSlider1: UISlider!
+    @IBOutlet weak var reverbSlider2: UISlider!
+    @IBOutlet weak var reverbSlider3: UISlider!
+
+    private var trackReverbSliders = [UISlider]()
     
     
     private var controlButtons: [UIView] = []
@@ -291,7 +298,9 @@ class ViewController: UIViewController{
         
         controlButtons = [playPauseButton, tapButton, bpmLabel, bpmStepper, picker]
         
-        trackVolumes = [volume0, volume1, volume2, volume3]
+        trackVolumeSliders = [volumeSlider0, volumeSlider1, volumeSlider2, volumeSlider3]
+        
+        trackReverbSliders = [reverbSlider0, reverbSlider1, reverbSlider2, reverbSlider3]
         
         //players = [player0, player1, player2, player3]
         
@@ -405,7 +414,10 @@ class ViewController: UIViewController{
             stepper.value = Double(seq.tracks[index].numberOfCellsActive)
         }
         
-        for (index, slider) in trackVolumes.enumerated() {
+        for (index, slider) in trackVolumeSliders.enumerated() {
+            slider.tag = index
+        }
+        for (index, slider) in trackReverbSliders.enumerated() {
             slider.tag = index
         }
         
@@ -1357,7 +1369,10 @@ class ViewController: UIViewController{
             //
             // Show controls
             //
-            for slider in trackVolumes {
+            for slider in trackVolumeSliders {
+                slider.isHidden = false
+            }
+            for slider in trackReverbSliders {
                 slider.isHidden = false
             }
             for view in stepperViews {
@@ -1369,7 +1384,10 @@ class ViewController: UIViewController{
             //
             // Hide controls
             //
-            for slider in trackVolumes {
+            for slider in trackVolumeSliders {
+                slider.isHidden = true
+            }
+            for slider in trackReverbSliders {
                 slider.isHidden = true
             }
             for view in stepperViews {
@@ -1429,6 +1447,20 @@ class ViewController: UIViewController{
         
         
     }
+    
+    //
+    // MARK:- trackReverbChanged()
+    //
+    @IBAction func trackReverbChanged(_ sender: UISlider) {
+        print(#function)
+        print(sender.tag, sender.value)
+        seq.tracks[sender.tag].reverbMix = Double(sender.value * 100)
+        reverbs[sender.tag].wetDryMix = sender.value * 100
+        
+        
+        
+    }
+    
     
     @objc func onDidReceiveData(_ notification: Notification) {
         print(#function)
