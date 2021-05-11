@@ -1,4 +1,4 @@
-// uing timer to schedule buffers
+// using timer to schedule buffers
 // https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer
 
 

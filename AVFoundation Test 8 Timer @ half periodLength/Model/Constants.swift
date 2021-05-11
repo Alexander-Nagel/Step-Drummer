@@ -3,6 +3,9 @@
 import Foundation
 import UIKit
 
+// blau #1B7DFF
+// orange #FF914D
+
 //
 // Constants
 //
@@ -29,6 +32,12 @@ struct K {
     }
     
     struct Color {
+        
+        static let step = UIColor(rgb: 0xFF914D) // orange
+        static let stepPlaying = UIColor(rgb: 0xEB5A00) // darker orange
+        
+        static let control = UIColor(rgb: 0x1B7DFF) // blue
+        static let controlSelected = UIColor(rgb: 0x3D91FF) // brighter blue
         
 //        static let backgroundColor = UIColor(rgb: 0x6B9080) // Wintergreen Dream
 //

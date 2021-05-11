@@ -30,6 +30,7 @@
 		FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */; };
 		FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */; };
 		FAB22319264413D300708387 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAB22318264413D300708387 /* silence.wav */; };
+		FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC7FF72264A8D9E00041FEA /* HexColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashExtension.swift; sourceTree = "<group>"; };
 		FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BpmDetector.swift; sourceTree = "<group>"; };
 		FAB22318264413D300708387 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
+		FAC7FF72264A8D9E00041FEA /* HexColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		FA6C960A2641B64600114B08 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				FAC7FF72264A8D9E00041FEA /* HexColorExtension.swift */,
 				FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */,
 				FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */,
 				FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */,
@@ -326,6 +329,7 @@
 				FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */,
 				FA0E89452646218200B7CD45 /* Patterns.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
+				FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */,
 				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
 				FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */,
