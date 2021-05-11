@@ -67,6 +67,22 @@ class ViewController: UIViewController {
     // MARK: - OUTLETS
     //
     
+    //
+    // Track control labels
+    //
+    
+    @IBOutlet weak var trackVolumeLabel: UILabel!
+    @IBOutlet weak var trackReverbLabel: UILabel!
+    @IBOutlet weak var trackStepsLabel: UILabel!
+    @IBOutlet weak var trackMuteLabel: UILabel!
+    @IBOutlet weak var trackCellsLabel: UILabel!
+    
+    @IBOutlet weak var trackCellsView: UIStackView!
+    
+    @IBOutlet weak var trackControlsLabelsStackView: UIStackView!
+    private var trackControlLabels = [UILabel]()
+    
+    //
     // player0
     //
     @IBOutlet weak var button0_0: UIButton!
@@ -208,6 +224,13 @@ class ViewController: UIViewController {
 
     private var trackReverbSliders = [UISlider]()
     
+    @IBOutlet weak var delaySlider0: UISlider!
+    @IBOutlet weak var delaySlider1: UISlider!
+    @IBOutlet weak var delaySlider2: UISlider!
+    @IBOutlet weak var delaySlider3: UISlider!
+
+    private var trackDelaySliders = [UISlider]()
+    
     private var controlButtons: [UIView] = []
     
     var seq = Sequencer()
@@ -247,19 +270,9 @@ class ViewController: UIViewController {
         picker.selectRow(0, inComponent: 2, animated: true) // start at 0 as decimal
         
         
-        //beatLabels = [beat1Label, beat2Label, beat3Label, beat4Label, beat5Label, beat6Label, beat7Label, beat8Label]
-        //beatLabelsB = [beat1LabelB, beat2LabelB, beat3LabelB, beat4LabelB, beat5LabelB, beat6LabelB, beat7LabelB, beat8LabelB]
         
-        //        for label in beatLabels {
-        //            label.backgroundColor = .none
-        //            label.layer.borderColor = UIColor.orange.cgColor
-        //            label.layer.borderWidth = 3.0
-        //        }
-        //        for label in beatLabelsB {
-        //            label.backgroundColor = .none
-        //            label.layer.borderColor = UIColor.orange.cgColor
-        //            label.layer.borderWidth = 3.0
-        //        }
+        trackControlLabels = [trackVolumeLabel, trackReverbLabel, /*, trackStepsLabel */ trackMuteLabel, trackCellsLabel]
+        
         
         track0Buttons = [button0_0, button0_1, button0_2, button0_3,
                          button0_4, button0_5, button0_6, button0_7,
@@ -294,6 +307,8 @@ class ViewController: UIViewController {
         trackVolumeSliders = [volumeSlider0, volumeSlider1, volumeSlider2, volumeSlider3]
         
         trackReverbSliders = [reverbSlider0, reverbSlider1, reverbSlider2, reverbSlider3]
+        
+        trackDelaySliders = [delaySlider0, delaySlider1, delaySlider2, delaySlider3]
         
         //players = [player0, player1, player2, player3]
         
@@ -381,6 +396,15 @@ class ViewController: UIViewController {
         }
         
         //
+        // Hide track control labels
+        //
+        for label in trackControlLabels {
+            label.isHidden = true
+        }
+        trackCellsView.isHidden = true
+        trackControlsLabelsStackView.isHidden = true
+        
+        //
         // muteButtons
         //
         for (index, button) in muteButtons.enumerated() {
@@ -411,6 +435,9 @@ class ViewController: UIViewController {
             slider.tag = index
         }
         for (index, slider) in trackReverbSliders.enumerated() {
+            slider.tag = index
+        }
+        for (index, slider) in trackDelaySliders.enumerated() {
             slider.tag = index
         }
         
@@ -1387,30 +1414,46 @@ class ViewController: UIViewController {
             //
             // Show controls
             //
+            for label in trackControlLabels {
+                label.isHidden = false
+            }
+            trackCellsView.isHidden = false
+            trackControlsLabelsStackView.isHidden = false
+            
             for slider in trackVolumeSliders {
                 slider.isHidden = false
             }
             for slider in trackReverbSliders {
                 slider.isHidden = false
             }
-            for view in stepperViews {
-                view.isHidden = false
+            for slider in trackDelaySliders {
+                slider.isHidden = false
             }
-            
-            
+//            for view in stepperViews {
+//                view.isHidden = false
+//            }
         } else {
             //
             // Hide controls
             //
+            for label in trackControlLabels {
+                label.isHidden = true
+            }
+            trackCellsView.isHidden = true
+            trackControlsLabelsStackView.isHidden = true
+            
             for slider in trackVolumeSliders {
                 slider.isHidden = true
             }
             for slider in trackReverbSliders {
                 slider.isHidden = true
             }
-            for view in stepperViews {
-                view.isHidden = true
+            for slider in trackDelaySliders {
+                slider.isHidden = true
             }
+//            for view in stepperViews {
+//                view.isHidden = true
+//            }
             
             
         }
@@ -1474,9 +1517,16 @@ class ViewController: UIViewController {
         print(sender.tag, sender.value)
         seq.tracks[sender.tag].reverbMix = Double(sender.value * 100)
         reverbs[sender.tag].wetDryMix = sender.value * 100
-        
-        
-        
+    }
+    
+    //
+    // MARK:- trackDelayChanged()
+    //
+    @IBAction func trackDelayChanged(_ sender: UISlider) {
+        print(#function)
+        print(sender.tag, sender.value)
+        seq.tracks[sender.tag].delayMix = Double(sender.value * 100)
+        delays[sender.tag].wetDryMix = sender.value * 100
     }
     
     
