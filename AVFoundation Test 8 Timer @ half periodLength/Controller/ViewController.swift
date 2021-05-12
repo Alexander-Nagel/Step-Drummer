@@ -304,8 +304,8 @@ class ViewController: UIViewController {
             button.isHidden = false
             button.titleLabel?.text = ""
             button.tag = index
-            button.widthAnchor.constraint(equalToConstant: 45).isActive = true
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true           
+            //button.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
         }
 //        //
 //        // Show only active buttons
@@ -412,7 +412,7 @@ class ViewController: UIViewController {
         // muteButtons
         //
         for (index, button) in muteButtons.enumerated() {
-            print("Index: \(index)")
+            //print("Index: \(index)")
             button.backgroundColor = K.Color.muteButtonColor
             button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
             button.layer.borderWidth = 1.0
@@ -420,8 +420,9 @@ class ViewController: UIViewController {
 //            button.titleLabel?.text = "AA"
             button.setTitleColor(K.Color.black, for: .normal)
             button.layer.cornerRadius = 15
+           // button.layer.cornerRadius = 0.5 * button.bounds.size.width
             button.tag = index
-            button.widthAnchor.constraint(equalToConstant: 45).isActive = true
+            button.widthAnchor.constraint(equalToConstant: 50).isActive = true
             button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
         }
         
@@ -440,20 +441,28 @@ class ViewController: UIViewController {
         
         for (index, slider) in trackVolumeSliders.enumerated() {
             slider.tag = index
+            slider.tintColor = K.Color.orange
         }
         for (index, slider) in trackReverbSliders.enumerated() {
             slider.tag = index
+            slider.tintColor = K.Color.orange
+
         }
         for (index, slider) in trackDelaySliders.enumerated() {
             slider.tag = index
+            slider.tintColor = K.Color.orange
+
         }
         
         settingsButton.backgroundColor = K.Color.orange
         settingsButton.setTitleColor(K.Color.black, for: .normal)
-    
+        settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        settingsButton.layer.cornerRadius = 15
+
         
         partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
+       
         
         for uielement in controlButtons{
             uielement.backgroundColor = .lightGray
@@ -464,16 +473,22 @@ class ViewController: UIViewController {
             if let button = uielement as? UIButton {
                 button.setTitleColor(.white, for: .normal)
                 button.backgroundColor = K.Color.controlButtonsColor
+                button.layer.cornerRadius = 0.125 * button.bounds.size.width
+
             }
             if let stepper = uielement as? UIStepper {
                 //stepper.tintColor = .white
                 stepper.backgroundColor = K.Color.controlButtonsColor
+                stepper.layer.cornerRadius = 0.125 * stepper.bounds.size.width
+
             }
             if let picker = uielement as? UIPickerView {
                 picker.tintColor = .white
                 picker.backgroundColor = K.Color.controlButtonsColor
+                picker.layer.cornerRadius = 0.125 * picker.bounds.size.width
             }
             tapButton.setTitleColor(.black, for: .normal)
+           
         }
     
         
@@ -1309,7 +1324,7 @@ class ViewController: UIViewController {
             //
             // Un-mute row / player
             //
-            players[sender.tag].volume = 1
+            players[sender.tag].volume = Float(seq.tracks[sender.tag].volume)
             muteButtons[sender.tag].backgroundColor = K.Color.muteButtonColor
             
             let buttonRowToBeUnmuted = trackButtonMatrix[sender.tag]
@@ -1499,8 +1514,17 @@ class ViewController: UIViewController {
     @IBAction func trackVolumeChanged(_ sender: UISlider) {
         print(#function)
         print(sender.tag, sender.value)
+        
+        //
+        // Write new volume to seq struct
+        //
         seq.tracks[sender.tag].volume = Double(sender.value)
-        players[sender.tag].volume = sender.value
+        
+        //
+        // Only change player volume if not muted
+        //
+        if !seq.tracks[sender.tag].muted {
+            players[sender.tag].volume = sender.value}
         
         
         
