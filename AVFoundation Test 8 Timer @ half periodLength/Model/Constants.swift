@@ -30,25 +30,30 @@ struct K {
     
     struct Color {
         
-        static let orange = UIColor(rgb: 0xFF914D)
-        static let orange_dark = UIColor(rgb: 0xEB5A00)
-        static let blue = UIColor(rgb: 0x1B7DFF)
-        static let blue_bright = UIColor(rgb: 0x3DD2FF)
+        //https://coolors.co/ff914d-ffad7a-024176-008bb5-00c3da-ffffff
+        
+        static let orange = UIColor(rgb: 0xFF914D) // Atomic Tangerine
+        static let orange_brighter = UIColor(rgb: 0xFFD0B2) // Apricot
+        static let blue = UIColor(rgb: 0x024176) // Indigo Dye
+        static let blue_brighter = UIColor(rgb: 0x008BB5) // Blue NCS
+        static let blue_brighest = UIColor(rgb: 0x00C3DA) // Dark Turquoise
         static let light_gray: UIColor = .lightGray
         static let white: UIColor = .white
+        static let black: UIColor = .black
         
         static let step = orange
-        static let stepPlaying = orange_dark
+        static let step_soft = orange_brighter
+        static let stepPlaying = orange_brighter
         
         static let control = blue
-        static let controlSelected = blue_bright
+        static let controlSelected = blue_brighter
         
-        static let playerButtonColors = [blue, blue, blue, blue]
+        //static let playerButtonColors = [blue, blue, blue, blue]
         
         static let playerButtonBorderColors = [light_gray, light_gray, light_gray, light_gray]
         
-        static let muteButtonColor = blue_bright
-        static let muteButtonBorderColor = blue_bright
+        static let muteButtonColor = blue_brighter
+        static let muteButtonBorderColor = blue_brighter
         
         static let controlButtonsColor = K.Color.control
         static let controlButtonsSelectedColor = K.Color.controlSelected

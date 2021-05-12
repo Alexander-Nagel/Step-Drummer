@@ -22,13 +22,30 @@ class ViewController: UIViewController {
     private var bpmDetector = BpmDetector()
     
     private let fileNameSilence = "silence.wav"
-    private let fileNames = ["kick_2156samples.wav",
-                             "snare_2152samples.wav",
-                             "hihat_2154samples.wav",
-                             "open_hihat_2181samples.wav"]
-    private var files =  [AVAudioFile]()
+//    private let fileNames = FileNames(normal: ["kick_2156samples.wav",
+//                                               "snare_2152samples.wav",
+//                                               "hihat_2154samples.wav",
+//                                               "open_hihat_2181samples.wav"],
+//                                      soft: ["kick_2156samples_SOFT.wav",
+//                                             "snare_2152samples_SOFT.wav",
+//                                             "hihat_2154samples_SOFT.wav",
+    //                                             "open_hihat_2181samples_SOFT.wav"])
+    private let fileNames = FileNames(normal: ["kick_2156samples.wav",
+                                               "snare_2152samples.wav",
+                                               "hihat_2154samples.wav",
+                                               "open_hihat_2181samples.wav"],
+                                      soft: ["kick_2156samples_SOFT.wav",
+                                             "snare_2152samples_SOFT.wav",
+                                             "hihat_2154samples_SOFT.wav",
+                                             "open_hihat_2181samples_SOFT.wav"])
+//    private var files =  [AVAudioFile]()
+    private var files = Files()
+    
     private var fileSilence: AVAudioFile! = nil
-    private var soundBuffers = [AVAudioPCMBuffer]()
+    
+//    private var soundBuffers = [AVAudioPCMBuffer]()
+    private var soundBuffers = SoundBuffers()
+    
     private var silenceBuffers = [AVAudioPCMBuffer]()
     
     private var timerEventCounter0: Int = 1
@@ -218,8 +235,12 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        files = [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()]
-        soundBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
+        //        files = [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()]
+        files = Files(normal: [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()],
+                      soft: [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()])
+        //        soundBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
+        soundBuffers = SoundBuffers(normal: [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()], soft: [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()])
+        
         silenceBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
         
         // NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
@@ -272,87 +293,111 @@ class ViewController: UIViewController {
         //players = [player0, player1, player2, player3]
         
         //
-        // player0: Style & hide all buttons
+        // Style & hide all buttons
         //
-        for (index, button) in track0Buttons.enumerated() {
+        let allButtons = track0Buttons + track1Buttons + track2Buttons + track3Buttons
+        for (index, button) in allButtons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
             button.layer.borderColor = K.Color.playerButtonBorderColors[0].cgColor
             button.layer.borderWidth = 1.0
-            button.isHidden = true
+            button.isHidden = false
             button.titleLabel?.text = ""
             button.tag = index
-            //            button.setBackgroundColor(color: .clear, forState: .normal)
-            //            button.setBackgroundColor(color: .orange, forState: .selected)
+            button.widthAnchor.constraint(equalToConstant: 45).isActive = true
+            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true           
         }
-        //
-        // Show only active buttons
-        //
-        for i in 0...(seq.tracks[0].numberOfCellsActive-1) {
-            track0Buttons[i].isHidden = false
-        }
-        //
-        // player1: Style & hide all buttons
-        //
-        for (index, button) in track1Buttons.enumerated() {
-            print("Index: \(index)")
-            //button.backgroundColor = .none
-            button.layer.borderColor = K.Color.playerButtonBorderColors[1].cgColor
-            button.layer.borderWidth = 1.0
-            button.isHidden = true
-            button.titleLabel?.text = ""
-            button.tag = index
-            button.setBackgroundColor(color: .clear, forState: .normal)
-            button.setBackgroundColor(color: .orange, forState: .selected)
-        }
-        //
-        // Show only active buttons
-        //
-        for i in 0...(seq.tracks[1].numberOfCellsActive-1) {
-            track1Buttons[i].isHidden = false
-        }
+//        //
+//        // Show only active buttons
+//        //
+//        for i in 0...(seq.tracks[0].numberOfCellsActive-1) {
+//            track0Buttons[i].isHidden = false
+//        }
+//
         
-        //
-        // player2: Style & hide all buttons
-        //
-        for (index, button) in track2Buttons.enumerated() {
-            print("Index: \(index)")
-            //button.backgroundColor = .none
-            button.layer.borderColor = K.Color.playerButtonBorderColors[2].cgColor
-            button.layer.borderWidth = 1.0
-            button.isHidden = true
-            button.titleLabel?.text = ""
-            button.tag = index
-            button.setBackgroundColor(color: .clear, forState: .normal)
-            button.setBackgroundColor(color: .orange, forState: .selected)
-        }
-        //
-        // Show only active buttons
-        //
-        for i in 0...(seq.tracks[2].numberOfCellsActive-1) {
-            track2Buttons[i].isHidden = false
-        }
         
-        //
-        // player3: Style & hide all buttons
-        //
-        for (index, button) in track3Buttons.enumerated() {
-            print("Index: \(index)")
-            //button.backgroundColor = .none
-            button.layer.borderColor = K.Color.playerButtonBorderColors[3].cgColor
-            button.layer.borderWidth = 1.0
-            button.isHidden = true
-            button.titleLabel?.text = ""
-            button.tag = index
-            button.setBackgroundColor(color: .clear, forState: .normal)
-            button.setBackgroundColor(color: .orange, forState: .selected)
-        }
-        //
-        // Show only active buttons
-        //
-        for i in 0...(seq.tracks[3].numberOfCellsActive-1) {
-            track3Buttons[i].isHidden = false
-        }
+//        //
+//        // player0: Style & hide all buttons
+//        //
+//        for (index, button) in track0Buttons.enumerated() {
+//            print("Index: \(index)")
+//            //button.backgroundColor = .none
+//            button.layer.borderColor = K.Color.playerButtonBorderColors[0].cgColor
+//            button.layer.borderWidth = 1.0
+//            button.isHidden = true
+//            button.titleLabel?.text = ""
+//            button.tag = index
+//            //            button.setBackgroundColor(color: .clear, forState: .normal)
+//            //            button.setBackgroundColor(color: .orange, forState: .selected)
+//        }
+//        //
+//        // Show only active buttons
+//        //
+//        for i in 0...(seq.tracks[0].numberOfCellsActive-1) {
+//            track0Buttons[i].isHidden = false
+//        }
+//        //
+//        // player1: Style & hide all buttons
+//        //
+//        for (index, button) in track1Buttons.enumerated() {
+//            print("Index: \(index)")
+//            //button.backgroundColor = .none
+//            button.layer.borderColor = K.Color.playerButtonBorderColors[1].cgColor
+//            button.layer.borderWidth = 1.0
+//            button.isHidden = true
+//            button.titleLabel?.text = ""
+//            button.tag = index
+//            button.setBackgroundColor(color: .clear, forState: .normal)
+//            button.setBackgroundColor(color: .orange, forState: .selected)
+//        }
+//        //
+//        // Show only active buttons
+//        //
+//        for i in 0...(seq.tracks[1].numberOfCellsActive-1) {
+//            track1Buttons[i].isHidden = false
+//        }
+//
+//        //
+//        // player2: Style & hide all buttons
+//        //
+//        for (index, button) in track2Buttons.enumerated() {
+//            print("Index: \(index)")
+//            //button.backgroundColor = .none
+//            button.layer.borderColor = K.Color.playerButtonBorderColors[2].cgColor
+//            button.layer.borderWidth = 1.0
+//            button.isHidden = true
+//            button.titleLabel?.text = ""
+//            button.tag = index
+//            button.setBackgroundColor(color: .clear, forState: .normal)
+//            button.setBackgroundColor(color: .orange, forState: .selected)
+//        }
+//        //
+//        // Show only active buttons
+//        //
+//        for i in 0...(seq.tracks[2].numberOfCellsActive-1) {
+//            track2Buttons[i].isHidden = false
+//        }
+//
+//        //
+//        // player3: Style & hide all buttons
+//        //
+//        for (index, button) in track3Buttons.enumerated() {
+//            print("Index: \(index)")
+//            //button.backgroundColor = .none
+//            button.layer.borderColor = K.Color.playerButtonBorderColors[3].cgColor
+//            button.layer.borderWidth = 1.0
+//            button.isHidden = true
+//            button.titleLabel?.text = ""
+//            button.tag = index
+//            button.setBackgroundColor(color: .clear, forState: .normal)
+//            button.setBackgroundColor(color: .orange, forState: .selected)
+//        }
+//        //
+//        // Show only active buttons
+//        //
+//        for i in 0...(seq.tracks[3].numberOfCellsActive-1) {
+//            track3Buttons[i].isHidden = false
+//        }
         
         //
         // Hide track control labels
@@ -372,9 +417,12 @@ class ViewController: UIViewController {
             button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = false
-            button.titleLabel?.text = ""
+//            button.titleLabel?.text = "AA"
+            button.setTitleColor(K.Color.black, for: .normal)
             button.layer.cornerRadius = 15
             button.tag = index
+            button.widthAnchor.constraint(equalToConstant: 45).isActive = true
+            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
         }
         
         for view in stepperViews {
@@ -401,7 +449,7 @@ class ViewController: UIViewController {
         }
         
         settingsButton.backgroundColor = K.Color.orange
-        settingsButton.tintColor = K.Color.white
+        settingsButton.setTitleColor(K.Color.black, for: .normal)
     
         
         partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
@@ -426,12 +474,8 @@ class ViewController: UIViewController {
                 picker.backgroundColor = K.Color.controlButtonsColor
             }
             tapButton.setTitleColor(.black, for: .normal)
-            
         }
-        //stepperOuterStackView.backgroundColor = .white
-        //stepperInnerStackView.backgroundColor = .green
-        //stepperView.backgroundColor = K.Sequencer.controlButtonsColor
-        
+    
         
         updateUI()
         
@@ -443,8 +487,6 @@ class ViewController: UIViewController {
         bpmStepperView.backgroundColor = K.Color.controlButtonsColor
         bpmStepper.isHidden = true
         bpmStepperView.isHidden = true
-        
-        //loadBuffersTO_BE_REFACTORED()
         
         loadBuffer(ofPlayer: 0, withFile: 0)
         loadBuffer(ofPlayer: 1, withFile: 1)
@@ -563,14 +605,30 @@ class ViewController: UIViewController {
         //
         // MARK: Loading buffer - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
         //
-        let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
-        let url = URL(fileURLWithPath: path)
-        do {files[file_to_load] = try AVAudioFile(forReading: url)
-            soundBuffers[player_to_be_loaded] = AVAudioPCMBuffer(
-                pcmFormat: files[file_to_load].processingFormat,
+        let path_normal = Bundle.main.path(forResource: fileNames.normal[file_to_load], ofType: nil)!
+        let path_soft = Bundle.main.path(forResource: fileNames.soft[file_to_load], ofType: nil)!
+        //let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
+
+        let url_normal = URL(fileURLWithPath: path_normal)
+        let url_soft = URL(fileURLWithPath: path_soft)
+        
+        do {
+            files.normal[file_to_load] = try AVAudioFile(forReading: url_normal)
+            soundBuffers.normal[player_to_be_loaded] = AVAudioPCMBuffer(
+                pcmFormat: files.normal[file_to_load].processingFormat,
                 frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded)))!
-            try files[file_to_load].read(into: soundBuffers[player_to_be_loaded])
-            soundBuffers[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
+            
+            files.soft[file_to_load] = try AVAudioFile(forReading: url_soft)
+            soundBuffers.soft[player_to_be_loaded] = AVAudioPCMBuffer(
+                pcmFormat: files.soft[file_to_load].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded)))!
+            
+            try files.normal[file_to_load].read(into: soundBuffers.normal[player_to_be_loaded])
+            try files.soft[file_to_load].read(into: soundBuffers.soft[player_to_be_loaded])
+            
+            soundBuffers.normal[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
+            soundBuffers.soft[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
+            
         } catch { print("Error loading buffer \(player_to_be_loaded) \(error)") }
         
         
@@ -658,7 +716,7 @@ class ViewController: UIViewController {
     //
     // MARK:- Play / Pause toggle action
     //
-    @IBAction func buttonPresed(_ sender: UIButton) {
+    @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         
         sender.isSelected = !sender.isSelected
         
@@ -712,7 +770,7 @@ class ViewController: UIViewController {
         
         if DEBUG {
             print("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  ")
-            print(soundBuffers[0].frameLength, soundBuffers[1].frameLength, soundBuffers[2].frameLength, soundBuffers[3].frameLength)
+            print(soundBuffers.normal[0].frameLength, soundBuffers.normal[1].frameLength, soundBuffers.normal[2].frameLength, soundBuffers.normal[3].frameLength)
         }
         
         //
@@ -729,10 +787,10 @@ class ViewController: UIViewController {
             
             print(#function)
             
-            print(self.soundBuffers[0].frameLength, self.silenceBuffers[0].frameLength, "  ",
-                  self.soundBuffers[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
-                  self.soundBuffers[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
-                  self.soundBuffers[3].frameLength, self.silenceBuffers[3].frameLength
+            print(self.soundBuffers.normal[0].frameLength, self.silenceBuffers[0].frameLength, "  ",
+                  self.soundBuffers.normal[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
+                  self.soundBuffers.normal[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
+                  self.soundBuffers.normal[3].frameLength, self.silenceBuffers[3].frameLength
             )
             
             if DEBUG {
@@ -756,9 +814,13 @@ class ViewController: UIViewController {
                 let nextCell = self.seq.tracks[0].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.players[0].scheduleBuffer(self.soundBuffers[0], at: nil, options: [], completionHandler: nil)
+                    self.players[0].scheduleBuffer(self.soundBuffers.normal[0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer0"
+                } else if nextCell == .SOFT {
+                    self.players[0].scheduleBuffer(self.soundBuffers.soft[0], at: nil, options: [], completionHandler: nil)
+                    bufferScheduled = "buffer0 soft"
                 } else {
+                    
                     self.players[0].scheduleBuffer(self.silenceBuffers[0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer0Silence"
                 }
@@ -834,8 +896,11 @@ class ViewController: UIViewController {
                 let nextCell = self.seq.tracks[1].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.players[1].scheduleBuffer(self.soundBuffers[1], at: nil, options: [], completionHandler: nil)
+                    self.players[1].scheduleBuffer(self.soundBuffers.normal[1], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer1"
+                } else if nextCell == .SOFT {
+                    self.players[1].scheduleBuffer(self.soundBuffers.soft[1], at: nil, options: [], completionHandler: nil)
+                    bufferScheduled = "buffer1 soft"
                 } else {
                     self.players[1].scheduleBuffer(self.silenceBuffers[1], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer1Silence"
@@ -909,8 +974,11 @@ class ViewController: UIViewController {
                 let nextCell = self.seq.tracks[2].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.players[2].scheduleBuffer(self.soundBuffers[2], at: nil, options: [], completionHandler: nil)
+                    self.players[2].scheduleBuffer(self.soundBuffers.normal[2], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer2"
+                } else if nextCell == .SOFT {
+                    self.players[2].scheduleBuffer(self.soundBuffers.soft[2], at: nil, options: [], completionHandler: nil)
+                    bufferScheduled = "buffer2 soft"
                 } else {
                     self.players[2].scheduleBuffer(self.silenceBuffers[2], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer2Silence"
@@ -987,8 +1055,11 @@ class ViewController: UIViewController {
                 let nextCell = self.seq.tracks[3].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.players[3].scheduleBuffer(self.soundBuffers[3], at: nil, options: [], completionHandler: nil)
+                    self.players[3].scheduleBuffer(self.soundBuffers.normal[3], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer3"
+                } else if nextCell == .SOFT {
+                    self.players[3].scheduleBuffer(self.soundBuffers.soft[3], at: nil, options: [], completionHandler: nil)
+                    bufferScheduled = "buffer3 soft"
                 } else {
                     self.players[3].scheduleBuffer(self.silenceBuffers[3], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer3Silence"
@@ -1159,7 +1230,7 @@ class ViewController: UIViewController {
             //
             // Schedule sound
             //
-            players[seletedPlayer].scheduleBuffer(soundBuffers[seletedPlayer], at: nil, options: [], completionHandler: nil)
+            players[seletedPlayer].scheduleBuffer(soundBuffers.normal[seletedPlayer], at: nil, options: [], completionHandler: nil)
         } else {
             //
             // Schedule silence
@@ -1169,102 +1240,51 @@ class ViewController: UIViewController {
         players[seletedPlayer].prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: seletedPlayer)))
     }
     
-    
     //
-    // MARK:- player0 button pressed action
+    // MARK:- cellPressed
     //
-    @IBAction func button0pressed(_ sender: UIButton) {
-        print("Tag: \(sender.tag)")
+    @IBAction func cellPressed(_ sender: UIButton) {
         
-        if track0Buttons[sender.tag].backgroundColor == .none {
+        var selectedTrack = 0
+//        while !trackButtonMatrix[selectedTrack].contains(sender) {selectedTrack += 1}
+        
+        var numberOfCell: Int = 0
+        switch sender.tag {
+        case 0...15: selectedTrack = 0; numberOfCell = sender.tag
+        case 16...31: selectedTrack = 1; numberOfCell = sender.tag - 16
+        case 32...47: selectedTrack = 2; numberOfCell = sender.tag - 32
+        case 48...63: selectedTrack = 3; numberOfCell = sender.tag - 48
+        default: selectedTrack = 99 // will not happen
+        }
+        print("You pressed a buton in row: ", selectedTrack)
+        
+        
+        if trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor == .none {
             
             //
-            // Set Step
+            // Step is OFF: Set Step
             //
-            track0Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[0]
-            seq.tracks[0].cells[sender.tag] = .ON
+            trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor = K.Color.step
+            seq.tracks[selectedTrack].cells[numberOfCell] = .ON
             
+        } else if trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor == K.Color.step {
+            
+            //
+            // Step is ON: Set Step to SOFT
+            //
+            trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor = K.Color.step_soft
+            seq.tracks[selectedTrack].cells[numberOfCell] = .SOFT
+        
         } else {
             
             //
-            // Delete Step
+            // Step is SOFT: Set Step to OFF
             //
-            track0Buttons[sender.tag].backgroundColor = .none
-            seq.tracks[0].cells[sender.tag] = .OFF
+            trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor = .none
+            seq.tracks[selectedTrack].cells[numberOfCell] = .OFF
         }
     }
     
-    //
-    // MARK:- player1 button pressed action
-    //
-    @IBAction func button1pressed(_ sender: UIButton) {
-        print("Tag: \(sender.tag)")
-        
-        if track1Buttons[sender.tag].backgroundColor == .none {
-            
-            //
-            // Set Step
-            //
-            track1Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[1]
-            seq.tracks[1].cells[sender.tag] = .ON
-            
-        } else {
-            
-            //
-            // Delete Step
-            //
-            track1Buttons[sender.tag].backgroundColor = .none
-            seq.tracks[1].cells[sender.tag] = .OFF
-        }
-    }
-    
-    //
-    // MARK:- player2 button pressed action
-    //
-    @IBAction func button2pressed(_ sender: UIButton) {
-        print("Tag: \(sender.tag)")
-        
-        if track2Buttons[sender.tag].backgroundColor == .none {
-            
-            //
-            // Set Step
-            //
-            track2Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[2]
-            seq.tracks[2].cells[sender.tag] = .ON
-            
-        } else {
-            
-            //
-            // Delete Step
-            //
-            track2Buttons[sender.tag].backgroundColor = .none
-            seq.tracks[2].cells[sender.tag] = .OFF
-        }
-    }
-    
-    //
-    // MARK:- player3 button pressed action
-    //
-    @IBAction func button3pressed(_ sender: UIButton) {
-        print("Tag: \(sender.tag)")
-        
-        if track3Buttons[sender.tag].backgroundColor == .none {
-            
-            //
-            // Set Step
-            //
-            track3Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[3]
-            seq.tracks[3].cells[sender.tag] = .ON
-            
-        } else {
-            
-            //
-            // Delete Step
-            //
-            track3Buttons[sender.tag].backgroundColor = .none
-            seq.tracks[3].cells[sender.tag] = .OFF
-        }
-    }
     
     //
     // MARK:- muteButton action
@@ -1316,7 +1336,11 @@ class ViewController: UIViewController {
             
             if seq.tracks[0].cells[index] == .ON {
                 
-                button.backgroundColor = K.Color.playerButtonColors[0]
+                button.backgroundColor = K.Color.step
+             
+            } else if seq.tracks[0].cells[index] == .SOFT {
+                
+                button.backgroundColor = K.Color.step_soft
                 
             } else {
                 
@@ -1327,7 +1351,11 @@ class ViewController: UIViewController {
             
             if seq.tracks[1].cells[index] == .ON {
                 
-                button.backgroundColor = K.Color.playerButtonColors[1]
+                button.backgroundColor = K.Color.step
+           
+            } else if seq.tracks[1].cells[index] == .SOFT {
+                
+                button.backgroundColor = K.Color.step_soft
                 
             } else {
                 
@@ -1338,8 +1366,12 @@ class ViewController: UIViewController {
             
             if seq.tracks[2].cells[index] == .ON {
                 
-                button.backgroundColor = K.Color.playerButtonColors[2]
+                button.backgroundColor = K.Color.step
                 
+            } else if seq.tracks[2].cells[index] == .SOFT {
+                
+                button.backgroundColor = K.Color.step_soft
+            
             } else {
                 
                 button.backgroundColor = .none
@@ -1349,8 +1381,12 @@ class ViewController: UIViewController {
             
             if seq.tracks[3].cells[index] == .ON {
                 
-                button.backgroundColor = K.Color.playerButtonColors[3]
+                button.backgroundColor = K.Color.step
                 
+            } else if seq.tracks[3].cells[index] == .SOFT {
+                
+                button.backgroundColor = K.Color.step_soft
+            
             } else {
                 
                 button.backgroundColor = .none
@@ -1582,10 +1618,10 @@ extension ViewController {
     
     func printFrameLengths() {
         
-        print(self.soundBuffers[0].frameLength, self.silenceBuffers[0].frameLength, "  ",
-              self.soundBuffers[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
-              self.soundBuffers[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
-              self.soundBuffers[3].frameLength, self.silenceBuffers[3].frameLength
+        print(self.soundBuffers.normal[0].frameLength, self.silenceBuffers[0].frameLength, "  ",
+              self.soundBuffers.normal[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
+              self.soundBuffers.normal[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
+              self.soundBuffers.normal[3].frameLength, self.silenceBuffers[3].frameLength
         )
     }
     
