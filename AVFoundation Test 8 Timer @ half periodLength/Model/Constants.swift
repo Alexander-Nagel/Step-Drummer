@@ -17,12 +17,9 @@ struct K {
         static let numberOfTracks = 4
         static let numberOfCellsPerTrack = 16
         static let sampleRate = 44100.0
-        static let playerButtonColors: [UIColor] = [.orange, .orange, .orange, .orange]
-        static let playerButtonBorderColors: [UIColor] = [.lightGray, .lightGray, .lightGray, .lightGray]
-        static let muteButtonColor: UIColor = .red
-        static let muteButtonBorderColor: UIColor = .lightGray
-        static let controlButtonsColor: UIColor = .red
-        static let playingCellColor: UIColor = .lightGray
+        
+        
+        
     }
     
     struct BpmDtctr {
@@ -33,12 +30,29 @@ struct K {
     
     struct Color {
         
-        static let step = UIColor(rgb: 0xFF914D) // orange
-        static let stepPlaying = UIColor(rgb: 0xEB5A00) // darker orange
+        static let orange = UIColor(rgb: 0xFF914D)
+        static let orange_dark = UIColor(rgb: 0xEB5A00)
+        static let blue = UIColor(rgb: 0x1B7DFF)
+        static let blue_bright = UIColor(rgb: 0x3DD2FF)
+        static let light_gray: UIColor = .lightGray
+        static let white: UIColor = .white
         
-        static let control = UIColor(rgb: 0x1B7DFF) // blue
-        static let controlSelected = UIColor(rgb: 0x3D91FF) // brighter blue
+        static let step = orange
+        static let stepPlaying = orange_dark
         
+        static let control = blue
+        static let controlSelected = blue_bright
+        
+        static let playerButtonColors = [blue, blue, blue, blue]
+        
+        static let playerButtonBorderColors = [light_gray, light_gray, light_gray, light_gray]
+        
+        static let muteButtonColor = blue_bright
+        static let muteButtonBorderColor = blue_bright
+        
+        static let controlButtonsColor = K.Color.control
+        static let controlButtonsSelectedColor = K.Color.controlSelected
+        static let playingCellColor: UIColor = orange
 //        static let backgroundColor = UIColor(rgb: 0x6B9080) // Wintergreen Dream
 //
 //        static let majorButtonColor = UIColor(rgb: 0xCCE3dE) // Light Cyan

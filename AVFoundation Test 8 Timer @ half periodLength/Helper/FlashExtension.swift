@@ -25,7 +25,7 @@ internal extension UIButton {
 //        layer.add(flash, forKey: nil)
         
         let animation = CABasicAnimation(keyPath: "backgroundColor")
-        animation.fromValue = K.Sequencer.playingCellColor.cgColor
+        animation.fromValue = K.Color.playingCellColor.cgColor
         animation.toValue = UIColor.clear.cgColor
         animation.duration = 0.15
         layer.add(animation, forKey: nil)

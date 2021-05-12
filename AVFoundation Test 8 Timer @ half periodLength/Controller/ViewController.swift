@@ -13,13 +13,10 @@ class ViewController: UIViewController {
     
     private var players = [AVAudioPlayerNode(), AVAudioPlayerNode(),
                            AVAudioPlayerNode(), AVAudioPlayerNode()]
-    
     private var reverbs = [AVAudioUnitReverb(), AVAudioUnitReverb(),
                            AVAudioUnitReverb(), AVAudioUnitReverb()]
-    
     private var delays = [AVAudioUnitDelay(), AVAudioUnitDelay(),
                           AVAudioUnitDelay(), AVAudioUnitDelay()]
-    
     private var mixer = AVAudioMixerNode()
     
     private var bpmDetector = BpmDetector()
@@ -29,13 +26,9 @@ class ViewController: UIViewController {
                              "snare_2152samples.wav",
                              "hihat_2154samples.wav",
                              "open_hihat_2181samples.wav"]
-    
     private var files =  [AVAudioFile]()
-    
     private var fileSilence: AVAudioFile! = nil
-    
     private var soundBuffers = [AVAudioPCMBuffer]()
-    
     private var silenceBuffers = [AVAudioPCMBuffer]()
     
     private var timerEventCounter0: Int = 1
@@ -49,8 +42,6 @@ class ViewController: UIViewController {
     
     private enum MetronomeState {case run; case stop}
     private var state: MetronomeState = .stop
-    
-    //private var timer: Timer! = nil
     
     private var timer0: Timer! = nil
     private var timer1: Timer! = nil
@@ -76,7 +67,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var trackStepsLabel: UILabel!
     @IBOutlet weak var trackMuteLabel: UILabel!
     @IBOutlet weak var trackCellsLabel: UILabel!
-    
     @IBOutlet weak var trackCellsView: UIStackView!
     
     @IBOutlet weak var trackControlsLabelsStackView: UIStackView!
@@ -101,7 +91,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var button0_13: UIButton!
     @IBOutlet weak var button0_14: UIButton!
     @IBOutlet weak var button0_15: UIButton!
-    
     private var track0Buttons: [UIButton] = []
     
     //
@@ -123,7 +112,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var button1_13: UIButton!
     @IBOutlet weak var button1_14: UIButton!
     @IBOutlet weak var button1_15: UIButton!
-    
     private var track1Buttons: [UIButton] = []
     
     //
@@ -145,7 +133,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var button2_13: UIButton!
     @IBOutlet weak var button2_14: UIButton!
     @IBOutlet weak var button2_15: UIButton!
-    
     private var track2Buttons: [UIButton] = []
     
     //
@@ -167,69 +154,56 @@ class ViewController: UIViewController {
     @IBOutlet weak var button3_13: UIButton!
     @IBOutlet weak var button3_14: UIButton!
     @IBOutlet weak var button3_15: UIButton!
-    
     private var track3Buttons: [UIButton] = []
     
     private var trackButtonMatrix: [[UIButton]] = []
     
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var bpmLabel: UILabel!
-    
     @IBOutlet weak var bpmStepper: UIStepper!
     @IBOutlet weak var bpmStepperView: UIView!
-    
-    
     @IBOutlet weak var playPauseButton: UIButton!
-
     @IBOutlet weak var partSegmentedControl: UISegmentedControl!
-    
     @IBOutlet weak var tapButton: UIButton!
     @IBOutlet weak var picker: UIPickerView!
-    
     
     @IBOutlet weak var mute0Button: UIButton!
     @IBOutlet weak var mute1Button: UIButton!
     @IBOutlet weak var mute2Button: UIButton!
     @IBOutlet weak var mute3Button: UIButton!
-    
     private var muteButtons: [UIButton] = []
-    
     
     @IBOutlet weak var stepper0Button: UIStepper!
     @IBOutlet weak var stepper1Button: UIStepper!
     @IBOutlet weak var stepper2Button: UIStepper!
     @IBOutlet weak var stepper3Button: UIStepper!
-    
     private var stepperButtons: [UIStepper] = []
     
     @IBOutlet weak var stepper0View: UIView!
     @IBOutlet weak var stepper1View: UIView!
     @IBOutlet weak var stepper2View: UIView!
     @IBOutlet weak var stepper3View: UIView!
-    
     private var stepperViews: [UIView] = []
-    
     
     @IBOutlet weak var volumeSlider0: UISlider!
     @IBOutlet weak var volumeSlider1: UISlider!
     @IBOutlet weak var volumeSlider2: UISlider!
     @IBOutlet weak var volumeSlider3: UISlider!
-    
     private var trackVolumeSliders = [UISlider]()
     
     @IBOutlet weak var reverbSlider0: UISlider!
     @IBOutlet weak var reverbSlider1: UISlider!
     @IBOutlet weak var reverbSlider2: UISlider!
     @IBOutlet weak var reverbSlider3: UISlider!
-
     private var trackReverbSliders = [UISlider]()
     
     @IBOutlet weak var delaySlider0: UISlider!
     @IBOutlet weak var delaySlider1: UISlider!
     @IBOutlet weak var delaySlider2: UISlider!
     @IBOutlet weak var delaySlider3: UISlider!
-
     private var trackDelaySliders = [UISlider]()
+    
+    private var trackSliders = [UISlider]()
     
     private var controlButtons: [UIView] = []
     
@@ -240,12 +214,9 @@ class ViewController: UIViewController {
     //
     // MARK: - LIFECYCLE
     //
-    
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         
         files = [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()]
         soundBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
@@ -269,46 +240,34 @@ class ViewController: UIViewController {
         picker.selectRow(0, inComponent: 1, animated: true) // decimal point
         picker.selectRow(0, inComponent: 2, animated: true) // start at 0 as decimal
         
-        
-        
         trackControlLabels = [trackVolumeLabel, trackReverbLabel, /*, trackStepsLabel */ trackMuteLabel, trackCellsLabel]
-        
         
         track0Buttons = [button0_0, button0_1, button0_2, button0_3,
                          button0_4, button0_5, button0_6, button0_7,
                          button0_8, button0_9, button0_10, button0_11,
                          button0_12, button0_13, button0_14, button0_15]
-        
         track1Buttons = [button1_0, button1_1, button1_2, button1_3,
                          button1_4, button1_5, button1_6, button1_7,
                          button1_8, button1_9, button1_10, button1_11,
                          button1_12, button1_13, button1_14, button1_15]
-        
         track2Buttons = [button2_0, button2_1, button2_2, button2_3,
                          button2_4, button2_5, button2_6, button2_7,
                          button2_8, button2_9, button2_10, button2_11,
                          button2_12, button2_13, button2_14, button2_15]
-        
         track3Buttons = [button3_0, button3_1, button3_2, button3_3,
                          button3_4, button3_5, button3_6, button3_7,
                          button3_8, button3_9, button3_10, button3_11,
                          button3_12, button3_13, button3_14, button3_15]
-        
         trackButtonMatrix = [track0Buttons, track1Buttons, track2Buttons, track3Buttons]
         
         muteButtons = [mute0Button, mute1Button, mute2Button, mute3Button]
-        
         stepperButtons = [stepper0Button, stepper1Button, stepper2Button, stepper3Button]
-        
         stepperViews = [stepper0View, stepper1View, stepper2View, stepper3View ]
-        
         controlButtons = [playPauseButton, tapButton, bpmLabel, bpmStepper, picker]
-        
         trackVolumeSliders = [volumeSlider0, volumeSlider1, volumeSlider2, volumeSlider3]
-        
         trackReverbSliders = [reverbSlider0, reverbSlider1, reverbSlider2, reverbSlider3]
-        
         trackDelaySliders = [delaySlider0, delaySlider1, delaySlider2, delaySlider3]
+        trackSliders = trackVolumeSliders + trackReverbSliders + trackDelaySliders
         
         //players = [player0, player1, player2, player3]
         
@@ -318,7 +277,7 @@ class ViewController: UIViewController {
         for (index, button) in track0Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[0].cgColor
+            button.layer.borderColor = K.Color.playerButtonBorderColors[0].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -338,7 +297,7 @@ class ViewController: UIViewController {
         for (index, button) in track1Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[1].cgColor
+            button.layer.borderColor = K.Color.playerButtonBorderColors[1].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -359,7 +318,7 @@ class ViewController: UIViewController {
         for (index, button) in track2Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[2].cgColor
+            button.layer.borderColor = K.Color.playerButtonBorderColors[2].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -380,7 +339,7 @@ class ViewController: UIViewController {
         for (index, button) in track3Buttons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Sequencer.playerButtonBorderColors[3].cgColor
+            button.layer.borderColor = K.Color.playerButtonBorderColors[3].cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = true
             button.titleLabel?.text = ""
@@ -409,8 +368,8 @@ class ViewController: UIViewController {
         //
         for (index, button) in muteButtons.enumerated() {
             print("Index: \(index)")
-            button.backgroundColor = K.Sequencer.muteButtonColor
-            button.layer.borderColor = K.Sequencer.muteButtonBorderColor.cgColor
+            button.backgroundColor = K.Color.muteButtonColor
+            button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = false
             button.titleLabel?.text = ""
@@ -419,10 +378,10 @@ class ViewController: UIViewController {
         }
         
         for view in stepperViews {
-            view.backgroundColor = K.Sequencer.muteButtonColor
+            view.backgroundColor = K.Color.muteButtonColor
         }
         for (index, stepper) in stepperButtons.enumerated() {
-            stepper.backgroundColor = K.Sequencer.muteButtonColor
+            stepper.backgroundColor = K.Color.muteButtonColor
             
             stepper.minimumValue = 1
             stepper.maximumValue = 16
@@ -441,28 +400,30 @@ class ViewController: UIViewController {
             slider.tag = index
         }
         
-        //settingsButton.backgroundColor = .red
+        settingsButton.backgroundColor = K.Color.orange
+        settingsButton.tintColor = K.Color.white
+    
         
-        partSegmentedControl.backgroundColor = K.Sequencer.controlButtonsColor
-        partSegmentedControl.selectedSegmentTintColor = .orange
+        partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
+        partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
         
         for uielement in controlButtons{
             uielement.backgroundColor = .lightGray
             if let label = uielement as? UILabel {
                 label.textColor = .white
-                label.backgroundColor = K.Sequencer.controlButtonsColor
+                label.backgroundColor = K.Color.controlButtonsColor
             }
             if let button = uielement as? UIButton {
                 button.setTitleColor(.white, for: .normal)
-                button.backgroundColor = K.Sequencer.controlButtonsColor
+                button.backgroundColor = K.Color.controlButtonsColor
             }
             if let stepper = uielement as? UIStepper {
                 //stepper.tintColor = .white
-                stepper.backgroundColor = K.Sequencer.controlButtonsColor
+                stepper.backgroundColor = K.Color.controlButtonsColor
             }
             if let picker = uielement as? UIPickerView {
                 picker.tintColor = .white
-                picker.backgroundColor = K.Sequencer.controlButtonsColor
+                picker.backgroundColor = K.Color.controlButtonsColor
             }
             tapButton.setTitleColor(.black, for: .normal)
             
@@ -479,7 +440,7 @@ class ViewController: UIViewController {
         bpmStepper.stepValue = 1
         bpmStepper.value = seq.tempo!.bpm
         bpmLabel.text = String(seq.tempo!.bpm)
-        bpmStepperView.backgroundColor = K.Sequencer.controlButtonsColor
+        bpmStepperView.backgroundColor = K.Color.controlButtonsColor
         bpmStepper.isHidden = true
         bpmStepperView.isHidden = true
         
@@ -507,8 +468,8 @@ class ViewController: UIViewController {
         
         //var mixer = engine.mainMixerNode
         //var input = engine.inputNode
-        var output = engine.outputNode
-        var format = reverbs[2].inputFormat(forBus: 0)
+       // var output = engine.outputNode
+        let format = reverbs[2].inputFormat(forBus: 0)
         
         engine.attach(players[0])
         engine.attach(players[1])
@@ -1220,7 +1181,7 @@ class ViewController: UIViewController {
             //
             // Set Step
             //
-            track0Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[0]
+            track0Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[0]
             seq.tracks[0].cells[sender.tag] = .ON
             
         } else {
@@ -1244,7 +1205,7 @@ class ViewController: UIViewController {
             //
             // Set Step
             //
-            track1Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[1]
+            track1Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[1]
             seq.tracks[1].cells[sender.tag] = .ON
             
         } else {
@@ -1268,7 +1229,7 @@ class ViewController: UIViewController {
             //
             // Set Step
             //
-            track2Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[2]
+            track2Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[2]
             seq.tracks[2].cells[sender.tag] = .ON
             
         } else {
@@ -1292,7 +1253,7 @@ class ViewController: UIViewController {
             //
             // Set Step
             //
-            track3Buttons[sender.tag].backgroundColor = K.Sequencer.playerButtonColors[3]
+            track3Buttons[sender.tag].backgroundColor = K.Color.playerButtonColors[3]
             seq.tracks[3].cells[sender.tag] = .ON
             
         } else {
@@ -1329,7 +1290,7 @@ class ViewController: UIViewController {
             // Un-mute row / player
             //
             players[sender.tag].volume = 1
-            muteButtons[sender.tag].backgroundColor = K.Sequencer.muteButtonColor
+            muteButtons[sender.tag].backgroundColor = K.Color.muteButtonColor
             
             let buttonRowToBeUnmuted = trackButtonMatrix[sender.tag]
             for button in buttonRowToBeUnmuted {
@@ -1355,7 +1316,7 @@ class ViewController: UIViewController {
             
             if seq.tracks[0].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.playerButtonColors[0]
+                button.backgroundColor = K.Color.playerButtonColors[0]
                 
             } else {
                 
@@ -1366,7 +1327,7 @@ class ViewController: UIViewController {
             
             if seq.tracks[1].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.playerButtonColors[1]
+                button.backgroundColor = K.Color.playerButtonColors[1]
                 
             } else {
                 
@@ -1377,7 +1338,7 @@ class ViewController: UIViewController {
             
             if seq.tracks[2].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.playerButtonColors[2]
+                button.backgroundColor = K.Color.playerButtonColors[2]
                 
             } else {
                 
@@ -1388,7 +1349,7 @@ class ViewController: UIViewController {
             
             if seq.tracks[3].cells[index] == .ON {
                 
-                button.backgroundColor = K.Sequencer.playerButtonColors[3]
+                button.backgroundColor = K.Color.playerButtonColors[3]
                 
             } else {
                 
