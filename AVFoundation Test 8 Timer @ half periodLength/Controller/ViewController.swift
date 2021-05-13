@@ -455,11 +455,10 @@ class ViewController: UIViewController {
         }
         
         settingsButton.backgroundColor = K.Color.orange
+        settingsButton.tintColor = K.Color.black
         settingsButton.setTitleColor(K.Color.black, for: .normal)
         settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         settingsButton.layer.cornerRadius = 15
-
-        
         partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
        
@@ -472,7 +471,7 @@ class ViewController: UIViewController {
             }
             if let button = uielement as? UIButton {
                 button.setTitleColor(.white, for: .normal)
-                button.backgroundColor = K.Color.controlButtonsColor
+                button.backgroundColor = K.Color.blue_brighter
                 button.layer.cornerRadius = 0.125 * button.bounds.size.width
 
             }
