@@ -33,8 +33,8 @@ struct Track {
     var soloed: Bool = false
     var isReverbOn = true
     var isDelayOn = true
-    var reverbMix = 0.5
-    var delayMix = 0.5
+    var reverbMix = 0.0
+    var delayMix = 0.0
     
     var cells = [Cell]()
     var patterns = Patterns()
@@ -77,6 +77,7 @@ struct Sequencer {
         tracks[3].numberOfCellsActive = patterns.open_hihat[number].length
         tracks[3].cells = patterns.open_hihat[number].data
     }
+    
     
     mutating func saveToPattern(number: Int) {
         
@@ -131,7 +132,4 @@ struct Sequencer {
     
 }
 
-struct Pattern {
-    var length: Int
-    var data: [Cell]
-}
+

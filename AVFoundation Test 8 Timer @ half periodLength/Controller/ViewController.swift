@@ -9,12 +9,14 @@ fileprivate let DEBUG = false
 
 class ViewController: UIViewController {
     
-//    let leftSwipeButton = UISwipeGestureRecognizer(target: self, action: "leftSwipeButtonAction:")
-//
+    //    let leftSwipeButton = UISwipeGestureRecognizer(target: self, action: "leftSwipeButtonAction:")
+    //
     private var engine = AVAudioEngine()
     
     private var players = [AVAudioPlayerNode(), AVAudioPlayerNode(),
                            AVAudioPlayerNode(), AVAudioPlayerNode()]
+    private var guidePlayer = AVAudioPlayerNode()
+    
     private var reverbs = [AVAudioUnitReverb(), AVAudioUnitReverb(),
                            AVAudioUnitReverb(), AVAudioUnitReverb()]
     private var delays = [AVAudioUnitDelay(), AVAudioUnitDelay(),
@@ -24,31 +26,35 @@ class ViewController: UIViewController {
     private var bpmDetector = BpmDetector()
     
     private let fileNameSilence = "silence.wav"
-//    private let fileNames = FileNames(normal: ["kick_2156samples.wav",
-//                                               "snare_2152samples.wav",
-//                                               "hihat_2154samples.wav",
-//                                               "open_hihat_2181samples.wav"],
-//                                      soft: ["kick_2156samples_SOFT.wav",
-//                                             "snare_2152samples_SOFT.wav",
-//                                             "hihat_2154samples_SOFT.wav",
-    //                                             "open_hihat_2181samples_SOFT.wav"])
-    private let fileNames = FileNames(normal: ["kick_2156samples.wav",
-                                               "snare_2152samples.wav",
-                                               "hihat_2154samples.wav",
-                                               "open_hihat_2181samples.wav"],
-                                      soft: ["kick_2156samples_SOFT.wav",
-                                             "snare_2152samples_SOFT.wav",
-                                             "hihat_2154samples_SOFT.wav",
-                                             "open_hihat_2181samples_SOFT.wav"])
-//    private var files =  [AVAudioFile]()
+    
+//    private let fileNames = FileNames(
+//        normal: ["kick_2156samples.wav",
+//                 "snare_2152samples.wav",
+//                 "hihat_2154samples.wav",
+//                 "open_hihat_2181samples.wav"],
+//        soft: ["kick_2156samples_SOFT.wav",
+//               "snare_2152samples_SOFT.wav",
+//               "hihat_2154samples_SOFT.wav",
+//               "open_hihat_2181samples_SOFT.wav"])
+    private let fileNames = FileNames(
+        normal: ["440KICK1.wav",
+                 "440SN1.wav",
+                 "hihat_2154samples.wav",
+                 "440CRASH.wav"],
+        soft: ["kick_2156samples_SOFT.wav",
+               "snare_2152samples_SOFT.wav",
+               "hihat_2154samples_SOFT.wav",
+               "open_hihat_2181samples_SOFT.wav"])
+   
+    
     private var files = Files()
     
     private var fileSilence: AVAudioFile! = nil
     
-//    private var soundBuffers = [AVAudioPCMBuffer]()
     private var soundBuffers = SoundBuffers()
-    
     private var silenceBuffers = [AVAudioPCMBuffer]()
+
+    private var guideBuffer = AVAudioPCMBuffer()
     
     private var timerEventCounter0: Int = 1
     private var currentStep0: Int = 1
@@ -59,20 +65,25 @@ class ViewController: UIViewController {
     private var timerEventCounter3: Int = 1
     private var currentStep3: Int = 1
     
-    private enum MetronomeState {case run; case stop}
-    private var state: MetronomeState = .stop
+    private var timerEventCounterGuide: Int = 1
+    private var currentStepGuide: Int = 1
+    
+    private enum State {case run; case stop}
+    private var state: State = .stop
     
     private var timer0: Timer! = nil
     private var timer1: Timer! = nil
     private var timer2: Timer! = nil
     private var timer3: Timer! = nil
     
+    private var timerGuide: Timer! = nil
+    
     private let pickerLeftInts = 30...300 // 271 elements
     private let pickerRightDecimals = 0...9 // 10 elements
     private let pickerDataArray = [Array(30...300).map{String($0)}, ["."], Array(0...9).map{String($0)}]
     private var pickedLeft: Int = 120
     private var pickedRight: Int = 0
-
+    
     //
     // MARK: - OUTLETS
     //
@@ -230,24 +241,22 @@ class ViewController: UIViewController {
     
     var controlsHidden = true
     
-//    func leftSwipeButtonAction(recognizer:UITapGestureRecognizer) {
-//        //You could access to sender view
-//        print(recognizer.view)
-//    }
+    //    func leftSwipeButtonAction(recognizer:UITapGestureRecognizer) {
+    //        //You could access to sender view
+    //        print(recognizer.view)
+    //    }
     
     //
     // MARK: - LIFECYCLE
     //
     override func viewDidLoad() {
         
-//        leftSwipeButton.direction = .left
+        //        leftSwipeButton.direction = .left
         
         super.viewDidLoad()
         
-        //        files = [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()]
         files = Files(normal: [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()],
                       soft: [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()])
-        //        soundBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
         soundBuffers = SoundBuffers(normal: [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()], soft: [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()])
         
         silenceBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
@@ -255,13 +264,14 @@ class ViewController: UIViewController {
         // NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .AVAudioEngineConfigurationChange, object: nil)
         
         seq.tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
-                
+        
         seq.loadPattern(number: 0)
         
         print(seq.durationOf16thNoteInSamples(forTrack: 0))
         print(seq.durationOf16thNoteInSamples(forTrack: 1))
         print(seq.durationOf16thNoteInSamples(forTrack: 2))
         print(seq.durationOf16thNoteInSamples(forTrack: 3))
+    
         
         // Connect data:
         picker.delegate = self
@@ -317,97 +327,6 @@ class ViewController: UIViewController {
             button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
             //button.addGestureRecognizer(leftSwipeButton)
         }
-//        //
-//        // Show only active buttons
-//        //
-//        for i in 0...(seq.tracks[0].numberOfCellsActive-1) {
-//            track0Buttons[i].isHidden = false
-//        }
-//
-        
-        
-//        //
-//        // player0: Style & hide all buttons
-//        //
-//        for (index, button) in track0Buttons.enumerated() {
-//            print("Index: \(index)")
-//            //button.backgroundColor = .none
-//            button.layer.borderColor = K.Color.playerButtonBorderColors[0].cgColor
-//            button.layer.borderWidth = 1.0
-//            button.isHidden = true
-//            button.titleLabel?.text = ""
-//            button.tag = index
-//            //            button.setBackgroundColor(color: .clear, forState: .normal)
-//            //            button.setBackgroundColor(color: .orange, forState: .selected)
-//        }
-//        //
-//        // Show only active buttons
-//        //
-//        for i in 0...(seq.tracks[0].numberOfCellsActive-1) {
-//            track0Buttons[i].isHidden = false
-//        }
-//        //
-//        // player1: Style & hide all buttons
-//        //
-//        for (index, button) in track1Buttons.enumerated() {
-//            print("Index: \(index)")
-//            //button.backgroundColor = .none
-//            button.layer.borderColor = K.Color.playerButtonBorderColors[1].cgColor
-//            button.layer.borderWidth = 1.0
-//            button.isHidden = true
-//            button.titleLabel?.text = ""
-//            button.tag = index
-//            button.setBackgroundColor(color: .clear, forState: .normal)
-//            button.setBackgroundColor(color: .orange, forState: .selected)
-//        }
-//        //
-//        // Show only active buttons
-//        //
-//        for i in 0...(seq.tracks[1].numberOfCellsActive-1) {
-//            track1Buttons[i].isHidden = false
-//        }
-//
-//        //
-//        // player2: Style & hide all buttons
-//        //
-//        for (index, button) in track2Buttons.enumerated() {
-//            print("Index: \(index)")
-//            //button.backgroundColor = .none
-//            button.layer.borderColor = K.Color.playerButtonBorderColors[2].cgColor
-//            button.layer.borderWidth = 1.0
-//            button.isHidden = true
-//            button.titleLabel?.text = ""
-//            button.tag = index
-//            button.setBackgroundColor(color: .clear, forState: .normal)
-//            button.setBackgroundColor(color: .orange, forState: .selected)
-//        }
-//        //
-//        // Show only active buttons
-//        //
-//        for i in 0...(seq.tracks[2].numberOfCellsActive-1) {
-//            track2Buttons[i].isHidden = false
-//        }
-//
-//        //
-//        // player3: Style & hide all buttons
-//        //
-//        for (index, button) in track3Buttons.enumerated() {
-//            print("Index: \(index)")
-//            //button.backgroundColor = .none
-//            button.layer.borderColor = K.Color.playerButtonBorderColors[3].cgColor
-//            button.layer.borderWidth = 1.0
-//            button.isHidden = true
-//            button.titleLabel?.text = ""
-//            button.tag = index
-//            button.setBackgroundColor(color: .clear, forState: .normal)
-//            button.setBackgroundColor(color: .orange, forState: .selected)
-//        }
-//        //
-//        // Show only active buttons
-//        //
-//        for i in 0...(seq.tracks[3].numberOfCellsActive-1) {
-//            track3Buttons[i].isHidden = false
-//        }
         
         //
         // Hide track control labels
@@ -427,10 +346,10 @@ class ViewController: UIViewController {
             button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = false
-//            button.titleLabel?.text = "AA"
+            //            button.titleLabel?.text = "AA"
             button.setTitleColor(K.Color.black, for: .normal)
             button.layer.cornerRadius = 15
-           // button.layer.cornerRadius = 0.5 * button.bounds.size.width
+            // button.layer.cornerRadius = 0.5 * button.bounds.size.width
             button.tag = index
             button.widthAnchor.constraint(equalToConstant: 50).isActive = true
             button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
@@ -456,12 +375,12 @@ class ViewController: UIViewController {
         for (index, slider) in trackReverbSliders.enumerated() {
             slider.tag = index
             slider.tintColor = K.Color.orange
-
+            
         }
         for (index, slider) in trackDelaySliders.enumerated() {
             slider.tag = index
             slider.tintColor = K.Color.orange
-
+            
         }
         
         settingsButton.backgroundColor = K.Color.orange
@@ -471,7 +390,7 @@ class ViewController: UIViewController {
         settingsButton.layer.cornerRadius = 15
         partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
-       
+        
         
         for uielement in controlButtons{
             uielement.backgroundColor = .lightGray
@@ -483,13 +402,13 @@ class ViewController: UIViewController {
                 button.setTitleColor(.white, for: .normal)
                 button.backgroundColor = K.Color.blue_brighter
                 button.layer.cornerRadius = 0.125 * button.bounds.size.width
-
+                
             }
             if let stepper = uielement as? UIStepper {
                 //stepper.tintColor = .white
                 stepper.backgroundColor = K.Color.controlButtonsColor
                 stepper.layer.cornerRadius = 0.125 * stepper.bounds.size.width
-
+                
             }
             if let picker = uielement as? UIPickerView {
                 picker.tintColor = .white
@@ -497,9 +416,9 @@ class ViewController: UIViewController {
                 picker.layer.cornerRadius = 0.125 * picker.bounds.size.width
             }
             tapButton.setTitleColor(.black, for: .normal)
-           
+            
         }
-    
+        
         
         updateUI()
         
@@ -516,6 +435,7 @@ class ViewController: UIViewController {
         loadBuffer(ofPlayer: 1, withFile: 1)
         loadBuffer(ofPlayer: 2, withFile: 2)
         loadBuffer(ofPlayer: 3, withFile: 3)
+        loadGuideBuffer()
         
         
         //
@@ -534,13 +454,14 @@ class ViewController: UIViewController {
         
         //var mixer = engine.mainMixerNode
         //var input = engine.inputNode
-       // var output = engine.outputNode
+        // var output = engine.outputNode
         let format = reverbs[2].inputFormat(forBus: 0)
         
         engine.attach(players[0])
         engine.attach(players[1])
         engine.attach(players[2])
         engine.attach(players[3])
+        engine.attach(guidePlayer)
         
         engine.attach(reverbs[0])
         engine.attach(reverbs[1])
@@ -574,20 +495,20 @@ class ViewController: UIViewController {
         engine.connect(delays[3], to: reverbs[3], format: format)
         engine.connect(reverbs[3], to: engine.mainMixerNode, format: format)
         
-        reverbs[0].loadFactoryPreset(.mediumChamber)
+        reverbs[0].loadFactoryPreset(.mediumHall)
         reverbs[0].wetDryMix = 0
         
-        reverbs[1].loadFactoryPreset(.plate)
-        reverbs[1].wetDryMix = 10
+        reverbs[1].loadFactoryPreset(.mediumHall)
+        reverbs[1].wetDryMix = 0
         
         reverbs[2].loadFactoryPreset(.mediumHall)
-        reverbs[2].wetDryMix = 10
+        reverbs[2].wetDryMix = 0
         
-        reverbs[3].loadFactoryPreset(.mediumChamber)
-        reverbs[3].wetDryMix = 10
+        reverbs[3].loadFactoryPreset(.mediumHall)
+        reverbs[3].wetDryMix = 0
         
         delays[0].delayTime = 0.375
-        delays[0].feedback = 10
+        delays[0].feedback = 5
         delays[0].wetDryMix = 0
         
         delays[1].delayTime = 0.375
@@ -595,12 +516,12 @@ class ViewController: UIViewController {
         delays[1].wetDryMix = 0
         
         delays[2].delayTime = 0.375
-        delays[2].feedback = 25
-        delays[2].wetDryMix = 10
+        delays[2].feedback = 5
+        delays[2].wetDryMix = 0
         
         delays[3].delayTime = 0.375
-        delays[3].feedback = 20
-        delays[3].wetDryMix = 20
+        delays[3].feedback = 5
+        delays[3].wetDryMix = 0
         
         engine.prepare()
         do { try engine.start() } catch { print(error) }
@@ -611,13 +532,14 @@ class ViewController: UIViewController {
         preScheduleFirstBuffer(forPlayer: 1)
         preScheduleFirstBuffer(forPlayer: 2)
         preScheduleFirstBuffer(forPlayer: 3)
+        preScheduleFirstGuideBuffer()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        
         showOrHideControls()
-
+        
     }
     
     
@@ -632,7 +554,7 @@ class ViewController: UIViewController {
         let path_normal = Bundle.main.path(forResource: fileNames.normal[file_to_load], ofType: nil)!
         let path_soft = Bundle.main.path(forResource: fileNames.soft[file_to_load], ofType: nil)!
         //let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
-
+        
         let url_normal = URL(fileURLWithPath: path_normal)
         let url_soft = URL(fileURLWithPath: path_soft)
         
@@ -675,6 +597,31 @@ class ViewController: UIViewController {
         
     }
     
+    //
+    // MARK:- Load guide buffers (with parameter)
+    //
+    func loadGuideBuffer() {
+        
+        //
+        // MARK: Loading buffer - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
+        //
+        let path = Bundle.main.path(forResource: fileNameSilence, ofType: nil)!
+        
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            guideBuffer = AVAudioPCMBuffer(
+                pcmFormat: fileSilence.processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: 0)))!
+            
+            try fileSilence.read(into: guideBuffer)
+            
+            guideBuffer.frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: 0))
+            
+        } catch { print("Error loading guide buffer ") }
+    
+    }
+    
     
     
     //
@@ -698,6 +645,7 @@ class ViewController: UIViewController {
             preScheduleFirstBuffer(forPlayer: 1)
             preScheduleFirstBuffer(forPlayer: 2)
             preScheduleFirstBuffer(forPlayer: 3)
+            preScheduleFirstGuideBuffer()
             
             updateUIAfterTempoChange(to: newTempo, restart: true)
             print(newTempo)
@@ -733,6 +681,7 @@ class ViewController: UIViewController {
         preScheduleFirstBuffer(forPlayer: 1)
         preScheduleFirstBuffer(forPlayer: 2)
         preScheduleFirstBuffer(forPlayer: 3)
+        preScheduleFirstGuideBuffer()
         
         updateUIAfterTempoChange(to: newTempo)
     }
@@ -774,6 +723,7 @@ class ViewController: UIViewController {
             preScheduleFirstBuffer(forPlayer: 1)
             preScheduleFirstBuffer(forPlayer: 2)
             preScheduleFirstBuffer(forPlayer: 3)
+            preScheduleFirstGuideBuffer()
             
             
         } else {
@@ -1264,13 +1214,31 @@ class ViewController: UIViewController {
         players[seletedPlayer].prepare(withFrameCount: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: seletedPlayer)))
     }
     
+    
+    private func preScheduleFirstGuideBuffer() {
+        
+        print(#function)
+        
+        printFrameLengths()
+        
+        guidePlayer.stop()
+        
+        //
+        // Schedule silence
+        //
+        
+            guidePlayer.scheduleBuffer(guideBuffer, at: nil, options: [], completionHandler: nil)
+
+        guidePlayer.prepare(withFrameCount: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: 0)))
+    }
+    
     //
     // MARK:- cellPressed
     //
     @IBAction func cellPressed(_ sender: UIButton) {
         
         var selectedTrack = 0
-//        while !trackButtonMatrix[selectedTrack].contains(sender) {selectedTrack += 1}
+        //        while !trackButtonMatrix[selectedTrack].contains(sender) {selectedTrack += 1}
         
         var numberOfCell: Int = 0
         switch sender.tag {
@@ -1298,7 +1266,7 @@ class ViewController: UIViewController {
             //
             trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor = K.Color.step_soft
             seq.tracks[selectedTrack].cells[numberOfCell] = .SOFT
-        
+            
         } else {
             
             //
@@ -1361,7 +1329,7 @@ class ViewController: UIViewController {
             if seq.tracks[0].cells[index] == .ON {
                 
                 button.backgroundColor = K.Color.step
-             
+                
             } else if seq.tracks[0].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
@@ -1376,7 +1344,7 @@ class ViewController: UIViewController {
             if seq.tracks[1].cells[index] == .ON {
                 
                 button.backgroundColor = K.Color.step
-           
+                
             } else if seq.tracks[1].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
@@ -1395,7 +1363,7 @@ class ViewController: UIViewController {
             } else if seq.tracks[2].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
-            
+                
             } else {
                 
                 button.backgroundColor = .none
@@ -1410,11 +1378,24 @@ class ViewController: UIViewController {
             } else if seq.tracks[3].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
-            
+                
             } else {
                 
                 button.backgroundColor = .none
             }
+        }
+        
+        //
+        // Set Vol / Rev / Delay sliders to values in tracks Array
+        //
+        for (index, slider) in trackVolumeSliders.enumerated() {
+            slider.value = Float(seq.tracks[index].volume)
+        }
+        for (index, slider) in trackReverbSliders.enumerated() {
+            slider.value = Float(seq.tracks[index].reverbMix)
+        }
+        for (index, slider) in trackDelaySliders.enumerated() {
+            slider.value = Float(seq.tracks[index].delayMix)
         }
         
     }
@@ -1428,9 +1409,9 @@ class ViewController: UIViewController {
         controlsHidden = !controlsHidden
         showOrHideControls()
     }
-        
-    private func showOrHideControls() {
     
+    private func showOrHideControls() {
+        
         if !controlsHidden {
             //
             // Show controls
@@ -1450,9 +1431,9 @@ class ViewController: UIViewController {
             for slider in trackDelaySliders {
                 slider.isHidden = false
             }
-//            for view in stepperViews {
-//                view.isHidden = false
-//            }
+            //            for view in stepperViews {
+            //                view.isHidden = false
+            //            }
         } else {
             //
             // Hide controls
@@ -1472,9 +1453,9 @@ class ViewController: UIViewController {
             for slider in trackDelaySliders {
                 slider.isHidden = true
             }
-//            for view in stepperViews {
-//                view.isHidden = true
-//            }
+            //            for view in stepperViews {
+            //                view.isHidden = true
+            //            }
             
             
         }
@@ -1654,7 +1635,8 @@ extension ViewController {
         print(self.soundBuffers.normal[0].frameLength, self.silenceBuffers[0].frameLength, "  ",
               self.soundBuffers.normal[1].frameLength, self.silenceBuffers[1].frameLength, "  ",
               self.soundBuffers.normal[2].frameLength, self.silenceBuffers[2].frameLength, "  ",
-              self.soundBuffers.normal[3].frameLength, self.silenceBuffers[3].frameLength
+              self.soundBuffers.normal[3].frameLength, self.silenceBuffers[3].frameLength, "  ",
+              self.guideBuffer.frameLength
         )
     }
     
