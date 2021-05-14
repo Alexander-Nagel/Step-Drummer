@@ -113,8 +113,10 @@ struct Sequencer {
             print()
         }
     }
-    
-    func getPeriodLengthInSamples(forTrack track: Int) -> Double {
+    //
+    // Computes duration in samples of 16th note depending on BPM / samplerate (44100 kHz)
+    //
+    func durationOf16thNoteInSamples(forTrack track: Int) -> Double {
         let activeCells = Double(tracks[track].numberOfCellsActive)
         let bpm = (tempo?.bpm)!
         let sampleRate = Double(K.Sequencer.sampleRate)

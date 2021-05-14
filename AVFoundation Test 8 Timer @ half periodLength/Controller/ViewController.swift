@@ -9,6 +9,8 @@ fileprivate let DEBUG = false
 
 class ViewController: UIViewController {
     
+//    let leftSwipeButton = UISwipeGestureRecognizer(target: self, action: "leftSwipeButtonAction:")
+//
     private var engine = AVAudioEngine()
     
     private var players = [AVAudioPlayerNode(), AVAudioPlayerNode(),
@@ -228,10 +230,17 @@ class ViewController: UIViewController {
     
     var controlsHidden = true
     
+//    func leftSwipeButtonAction(recognizer:UITapGestureRecognizer) {
+//        //You could access to sender view
+//        print(recognizer.view)
+//    }
+    
     //
     // MARK: - LIFECYCLE
     //
     override func viewDidLoad() {
+        
+//        leftSwipeButton.direction = .left
         
         super.viewDidLoad()
         
@@ -249,10 +258,10 @@ class ViewController: UIViewController {
                 
         seq.loadPattern(number: 0)
         
-        print(seq.getPeriodLengthInSamples(forTrack: 0))
-        print(seq.getPeriodLengthInSamples(forTrack: 1))
-        print(seq.getPeriodLengthInSamples(forTrack: 2))
-        print(seq.getPeriodLengthInSamples(forTrack: 3))
+        print(seq.durationOf16thNoteInSamples(forTrack: 0))
+        print(seq.durationOf16thNoteInSamples(forTrack: 1))
+        print(seq.durationOf16thNoteInSamples(forTrack: 2))
+        print(seq.durationOf16thNoteInSamples(forTrack: 3))
         
         // Connect data:
         picker.delegate = self
@@ -306,6 +315,7 @@ class ViewController: UIViewController {
             button.tag = index
             //button.widthAnchor.constraint(equalToConstant: 30).isActive = true
             button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
+            //button.addGestureRecognizer(leftSwipeButton)
         }
 //        //
 //        // Show only active buttons
@@ -630,18 +640,18 @@ class ViewController: UIViewController {
             files.normal[file_to_load] = try AVAudioFile(forReading: url_normal)
             soundBuffers.normal[player_to_be_loaded] = AVAudioPCMBuffer(
                 pcmFormat: files.normal[file_to_load].processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded)))!
+                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded)))!
             
             files.soft[file_to_load] = try AVAudioFile(forReading: url_soft)
             soundBuffers.soft[player_to_be_loaded] = AVAudioPCMBuffer(
                 pcmFormat: files.soft[file_to_load].processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded)))!
+                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded)))!
             
             try files.normal[file_to_load].read(into: soundBuffers.normal[player_to_be_loaded])
             try files.soft[file_to_load].read(into: soundBuffers.soft[player_to_be_loaded])
             
-            soundBuffers.normal[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
-            soundBuffers.soft[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
+            soundBuffers.normal[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded))
+            soundBuffers.soft[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded))
             
         } catch { print("Error loading buffer \(player_to_be_loaded) \(error)") }
         
@@ -655,9 +665,9 @@ class ViewController: UIViewController {
             fileSilence = try AVAudioFile(forReading: urlSilence)
             silenceBuffers[player_to_be_loaded] = AVAudioPCMBuffer(
                 pcmFormat: fileSilence.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded)))!
+                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded)))!
             try fileSilence.read(into: silenceBuffers[player_to_be_loaded])
-            silenceBuffers[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: player_to_be_loaded))
+            silenceBuffers[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded))
         } catch {
             print("Error loading buffer0 \(player_to_be_loaded) \(error)")
         }
@@ -790,7 +800,7 @@ class ViewController: UIViewController {
         //
         //  Timer for player0
         //
-        let timerIntervallInSeconds0 = self.seq.getPeriodLengthInSamples(forTrack: 0) / (2 * K.Sequencer.sampleRate)
+        let timerIntervallInSeconds0 = self.seq.durationOf16thNoteInSamples(forTrack: 0) / (2 * K.Sequencer.sampleRate) // 1/2 of 16th note in seconds
         timer0 = Timer.scheduledTimer(withTimeInterval: timerIntervallInSeconds0, repeats: true) { timer in
             
             //
@@ -881,7 +891,7 @@ class ViewController: UIViewController {
         //
         //  Timer for player1
         //
-        let timerIntervallInSeconds1 = self.seq.getPeriodLengthInSamples(forTrack: 1) / (2 * K.Sequencer.sampleRate)
+        let timerIntervallInSeconds1 = self.seq.durationOf16thNoteInSamples(forTrack: 1) / (2 * K.Sequencer.sampleRate)
         timer1 = Timer.scheduledTimer(withTimeInterval: timerIntervallInSeconds1, repeats: true) { timer in
             
             //
@@ -959,7 +969,7 @@ class ViewController: UIViewController {
         //
         //  Timer for player2
         //
-        let timerIntervallInSeconds2 = self.seq.getPeriodLengthInSamples(forTrack: 2) / (2 * K.Sequencer.sampleRate)
+        let timerIntervallInSeconds2 = self.seq.durationOf16thNoteInSamples(forTrack: 2) / (2 * K.Sequencer.sampleRate)
         timer2 = Timer.scheduledTimer(withTimeInterval: timerIntervallInSeconds2, repeats: true) { timer in
             
             //
@@ -1040,7 +1050,7 @@ class ViewController: UIViewController {
         //
         //  Timer for player3
         //
-        let timerIntervallInSeconds3 = self.seq.getPeriodLengthInSamples(forTrack: 3) / (2 * K.Sequencer.sampleRate)
+        let timerIntervallInSeconds3 = self.seq.durationOf16thNoteInSamples(forTrack: 3) / (2 * K.Sequencer.sampleRate)
         timer3 = Timer.scheduledTimer(withTimeInterval: timerIntervallInSeconds3, repeats: true) { timer in
             
             //
@@ -1251,7 +1261,7 @@ class ViewController: UIViewController {
             //
             players[seletedPlayer].scheduleBuffer(silenceBuffers[seletedPlayer], at: nil, options: [], completionHandler: nil)
         }
-        players[seletedPlayer].prepare(withFrameCount: AVAudioFrameCount(seq.getPeriodLengthInSamples(forTrack: seletedPlayer)))
+        players[seletedPlayer].prepare(withFrameCount: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: seletedPlayer)))
     }
     
     //

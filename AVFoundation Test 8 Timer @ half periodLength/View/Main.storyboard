@@ -284,106 +284,106 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OF7-ES-xHR" userLabel="MUTE 1">
-                                                <rect key="frame" x="240" y="1.5" width="0.0" height="30"/>
+                                                <rect key="frame" x="240" y="1.5" width="30" height="30"/>
                                                 <connections>
                                                     <action selector="muteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H2j-6z-pzm"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IK6-1C-C65">
-                                                <rect key="frame" x="245" y="1.5" width="265" height="30"/>
+                                                <rect key="frame" x="275" y="1.5" width="235" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-1p-eqC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nqV-pE-E0g"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmB-EY-TVa">
-                                                        <rect key="frame" x="17" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="15" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8a7-jd-rcr"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVt-Zy-cSg">
-                                                        <rect key="frame" x="34" y="0.0" width="11.5" height="30"/>
+                                                        <rect key="frame" x="30" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="45w-Fj-XDa"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hq-ns-W9t">
-                                                        <rect key="frame" x="50.5" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="45" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AXC-1I-302"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAH-cU-hSW">
-                                                        <rect key="frame" x="67.5" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="60" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1BT-LH-bcr"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dc1-LH-KvF">
-                                                        <rect key="frame" x="84.5" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="75" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iEk-2Q-1Q8"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzj-OJ-iNc">
-                                                        <rect key="frame" x="101.5" y="0.0" width="11.5" height="30"/>
+                                                        <rect key="frame" x="90" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AoG-PU-Zq6"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjP-ba-iBW">
-                                                        <rect key="frame" x="118" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="105" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KE6-dA-2Uq"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kye-r8-An8">
-                                                        <rect key="frame" x="135" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="120" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UNP-go-MoF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-s3-pQu">
-                                                        <rect key="frame" x="152" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="135" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="brJ-a7-MG1"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8B-m4-ksg">
-                                                        <rect key="frame" x="169" y="0.0" width="11.5" height="30"/>
+                                                        <rect key="frame" x="150" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Pm-hY-3de"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MV6-de-HVk">
-                                                        <rect key="frame" x="185.5" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="165" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dYh-aI-smP"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZD-TZ-pvU">
-                                                        <rect key="frame" x="202.5" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="180" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qwP-oI-wJO"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZ0-5Y-Hqq">
-                                                        <rect key="frame" x="219.5" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="195" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="urM-b3-ajh"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wX1-Ha-lWn">
-                                                        <rect key="frame" x="236.5" y="0.0" width="11.5" height="30"/>
+                                                        <rect key="frame" x="210" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u1u-mC-tgl"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEY-qt-HgU">
-                                                        <rect key="frame" x="253" y="0.0" width="12" height="30"/>
+                                                        <rect key="frame" x="225" y="0.0" width="10" height="30"/>
                                                         <connections>
                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x0i-yp-8rS"/>
                                                         </connections>
@@ -807,7 +807,7 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="Xfo-Nr-UVf"/>
+                                            <constraint firstAttribute="height" constant="125" id="Xfo-Nr-UVf"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
