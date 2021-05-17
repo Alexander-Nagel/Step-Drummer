@@ -9,6 +9,12 @@ fileprivate let DEBUG = false
 
 class ViewController: UIViewController {
     
+    private var isSwiping = false
+    private var swipeStart: Int?
+    private var swipeStartMinY: CGFloat?
+    private var swipeStartMaxY: CGFloat?
+    private var swipeCellState: Cell?
+    
     //    let leftSwipeButton = UISwipeGestureRecognizer(target: self, action: "leftSwipeButtonAction:")
     //
     private var engine = AVAudioEngine()
@@ -27,15 +33,15 @@ class ViewController: UIViewController {
     
     private let fileNameSilence = "silence.wav"
     
-//    private let fileNames = FileNames(
-//        normal: ["kick_2156samples.wav",
-//                 "snare_2152samples.wav",
-//                 "hihat_2154samples.wav",
-//                 "open_hihat_2181samples.wav"],
-//        soft: ["kick_2156samples_SOFT.wav",
-//               "snare_2152samples_SOFT.wav",
-//               "hihat_2154samples_SOFT.wav",
-//               "open_hihat_2181samples_SOFT.wav"])
+    //    private let fileNames = FileNames(
+    //        normal: ["kick_2156samples.wav",
+    //                 "snare_2152samples.wav",
+    //                 "hihat_2154samples.wav",
+    //                 "open_hihat_2181samples.wav"],
+    //        soft: ["kick_2156samples_SOFT.wav",
+    //               "snare_2152samples_SOFT.wav",
+    //               "hihat_2154samples_SOFT.wav",
+    //               "open_hihat_2181samples_SOFT.wav"])
     private let fileNames = FileNames(
         normal: ["440KICK1.wav",
                  "440SN1.wav",
@@ -45,7 +51,7 @@ class ViewController: UIViewController {
                "snare_2152samples_SOFT.wav",
                "hihat_2154samples_SOFT.wav",
                "open_hihat_2181samples_SOFT.wav"])
-   
+    
     
     private var files = Files()
     
@@ -53,7 +59,7 @@ class ViewController: UIViewController {
     
     private var soundBuffers = SoundBuffers()
     private var silenceBuffers = [AVAudioPCMBuffer]()
-
+    
     private var guideBuffer = AVAudioPCMBuffer()
     
     private var timerEventCounter0: Int = 1
@@ -122,6 +128,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var button0_14: UIButton!
     @IBOutlet weak var button0_15: UIButton!
     private var track0Buttons: [UIButton] = []
+    
+    @IBOutlet weak var track0StackView: UIStackView!
     
     //
     // player1
@@ -271,7 +279,7 @@ class ViewController: UIViewController {
         print(seq.durationOf16thNoteInSamples(forTrack: 1))
         print(seq.durationOf16thNoteInSamples(forTrack: 2))
         print(seq.durationOf16thNoteInSamples(forTrack: 3))
-    
+        
         
         // Connect data:
         picker.delegate = self
@@ -318,7 +326,7 @@ class ViewController: UIViewController {
         for (index, button) in allButtons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Color.playerButtonBorderColors[0].cgColor
+            button.layer.borderColor = K.Color.orange_brighter.cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = false
             button.titleLabel?.text = ""
@@ -326,6 +334,8 @@ class ViewController: UIViewController {
             //button.widthAnchor.constraint(equalToConstant: 30).isActive = true
             button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
             //button.addGestureRecognizer(leftSwipeButton)
+            // button.addTarget(self, action: #selector(btnPressedAction), for: .allTouchEvents)
+            
         }
         
         //
@@ -619,7 +629,7 @@ class ViewController: UIViewController {
             guideBuffer.frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: 0))
             
         } catch { print("Error loading guide buffer ") }
-    
+        
     }
     
     
@@ -1227,9 +1237,32 @@ class ViewController: UIViewController {
         // Schedule silence
         //
         
-            guidePlayer.scheduleBuffer(guideBuffer, at: nil, options: [], completionHandler: nil)
-
+        guidePlayer.scheduleBuffer(guideBuffer, at: nil, options: [], completionHandler: nil)
+        
         guidePlayer.prepare(withFrameCount: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: 0)))
+    }
+    
+    func getSelectedTrackAndNumberOfCell(tag: Int) -> (Int, Int) {
+        
+        var selectedTrack = 0
+        var numberOfCell: Int = 0
+        switch tag {
+        case 0...15:
+            selectedTrack = 0
+            numberOfCell = tag
+        case 16...31:
+            selectedTrack = 1
+            numberOfCell = tag - 16
+        case 32...47:
+            selectedTrack = 2
+            numberOfCell = tag - 32
+        case 48...63:
+            selectedTrack = 3
+            numberOfCell = tag - 48
+        default: selectedTrack = 99 // will not happen
+        }
+        print("You pressed a button ",numberOfCell," in row: ", selectedTrack)
+        return (selectedTrack, numberOfCell)
     }
     
     //
@@ -1237,46 +1270,286 @@ class ViewController: UIViewController {
     //
     @IBAction func cellPressed(_ sender: UIButton) {
         
-        var selectedTrack = 0
-        //        while !trackButtonMatrix[selectedTrack].contains(sender) {selectedTrack += 1}
+        //        print(#function)
+        //
+        //        var selectedTrack: Int
+        //        var numberOfCell: Int
+        //
+        //        (selectedTrack, numberOfCell) = getSelectedTrackAndNumberOfCell(tag: sender.tag)
+        //
+        //        changeCell(selectedTrack, numberOfCell)
         
-        var numberOfCell: Int = 0
-        switch sender.tag {
-        case 0...15: selectedTrack = 0; numberOfCell = sender.tag
-        case 16...31: selectedTrack = 1; numberOfCell = sender.tag - 16
-        case 32...47: selectedTrack = 2; numberOfCell = sender.tag - 32
-        case 48...63: selectedTrack = 3; numberOfCell = sender.tag - 48
-        default: selectedTrack = 99 // will not happen
+    }
+    
+    fileprivate func setCellTo(state: Cell, track: Int, cell: Int) {
+        
+        //print("swipeCellState: ", swipeCellState)
+        switch swipeCellState {
+        
+        case .ON:
+            trackButtonMatrix[track][cell].backgroundColor = K.Color.step
+            seq.tracks[track].cells[cell] = .ON
+            
+        case .OFF:
+            trackButtonMatrix[track][cell].backgroundColor = .none
+            seq.tracks[track].cells[cell] = .OFF
+            
+        case .SOFT:
+            trackButtonMatrix[track][cell].backgroundColor = K.Color.step_soft
+            seq.tracks[track].cells[cell] = .SOFT
+            
+        default:
+            print("not gonna happen")
         }
-        print("You pressed a buton in row: ", selectedTrack)
+        //print("swipeCellState: ", swipeCellState)
+    }
+    
+    fileprivate func changeCell(_ track: Int, _ cell: Int) {
         
-        
-        if trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor == .none {
+        //print(#function)
+        print("1")
+        if trackButtonMatrix[track][cell].backgroundColor == .none {
+            print("2")
             
             //
-            // Step is OFF: Set Step
+            // Step is OFF: Set step to "ON"
             //
-            trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor = K.Color.step
-            seq.tracks[selectedTrack].cells[numberOfCell] = .ON
+            trackButtonMatrix[track][cell].backgroundColor = K.Color.step
+            seq.tracks[track].cells[cell] = .ON
+            swipeCellState = .ON
             
-        } else if trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor == K.Color.step {
+            //        } else if trackButtonMatrix[track][cell].backgroundColor == K.Color.step {
+            //
+            //            //
+            //            // Step is ON: Set step to "SOFT"
+            //            //
+            //            trackButtonMatrix[track][cell].backgroundColor = K.Color.step_soft
+            //            seq.tracks[track].cells[cell] = .SOFT
+            //            swipeCellState = .SOFT
             
-            //
-            // Step is ON: Set Step to SOFT
-            //
-            trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor = K.Color.step_soft
-            seq.tracks[selectedTrack].cells[numberOfCell] = .SOFT
             
         } else {
+            print("3")
             
             //
             // Step is SOFT: Set Step to OFF
             //
-            trackButtonMatrix[selectedTrack][numberOfCell].backgroundColor = .none
-            seq.tracks[selectedTrack].cells[numberOfCell] = .OFF
+            trackButtonMatrix[track][cell].backgroundColor = .none
+            seq.tracks[track].cells[cell] = .OFF
+            swipeCellState = .OFF
+            
         }
     }
     
+    //    @objc func btnPressedAction(_ sender: UIButton) {
+    //        print(#function)
+    ////        print(sender)
+    //    }
+    //
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesBegan(touches, with: event)
+        
+        let touch = event?.allTouches?.first
+        //let touchLocation = touch?.location(in: touch?.view)
+        let touchLocation2 = touch?.location(in: self.view)
+        //print("\(touchLocation?.x ?? 0.0) - \(touchLocation?.y ?? 0.0)")
+        print("\(touchLocation2?.x ?? 0.0) - \(touchLocation2?.y ?? 0.0)")
+        print("AA")
+        
+        //
+        // Determine if inside a button
+        //
+        var button: Int? = nil
+        if let touchX = touchLocation2?.x, let touchY = touchLocation2?.y {
+            button = whichButtonHasBeenTouched(x: touchX, y: touchY)
+        }
+        //
+        // If inside a button
+        //
+        if let b = button {
+            print("BB")
+            //print(#function, " Button No. ", b ," got touched!")
+            // Which button? Which row?
+            var selectedTrack: Int
+            var numberOfCell: Int
+            (selectedTrack, numberOfCell) = getSelectedTrackAndNumberOfCell(tag: b)
+            
+            changeCell(selectedTrack, numberOfCell)
+        }
+        print()
+        print("--------------------------------------------------------------")
+        print("01: ","isSwiping: ",isSwiping,"\tswipeStart: ",swipeStart ?? "nil","\tswipeStartMinY: ",swipeStartMinY ?? "nil","\tswipeStartMaxY: ",swipeStartMaxY ?? "nil","\tswipeCellState: ",swipeCellState ?? "nil")
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesMoved(touches, with: event)
+        
+        //
+        // Are we inside a button?
+        //
+        let touch = event?.allTouches?.first
+        let touchLocation = touch?.location(in: touch?.view)
+        let touchLocation2 = touch?.location(in: self.view)
+        //print("\(touchLocation?.x ?? 0.0) - \(touchLocation?.y ?? 0.0)")
+        print("\(touchLocation2?.x ?? 0.0) - \(touchLocation2?.y ?? 0.0)")
+        print("A")
+        
+        var button: Int? = nil
+        if let touchX = touchLocation2?.x, let touchY = touchLocation2?.y {
+            button = whichButtonHasBeenTouched(x: touchX, y: touchY)
+        }
+        if let b = button {
+            print("B")
+            
+            //
+            // If inside a button:
+            //
+            
+            if !isSwiping {
+                print("C")
+                
+                //
+                // Swiping begins
+                //
+                isSwiping = true
+                swipeStart = b
+                swipeStartMinY = trackButtonMatrix.flatMap { $0 }[0...63][b].frame.minY
+                swipeStartMaxY = trackButtonMatrix.flatMap { $0 }[0...63][b].frame.maxY
+            } else {
+                print("D")
+                
+                //
+                // Check if already inside another button
+                //
+                if b != swipeStart {
+                    print("E")
+                    
+                    // Which button? Which row?
+                    var selectedTrack: Int
+                    var numberOfCell: Int
+                    (selectedTrack, numberOfCell) = getSelectedTrackAndNumberOfCell(tag: b)
+                    //changeCell(selectedTrack, numberOfCell)
+                    if let state = swipeCellState {
+                        setCellTo(state: state, track: selectedTrack, cell: numberOfCell)
+                    }
+                    swipeStart = b
+                }
+            }
+            
+            //print("isSwiping: ", isSwiping, "swipeStart: ", swipeStart)
+            
+        } else {
+            print("F")
+            
+            
+            //
+            // If outside:
+            //
+            
+            //
+            // Reset isSwiping to false if below or above current button row
+            //
+            if let touchY = touchLocation?.y, let minY = swipeStartMinY, let maxY = swipeStartMaxY {
+                print("G")
+                
+                if !(minY...maxY).contains(touchY) {
+                    print("H")
+                    
+                    isSwiping = false
+                }
+            }
+            // print(#function, "isSwiping: ", isSwiping, "swipeStart: ", swipeStart)
+            
+        }
+        
+        print("02: ","isSwiping: ",isSwiping,"\tswipeStart: ",swipeStart ?? "nil","\tswipeStartMinY: ",swipeStartMinY ?? "nil","\tswipeStartMaxY: ",swipeStartMaxY ?? "nil","\tswipeCellState: ",swipeCellState ?? "nil")
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesEnded(touches, with: event)
+        
+        print(#function)
+        isSwiping = false
+        swipeStart = nil
+        swipeStartMaxY = nil
+        swipeStartMinY = nil
+        swipeCellState = nil
+        
+        print("03: ","isSwiping: ",isSwiping,"\tswipeStart: ",swipeStart ?? "nil","\tswipeStartMinY: ",swipeStartMinY ?? "nil","\tswipeStartMaxY: ",swipeStartMaxY ?? "nil","\tswipeCellState: ",swipeCellState ?? "nil")
+        print()
+        
+    }
+    
+    func whichButtonHasBeenTouched(x: CGFloat, y: CGFloat) -> Int? {
+        print("whichIN: \(x) \(y)")
+        
+        
+        
+        var arrayOfFittingButtons: [Int?] = [Int]()
+        var buttonNumber: Int? = nil
+        for button in trackButtonMatrix.flatMap({ $0 })[0...63] {
+            
+            let myViewLocation = track0StackView.convert(button.frame, to: self.view)
+            //print("myViewLocation: \(myViewLocation)")
+            let loc = getConvertedPoint(button, baseView: self.view)
+            //print("loc: \(loc)")
+            let superMinX = loc.x
+            let superMaxX = loc.x + myViewLocation.width
+            let superMinY = loc.y
+            let superMaxY = loc.y + myViewLocation.height
+            
+            
+            let minX = button.frame.minX
+            let maxX = button.frame.maxX
+            let minY = button.frame.minY
+            let maxY = button.frame.maxY
+            
+            // superview (horizontal stack view)
+            let minX2 = button.superview?.frame.minX
+            let maxX2 = button.superview?.frame.maxX
+            let minY2 = button.superview?.frame.minY
+            let maxY2 = button.superview?.frame.maxY
+            
+            // super - superview ("player" / horizontal stack view)
+            let minX3 = button.superview?.superview?.frame.minX
+            let maxX3 = button.superview?.superview?.frame.maxX
+            let minY3 = button.superview?.superview?.frame.minY // these y coordinates give the real y of button inside view
+            let maxY3 = button.superview?.superview?.frame.maxY // // these y coordinates give the real y of button inside view
+            
+            var isInX = false
+            var isInY = false
+            isInX = (superMinX...superMaxX).contains(x)
+            isInY = (superMinY...superMaxY).contains(y)
+            if isInX && isInY {
+                buttonNumber = button.tag
+                arrayOfFittingButtons.append(buttonNumber)
+            }
+            //            print("touchX / Y: ",x," / ",y, "Button: ", button.tag, "\tX: ",minX,"-", maxX, "\tY: ",minY,"-",maxY, isInX, isInY,"\t", minX2!, maxX2!, minY2!, maxY2!,"\t", minX3!, maxX3!, minY3!, maxY3!)
+            
+            //            print("touchX / Y: ",x," / ",y, "Button: ", button.tag, "\tX: ",minX,"-", maxX, "\tY: ",superMinY,"-",superMaxY, isInX, isInY)
+        }
+        if let b = buttonNumber {
+            print("whichButtonHasBeenTouched: ", b)
+        }
+        // print("arrayOfFittingButtons: \(arrayOfFittingButtons)")
+        return buttonNumber
+    }
+    
+    //    @IBAction func enteringButtonWhileDragging(_ sender: UIButton) {
+    //
+    //        print()
+    //        print(#function)
+    //
+    //        // Which button? Which row?
+    //        var selectedTrack: Int
+    //        var numberOfCell: Int
+    //        (selectedTrack, numberOfCell) = getSelectedTrackAndNumberOfCell(tag: sender.tag)
+    //
+    //
+    //    }
     
     //
     // MARK:- muteButton action

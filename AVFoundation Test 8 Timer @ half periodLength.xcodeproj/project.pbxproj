@@ -41,6 +41,7 @@
 		FAC71DF9264F37AE007FE152 /* 440KICK3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DEF264F37AE007FE152 /* 440KICK3.wav */; };
 		FAC71DFA264F37AE007FE152 /* 440KICK2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DF0264F37AE007FE152 /* 440KICK2.wav */; };
 		FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC7FF72264A8D9E00041FEA /* HexColorExtension.swift */; };
+		FAE3DF382651BABA0000DD9F /* getConvertedPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE3DF372651BABA0000DD9F /* getConvertedPoint.swift */; };
 		FAFEA98E264BD34E002807DC /* hihat_2154samples_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAFEA98A264BD34D002807DC /* hihat_2154samples_SOFT.wav */; };
 		FAFEA98F264BD34E002807DC /* open_hihat_2181samples_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAFEA98B264BD34D002807DC /* open_hihat_2181samples_SOFT.wav */; };
 		FAFEA990264BD34E002807DC /* snare_2152samples_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAFEA98C264BD34E002807DC /* snare_2152samples_SOFT.wav */; };
@@ -97,6 +98,7 @@
 		FAC71DEF264F37AE007FE152 /* 440KICK3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440KICK3.wav; sourceTree = "<group>"; };
 		FAC71DF0264F37AE007FE152 /* 440KICK2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440KICK2.wav; sourceTree = "<group>"; };
 		FAC7FF72264A8D9E00041FEA /* HexColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorExtension.swift; sourceTree = "<group>"; };
+		FAE3DF372651BABA0000DD9F /* getConvertedPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getConvertedPoint.swift; sourceTree = "<group>"; };
 		FAFEA98A264BD34D002807DC /* hihat_2154samples_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat_2154samples_SOFT.wav; sourceTree = "<group>"; };
 		FAFEA98B264BD34D002807DC /* open_hihat_2181samples_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open_hihat_2181samples_SOFT.wav; sourceTree = "<group>"; };
 		FAFEA98C264BD34E002807DC /* snare_2152samples_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snare_2152samples_SOFT.wav; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */,
 				FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */,
 				FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */,
+				FAE3DF372651BABA0000DD9F /* getConvertedPoint.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 			files = (
 				FAFEA995264BD45B002807DC /* FileNames.swift in Sources */,
 				FA8D6E9C263EF2E8000FFFE3 /* ViewController.swift in Sources */,
+				FAE3DF382651BABA0000DD9F /* getConvertedPoint.swift in Sources */,
 				FA8D6E99263EF2D9000FFFE3 /* RoundFunction.swift in Sources */,
 				FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */,
 				FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */,
