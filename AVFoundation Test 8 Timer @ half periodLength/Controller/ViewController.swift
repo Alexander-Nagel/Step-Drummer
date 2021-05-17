@@ -9,6 +9,8 @@ fileprivate let DEBUG = false
 
 class ViewController: UIViewController {
     
+    private var chainModeABCD = true
+    
     private var isSwiping = false
     private var swipeStart: Int?
     private var swipeStartMinY: CGFloat?
@@ -679,6 +681,16 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    func changeToPart(_ part: Int) {
+        print(#function)
+        seq.saveToPattern(number: seq.activePattern)
+        //print(partSegmentedControl.selectedSegmentIndex)
+        seq.loadPattern(number: part)
+        seq.activePattern = part
+        partSegmentedControl.selectedSegmentIndex = part
+        updateUI()
+    }
+    
     
     
     //
@@ -817,6 +829,11 @@ class ViewController: UIViewController {
                 self.currentStep0 += 1
                 if self.currentStep0 > self.seq.tracks[0].numberOfCellsActive {
                     self.currentStep0 = 1
+                    if self.chainModeABCD {
+                        var nextPart = self.seq.activePattern + 1
+                        if nextPart == 4 { nextPart = 0 }
+                        self.changeToPart(nextPart)
+                    }
                 }
             }
             
