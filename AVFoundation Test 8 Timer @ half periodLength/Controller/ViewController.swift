@@ -326,10 +326,11 @@ class ViewController: UIViewController {
         for (index, button) in allButtons.enumerated() {
             print("Index: \(index)")
             //button.backgroundColor = .none
-            button.layer.borderColor = K.Color.orange_brighter.cgColor
+            button.layer.borderColor = K.Color.blue_brighter.cgColor
             button.layer.borderWidth = 1.0
             button.isHidden = false
             button.titleLabel?.text = ""
+            button.layer.cornerRadius = 5
             button.tag = index
             //button.widthAnchor.constraint(equalToConstant: 30).isActive = true
             button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
@@ -355,6 +356,7 @@ class ViewController: UIViewController {
             button.backgroundColor = K.Color.muteButtonColor
             button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
             button.layer.borderWidth = 1.0
+            button.tintColor = K.Color.blue_brighest
             button.isHidden = false
             //            button.titleLabel?.text = "AA"
             button.setTitleColor(K.Color.black, for: .normal)
@@ -1564,6 +1566,7 @@ class ViewController: UIViewController {
             //
             players[sender.tag].volume = 0
             muteButtons[sender.tag].backgroundColor = .none
+            muteButtons[sender.tag].tintColor = K.Color.blue_brighest
             
             let buttonRowToBeMuted = trackButtonMatrix[sender.tag]
             for button in buttonRowToBeMuted {
@@ -1576,6 +1579,7 @@ class ViewController: UIViewController {
             //
             players[sender.tag].volume = Float(seq.tracks[sender.tag].volume)
             muteButtons[sender.tag].backgroundColor = K.Color.muteButtonColor
+            muteButtons[sender.tag].tintColor = K.Color.blue_brighest
             
             let buttonRowToBeUnmuted = trackButtonMatrix[sender.tag]
             for button in buttonRowToBeUnmuted {
