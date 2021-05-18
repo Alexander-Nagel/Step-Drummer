@@ -36,7 +36,7 @@ struct K {
         static let orange_brighter = UIColor(rgb: 0xFFD0B2) // Apricot
         static let blue = UIColor(rgb: 0x024176) // Indigo Dye
         static let blue_brighter = UIColor(rgb: 0x008BB5) // Blue NCS
-        static let blue_brighest = UIColor(rgb: 0x00C3DA) // Dark Turquoise
+        static let blue_brightest = UIColor(rgb: 0x00C3DA) // Dark Turquoise
         static let light_gray = UIColor(rgb: 0xEBEBEB) // Light Gray / "Mercury"
         static let white: UIColor = .white
         static let black: UIColor = .black
