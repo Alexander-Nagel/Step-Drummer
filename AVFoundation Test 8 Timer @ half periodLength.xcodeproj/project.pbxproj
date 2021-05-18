@@ -13,6 +13,7 @@
 		FA18D30B2653F206005D2A2F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30A2653F206005D2A2F /* Track.swift */; };
 		FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30E2653F24E005D2A2F /* Cell.swift */; };
 		FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D3122653F26F005D2A2F /* Tempo.swift */; };
+		FA18D31726542B09005D2A2F /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D31626542B09005D2A2F /* VerticalButton.swift */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
 		FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */; };
 		FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D44264933BD000497C8 /* SequencerTests.swift */; };
@@ -70,6 +71,7 @@
 		FA18D30A2653F206005D2A2F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		FA18D30E2653F24E005D2A2F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		FA18D3122653F26F005D2A2F /* Tempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
+		FA18D31626542B09005D2A2F /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		FA562D38264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation_Test_8_Timer___half_periodLength_Tests.swift"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */,
 				FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */,
 				FAE3DF372651BABA0000DD9F /* getConvertedPoint.swift */,
+				FA18D31626542B09005D2A2F /* VerticalButton.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				FAE3DF382651BABA0000DD9F /* getConvertedPoint.swift in Sources */,
 				FA8D6E99263EF2D9000FFFE3 /* RoundFunction.swift in Sources */,
 				FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */,
+				FA18D31726542B09005D2A2F /* VerticalButton.swift in Sources */,
 				FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */,
 				FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */,
 				FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */,

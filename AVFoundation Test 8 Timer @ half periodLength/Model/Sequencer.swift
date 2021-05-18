@@ -34,7 +34,7 @@ struct Sequencer {
         normal: ["440KICK1.wav",
                  "440SN1.wav",
                  "hihat_2154samples.wav",
-                 "440CRASH.wav"],
+                 "open_hihat_2181samples.wav"],
         soft: ["kick_2156samples_SOFT.wav",
                "snare_2152samples_SOFT.wav",
                "hihat_2154samples_SOFT.wav",

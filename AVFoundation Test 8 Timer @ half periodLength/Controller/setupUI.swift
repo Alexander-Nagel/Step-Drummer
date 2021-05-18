@@ -153,6 +153,12 @@ extension ViewController {
         settingsButton.layer.cornerRadius = 15
         partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
         
+        // SOFT MODE button:
+        //
+        softModeButton.setTitleColor(.black, for: .normal)
+        softModeButton.backgroundColor = K.Color.blue
+        softModeButton.layer.cornerRadius = 0.125 * softModeButton.bounds.size.width
+        
         // PART A/B/C/D segmented control:
         //
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
@@ -160,8 +166,9 @@ extension ViewController {
         // CHAIN button:
         //
         chainButton.setTitleColor(.black, for: .normal)
-        chainButton.backgroundColor = K.Color.blue_brighter
+        chainButton.backgroundColor = K.Color.blue
         chainButton.layer.cornerRadius = 0.125 * tapButton.bounds.size.width
+        //chainButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
 //        let font = UIFont.systemFont(ofSize: 20)
 //        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)

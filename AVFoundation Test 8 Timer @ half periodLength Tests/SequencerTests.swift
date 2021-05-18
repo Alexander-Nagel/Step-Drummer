@@ -20,12 +20,12 @@ class SequencerTests: XCTestCase {
         sequencer = nil
     }
     
-    func test_rubbish() {
-        
-        XCTAssertEqual(sequencer.rubbish(a: 2, b: 3), 5)
-        
-        
-    }
+//    func test_rubbish() {
+//        
+//        XCTAssertEqual(sequencer.rubbish(a: 2, b: 3), 5)
+//        
+//        
+//    }
     
     
 //    override func setUpWithError() throws {

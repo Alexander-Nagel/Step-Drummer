@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     var seq = Sequencer()
     
     var controlsHidden = true
+    var drawSoftNotes = false
     
     private var isSwiping = false
     private var swipeStart: Int?
@@ -179,6 +180,8 @@ class ViewController: UIViewController {
     // Main Controls at bottom (Play, Tap, Parts...)
     //
     @IBOutlet weak var settingsButton: UIButton!
+    
+    @IBOutlet weak var softModeButton: VerticalButton!
     @IBOutlet weak var partSegmentedControl: UISegmentedControl!
 
     @IBOutlet weak var chainButton: UIButton!
@@ -307,6 +310,31 @@ class ViewController: UIViewController {
     }
     
     //
+    // MARK:- SOFT edit mode action
+    //
+    @IBAction func softModeButtonPressed(_ sender: UIButton) {
+        print(#function)
+        
+        sender.isSelected = !sender.isSelected
+        
+        if drawSoftNotes {
+            //
+            // switch soft note mode OFF
+            //
+            drawSoftNotes = false
+            //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
+            softModeButton.backgroundColor = K.Color.blue
+        } else {
+            //
+            // switch soft note mode  ON
+            //
+            drawSoftNotes = true
+            //chainButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
+            softModeButton.backgroundColor = K.Color.blue_brightest
+        }
+    }
+    
+    //
     // MARK:- CHAIN button action
     //
     @IBAction func chainButtonPressed(_ sender: UIButton) {
@@ -320,7 +348,7 @@ class ViewController: UIViewController {
             //
             seq.chainModeABCD = false
             //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-            chainButton.backgroundColor = K.Color.blue_brighter
+            chainButton.backgroundColor = K.Color.blue
         } else {
             //
             // switch chain mode ON
@@ -945,20 +973,23 @@ class ViewController: UIViewController {
             print("2")
             
             //
-            // Step is OFF: Set step to "ON"
+            // Step is OFF: Set step to "ON" or "SOFT"
             //
-            trackButtonMatrix[track][cell].backgroundColor = K.Color.step
-            seq.tracks[track].cells[cell] = .ON
-            swipeCellState = .ON
+            if !drawSoftNotes { // draw normal ON notes
+                trackButtonMatrix[track][cell].backgroundColor = K.Color.step
+                seq.tracks[track].cells[cell] = .ON
+                swipeCellState = .ON
+            } else { // draw SOFT notes
+                trackButtonMatrix[track][cell].backgroundColor = K.Color.step_soft
+                seq.tracks[track].cells[cell] = .SOFT
+                swipeCellState = .SOFT
+            }
             
             //        } else if trackButtonMatrix[track][cell].backgroundColor == K.Color.step {
             //
             //            //
             //            // Step is ON: Set step to "SOFT"
             //            //
-            //            trackButtonMatrix[track][cell].backgroundColor = K.Color.step_soft
-            //            seq.tracks[track].cells[cell] = .SOFT
-            //            swipeCellState = .SOFT
             
             
         } else {
@@ -972,13 +1003,10 @@ class ViewController: UIViewController {
             swipeCellState = .OFF
             
         }
+        print(drawSoftNotes)
     }
     
-    //    @objc func btnPressedAction(_ sender: UIButton) {
-    //        print(#function)
-    ////        print(sender)
-    //    }
-    //
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         super.touchesBegan(touches, with: event)
@@ -1302,7 +1330,6 @@ class ViewController: UIViewController {
         for (index, slider) in trackDelaySliders.enumerated() {
             slider.value = Float(seq.tracks[index].delayMix)
         }
-        
     }
     
     //
@@ -1361,8 +1388,6 @@ class ViewController: UIViewController {
             //            for view in stepperViews {
             //                view.isHidden = true
             //            }
-            
-            
         }
     }
     
@@ -1400,7 +1425,6 @@ class ViewController: UIViewController {
         preScheduleFirstBuffer(forPlayer: 2)
         preScheduleFirstBuffer(forPlayer: 3)
         stopAndRestartAllTimers()
-        
     }
     
     //
@@ -1420,9 +1444,6 @@ class ViewController: UIViewController {
         //
         if !seq.tracks[sender.tag].muted {
             seq.players[sender.tag].volume = sender.value}
-        
-        
-        
     }
     
     //
@@ -1529,7 +1550,6 @@ class ViewController: UIViewController {
             startPlayers()
             startAllTimers()
         }
-        
     }
 }
 
@@ -1544,7 +1564,6 @@ extension ViewController {
               self.seq.guideBuffer.frameLength
         )
     }
-    
 }
 
 //
@@ -1565,16 +1584,6 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return 10
         }
     }
-    
-    //    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    //        if component == 0 {
-    //            return "\(Array(pickerLeftInts)[row])"
-    //        } else if component == 1 {
-    //            return "."
-    //        } else {
-    //            return "\(Array(pickerRightDecimals)[row])"
-    //        }
-    //    }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var pickerLabel: UILabel? = (view as? UILabel)
