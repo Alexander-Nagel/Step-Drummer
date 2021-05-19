@@ -14,7 +14,6 @@
 		FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30E2653F24E005D2A2F /* Cell.swift */; };
 		FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D3122653F26F005D2A2F /* Tempo.swift */; };
 		FA18D31726542B09005D2A2F /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D31626542B09005D2A2F /* VerticalButton.swift */; };
-		FA18D31B265434E6005D2A2F /* ChainModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D31A265434E6005D2A2F /* ChainModes.swift */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
 		FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */; };
 		FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D44264933BD000497C8 /* SequencerTests.swift */; };
@@ -36,10 +35,11 @@
 		FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */; };
 		FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */; };
 		FAB22319264413D300708387 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAB22318264413D300708387 /* silence.wav */; };
-		FAB47AC22654F9D2006281CE /* PartName.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AC12654F9D2006281CE /* PartName.swift */; };
+		FAB47AC22654F9D2006281CE /* PartNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AC12654F9D2006281CE /* PartNames.swift */; };
 		FAB47ACA2654FFBB006281CE /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AC92654FFBB006281CE /* Part.swift */; };
 		FAB47ACE26550223006281CE /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47ACD26550223006281CE /* Pattern.swift */; };
 		FAB47AD426552C50006281CE /* ClickableSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AD326552C50006281CE /* ClickableSegmentedControl.swift */; };
+		FAB47AD82655ACC1006281CE /* ChainModeNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AD72655ACC1006281CE /* ChainModeNames.swift */; };
 		FAC71DF1264F37AE007FE152 /* 440CLHH.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DE7264F37AD007FE152 /* 440CLHH.wav */; };
 		FAC71DF2264F37AE007FE152 /* 440OHH.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DE8264F37AE007FE152 /* 440OHH.wav */; };
 		FAC71DF3264F37AE007FE152 /* 440SN1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DE9264F37AE007FE152 /* 440SN1.wav */; };
@@ -77,7 +77,6 @@
 		FA18D30E2653F24E005D2A2F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		FA18D3122653F26F005D2A2F /* Tempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
 		FA18D31626542B09005D2A2F /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
-		FA18D31A265434E6005D2A2F /* ChainModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainModes.swift; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		FA562D38264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation_Test_8_Timer___half_periodLength_Tests.swift"; sourceTree = "<group>"; };
@@ -103,10 +102,11 @@
 		FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashExtension.swift; sourceTree = "<group>"; };
 		FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BpmDetector.swift; sourceTree = "<group>"; };
 		FAB22318264413D300708387 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
-		FAB47AC12654F9D2006281CE /* PartName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartName.swift; sourceTree = "<group>"; };
+		FAB47AC12654F9D2006281CE /* PartNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartNames.swift; sourceTree = "<group>"; };
 		FAB47AC92654FFBB006281CE /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
 		FAB47ACD26550223006281CE /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		FAB47AD326552C50006281CE /* ClickableSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableSegmentedControl.swift; sourceTree = "<group>"; };
+		FAB47AD72655ACC1006281CE /* ChainModeNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainModeNames.swift; sourceTree = "<group>"; };
 		FAC71DE7264F37AD007FE152 /* 440CLHH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440CLHH.wav; sourceTree = "<group>"; };
 		FAC71DE8264F37AE007FE152 /* 440OHH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440OHH.wav; sourceTree = "<group>"; };
 		FAC71DE9264F37AE007FE152 /* 440SN1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440SN1.wav; sourceTree = "<group>"; };
@@ -166,18 +166,18 @@
 		FA6C96082641B64000114B08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
-				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
-				FAB47AC12654F9D2006281CE /* PartName.swift */,
-				FAB47AC92654FFBB006281CE /* Part.swift */,
 				FA30281026433C0D00406561 /* Sequencer.swift */,
-				FA18D30E2653F24E005D2A2F /* Cell.swift */,
-				FA18D3122653F26F005D2A2F /* Tempo.swift */,
+				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
 				FA18D30A2653F206005D2A2F /* Track.swift */,
+				FA18D30E2653F24E005D2A2F /* Cell.swift */,
+				FAB47AC92654FFBB006281CE /* Part.swift */,
+				FAB47AC12654F9D2006281CE /* PartNames.swift */,
+				FA18D3122653F26F005D2A2F /* Tempo.swift */,
 				FA0E89442646218200B7CD45 /* DefaultPatterns.swift */,
 				FAB47ACD26550223006281CE /* Pattern.swift */,
 				FAFEA994264BD45B002807DC /* FileNames.swift */,
-				FA18D31A265434E6005D2A2F /* ChainModes.swift */,
+				FAB47AD72655ACC1006281CE /* ChainModeNames.swift */,
+				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -434,13 +434,13 @@
 				FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */,
 				FAB47AD426552C50006281CE /* ClickableSegmentedControl.swift in Sources */,
 				FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */,
-				FA18D31B265434E6005D2A2F /* ChainModes.swift in Sources */,
 				FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
 				FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */,
 				FA18D30B2653F206005D2A2F /* Track.swift in Sources */,
+				FAB47AD82655ACC1006281CE /* ChainModeNames.swift in Sources */,
 				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
-				FAB47AC22654F9D2006281CE /* PartName.swift in Sources */,
+				FAB47AC22654F9D2006281CE /* PartNames.swift in Sources */,
 				FAB47ACE26550223006281CE /* Pattern.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
 				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="landscape" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -16,11 +16,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="DNg-ih-j2Y">
-                                <rect key="frame" x="0.0" y="0.0" width="510" height="369"/>
+                                <rect key="frame" x="0.0" y="0.0" width="510" height="423"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AZt-g5-bee" userLabel="Track Control Labels">
                                         <rect key="frame" x="0.0" y="0.0" width="510" height="30"/>
@@ -293,38 +293,38 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OF7-ES-xHR" userLabel="MUTE 1">
-                                                <rect key="frame" x="240" y="5.5" width="0.0" height="22"/>
+                                                <rect key="frame" x="240" y="5.5" width="17.5" height="22"/>
                                                 <state key="normal" image="speaker.slash" catalog="system"/>
                                                 <connections>
                                                     <action selector="muteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H2j-6z-pzm"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="IK6-1C-C65">
-                                                <rect key="frame" x="245" y="1.5" width="265" height="30"/>
+                                                <rect key="frame" x="262.5" y="1.5" width="247.5" height="30"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TwD-H0-OSv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="59.5" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-1p-eqC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nqV-pE-E0g"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmB-EY-TVa">
-                                                                <rect key="frame" x="15" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="14" y="0.0" width="13.5" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8a7-jd-rcr"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVt-Zy-cSg">
-                                                                <rect key="frame" x="30" y="0.0" width="14.5" height="30"/>
+                                                                <rect key="frame" x="27.5" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="45w-Fj-XDa"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hq-ns-W9t">
-                                                                <rect key="frame" x="44.5" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="41.5" y="0.0" width="13.5" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AXC-1I-302"/>
                                                                 </connections>
@@ -332,28 +332,28 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="JCV-iK-Tev">
-                                                        <rect key="frame" x="68.5" y="0.0" width="59.5" height="30"/>
+                                                        <rect key="frame" x="64" y="0.0" width="55.5" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAH-cU-hSW">
-                                                                <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1BT-LH-bcr"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dc1-LH-KvF">
-                                                                <rect key="frame" x="15" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="14" y="0.0" width="13.5" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iEk-2Q-1Q8"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzj-OJ-iNc">
-                                                                <rect key="frame" x="30" y="0.0" width="14.5" height="30"/>
+                                                                <rect key="frame" x="27.5" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AoG-PU-Zq6"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjP-ba-iBW">
-                                                                <rect key="frame" x="44.5" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="41.5" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KE6-dA-2Uq"/>
                                                                 </connections>
@@ -361,28 +361,28 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xHy-MM-Zk9">
-                                                        <rect key="frame" x="137" y="0.0" width="59.5" height="30"/>
+                                                        <rect key="frame" x="128.5" y="0.0" width="55" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kye-r8-An8">
-                                                                <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="13.5" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UNP-go-MoF"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAE-s3-pQu">
-                                                                <rect key="frame" x="15" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="13.5" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="brJ-a7-MG1"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8B-m4-ksg">
-                                                                <rect key="frame" x="30" y="0.0" width="14.5" height="30"/>
+                                                                <rect key="frame" x="27.5" y="0.0" width="13.5" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Pm-hY-3de"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MV6-de-HVk">
-                                                                <rect key="frame" x="44.5" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="41" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dYh-aI-smP"/>
                                                                 </connections>
@@ -390,28 +390,28 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="k30-N5-l7G">
-                                                        <rect key="frame" x="205.5" y="0.0" width="59.5" height="30"/>
+                                                        <rect key="frame" x="192.5" y="0.0" width="55" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZD-TZ-pvU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="13.5" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qwP-oI-wJO"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZ0-5Y-Hqq">
-                                                                <rect key="frame" x="15" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="13.5" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="urM-b3-ajh"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wX1-Ha-lWn">
-                                                                <rect key="frame" x="30" y="0.0" width="14.5" height="30"/>
+                                                                <rect key="frame" x="27.5" y="0.0" width="13.5" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u1u-mC-tgl"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEY-qt-HgU">
-                                                                <rect key="frame" x="44.5" y="0.0" width="15" height="30"/>
+                                                                <rect key="frame" x="41" y="0.0" width="14" height="30"/>
                                                                 <connections>
                                                                     <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x0i-yp-8rS"/>
                                                                 </connections>
@@ -782,10 +782,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BXG-dH-xVq" userLabel="Control">
-                                        <rect key="frame" x="0.0" y="207" width="510" height="162"/>
+                                        <rect key="frame" x="0.0" y="207" width="510" height="216"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1o5-v6-Jtg" userLabel="SETTINGS">
-                                                <rect key="frame" x="0.0" y="0.0" width="75" height="162"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="216"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="75" id="jXZ-nw-YwE"/>
                                                 </constraints>
@@ -797,13 +797,13 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dev-gT-hsS">
-                                                <rect key="frame" x="80" y="0.0" width="430" height="162"/>
+                                                <rect key="frame" x="80" y="0.0" width="430" height="216"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HZe-gU-Paz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="162"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="216"/>
                                                         <subviews>
                                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="B1g-OU-6w4" customClass="ClickableSegmentedControl" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="82"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="109"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="150" id="0l6-39-K2p"/>
                                                                 </constraints>
@@ -818,10 +818,10 @@
                                                                 </connections>
                                                             </segmentedControl>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vtF-72-POD">
-                                                                <rect key="frame" x="0.0" y="81" width="150" height="81"/>
+                                                                <rect key="frame" x="0.0" y="108" width="150" height="108"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrh-ff-6Si" userLabel="Soft" customClass="VerticalButton" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="34" height="81"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="34" height="108"/>
                                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -831,7 +831,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-3r-CXT" userLabel="Delete" customClass="VerticalButton" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target">
-                                                                        <rect key="frame" x="39" y="0.0" width="33.5" height="81"/>
+                                                                        <rect key="frame" x="39" y="0.0" width="33.5" height="108"/>
                                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -841,7 +841,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6P-YJ-684" userLabel="Copy" customClass="VerticalButton" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target">
-                                                                        <rect key="frame" x="77.5" y="0.0" width="34" height="81"/>
+                                                                        <rect key="frame" x="77.5" y="0.0" width="34" height="108"/>
                                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -851,11 +851,11 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OfZ-Yp-tpW" userLabel="Chain" customClass="VerticalButton" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target">
-                                                                        <rect key="frame" x="116.5" y="0.0" width="33.5" height="81"/>
+                                                                        <rect key="frame" x="116.5" y="0.0" width="33.5" height="108"/>
                                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <state key="normal" title="ABCD" image="repeat" catalog="system"/>
+                                                                        <state key="normal" image="link" catalog="system"/>
                                                                         <connections>
                                                                             <action selector="chainButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xqz-fE-8ev"/>
                                                                         </connections>
@@ -865,7 +865,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ozo-XU-6KX" userLabel="TAP" customClass="VerticalButton" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target">
-                                                        <rect key="frame" x="155" y="0.0" width="75" height="162"/>
+                                                        <rect key="frame" x="155" y="0.0" width="75" height="216"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="75" id="9D4-Ax-RIG"/>
@@ -880,14 +880,14 @@
                                                         </connections>
                                                     </button>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQo-5m-Rf9" userLabel="BPM">
-                                                        <rect key="frame" x="232.5" y="0.0" width="0.0" height="162"/>
+                                                        <rect key="frame" x="232.5" y="0.0" width="0.0" height="216"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAV-2s-gw6">
-                                                        <rect key="frame" x="232.5" y="0.0" width="0.0" height="162"/>
+                                                        <rect key="frame" x="232.5" y="0.0" width="0.0" height="216"/>
                                                         <subviews>
                                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="a6p-DL-ihA">
                                                                 <rect key="frame" x="-47" y="-16" width="94" height="32"/>
@@ -897,7 +897,7 @@
                                                         </subviews>
                                                     </view>
                                                     <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="bEc-yE-UTb">
-                                                        <rect key="frame" x="235" y="0.0" width="115" height="162"/>
+                                                        <rect key="frame" x="235" y="0.0" width="115" height="216"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="115" id="ydu-g7-wY0"/>
@@ -908,7 +908,7 @@
                                                         </connections>
                                                     </pickerView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dD-e1-zaT">
-                                                        <rect key="frame" x="355" y="0.0" width="75" height="162"/>
+                                                        <rect key="frame" x="355" y="0.0" width="75" height="216"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="75" id="dS8-G4-1HO"/>
@@ -1044,6 +1044,7 @@
                         <outlet property="trackCellsLabel" destination="f4c-0Y-Bw3" id="MKW-RT-P9w"/>
                         <outlet property="trackCellsView" destination="5df-Db-dsX" id="asL-9O-Kl2"/>
                         <outlet property="trackControlsLabelsStackView" destination="AZt-g5-bee" id="xxr-ge-PC4"/>
+                        <outlet property="trackDelayLabel" destination="3Iy-1h-XHR" id="Xhd-Ja-vjL"/>
                         <outlet property="trackMuteLabel" destination="onM-wX-SYA" id="2gk-Cx-9tv"/>
                         <outlet property="trackReverbLabel" destination="Flz-41-yZs" id="6fj-YD-nb3"/>
                         <outlet property="trackStepsLabel" destination="xuc-dg-xzZ" id="GPx-27-GwS"/>
@@ -1062,8 +1063,8 @@
     <resources>
         <image name="clear" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="link" catalog="system" width="128" height="122"/>
         <image name="play" catalog="system" width="120" height="128"/>
-        <image name="repeat" catalog="system" width="128" height="99"/>
         <image name="speaker.slash" catalog="system" width="124" height="128"/>
         <image name="square.on.square" catalog="system" width="128" height="113"/>
         <image name="target" catalog="system" width="128" height="121"/>

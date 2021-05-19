@@ -16,7 +16,7 @@ extension ViewController {
         //
         // Init button/label arrays
         //
-        trackControlLabels = [trackVolumeLabel, trackReverbLabel, /*, trackStepsLabel */ trackMuteLabel, trackCellsLabel]
+        trackControlLabels = [trackVolumeLabel, trackReverbLabel, trackDelayLabel, /*, trackStepsLabel */ trackMuteLabel, trackCellsLabel]
         
         track0Buttons = [button0_0, button0_1, button0_2, button0_3,
                          button0_4, button0_5, button0_6, button0_7,
@@ -54,8 +54,8 @@ extension ViewController {
         for label in trackControlLabels {
             label.isHidden = true
         }
-        trackCellsView.isHidden = true
-        trackControlsLabelsStackView.isHidden = true
+//        trackCellsView.isHidden = true
+//        trackControlsLabelsStackView.isHidden = true
         
         //
         // MARK: - Track controls:
@@ -147,41 +147,54 @@ extension ViewController {
         // SETTINGS button:
         //
         settingsButton.backgroundColor = K.Color.orange
-        settingsButton.tintColor = K.Color.black
+        settingsButton.tintColor = K.Color.white
         settingsButton.setTitleColor(K.Color.black, for: .normal)
         settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         settingsButton.layer.cornerRadius = 15
-        partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
-        
-        // SOFT MODE button:
-        //
-        softModeButton.setTitleColor(.black, for: .normal)
-        softModeButton.backgroundColor = K.Color.blue
-        softModeButton.layer.cornerRadius = 0.125 * softModeButton.bounds.size.width
-        
-        // DELETE button:
-        //
-        deleteButton.setTitleColor(.black, for: .normal)
-        deleteButton.backgroundColor = K.Color.blue
-        deleteButton.layer.cornerRadius = 0.125 * deleteButton.bounds.size.width
-        
-        // COPY button:
-        //
-        copyButton.setTitleColor(.black, for: .normal)
-        copyButton.backgroundColor = K.Color.blue
-        copyButton.layer.cornerRadius = 0.125 * copyButton.bounds.size.width
         
         // PART A/B/C/D segmented control:
         //
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
+        partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
+        
+        // SOFT MODE button:
+        //
+//        softModeButton.setTitleColor(.black, for: .normal)
+        softModeButton.backgroundColor = K.Color.blue_brighter
+        softModeButton.layer.cornerRadius = 0.125 * softModeButton.bounds.size.width
+        softModeButton.tintColor = K.Color.white
+        softModeButton.titleLabel?.textColor = K.Color.white
+
+        
+        // DELETE button:
+        //
+//        deleteButton.setTitleColor(.black, for: .normal)
+        deleteButton.backgroundColor = K.Color.blue_brighter
+        deleteButton.layer.cornerRadius = 0.125 * deleteButton.bounds.size.width
+        deleteButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        deleteButton.tintColor = K.Color.white
+        deleteButton.titleLabel?.textColor = K.Color.white
+
+        
+        // COPY button:
+        //
+//        copyButton.setTitleColor(.black, for: .normal)
+        copyButton.backgroundColor = K.Color.blue_brighter
+        copyButton.layer.cornerRadius = 0.125 * copyButton.bounds.size.width
+        copyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        copyButton.tintColor = K.Color.white
+        copyButton.titleLabel?.textColor = K.Color.white
         
         // CHAIN button:
         //
-        chainButton.setTitleColor(.black, for: .normal)
-        chainButton.backgroundColor = K.Color.blue
+//        chainButton.setTitleColor(.black, for: .normal)
+        chainButton.backgroundColor = K.Color.blue_brighter
         chainButton.layer.cornerRadius = 0.125 * tapButton.bounds.size.width
-        //chainButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
+        chainButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        chainButton.tintColor = K.Color.white
+        chainButton.titleLabel?.textColor = K.Color.white
+        chainButton.setTitle(ChainModeNames.OFF.description, for: .normal)
+
 //        let font = UIFont.systemFont(ofSize: 20)
 //        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
         let font = UIFont.systemFont(ofSize: 24)
@@ -198,9 +211,11 @@ extension ViewController {
         
         // TAP button:
         //
-        tapButton.setTitleColor(.black, for: .normal)
+//        tapButton.setTitleColor(.black, for: .normal)
         tapButton.backgroundColor = K.Color.blue_brighter
         tapButton.layer.cornerRadius = 0.125 * tapButton.bounds.size.width
+        tapButton.tintColor = K.Color.white
+        tapButton.titleLabel?.textColor = K.Color.white
         
         // BPM picker:
         //
@@ -219,5 +234,7 @@ extension ViewController {
         playPauseButton.setTitleColor(.white, for: .normal)
         playPauseButton.backgroundColor = K.Color.blue_brighter
         playPauseButton.layer.cornerRadius = 0.125 * playPauseButton.bounds.size.width
+        playPauseButton.tintColor = K.Color.white
+        playPauseButton.titleLabel?.textColor = K.Color.white
     }
 }

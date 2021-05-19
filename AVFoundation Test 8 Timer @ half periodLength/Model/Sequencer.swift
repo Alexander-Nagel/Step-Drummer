@@ -9,15 +9,15 @@ import Foundation
 import AVFoundation
 
 struct Sequencer {
+
+    var bpmDetector = BpmDetector()
     
     var displayedTracks = [Track]()
     var defaultPatterns = DefaultPatterns()
-    var parts = [PartName.A: Part(), PartName.B: Part(), PartName.C: Part(), PartName.D: Part()]
-    var activePart: PartName = .A
-    var chainModeABCD = false
+    var parts = [PartNames.A: Part(), PartNames.B: Part(), PartNames.C: Part(), PartNames.D: Part()]
+    var activePart: PartNames = .A
+    var chainMode: ChainModeNames = .OFF
     var tempo: Tempo?
-    
-    var bpmDetector = BpmDetector()
     
     var engine = AVAudioEngine()
     var players = [AVAudioPlayerNode(), AVAudioPlayerNode(),
@@ -168,7 +168,7 @@ struct Sequencer {
         
     }
     
-    mutating func loadPart(partName: PartName) {
+    mutating func loadPart(partName: PartNames) {
         
         let number = partName.rawValue
 //        displayedTracks[0].numberOfCellsActive = defaultPatterns.kick[number].length
@@ -195,7 +195,7 @@ struct Sequencer {
 //        displayedTracks[3].cells = defaultPatterns.open_hihat[number].cells
     }
     
-    mutating func saveToPart(partName: PartName) {
+    mutating func saveToPart(partName: PartNames) {
         
         let number = partName.rawValue
 //        defaultPatterns.kick[number].length = displayedTracks[0].numberOfCellsActive
@@ -216,7 +216,7 @@ struct Sequencer {
 //        defaultPatterns.open_hihat[number].cells = displayedTracks[3].cells
     }
     
-    mutating func deletePart(partName: PartName) {
+    mutating func deletePart(partName: PartNames) {
         
         for i in 0...3 {
             if let length = parts[partName]?.patterns[i].length {
@@ -226,7 +226,7 @@ struct Sequencer {
         print("Deleted part \(partName)")
     }
     
-    mutating func copyActivePart(to partName: PartName) {
+    mutating func copyActivePart(to partName: PartNames) {
         
         let sourceName = activePart
         let destinationName = partName

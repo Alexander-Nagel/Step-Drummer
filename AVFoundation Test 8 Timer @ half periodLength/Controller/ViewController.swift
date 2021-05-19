@@ -11,12 +11,12 @@ class ViewController: UIViewController {
     
     var seq = Sequencer()
     
-    var controlsHidden = true
+    var controlsHidden = false
     var drawSoftNotes = false
     var copyMode = false
-    var copyModeSource: PartName?
+    var copyModeSource: PartNames?
     var deleteMode = false
-    var deleteModeSource: PartName?
+    var deleteModeSource: PartNames?
     
     private var isSwiping = false
     private var swipeStart: Int?
@@ -52,6 +52,7 @@ class ViewController: UIViewController {
     //
     @IBOutlet weak var trackVolumeLabel: UILabel!
     @IBOutlet weak var trackReverbLabel: UILabel!
+    @IBOutlet weak var trackDelayLabel: UILabel!
     @IBOutlet weak var trackStepsLabel: UILabel!
     @IBOutlet weak var trackMuteLabel: UILabel!
     @IBOutlet weak var trackCellsLabel: UILabel!
@@ -398,7 +399,7 @@ class ViewController: UIViewController {
     func endDeleteMode() {
         
         deleteMode = false
-        deleteButton.backgroundColor = K.Color.blue
+        deleteButton.backgroundColor = K.Color.blue_brighter
         deleteButton.layer.removeAllAnimations()
         partSegmentedControl.layer.removeAllAnimations()
         if let sourcePart = deleteModeSource {
@@ -409,7 +410,7 @@ class ViewController: UIViewController {
     func endCopyMode() {
         
         copyMode = false
-        copyButton.backgroundColor = K.Color.blue
+        copyButton.backgroundColor = K.Color.blue_brighter
         copyButton.layer.removeAllAnimations()
         partSegmentedControl.layer.removeAllAnimations()
         if let sourcePart = copyModeSource {
@@ -457,21 +458,34 @@ class ViewController: UIViewController {
         
         sender.isSelected = !sender.isSelected
         
-        if seq.chainModeABCD {
-            //
-            // switch chain mode OFF
-            //
-            seq.chainModeABCD = false
-            //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-            chainButton.backgroundColor = K.Color.blue
-        } else {
-            //
-            // switch chain mode ON
-            //
-            seq.chainModeABCD = true
-            //chainButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
+        let current = seq.chainMode
+        let next = current.next()
+        
+        seq.chainMode = next
+        if next == .OFF {       // color OFF
+            chainButton.backgroundColor = K.Color.blue_brighter
+        } else {                // color chain mode ON
             chainButton.backgroundColor = K.Color.blue_brightest
         }
+        print(next)
+        print(next.description)
+        chainButton.setTitle(next.description, for: .normal)
+        
+//        if seq.chainModeABCD != .OFF {
+//            //
+//            // switch chain mode OFF
+//            //
+//            seq.chainModeABCD = .OFF
+//            //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
+//            chainButton.backgroundColor = K.Color.blue_brighter
+//        } else {
+//            //
+//            // switch chain mode ON / progress to next mode
+//            //
+//            seq.chainModeABCD = .ABCD
+//            //chainButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
+//            chainButton.backgroundColor = K.Color.blue_brightest
+//        }
     }
     
     //
@@ -511,7 +525,7 @@ class ViewController: UIViewController {
         
         print(#function)
         
-        let destinationPart = PartName(rawValue: partSegmentedControl.selectedSegmentIndex)!
+        let destinationPart = PartNames(rawValue: partSegmentedControl.selectedSegmentIndex)!
         
         if !copyMode && !deleteMode {
             //
@@ -535,7 +549,7 @@ class ViewController: UIViewController {
                 let action = UIAlertAction(title: "OK", style: .default) { [unowned copyCompleteAlert] _ in }
                 copyCompleteAlert.addAction(action)
                 present(copyCompleteAlert, animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     copyCompleteAlert.dismiss(animated: true, completion: nil)
                 }
             }
@@ -556,7 +570,7 @@ class ViewController: UIViewController {
             let deleteAction = UIAlertAction(title: "OK", style: .default) { [unowned deleteCompleteAlert] _ in }
             deleteCompleteAlert.addAction(deleteAction)
             present(deleteCompleteAlert, animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 deleteCompleteAlert.dismiss(animated: true, completion: nil)
             }
         
@@ -569,7 +583,7 @@ class ViewController: UIViewController {
     //
     // MARK:- CHANGE TO PART
     //
-    func changeToPart(_ partName: PartName) {
+    func changeToPart(_ partName: PartNames) {
         print(#function)
         seq.saveToPart(partName: seq.activePart)
         //print(partSegmentedControl.selectedSegmentIndex)
@@ -723,11 +737,66 @@ class ViewController: UIViewController {
                 self.currentStep0 += 1
                 if self.currentStep0 > self.seq.displayedTracks[0].numberOfCellsActive {
                     self.currentStep0 = 1
-                    if self.seq.chainModeABCD {
+                    
+                    if self.seq.chainMode == .ABCD {
                         var nextPart = self.seq.activePart.rawValue + 1
                         if nextPart == 4 { nextPart = 0 }
-                        self.changeToPart(PartName(rawValue: nextPart)!)
+                        self.changeToPart(PartNames(rawValue: nextPart)!)
                     }
+                    if self.seq.chainMode == .AB {
+                        let currentPart = self.seq.activePart
+                        var nextPart: PartNames
+                        if currentPart == .A {
+                            nextPart = .B
+                        } else {
+                            nextPart = .A
+                        }
+                        self.changeToPart(nextPart)
+                    }
+                    if self.seq.chainMode == .CD {
+                        let currentPart = self.seq.activePart
+                        var nextPart: PartNames
+                        if currentPart == .C {
+                            nextPart = .D
+                        } else {
+                            nextPart = .C
+                        }
+                        self.changeToPart(nextPart)
+                    }
+                    if self.seq.chainMode == .AD {
+                        let currentPart = self.seq.activePart
+                        var nextPart: PartNames
+                        if currentPart == .A {
+                            nextPart = .D
+                        } else {
+                            nextPart = .A
+                        }
+                        self.changeToPart(nextPart)
+                    }
+                    if self.seq.chainMode == .CB {
+                        let currentPart = self.seq.activePart
+                        var nextPart: PartNames
+                        if currentPart == .C {
+                            nextPart = .B
+                        } else {
+                            nextPart = .C
+                        }
+                        self.changeToPart(nextPart)
+                    }
+                    if self.seq.chainMode == .ABC {
+                        let currentPart = self.seq.activePart
+                        var nextPart: PartNames
+                        if currentPart == .A {
+                            nextPart = .B
+                        } else if currentPart == .B{
+                            nextPart = .C
+                        } else {
+                            nextPart = .A
+                        }
+                        self.changeToPart(nextPart)
+                    }
+                    
+                    
                 }
             }
             
@@ -1515,18 +1584,18 @@ class ViewController: UIViewController {
             for label in trackControlLabels {
                 label.isHidden = false
             }
-            trackCellsView.isHidden = false
-            trackControlsLabelsStackView.isHidden = false
-            
-            for slider in trackVolumeSliders {
-                slider.isHidden = false
-            }
-            for slider in trackReverbSliders {
-                slider.isHidden = false
-            }
-            for slider in trackDelaySliders {
-                slider.isHidden = false
-            }
+//            trackCellsView.isHidden = false
+//            trackControlsLabelsStackView.isHidden = false
+//
+//            for slider in trackVolumeSliders {
+//                slider.isHidden = false
+//            }
+//            for slider in trackReverbSliders {
+//                slider.isHidden = false
+//            }
+//            for slider in trackDelaySliders {
+//                slider.isHidden = false
+//            }
             //            for view in stepperViews {
             //                view.isHidden = false
             //            }
@@ -1537,9 +1606,9 @@ class ViewController: UIViewController {
             for label in trackControlLabels {
                 label.isHidden = true
             }
-            trackCellsView.isHidden = true
-            trackControlsLabelsStackView.isHidden = true
-            
+//            trackCellsView.isHidden = true
+//            trackControlsLabelsStackView.isHidden = true
+//
             for slider in trackVolumeSliders {
                 slider.isHidden = true
             }
