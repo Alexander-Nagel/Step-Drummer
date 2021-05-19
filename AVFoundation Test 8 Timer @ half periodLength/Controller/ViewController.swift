@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var copyMode = false
     var copyModeSource: PartName?
     var deleteMode = false
+    var deleteModeSource: PartName?
     
     private var isSwiping = false
     private var swipeStart: Int?
@@ -347,28 +348,62 @@ class ViewController: UIViewController {
         
         sender.isSelected = !sender.isSelected
         
-        //let activePart =  
-        let ac = UIAlertController(title: "Delete Part \(seq.activePart)?", message: "This will delete all 4 tracks of the current part.", preferredStyle: .alert)
-        //ac.addTextField()
-        
-        let deleteAction = UIAlertAction(title: "Delete", style: .default) { [unowned ac] _ in
-    
-            self.seq.deletePart(partName: self.seq.activePart)
-            self.seq.loadPart(partName: self.seq.activePart)
-            self.updateUI()
-            print("Deleting")
+        if deleteMode {
+            //
+            // switch deleteMode OFF
+            //
             
+            endDeleteMode()
+
+        } else {
+            //
+            // switch deleteMode ON
+            //
+            deleteMode = true
+            deleteModeSource = seq.activePart
+            deleteButton.backgroundColor = K.Color.blue_brightest
+            deleteButton.flashPermanently()
+            
+            //
+            // Let inactive part buttons flash
+            
+            //
+            partSegmentedControl.flashPermanently()
         }
         
-        ac.addAction(deleteAction)
+//        //let activePart =
+//        let ac = UIAlertController(title: "Delete Part \(seq.activePart)?", message: "This will delete all 4 tracks of the current part.", preferredStyle: .alert)
+//        //ac.addTextField()
+//
+//        let deleteAction = UIAlertAction(title: "Delete", style: .default) { [unowned ac] _ in
+//
+//            self.seq.deletePart(partName: self.seq.activePart)
+//            self.seq.loadPart(partName: self.seq.activePart)
+//            self.updateUI()
+//            print("Deleting")
+//
+//        }
+//
+//        ac.addAction(deleteAction)
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { [unowned ac] _ in
+//
+//       }
+//        ac.addAction(cancelAction)
+//
+//        present(ac, animated: true)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { [unowned ac] _ in
-            
-       }
-        ac.addAction(cancelAction)
-
-        present(ac, animated: true)
+    }
+    
+    func endDeleteMode() {
         
+        deleteMode = false
+        deleteButton.backgroundColor = K.Color.blue
+        deleteButton.layer.removeAllAnimations()
+        partSegmentedControl.layer.removeAllAnimations()
+        if let sourcePart = deleteModeSource {
+            changeToPart(sourcePart)
+        }
     }
     
     func endCopyMode() {
@@ -478,23 +513,56 @@ class ViewController: UIViewController {
         
         let destinationPart = PartName(rawValue: partSegmentedControl.selectedSegmentIndex)!
         
-        if !copyMode {
+        if !copyMode && !deleteMode {
             //
-            // Normal behaviour when not in copyMode: Switch to destinationPart
+            // Normal behaviour when not in copyMode or deleteMode: Switch to destinationPart
             //
             seq.saveToPart(partName: seq.activePart)
             print(partSegmentedControl.selectedSegmentIndex)
             seq.loadPart(partName: destinationPart)
             seq.activePart = destinationPart
             updateUI()
-        } else {
+        } else if copyMode {
             //
             // When in copyMode: Copy displayedPart to destinationPart, do NOT switch
             //
             seq.copyActivePart(to: destinationPart)
             
             endCopyMode()
+            
+            if let source = copyModeSource {
+                let copyCompleteAlert = UIAlertController(title: "Copied Part \(source) to \(destinationPart)", message: nil, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default) { [unowned copyCompleteAlert] _ in }
+                copyCompleteAlert.addAction(action)
+                present(copyCompleteAlert, animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                    copyCompleteAlert.dismiss(animated: true, completion: nil)
+                }
+            }
+        } else {
+            //
+            // When in deleteMode: Delete displayedPart , do NOT switch
+            //
+            print("will be deleting part \(destinationPart)")
+            self.seq.deletePart(partName: destinationPart)
+            if self.seq.activePart == destinationPart {
+                self.seq.loadPart(partName: destinationPart)
+            }
+            self.updateUI()
+            
+            endDeleteMode()
+            
+            let deleteCompleteAlert = UIAlertController(title: "Part \(destinationPart) deleted!", message: nil, preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "OK", style: .default) { [unowned deleteCompleteAlert] _ in }
+            deleteCompleteAlert.addAction(deleteAction)
+            present(deleteCompleteAlert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                deleteCompleteAlert.dismiss(animated: true, completion: nil)
+            }
+        
+            
         }
+        
         
     }
     

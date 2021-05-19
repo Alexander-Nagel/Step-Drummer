@@ -223,7 +223,7 @@ struct Sequencer {
                 parts[partName]?.patterns[i].cells = Array(repeating: Cell.OFF, count: length)
             }
         }
-        print("Deleted!")
+        print("Deleted part \(partName)")
     }
     
     mutating func copyActivePart(to partName: PartName) {
