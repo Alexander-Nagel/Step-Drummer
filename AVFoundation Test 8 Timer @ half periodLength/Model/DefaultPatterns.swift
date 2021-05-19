@@ -5,36 +5,31 @@
 //  Created by Alexander Nagel on 08.05.21.
 //
 
-struct Pattern {
-    var length: Int
-    var data: [Cell]
-}
-
-struct Patterns {
+struct DefaultPatterns {
     
     var kick: [Pattern] = [
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .ON, .OFF,
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .ON, .OFF,
                         .ON, .ON, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .ON, .OFF,
@@ -44,21 +39,21 @@ struct Patterns {
     ]
     
     var snare: [Pattern] = [
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .OFF, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .OFF, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .SOFT,
                         .OFF, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .OFF, .SOFT, .OFF, .OFF,
                         .ON, .OFF, .OFF, .SOFT,
@@ -66,7 +61,7 @@ struct Patterns {
                         .ON, .OFF, .OFF, .OFF
 
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .OFF, .SOFT, .OFF, .OFF,
                         .ON, .OFF, .OFF, .SOFT,
@@ -76,28 +71,28 @@ struct Patterns {
     ]
     
     var closed_hihat: [Pattern] = [
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .OFF,
                         .ON, .OFF, .OFF, .OFF,
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .ON, .OFF,
                         .ON, .OFF, .ON, .OFF,
                         .ON, .OFF, .ON, .OFF,
                         .ON, .OFF, .ON, .OFF,
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .ON, .OFF,
                         .ON, .OFF, .ON, .SOFT,
                         .ON, .OFF, .ON, .OFF,
                         .ON, .OFF, .ON, .SOFT,
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .SOFT, .ON, .SOFT,
                         .ON, .SOFT, .ON, .SOFT,
@@ -107,28 +102,28 @@ struct Patterns {
     ]
     
     var open_hihat: [Pattern] = [
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .ON, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .OFF, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .OFF, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .ON, .OFF,
                         .OFF, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .ON, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .OFF, .OFF, .OFF, .OFF,
                         .OFF, .OFF, .ON, .OFF,
                         .OFF, .SOFT, .OFF, .OFF,
                         .OFF, .OFF, .ON, .OFF
                     ]),
-        Pattern(length: 16, data:
+        Pattern(length: 16, cells:
                     [
                         .OFF, .OFF, .ON, .OFF,
                         .OFF, .OFF, .ON, .OFF,

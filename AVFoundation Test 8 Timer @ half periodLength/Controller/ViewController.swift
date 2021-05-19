@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     var controlsHidden = true
     var drawSoftNotes = false
+    var copyMode = false
     
     private var isSwiping = false
     private var swipeStart: Int?
@@ -181,9 +182,11 @@ class ViewController: UIViewController {
     //
     @IBOutlet weak var settingsButton: UIButton!
     
-    @IBOutlet weak var softModeButton: VerticalButton!
     @IBOutlet weak var partSegmentedControl: UISegmentedControl!
-
+    @IBOutlet weak var softModeButton: VerticalButton!
+    @IBOutlet weak var deleteButton: VerticalButton!
+    @IBOutlet weak var copyButton: VerticalButton!
+    
     @IBOutlet weak var chainButton: UIButton!
     //@IBOutlet weak var bpmLabel: UILabel!
     //@IBOutlet weak var bpmStepper: UIStepper!
@@ -335,6 +338,63 @@ class ViewController: UIViewController {
     }
     
     //
+    // MARK:- DELETE action
+    //
+    @IBAction func deleteButtonPressed(_ sender: UIButton) {
+        print(#function)
+        
+        sender.isSelected = !sender.isSelected
+        
+        //let activePart =  
+        let ac = UIAlertController(title: "Delete Part \(seq.activePart)?", message: "This will delete all 4 tracks of the current part.", preferredStyle: .alert)
+        //ac.addTextField()
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .default) { [unowned ac] _ in
+    
+            self.seq.deletePart(partName: self.seq.activePart)
+            self.seq.loadPart(partName: self.seq.activePart)
+            self.updateUI()
+            print("Deleting")
+            
+        }
+        
+        ac.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { [unowned ac] _ in
+            
+       }
+        ac.addAction(cancelAction)
+
+        present(ac, animated: true)
+        
+    }
+    
+    //
+    // MARK:- COPY action
+    //
+    @IBAction func copyButtonPressed(_ sender: UIButton) {
+        print(#function)
+        
+        sender.isSelected = !sender.isSelected
+        
+        if drawSoftNotes {
+            //
+            // switch soft note mode OFF
+            //
+            drawSoftNotes = false
+            //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
+            softModeButton.backgroundColor = K.Color.blue
+        } else {
+            //
+            // switch soft note mode  ON
+            //
+            drawSoftNotes = true
+            //chainButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
+            softModeButton.backgroundColor = K.Color.blue_brightest
+        }
+    }
+    
+    //
     // MARK:- CHAIN button action
     //
     @IBAction func chainButtonPressed(_ sender: UIButton) {
@@ -395,23 +455,23 @@ class ViewController: UIViewController {
     @IBAction func partChanged(_ sender: UISegmentedControl) {
         
         print(#function)
-        seq.saveToPattern(number: seq.activePattern)
+        seq.saveToPart(partName: seq.activePart)
         print(partSegmentedControl.selectedSegmentIndex)
-        seq.loadPattern(number: partSegmentedControl.selectedSegmentIndex)
-        seq.activePattern = partSegmentedControl.selectedSegmentIndex
+        seq.loadPart(partName: PartName(rawValue: partSegmentedControl.selectedSegmentIndex)!)
+        seq.activePart = PartName(rawValue: partSegmentedControl.selectedSegmentIndex)!
         updateUI()
     }
     
     //
     // MARK:- CHANGE TO PART
     //
-    func changeToPart(_ part: Int) {
+    func changeToPart(_ partName: PartName) {
         print(#function)
-        seq.saveToPattern(number: seq.activePattern)
+        seq.saveToPart(partName: seq.activePart)
         //print(partSegmentedControl.selectedSegmentIndex)
-        seq.loadPattern(number: part)
-        seq.activePattern = part
-        partSegmentedControl.selectedSegmentIndex = part
+        seq.loadPart(partName: partName)
+        seq.activePart = partName
+        partSegmentedControl.selectedSegmentIndex = partName.rawValue
         updateUI()
     }
     
@@ -536,10 +596,10 @@ class ViewController: UIViewController {
                 // ODD event: schedule next buffer
                 //
                 var nextStep = self.currentStep0
-                if nextStep == self.seq.tracks[0].numberOfCellsActive {
+                if nextStep == self.seq.displayedTracks[0].numberOfCellsActive {
                     nextStep = 0
                 }
-                let nextCell = self.seq.tracks[0].cells[nextStep]
+                let nextCell = self.seq.displayedTracks[0].cells[nextStep]
                 
                 if nextCell == .ON {
                     self.seq.players[0].scheduleBuffer(self.seq.soundBuffers.normal[0], at: nil, options: [], completionHandler: nil)
@@ -557,12 +617,12 @@ class ViewController: UIViewController {
                 // EVEN event: increase stepCounter
                 //
                 self.currentStep0 += 1
-                if self.currentStep0 > self.seq.tracks[0].numberOfCellsActive {
+                if self.currentStep0 > self.seq.displayedTracks[0].numberOfCellsActive {
                     self.currentStep0 = 1
                     if self.seq.chainModeABCD {
-                        var nextPart = self.seq.activePattern + 1
+                        var nextPart = self.seq.activePart.rawValue + 1
                         if nextPart == 4 { nextPart = 0 }
-                        self.changeToPart(nextPart)
+                        self.changeToPart(PartName(rawValue: nextPart)!)
                     }
                 }
             }
@@ -572,7 +632,7 @@ class ViewController: UIViewController {
             //
             self.timerEventCounter0 += 1
             
-            if self.timerEventCounter0 > (self.seq.tracks[0].numberOfCellsActive * 2) {
+            if self.timerEventCounter0 > (self.seq.displayedTracks[0].numberOfCellsActive * 2) {
                 self.timerEventCounter0 = 1
             }
             
@@ -623,10 +683,10 @@ class ViewController: UIViewController {
                 // schedule next buffer
                 //
                 var nextStep = self.currentStep1
-                if nextStep == self.seq.tracks[1].numberOfCellsActive {
+                if nextStep == self.seq.displayedTracks[1].numberOfCellsActive {
                     nextStep = 0
                 }
-                let nextCell = self.seq.tracks[1].cells[nextStep]
+                let nextCell = self.seq.displayedTracks[1].cells[nextStep]
                 
                 if nextCell == .ON {
                     self.seq.players[1].scheduleBuffer(self.seq.soundBuffers.normal[1], at: nil, options: [], completionHandler: nil)
@@ -643,7 +703,7 @@ class ViewController: UIViewController {
                 // increase stepCounter
                 //
                 self.currentStep1 += 1
-                if self.currentStep1 > self.seq.tracks[1].numberOfCellsActive {
+                if self.currentStep1 > self.seq.displayedTracks[1].numberOfCellsActive {
                     self.currentStep1 = 1
                 }
             }
@@ -653,7 +713,7 @@ class ViewController: UIViewController {
             //
             self.timerEventCounter1 += 1
             
-            if self.timerEventCounter1 > (self.seq.tracks[1].numberOfCellsActive * 2) {
+            if self.timerEventCounter1 > (self.seq.displayedTracks[1].numberOfCellsActive * 2) {
                 self.timerEventCounter1 = 1
             }
             
@@ -701,10 +761,10 @@ class ViewController: UIViewController {
                 // schedule next buffer
                 //
                 var nextStep = self.currentStep2
-                if nextStep == self.seq.tracks[2].numberOfCellsActive {
+                if nextStep == self.seq.displayedTracks[2].numberOfCellsActive {
                     nextStep = 0
                 }
-                let nextCell = self.seq.tracks[2].cells[nextStep]
+                let nextCell = self.seq.displayedTracks[2].cells[nextStep]
                 
                 if nextCell == .ON {
                     self.seq.players[2].scheduleBuffer(self.seq.soundBuffers.normal[2], at: nil, options: [], completionHandler: nil)
@@ -721,7 +781,7 @@ class ViewController: UIViewController {
                 // increase stepCounter
                 //
                 self.currentStep2 += 1
-                if self.currentStep2 > self.seq.tracks[2].numberOfCellsActive {
+                if self.currentStep2 > self.seq.displayedTracks[2].numberOfCellsActive {
                     self.currentStep2 = 1
                 }
             }
@@ -731,7 +791,7 @@ class ViewController: UIViewController {
             //
             self.timerEventCounter2 += 1
             
-            if self.timerEventCounter2 > (self.seq.tracks[2].numberOfCellsActive * 2) {
+            if self.timerEventCounter2 > (self.seq.displayedTracks[2].numberOfCellsActive * 2) {
                 self.timerEventCounter2 = 1
             }
             
@@ -782,10 +842,10 @@ class ViewController: UIViewController {
                 // schedule next buffer
                 //
                 var nextStep = self.currentStep3
-                if nextStep == self.seq.tracks[3].numberOfCellsActive {
+                if nextStep == self.seq.displayedTracks[3].numberOfCellsActive {
                     nextStep = 0
                 }
-                let nextCell = self.seq.tracks[3].cells[nextStep]
+                let nextCell = self.seq.displayedTracks[3].cells[nextStep]
                 
                 if nextCell == .ON {
                     self.seq.players[3].scheduleBuffer(self.seq.soundBuffers.normal[3], at: nil, options: [], completionHandler: nil)
@@ -802,7 +862,7 @@ class ViewController: UIViewController {
                 // increase stepCounter
                 //
                 self.currentStep3 += 1
-                if self.currentStep3 > self.seq.tracks[3].numberOfCellsActive {
+                if self.currentStep3 > self.seq.displayedTracks[3].numberOfCellsActive {
                     self.currentStep3 = 1
                 }
             }
@@ -812,7 +872,7 @@ class ViewController: UIViewController {
             //
             self.timerEventCounter3 += 1
             
-            if self.timerEventCounter3 > (self.seq.tracks[3].numberOfCellsActive * 2) {
+            if self.timerEventCounter3 > (self.seq.displayedTracks[3].numberOfCellsActive * 2) {
                 self.timerEventCounter3 = 1
             }
             
@@ -871,7 +931,7 @@ class ViewController: UIViewController {
         printFrameLengths()
         
         seq.players[seletedPlayer].stop()
-        if seq.tracks[seletedPlayer].cells[0] == .ON {
+        if seq.displayedTracks[seletedPlayer].cells[0] == .ON {
             //
             // Schedule sound
             //
@@ -949,15 +1009,15 @@ class ViewController: UIViewController {
         
         case .ON:
             trackButtonMatrix[track][cell].backgroundColor = K.Color.step
-            seq.tracks[track].cells[cell] = .ON
+            seq.displayedTracks[track].cells[cell] = .ON
             
         case .OFF:
             trackButtonMatrix[track][cell].backgroundColor = .none
-            seq.tracks[track].cells[cell] = .OFF
+            seq.displayedTracks[track].cells[cell] = .OFF
             
         case .SOFT:
             trackButtonMatrix[track][cell].backgroundColor = K.Color.step_soft
-            seq.tracks[track].cells[cell] = .SOFT
+            seq.displayedTracks[track].cells[cell] = .SOFT
             
         default:
             print("not gonna happen")
@@ -977,11 +1037,11 @@ class ViewController: UIViewController {
             //
             if !drawSoftNotes { // draw normal ON notes
                 trackButtonMatrix[track][cell].backgroundColor = K.Color.step
-                seq.tracks[track].cells[cell] = .ON
+                seq.displayedTracks[track].cells[cell] = .ON
                 swipeCellState = .ON
             } else { // draw SOFT notes
                 trackButtonMatrix[track][cell].backgroundColor = K.Color.step_soft
-                seq.tracks[track].cells[cell] = .SOFT
+                seq.displayedTracks[track].cells[cell] = .SOFT
                 swipeCellState = .SOFT
             }
             
@@ -999,7 +1059,7 @@ class ViewController: UIViewController {
             // Step is SOFT: Set Step to OFF
             //
             trackButtonMatrix[track][cell].backgroundColor = .none
-            seq.tracks[track].cells[cell] = .OFF
+            seq.displayedTracks[track].cells[cell] = .OFF
             swipeCellState = .OFF
             
         }
@@ -1214,9 +1274,9 @@ class ViewController: UIViewController {
     //
     @IBAction func muteButtonPressed(_ sender: UIButton) {
         
-        seq.tracks[sender.tag].muted = !seq.tracks[sender.tag].muted
+        seq.displayedTracks[sender.tag].muted = !seq.displayedTracks[sender.tag].muted
         
-        if seq.tracks[sender.tag].muted {
+        if seq.displayedTracks[sender.tag].muted {
             //
             // Mute row / player
             //
@@ -1233,7 +1293,7 @@ class ViewController: UIViewController {
             //
             // Un-mute row / player
             //
-            seq.players[sender.tag].volume = Float(seq.tracks[sender.tag].volume)
+            seq.players[sender.tag].volume = Float(seq.displayedTracks[sender.tag].volume)
             muteButtons[sender.tag].backgroundColor = K.Color.muteButtonColor
             muteButtons[sender.tag].tintColor = K.Color.blue_brightest
             
@@ -1259,11 +1319,11 @@ class ViewController: UIViewController {
         
         for (index, button) in track0Buttons.enumerated() {
             
-            if seq.tracks[0].cells[index] == .ON {
+            if seq.displayedTracks[0].cells[index] == .ON {
                 
                 button.backgroundColor = K.Color.step
                 
-            } else if seq.tracks[0].cells[index] == .SOFT {
+            } else if seq.displayedTracks[0].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
                 
@@ -1274,11 +1334,11 @@ class ViewController: UIViewController {
         }
         for (index, button) in track1Buttons.enumerated() {
             
-            if seq.tracks[1].cells[index] == .ON {
+            if seq.displayedTracks[1].cells[index] == .ON {
                 
                 button.backgroundColor = K.Color.step
                 
-            } else if seq.tracks[1].cells[index] == .SOFT {
+            } else if seq.displayedTracks[1].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
                 
@@ -1289,11 +1349,11 @@ class ViewController: UIViewController {
         }
         for (index, button) in track2Buttons.enumerated() {
             
-            if seq.tracks[2].cells[index] == .ON {
+            if seq.displayedTracks[2].cells[index] == .ON {
                 
                 button.backgroundColor = K.Color.step
                 
-            } else if seq.tracks[2].cells[index] == .SOFT {
+            } else if seq.displayedTracks[2].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
                 
@@ -1304,11 +1364,11 @@ class ViewController: UIViewController {
         }
         for (index, button) in track3Buttons.enumerated() {
             
-            if seq.tracks[3].cells[index] == .ON {
+            if seq.displayedTracks[3].cells[index] == .ON {
                 
                 button.backgroundColor = K.Color.step
                 
-            } else if seq.tracks[3].cells[index] == .SOFT {
+            } else if seq.displayedTracks[3].cells[index] == .SOFT {
                 
                 button.backgroundColor = K.Color.step_soft
                 
@@ -1322,13 +1382,13 @@ class ViewController: UIViewController {
         // Set Vol / Rev / Delay sliders to values in tracks Array
         //
         for (index, slider) in trackVolumeSliders.enumerated() {
-            slider.value = Float(seq.tracks[index].volume)
+            slider.value = Float(seq.displayedTracks[index].volume)
         }
         for (index, slider) in trackReverbSliders.enumerated() {
-            slider.value = Float(seq.tracks[index].reverbMix)
+            slider.value = Float(seq.displayedTracks[index].reverbMix)
         }
         for (index, slider) in trackDelaySliders.enumerated() {
-            slider.value = Float(seq.tracks[index].delayMix)
+            slider.value = Float(seq.displayedTracks[index].delayMix)
         }
     }
     
@@ -1399,7 +1459,7 @@ class ViewController: UIViewController {
         print(sender.tag, " ", sender.value)
         let selectedPlayer = sender.tag
         let newNumberOfCells = sender.value
-        seq.tracks[selectedPlayer].numberOfCellsActive = Int(newNumberOfCells)
+        seq.displayedTracks[selectedPlayer].numberOfCellsActive = Int(newNumberOfCells)
         
         //
         // Hide alle cells
@@ -1411,7 +1471,7 @@ class ViewController: UIViewController {
         //
         // Show only active cells
         //
-        for i in 0...(seq.tracks[selectedPlayer].numberOfCellsActive - 1) {
+        for i in 0...(seq.displayedTracks[selectedPlayer].numberOfCellsActive - 1) {
             trackButtonMatrix[selectedPlayer][i].isHidden = false
         }
         
@@ -1437,12 +1497,12 @@ class ViewController: UIViewController {
         //
         // Write new volume to seq struct
         //
-        seq.tracks[sender.tag].volume = Double(sender.value)
+        seq.displayedTracks[sender.tag].volume = Double(sender.value)
         
         //
         // Only change player volume if not muted
         //
-        if !seq.tracks[sender.tag].muted {
+        if !seq.displayedTracks[sender.tag].muted {
             seq.players[sender.tag].volume = sender.value}
     }
     
@@ -1452,7 +1512,7 @@ class ViewController: UIViewController {
     @IBAction func trackReverbChanged(_ sender: UISlider) {
         print(#function)
         print(sender.tag, sender.value)
-        seq.tracks[sender.tag].reverbMix = Double(sender.value * 100)
+        seq.displayedTracks[sender.tag].reverbMix = Double(sender.value * 100)
         seq.reverbs[sender.tag].wetDryMix = sender.value * 100
     }
     
@@ -1462,7 +1522,7 @@ class ViewController: UIViewController {
     @IBAction func trackDelayChanged(_ sender: UISlider) {
         print(#function)
         print(sender.tag, sender.value)
-        seq.tracks[sender.tag].delayMix = Double(sender.value * 100)
+        seq.displayedTracks[sender.tag].delayMix = Double(sender.value * 100)
         seq.delays[sender.tag].wetDryMix = sender.value * 100
     }
     

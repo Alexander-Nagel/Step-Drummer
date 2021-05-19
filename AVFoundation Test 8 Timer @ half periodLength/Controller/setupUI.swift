@@ -159,6 +159,18 @@ extension ViewController {
         softModeButton.backgroundColor = K.Color.blue
         softModeButton.layer.cornerRadius = 0.125 * softModeButton.bounds.size.width
         
+        // DELETE button:
+        //
+        deleteButton.setTitleColor(.black, for: .normal)
+        deleteButton.backgroundColor = K.Color.blue
+        deleteButton.layer.cornerRadius = 0.125 * deleteButton.bounds.size.width
+        
+        // COPY button:
+        //
+        copyButton.setTitleColor(.black, for: .normal)
+        copyButton.backgroundColor = K.Color.blue
+        copyButton.layer.cornerRadius = 0.125 * copyButton.bounds.size.width
+        
         // PART A/B/C/D segmented control:
         //
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor

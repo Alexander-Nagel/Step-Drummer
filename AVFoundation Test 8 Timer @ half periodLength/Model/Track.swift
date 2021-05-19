@@ -20,7 +20,7 @@ struct Track {
     var delayMix = 0.0
     
     var cells = [Cell]()
-    var patterns = Patterns()
+    var patterns = DefaultPatterns()
     
     init() {
         for _ in 0...(K.Sequencer.numberOfCellsPerTrack-1) {

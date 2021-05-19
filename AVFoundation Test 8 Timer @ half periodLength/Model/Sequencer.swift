@@ -10,9 +10,10 @@ import AVFoundation
 
 struct Sequencer {
     
-    var tracks = [Track]()
-    var patterns = Patterns()
-    var activePattern = 0
+    var displayedTracks = [Track]()
+    var defaultPatterns = DefaultPatterns()
+    var parts = [PartName.A: Part(), PartName.B: Part(), PartName.C: Part(), PartName.D: Part()]
+    var activePart: PartName = .A
     var chainModeABCD = false
     var tempo: Tempo?
     
@@ -51,8 +52,22 @@ struct Sequencer {
     init() {
         for _ in 0...(K.Sequencer.numberOfTracks-1) {
             let track = Track()
-            self.tracks.append(track)
+            self.displayedTracks.append(track)
         }
+        
+        
+//        var aaa = parts[.A]?.patterns[0]
+//        print(aaa!)
+        parts[.A]?.patterns[0].length = 16
+        parts[.A]?.patterns[0].cells = [
+            .ON, .ON, .ON, .OFF,
+            .OFF, .OFF, .OFF, .OFF,
+            .ON, .OFF, .OFF, .OFF,
+            .OFF, .OFF, .OFF, .OFF
+        ]
+//        aaa = parts[.A]?.patterns[0]
+//        print(aaa!)
+        
         
         //
         // MARK:- Configure + start engine
@@ -143,7 +158,7 @@ struct Sequencer {
         silenceBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
         
         tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
-        loadPattern(number: 0)
+        loadPart(partName: .A)
         
         print(durationOf16thNoteInSamples(forTrack: 0))
         print(durationOf16thNoteInSamples(forTrack: 1))
@@ -153,38 +168,66 @@ struct Sequencer {
         
     }
     
-    mutating func loadPattern(number: Int) {
+    mutating func loadPart(partName: PartName) {
         
-        tracks[0].numberOfCellsActive = patterns.kick[number].length
-        tracks[0].cells = patterns.kick[number].data
+        let number = partName.rawValue
+//        displayedTracks[0].numberOfCellsActive = defaultPatterns.kick[number].length
+//        displayedTracks[0].cells = defaultPatterns.kick[number].cells
         
-        tracks[1].numberOfCellsActive = patterns.snare[number].length
-        tracks[1].cells = patterns.snare[number].data
+        for i in 0...3 {
+           if let length = parts[partName]?.patterns[i].length,
+              let cells = parts[partName]?.patterns[i].cells {
+              displayedTracks[i].numberOfCellsActive = length
+              displayedTracks[i].cells = cells
+            }
+        }
         
-        tracks[2].numberOfCellsActive = patterns.closed_hihat[number].length
-        tracks[2].cells = patterns.closed_hihat[number].data
         
-        tracks[3].numberOfCellsActive = patterns.open_hihat[number].length
-        tracks[3].cells = patterns.open_hihat[number].data
+        
+        
+//        displayedTracks[1].numberOfCellsActive = defaultPatterns.snare[number].length
+//        displayedTracks[1].cells = defaultPatterns.snare[number].cells
+//
+//        displayedTracks[2].numberOfCellsActive = defaultPatterns.closed_hihat[number].length
+//        displayedTracks[2].cells = defaultPatterns.closed_hihat[number].cells
+//
+//        displayedTracks[3].numberOfCellsActive = defaultPatterns.open_hihat[number].length
+//        displayedTracks[3].cells = defaultPatterns.open_hihat[number].cells
     }
     
-    mutating func saveToPattern(number: Int) {
+    mutating func saveToPart(partName: PartName) {
         
-        patterns.kick[number].length = tracks[0].numberOfCellsActive
-        patterns.kick[number].data = tracks[0].cells
+        let number = partName.rawValue
+//        defaultPatterns.kick[number].length = displayedTracks[0].numberOfCellsActive
+//        defaultPatterns.kick[number].cells = displayedTracks[0].cells
+        for i in 0...3 {
+            parts[partName]?.patterns[i].length = displayedTracks[i].numberOfCellsActive
+            parts[partName]?.patterns[i].cells = displayedTracks[i].cells
+        }
         
-        patterns.snare[number].length = tracks[1].numberOfCellsActive
-        patterns.snare[number].data = tracks[1].cells
         
-        patterns.closed_hihat[number].length = tracks[2].numberOfCellsActive
-        patterns.closed_hihat[number].data = tracks[2].cells
+//        defaultPatterns.snare[number].length = displayedTracks[1].numberOfCellsActive
+//        defaultPatterns.snare[number].cells = displayedTracks[1].cells
+//
+//        defaultPatterns.closed_hihat[number].length = displayedTracks[2].numberOfCellsActive
+//        defaultPatterns.closed_hihat[number].cells = displayedTracks[2].cells
+//
+//        defaultPatterns.open_hihat[number].length = displayedTracks[3].numberOfCellsActive
+//        defaultPatterns.open_hihat[number].cells = displayedTracks[3].cells
+    }
+    
+    mutating func deletePart(partName: PartName) {
         
-        patterns.open_hihat[number].length = tracks[3].numberOfCellsActive
-        patterns.open_hihat[number].data = tracks[3].cells
+        for i in 0...3 {
+            if let length = parts[partName]?.patterns[i].length {
+                parts[partName]?.patterns[i].cells = Array(repeating: Cell.OFF, count: length)
+            }
+        }
+        print("Deleted!")
     }
     
     func printTracks() {
-        for track in self.tracks {
+        for track in self.displayedTracks {
             for cell in track.cells {
                 print("\(cell) ", terminator: "")
             }
@@ -196,7 +239,7 @@ struct Sequencer {
     // Computes duration in samples of 16th note depending on BPM / samplerate (44100 kHz)
     //
     func durationOf16thNoteInSamples(forTrack track: Int) -> Double {
-        let activeCells = Double(tracks[track].numberOfCellsActive)
+        let activeCells = Double(displayedTracks[track].numberOfCellsActive)
         let bpm = (tempo?.bpm)!
         let sampleRate = Double(K.Sequencer.sampleRate)
         

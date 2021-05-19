@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
-		FA0E89452646218200B7CD45 /* Patterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* Patterns.swift */; };
+		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
 		FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D3062653E3C0005D2A2F /* setupUI.swift */; };
 		FA18D30B2653F206005D2A2F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30A2653F206005D2A2F /* Track.swift */; };
 		FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30E2653F24E005D2A2F /* Cell.swift */; };
@@ -36,6 +36,9 @@
 		FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */; };
 		FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */; };
 		FAB22319264413D300708387 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAB22318264413D300708387 /* silence.wav */; };
+		FAB47AC22654F9D2006281CE /* PartName.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AC12654F9D2006281CE /* PartName.swift */; };
+		FAB47ACA2654FFBB006281CE /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AC92654FFBB006281CE /* Part.swift */; };
+		FAB47ACE26550223006281CE /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47ACD26550223006281CE /* Pattern.swift */; };
 		FAC71DF1264F37AE007FE152 /* 440CLHH.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DE7264F37AD007FE152 /* 440CLHH.wav */; };
 		FAC71DF2264F37AE007FE152 /* 440OHH.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DE8264F37AE007FE152 /* 440OHH.wav */; };
 		FAC71DF3264F37AE007FE152 /* 440SN1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DE9264F37AE007FE152 /* 440SN1.wav */; };
@@ -67,7 +70,7 @@
 
 /* Begin PBXFileReference section */
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
-		FA0E89442646218200B7CD45 /* Patterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patterns.swift; sourceTree = "<group>"; };
+		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
 		FA18D3062653E3C0005D2A2F /* setupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setupUI.swift; sourceTree = "<group>"; };
 		FA18D30A2653F206005D2A2F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		FA18D30E2653F24E005D2A2F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -99,6 +102,9 @@
 		FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashExtension.swift; sourceTree = "<group>"; };
 		FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BpmDetector.swift; sourceTree = "<group>"; };
 		FAB22318264413D300708387 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
+		FAB47AC12654F9D2006281CE /* PartName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartName.swift; sourceTree = "<group>"; };
+		FAB47AC92654FFBB006281CE /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
+		FAB47ACD26550223006281CE /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		FAC71DE7264F37AD007FE152 /* 440CLHH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440CLHH.wav; sourceTree = "<group>"; };
 		FAC71DE8264F37AE007FE152 /* 440OHH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440OHH.wav; sourceTree = "<group>"; };
 		FAC71DE9264F37AE007FE152 /* 440SN1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440SN1.wav; sourceTree = "<group>"; };
@@ -160,11 +166,14 @@
 			children = (
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
+				FAB47AC12654F9D2006281CE /* PartName.swift */,
+				FAB47AC92654FFBB006281CE /* Part.swift */,
 				FA30281026433C0D00406561 /* Sequencer.swift */,
 				FA18D30E2653F24E005D2A2F /* Cell.swift */,
 				FA18D3122653F26F005D2A2F /* Tempo.swift */,
 				FA18D30A2653F206005D2A2F /* Track.swift */,
-				FA0E89442646218200B7CD45 /* Patterns.swift */,
+				FA0E89442646218200B7CD45 /* DefaultPatterns.swift */,
+				FAB47ACD26550223006281CE /* Pattern.swift */,
 				FAFEA994264BD45B002807DC /* FileNames.swift */,
 				FA18D31A265434E6005D2A2F /* ChainModes.swift */,
 			);
@@ -420,14 +429,17 @@
 				FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */,
 				FA8D6E78263EF2B4000FFFE3 /* SceneDelegate.swift in Sources */,
 				FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */,
-				FA0E89452646218200B7CD45 /* Patterns.swift in Sources */,
+				FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */,
 				FA18D31B265434E6005D2A2F /* ChainModes.swift in Sources */,
 				FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
 				FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */,
 				FA18D30B2653F206005D2A2F /* Track.swift in Sources */,
 				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
+				FAB47AC22654F9D2006281CE /* PartName.swift in Sources */,
+				FAB47ACE26550223006281CE /* Pattern.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
+				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,
 				FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */,
 				FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */,
 				FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */,
