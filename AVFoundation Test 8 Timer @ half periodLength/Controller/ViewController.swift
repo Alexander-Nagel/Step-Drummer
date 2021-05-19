@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     var controlsHidden = true
     var drawSoftNotes = false
     var copyMode = false
+    var copyModeSource: PartName?
+    var deleteMode = false
     
     private var isSwiping = false
     private var swipeStart: Int?
@@ -369,6 +371,17 @@ class ViewController: UIViewController {
         
     }
     
+    func endCopyMode() {
+        
+        copyMode = false
+        copyButton.backgroundColor = K.Color.blue
+        copyButton.layer.removeAllAnimations()
+        partSegmentedControl.layer.removeAllAnimations()
+        if let sourcePart = copyModeSource {
+            changeToPart(sourcePart)
+        }
+    }
+    
     //
     // MARK:- COPY action
     //
@@ -377,20 +390,27 @@ class ViewController: UIViewController {
         
         sender.isSelected = !sender.isSelected
         
-        if drawSoftNotes {
+        if copyMode {
             //
-            // switch soft note mode OFF
+            // switch copyMode OFF
             //
-            drawSoftNotes = false
-            //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-            softModeButton.backgroundColor = K.Color.blue
+            
+            endCopyMode()
+
         } else {
             //
-            // switch soft note mode  ON
+            // switch copyMode ON
             //
-            drawSoftNotes = true
-            //chainButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
-            softModeButton.backgroundColor = K.Color.blue_brightest
+            copyMode = true
+            copyModeSource = seq.activePart
+            copyButton.backgroundColor = K.Color.blue_brightest
+            copyButton.flashPermanently()
+            
+            //
+            // Let inactive part buttons flash
+            
+            //
+            partSegmentedControl.flashPermanently()
         }
     }
     
@@ -455,11 +475,27 @@ class ViewController: UIViewController {
     @IBAction func partChanged(_ sender: UISegmentedControl) {
         
         print(#function)
-        seq.saveToPart(partName: seq.activePart)
-        print(partSegmentedControl.selectedSegmentIndex)
-        seq.loadPart(partName: PartName(rawValue: partSegmentedControl.selectedSegmentIndex)!)
-        seq.activePart = PartName(rawValue: partSegmentedControl.selectedSegmentIndex)!
-        updateUI()
+        
+        let destinationPart = PartName(rawValue: partSegmentedControl.selectedSegmentIndex)!
+        
+        if !copyMode {
+            //
+            // Normal behaviour when not in copyMode: Switch to destinationPart
+            //
+            seq.saveToPart(partName: seq.activePart)
+            print(partSegmentedControl.selectedSegmentIndex)
+            seq.loadPart(partName: destinationPart)
+            seq.activePart = destinationPart
+            updateUI()
+        } else {
+            //
+            // When in copyMode: Copy displayedPart to destinationPart, do NOT switch
+            //
+            seq.copyActivePart(to: destinationPart)
+            
+            endCopyMode()
+        }
+        
     }
     
     //

@@ -226,6 +226,14 @@ struct Sequencer {
         print("Deleted!")
     }
     
+    mutating func copyActivePart(to partName: PartName) {
+        
+        let sourceName = activePart
+        let destinationName = partName
+        
+        parts[destinationName] = parts[sourceName]
+    }
+    
     func printTracks() {
         for track in self.displayedTracks {
             for cell in track.cells {
