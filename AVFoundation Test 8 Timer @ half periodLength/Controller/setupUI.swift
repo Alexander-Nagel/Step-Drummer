@@ -10,13 +10,13 @@ import UIKit
 //
 // MARK: - Setup UI
 //
-extension ViewController {
+extension MainVC {
     func setupUI() {
         
         //
         // Init button/label arrays
         //
-        trackControlLabels = [trackVolumeLabel, trackReverbLabel, trackDelayLabel, /*, trackStepsLabel */ trackMuteLabel, trackCellsLabel]
+     
         
         track0Buttons = [button0_0, button0_1, button0_2, button0_3,
                          button0_4, button0_5, button0_6, button0_7,
@@ -37,23 +37,20 @@ extension ViewController {
         trackButtonMatrix = [track0Buttons, track1Buttons, track2Buttons, track3Buttons]
         
         muteButtons = [mute0Button, mute1Button, mute2Button, mute3Button]
+        trackSettingsButtons = [settingsButton0, settingsButton1, settingsButton2, settingsButton3 ]
         stepperButtons = [stepper0Button, stepper1Button, stepper2Button, stepper3Button]
         stepperViews = [stepper0View, stepper1View, stepper2View, stepper3View ]
         controlButtons = [playPauseButton, tapButton,/*  bpmLabel, bpmStepper, */ picker]
-        trackVolumeSliders = [volumeSlider0, volumeSlider1, volumeSlider2, volumeSlider3]
-        trackReverbSliders = [reverbSlider0, reverbSlider1, reverbSlider2, reverbSlider3]
-        trackDelaySliders = [delaySlider0, delaySlider1, delaySlider2, delaySlider3]
-        trackSliders = trackVolumeSliders + trackReverbSliders + trackDelaySliders
+//        trackVolumeSliders = [volumeSlider0, volumeSlider1, volumeSlider2, volumeSlider3]
+//        trackReverbSliders = [reverbSlider0, reverbSlider1, reverbSlider2, reverbSlider3]
+//        trackDelaySliders = [delaySlider0, delaySlider1, delaySlider2, delaySlider3]
+//        trackSliders = trackVolumeSliders + trackReverbSliders + trackDelaySliders
         
         //
         // MARK: - Track control description labels:
         //
         
-        // Hide track control labels:
-        //
-        for label in trackControlLabels {
-            label.isHidden = true
-        }
+      
 //        trackCellsView.isHidden = true
 //        trackControlsLabelsStackView.isHidden = true
         
@@ -106,16 +103,34 @@ extension ViewController {
             button.backgroundColor = K.Color.muteButtonColor
             button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
             button.layer.borderWidth = 1.0
-            button.tintColor = K.Color.blue_brightest
+            button.tintColor = K.Color.white
             button.isHidden = false
             //            button.titleLabel?.text = "AA"
-            button.setTitleColor(K.Color.black, for: .normal)
+           // button.setTitleColor(K.Color.black, for: .normal)
             button.layer.cornerRadius = 15
             // button.layer.cornerRadius = 0.5 * button.bounds.size.width
             button.tag = index
             button.widthAnchor.constraint(equalToConstant: 50).isActive = true
             button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
         }
+        // TRACK SETTINGS buttons:
+        //
+        for (index, button) in trackSettingsButtons.enumerated() {
+            //print("Index: \(index)")
+            button.backgroundColor = K.Color.muteButtonColor
+            //button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
+            button.layer.borderWidth = 1.0
+            button.tintColor = K.Color.white
+            button.isHidden = false
+            //            button.titleLabel?.text = "AA"
+           // button.setTitleColor(K.Color.black, for: .normal)
+            button.layer.cornerRadius = 15
+            // button.layer.cornerRadius = 0.5 * button.bounds.size.width
+            button.tag = index
+            button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
+        }
+        
         
         //
         // MARK: - Cells:
@@ -146,11 +161,11 @@ extension ViewController {
 
         // SETTINGS button:
         //
-        settingsButton.backgroundColor = K.Color.orange
-        settingsButton.tintColor = K.Color.white
-        settingsButton.setTitleColor(K.Color.black, for: .normal)
-        settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        settingsButton.layer.cornerRadius = 15
+//        settingsButton.backgroundColor = K.Color.orange
+//        settingsButton.tintColor = K.Color.white
+//        settingsButton.setTitleColor(K.Color.black, for: .normal)
+//        settingsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+//        settingsButton.layer.cornerRadius = 15
         
         // PART A/B/C/D segmented control:
         //

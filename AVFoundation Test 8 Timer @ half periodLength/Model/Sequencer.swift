@@ -35,11 +35,24 @@ struct Sequencer {
         normal: ["440KICK1.wav",
                  "440SN1.wav",
                  "hihat_2154samples.wav",
-                 "open_hihat_2181samples.wav"],
+                 "open_hihat_2181samples.wav",
+                 "440KICK2.wav",
+                 "440KICK3.wav",
+                 "440CLAP.wav",
+                 "440SN2.wav",
+                 "440SN3.wav"
+                 
+        ],
         soft: ["kick_2156samples_SOFT.wav",
                "snare_2152samples_SOFT.wav",
                "hihat_2154samples_SOFT.wav",
-               "open_hihat_2181samples_SOFT.wav"])
+               "open_hihat_2181samples_SOFT.wav",
+               "kick_2156samples_SOFT.wav",
+               "kick_2156samples_SOFT.wav",
+               "snare_2152samples_SOFT.wav",
+               "snare_2152samples_SOFT.wav",
+               "snare_2152samples_SOFT.wav",
+        ])
     
     var files = Files()
     var fileSilence: AVAudioFile! = nil
@@ -151,11 +164,11 @@ struct Sequencer {
         engine.prepare()
         do { try engine.start() } catch { print(error) }
         
-        files = Files(normal: [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()],
-                      soft: [AVAudioFile(), AVAudioFile(), AVAudioFile(), AVAudioFile()])
-        soundBuffers = SoundBuffers(normal: [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()], soft: [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()])
+        files = Files(normal: Array(repeating: AVAudioFile(), count: fileNames.normal.count),
+                      soft: Array(repeating: AVAudioFile(), count: fileNames.normal.count))
+        soundBuffers = SoundBuffers(normal: Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count), soft: Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count))
         
-        silenceBuffers = [AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer(), AVAudioPCMBuffer()]
+        silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count)
         
         tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         loadPart(partName: .A)

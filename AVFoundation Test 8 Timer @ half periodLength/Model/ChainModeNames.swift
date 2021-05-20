@@ -10,20 +10,31 @@ enum ChainModeNames: Int, CaseIterable {
     case AB
     case CD
     case ABCD
-    case AD
-    case CB
-    case ABC
+//    case AD
+//    case CB
+//    case ABC
     case OFF
     
-    var description: String {
+    var description: String { // needed for button label text
         switch self {
         case .AB: return "AB"
         case .CD: return "CD"
-        case .ABC: return "ABC"
+//        case .ABC: return "ABC"
         case .ABCD: return "ABCD"
-        case .AD: return "AD"
-        case .CB: return "CB"
+//        case .AD: return "AD"
+//        case .CB: return "CB"
         case .OFF: return "-"
+        }
+    }
+    var first: PartNames? { // to get first part after re-start
+        switch self {
+        case .AB: return .A
+        case .CD: return .C
+//        case .ABC: return .A
+        case .ABCD: return .A
+//        case .AD: return .A
+//        case .CB: return .C
+        case .OFF: return nil
         }
     }
     

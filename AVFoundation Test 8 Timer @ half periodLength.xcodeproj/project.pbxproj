@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
 		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
+		FA12A3332655C25E00439FA3 /* PickerView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A3322655C25E00439FA3 /* PickerView Extension.swift */; };
+		FA12A33726564D4300439FA3 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A33626564D4300439FA3 /* SettingsVC.swift */; };
+		FA12A33F2656627100439FA3 /* TrackSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A33E2656627100439FA3 /* TrackSettingsVC.swift */; };
+		FA12A3432656B4CD00439FA3 /* SoundSelectionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A3422656B4CC00439FA3 /* SoundSelectionTableVC.swift */; };
+		FA12A3472656B60E00439FA3 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A3462656B60E00439FA3 /* Shared.swift */; };
+		FA12A34D2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A34C2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift */; };
 		FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D3062653E3C0005D2A2F /* setupUI.swift */; };
 		FA18D30B2653F206005D2A2F /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30A2653F206005D2A2F /* Track.swift */; };
 		FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30E2653F24E005D2A2F /* Cell.swift */; };
@@ -30,7 +36,7 @@
 		FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA8D6E91263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav */; };
 		FA8D6E98263EF2D9000FFFE3 /* Audio Time Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */; };
 		FA8D6E99263EF2D9000FFFE3 /* RoundFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */; };
-		FA8D6E9C263EF2E8000FFFE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E9B263EF2E8000FFFE3 /* ViewController.swift */; };
+		FA8D6E9C263EF2E8000FFFE3 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E9B263EF2E8000FFFE3 /* MainVC.swift */; };
 		FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E9F263F3262000FFFE3 /* Constants.swift */; };
 		FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */; };
 		FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */; };
@@ -72,6 +78,12 @@
 /* Begin PBXFileReference section */
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
 		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
+		FA12A3322655C25E00439FA3 /* PickerView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickerView Extension.swift"; sourceTree = "<group>"; };
+		FA12A33626564D4300439FA3 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		FA12A33E2656627100439FA3 /* TrackSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSettingsVC.swift; sourceTree = "<group>"; };
+		FA12A3422656B4CC00439FA3 /* SoundSelectionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSelectionTableVC.swift; sourceTree = "<group>"; };
+		FA12A3462656B60E00439FA3 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		FA12A34C2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC TrackSettingsVCDelegate.swift"; sourceTree = "<group>"; };
 		FA18D3062653E3C0005D2A2F /* setupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setupUI.swift; sourceTree = "<group>"; };
 		FA18D30A2653F206005D2A2F /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		FA18D30E2653F24E005D2A2F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -97,7 +109,7 @@
 		FA8D6E91263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pcm stereo 16 bit 44.1kHz.wav"; sourceTree = "<group>"; };
 		FA8D6E96263EF2D9000FFFE3 /* Audio Time Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Audio Time Extensions.swift"; sourceTree = "<group>"; };
 		FA8D6E97263EF2D9000FFFE3 /* RoundFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundFunction.swift; sourceTree = "<group>"; };
-		FA8D6E9B263EF2E8000FFFE3 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FA8D6E9B263EF2E8000FFFE3 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		FA8D6E9F263F3262000FFFE3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashExtension.swift; sourceTree = "<group>"; };
 		FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BpmDetector.swift; sourceTree = "<group>"; };
@@ -157,7 +169,12 @@
 		FA6C96062641B63100114B08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FA8D6E9B263EF2E8000FFFE3 /* ViewController.swift */,
+				FA8D6E9B263EF2E8000FFFE3 /* MainVC.swift */,
+				FA12A34C2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift */,
+				FA12A33E2656627100439FA3 /* TrackSettingsVC.swift */,
+				FA12A3422656B4CC00439FA3 /* SoundSelectionTableVC.swift */,
+				FA12A33626564D4300439FA3 /* SettingsVC.swift */,
+				FA12A3322655C25E00439FA3 /* PickerView Extension.swift */,
 				FA18D3062653E3C0005D2A2F /* setupUI.swift */,
 			);
 			path = Controller;
@@ -178,6 +195,7 @@
 				FAFEA994264BD45B002807DC /* FileNames.swift */,
 				FAB47AD72655ACC1006281CE /* ChainModeNames.swift */,
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
+				FA12A3462656B60E00439FA3 /* Shared.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -424,7 +442,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAFEA995264BD45B002807DC /* FileNames.swift in Sources */,
-				FA8D6E9C263EF2E8000FFFE3 /* ViewController.swift in Sources */,
+				FA8D6E9C263EF2E8000FFFE3 /* MainVC.swift in Sources */,
+				FA12A3332655C25E00439FA3 /* PickerView Extension.swift in Sources */,
 				FAE3DF382651BABA0000DD9F /* getConvertedPoint.swift in Sources */,
 				FA8D6E99263EF2D9000FFFE3 /* RoundFunction.swift in Sources */,
 				FA8D6E76263EF2B4000FFFE3 /* AppDelegate.swift in Sources */,
@@ -435,16 +454,21 @@
 				FAB47AD426552C50006281CE /* ClickableSegmentedControl.swift in Sources */,
 				FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */,
 				FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */,
+				FA12A34D2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift in Sources */,
+				FA12A33726564D4300439FA3 /* SettingsVC.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
 				FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */,
 				FA18D30B2653F206005D2A2F /* Track.swift in Sources */,
 				FAB47AD82655ACC1006281CE /* ChainModeNames.swift in Sources */,
+				FA12A3472656B60E00439FA3 /* Shared.swift in Sources */,
 				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
 				FAB47AC22654F9D2006281CE /* PartNames.swift in Sources */,
 				FAB47ACE26550223006281CE /* Pattern.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
+				FA12A3432656B4CD00439FA3 /* SoundSelectionTableVC.swift in Sources */,
 				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,
 				FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */,
+				FA12A33F2656627100439FA3 /* TrackSettingsVC.swift in Sources */,
 				FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */,
 				FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */,
 			);

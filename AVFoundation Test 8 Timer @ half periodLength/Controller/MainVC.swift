@@ -7,11 +7,12 @@ import AVFoundation
 
 fileprivate let DEBUG = false
 
-class ViewController: UIViewController {
+class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     
     var seq = Sequencer()
+    var settingsVC = SettingsVC()
     
-    var controlsHidden = false
+    var controlsHidden = true
     var drawSoftNotes = false
     var copyMode = false
     var copyModeSource: PartNames?
@@ -47,18 +48,7 @@ class ViewController: UIViewController {
     
     
     // MARK:-  OUTLETS
-    //
-    // Track control description labels
-    //
-    @IBOutlet weak var trackVolumeLabel: UILabel!
-    @IBOutlet weak var trackReverbLabel: UILabel!
-    @IBOutlet weak var trackDelayLabel: UILabel!
-    @IBOutlet weak var trackStepsLabel: UILabel!
-    @IBOutlet weak var trackMuteLabel: UILabel!
-    @IBOutlet weak var trackCellsLabel: UILabel!
-    @IBOutlet weak var trackCellsView: UIStackView!
-    @IBOutlet weak var trackControlsLabelsStackView: UIStackView!
-     var trackControlLabels = [UILabel]()
+   
     
     //
     // player0 steps
@@ -180,11 +170,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var delaySlider3: UISlider!
      var trackDelaySliders = [UISlider]()
      var trackSliders = [UISlider]()
+    @IBOutlet weak var settingsButton0: UIButton!
+    @IBOutlet weak var settingsButton1: UIButton!
+    @IBOutlet weak var settingsButton2: UIButton!
+    @IBOutlet weak var settingsButton3: UIButton!
+    var trackSettingsButtons = [UIButton]()
         
     //
     // Main Controls at bottom (Play, Tap, Parts...)
     //
-    @IBOutlet weak var settingsButton: UIButton!
+//    @IBOutlet weak var settingsButton: UIButton!
     
     @IBOutlet weak var partSegmentedControl: UISegmentedControl!
     @IBOutlet weak var softModeButton: VerticalButton!
@@ -763,38 +758,38 @@ class ViewController: UIViewController {
                         }
                         self.changeToPart(nextPart)
                     }
-                    if self.seq.chainMode == .AD {
-                        let currentPart = self.seq.activePart
-                        var nextPart: PartNames
-                        if currentPart == .A {
-                            nextPart = .D
-                        } else {
-                            nextPart = .A
-                        }
-                        self.changeToPart(nextPart)
-                    }
-                    if self.seq.chainMode == .CB {
-                        let currentPart = self.seq.activePart
-                        var nextPart: PartNames
-                        if currentPart == .C {
-                            nextPart = .B
-                        } else {
-                            nextPart = .C
-                        }
-                        self.changeToPart(nextPart)
-                    }
-                    if self.seq.chainMode == .ABC {
-                        let currentPart = self.seq.activePart
-                        var nextPart: PartNames
-                        if currentPart == .A {
-                            nextPart = .B
-                        } else if currentPart == .B{
-                            nextPart = .C
-                        } else {
-                            nextPart = .A
-                        }
-                        self.changeToPart(nextPart)
-                    }
+//                    if self.seq.chainMode == .AD {
+//                        let currentPart = self.seq.activePart
+//                        var nextPart: PartNames
+//                        if currentPart == .A {
+//                            nextPart = .D
+//                        } else {
+//                            nextPart = .A
+//                        }
+//                        self.changeToPart(nextPart)
+//                    }
+//                    if self.seq.chainMode == .CB {
+//                        let currentPart = self.seq.activePart
+//                        var nextPart: PartNames
+//                        if currentPart == .C {
+//                            nextPart = .B
+//                        } else {
+//                            nextPart = .C
+//                        }
+//                        self.changeToPart(nextPart)
+//                    }
+//                    if self.seq.chainMode == .ABC {
+//                        let currentPart = self.seq.activePart
+//                        var nextPart: PartNames
+//                        if currentPart == .A {
+//                            nextPart = .B
+//                        } else if currentPart == .B{
+//                            nextPart = .C
+//                        } else {
+//                            nextPart = .A
+//                        }
+//                        self.changeToPart(nextPart)
+//                    }
                     
                     
                 }
@@ -1097,7 +1092,7 @@ class ViewController: UIViewController {
     // MARK:- PRE SCHEDULE FIRST BUFFER
     //
     
-    private func preScheduleFirstBuffer(forPlayer seletedPlayer: Int) {
+    func preScheduleFirstBuffer(forPlayer seletedPlayer: Int) {
         
         print(#function)
         
@@ -1564,6 +1559,39 @@ class ViewController: UIViewController {
             slider.value = Float(seq.displayedTracks[index].delayMix)
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "goToTrackSettingsVC" {
+            let trackSettingsVC = segue.destination as! TrackSettingsVC
+            trackSettingsVC.popoverPresentationController?.delegate = self
+            
+            trackSettingsVC.selectedSound = seq.fileNames.normal[0]
+            trackSettingsVC.fileNames = seq.fileNames.normal
+            trackSettingsVC.delegate = self
+            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+            
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+    
+    //
+    // MARK:- TRACK SETTINGS
+    //
+//    @IBAction func trackSettingsPressed(_ sender: UIButton) {
+//        print(#function)
+//       let trackVC = TrackSettingsVC()
+//     self.navigationController?.pushViewController(trackVC, animated: true)
+//
+//        //present(trackVC, animated: true) {
+//            //
+//       // }
+//        //performSegue(withIdentifier: "goToTrackSettingsVC", sender: self)
+//    }
+    
     
     //
     // MARK:- Settings
@@ -1573,6 +1601,9 @@ class ViewController: UIViewController {
         print(#function)
         controlsHidden = !controlsHidden
         showOrHideControls()
+        
+//        present(settingsVC, animated: true, completion: nil)
+        
     }
     
     private func showOrHideControls() {
@@ -1581,21 +1612,19 @@ class ViewController: UIViewController {
             //
             // Show controls
             //
-            for label in trackControlLabels {
-                label.isHidden = false
-            }
+
 //            trackCellsView.isHidden = false
 //            trackControlsLabelsStackView.isHidden = false
 //
-//            for slider in trackVolumeSliders {
-//                slider.isHidden = false
-//            }
-//            for slider in trackReverbSliders {
-//                slider.isHidden = false
-//            }
-//            for slider in trackDelaySliders {
-//                slider.isHidden = false
-//            }
+            for slider in trackVolumeSliders {
+                slider.isHidden = false
+            }
+            for slider in trackReverbSliders {
+                slider.isHidden = false
+            }
+            for slider in trackDelaySliders {
+                slider.isHidden = false
+            }
             //            for view in stepperViews {
             //                view.isHidden = false
             //            }
@@ -1603,9 +1632,7 @@ class ViewController: UIViewController {
             //
             // Hide controls
             //
-            for label in trackControlLabels {
-                label.isHidden = true
-            }
+
 //            trackCellsView.isHidden = true
 //            trackControlsLabelsStackView.isHidden = true
 //
@@ -1709,7 +1736,7 @@ class ViewController: UIViewController {
     //
     // MARK:- Tempo changed, update UI Tempo Elements
     //
-    private func updateUIAfterTempoChange(to newTempo: Double, restart: Bool? = true) {
+    func updateUIAfterTempoChange(to newTempo: Double, restart: Bool? = true) {
         
         //
         // Set new tempo, display value, load new buffers
@@ -1786,7 +1813,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension MainVC {
     
     func printFrameLengths() {
         
@@ -1799,84 +1826,4 @@ extension ViewController {
     }
 }
 
-//
-// MARK:- UIPicker Data Source & Delegate
-//
-extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    internal func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
-    }
-    
-    internal func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return 271
-        } else if component == 1{
-            return 1
-        } else {
-            return 10
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        var pickerLabel: UILabel? = (view as? UILabel)
-        if pickerLabel == nil {
-            pickerLabel = UILabel()
-            pickerLabel?.font = UIFont(name: "Arial", size: 25)
-            switch component {
-            case 0:
-                pickerLabel?.textAlignment = .right
-            case 1:
-                pickerLabel?.textAlignment = .center
-            case 2:
-                pickerLabel?.textAlignment = .left
-            default:
-                print("not gonna be the case for sure")
-            }
-        }
-        pickerLabel?.text = pickerDataArray[component][row]
-        pickerLabel?.textColor = UIColor(named: "Your Color Name")
-        
-        return pickerLabel!
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        if component == 0 {
-            return 60
-        } else if component == 1 {
-            return 15
-        } else if component == 2 {
-            return 30
-        } else {
-            print("This is quite unlikely to happen.")
-            return 30
-        }
-    }
-    
-    
-    internal func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //print("row: \(row) component: \(component)")
-        
-        switch component {
-        case 0:
-            pickedLeft = Array(pickerLeftInts)[row]
-        case 1:
-            print("Nothing happens when picking the decimals point.")
-        case 2:
-            pickedRight = Array(pickerRightDecimals)[row]
-        default:
-            print("This happens almost never.")
-        }
-        let newTempo = Double(pickedLeft) + Double(pickedRight) / 10.0
-        if DEBUG {print(newTempo)}
-        seq.tempo?.bpm = newTempo
-        
-        preScheduleFirstBuffer(forPlayer: 0)
-        preScheduleFirstBuffer(forPlayer: 1)
-        preScheduleFirstBuffer(forPlayer: 2)
-        preScheduleFirstBuffer(forPlayer: 3)
-        
-        updateUIAfterTempoChange(to: newTempo)
-    }
-}
+
