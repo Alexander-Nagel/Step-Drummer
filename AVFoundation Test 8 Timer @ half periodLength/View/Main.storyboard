@@ -43,64 +43,64 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpU-p6-0s9" userLabel="Settings 0">
-                                                        <rect key="frame" x="0.0" y="8" width="51" height="22"/>
-                                                        <state key="normal" title="üüü" image="gear" catalog="system"/>
+                                                        <rect key="frame" x="0.0" y="8" width="22.5" height="22"/>
+                                                        <state key="normal" image="gear" catalog="system"/>
                                                         <connections>
-                                                            <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC" popoverAnchorView="hpU-p6-0s9" id="CSp-mk-Alq">
+                                                            <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC0" popoverAnchorView="hpU-p6-0s9" id="CSp-mk-Alq">
                                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                                             </segue>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeX-1k-eb4" userLabel="MUTE 0">
-                                                        <rect key="frame" x="56" y="8" width="17" height="22"/>
+                                                        <rect key="frame" x="27.5" y="8" width="18" height="22"/>
                                                         <state key="normal" image="speaker.slash" catalog="system"/>
                                                         <connections>
                                                             <action selector="muteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c6q-Ly-vjy"/>
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="nVC-U0-dIP">
-                                                        <rect key="frame" x="78" y="4" width="490" height="30"/>
+                                                        <rect key="frame" x="50.5" y="4" width="517.5" height="30"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XBy-Mk-W4Z">
-                                                                <rect key="frame" x="0.0" y="0.0" width="116" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="122.5" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYm-1J-Ehh">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="30.5" height="30"/>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jy6-uA-vdG">
-                                                                        <rect key="frame" x="29" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="30.5" y="0.0" width="30.5" height="30"/>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eGd-hW-hay">
-                                                                        <rect key="frame" x="58" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="61" y="0.0" width="31" height="30"/>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wV7-xZ-m5J">
-                                                                        <rect key="frame" x="87" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="92" y="0.0" width="30.5" height="30"/>
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EyH-fK-0YH">
-                                                                <rect key="frame" x="125" y="0.0" width="115.5" height="30"/>
+                                                                <rect key="frame" x="131.5" y="0.0" width="122.5" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mu-mE-aaA">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yRh-FP-6IH"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ln-IQ-wRU">
-                                                                        <rect key="frame" x="29" y="0.0" width="28.5" height="30"/>
+                                                                        <rect key="frame" x="30.5" y="0.0" width="31" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K2A-AN-55U"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yc2-oT-LFQ">
-                                                                        <rect key="frame" x="57.5" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="61.5" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eqU-Vk-bro"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7BS-va-zAm">
-                                                                        <rect key="frame" x="86.5" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="92" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8qR-RW-fIf"/>
                                                                         </connections>
@@ -108,28 +108,28 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="T1w-9O-PIG">
-                                                                <rect key="frame" x="249.5" y="0.0" width="116" height="30"/>
+                                                                <rect key="frame" x="263" y="0.0" width="123" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6S5-Dy-j9J">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pLX-N1-cac"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SIp-8O-2eT">
-                                                                        <rect key="frame" x="29" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="31" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kjH-fH-CM4"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-ij-LXc">
-                                                                        <rect key="frame" x="58" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="61.5" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XAe-dm-fif"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOG-7B-c0x">
-                                                                        <rect key="frame" x="87" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="92" y="0.0" width="31" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yaa-Bj-9w2"/>
                                                                         </connections>
@@ -137,28 +137,28 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Dkb-JV-R1r">
-                                                                <rect key="frame" x="374.5" y="0.0" width="115.5" height="30"/>
+                                                                <rect key="frame" x="395" y="0.0" width="122.5" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4zP-qa-alJ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="28.5" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Phx-qZ-aEh"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dE-CF-OHE">
-                                                                        <rect key="frame" x="28.5" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="30.5" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HgY-Gw-D4i"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8c-Xf-DkJ">
-                                                                        <rect key="frame" x="57.5" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="61" y="0.0" width="31" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lwk-Kf-jhI"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAP-Y2-mTe">
-                                                                        <rect key="frame" x="86.5" y="0.0" width="29" height="30"/>
+                                                                        <rect key="frame" x="92" y="0.0" width="30.5" height="30"/>
                                                                         <connections>
                                                                             <action selector="cellPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dri-kI-7WV"/>
                                                                         </connections>
@@ -190,7 +190,9 @@
                                                         <rect key="frame" x="0.0" y="8" width="22.5" height="22"/>
                                                         <state key="normal" image="gear" catalog="system"/>
                                                         <connections>
-                                                            <action selector="trackSettingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BYe-Xy-pjM"/>
+                                                            <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC1" popoverAnchorView="jpJ-Z9-ymI" id="c7c-uu-yDE">
+                                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                            </segue>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OF7-ES-xHR" userLabel="MUTE 1">
@@ -344,7 +346,9 @@
                                                         <rect key="frame" x="0.0" y="8" width="22.5" height="22"/>
                                                         <state key="normal" image="gear" catalog="system"/>
                                                         <connections>
-                                                            <action selector="trackSettingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kUf-wP-okx"/>
+                                                            <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC2" popoverAnchorView="tAm-PS-FVt" id="H1j-Fq-xGq">
+                                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                            </segue>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5V-ph-Iwo" userLabel="MUTE 2">
@@ -498,7 +502,9 @@
                                                         <rect key="frame" x="0.0" y="8" width="22.5" height="22"/>
                                                         <state key="normal" image="gear" catalog="system"/>
                                                         <connections>
-                                                            <action selector="trackSettingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sBV-Up-9YL"/>
+                                                            <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC3" popoverAnchorView="UdF-W0-Xvb" id="mzx-FB-cSx">
+                                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                            </segue>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqU-q8-OOg" userLabel="MUTE 3">
@@ -987,7 +993,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAv-Fq-URv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2156" y="-326"/>
+            <point key="canvasLocation" x="2202" y="17"/>
         </scene>
         <!--Sound Selection TableVC-->
         <scene sceneID="DEZ-g1-uaj">
@@ -1039,6 +1045,9 @@
             <point key="canvasLocation" x="767.95774647887322" y="16.875"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="mzx-FB-cSx"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="play" catalog="system" width="120" height="128"/>

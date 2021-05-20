@@ -13,6 +13,7 @@ extension MainVC: TrackSettingsVCDelegate {
         
         if let index = seq.fileNames.normal.firstIndex(of: name) {
             loadBuffer(ofPlayer: player, withFile: index)
+            seq.selectedSounds[player] = seq.fileNames.normal[index]
         }
     }
 }

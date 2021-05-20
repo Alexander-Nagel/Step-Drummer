@@ -213,10 +213,16 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     
         updateUI()
         
-        loadBuffer(ofPlayer: 0, withFile: 0)
-        loadBuffer(ofPlayer: 1, withFile: 1)
-        loadBuffer(ofPlayer: 2, withFile: 2)
-        loadBuffer(ofPlayer: 3, withFile: 3)
+        for i in 0...(K.Sequencer.numberOfTracks - 1){
+            if let file = seq.fileNames.normal.firstIndex(of: seq.selectedSounds[i]) {
+                loadBuffer(ofPlayer: i, withFile: file)
+            }
+        }
+        
+//        loadBuffer(ofPlayer: 0, withFile: 0)
+//        loadBuffer(ofPlayer: 1, withFile: 1)
+//        loadBuffer(ofPlayer: 2, withFile: 2)
+//        loadBuffer(ofPlayer: 3, withFile: 3)
         loadGuideBuffer()
     
         preScheduleFirstBuffer(forPlayer: 0)
@@ -235,36 +241,36 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     //
     // MARK:- Load buffers (with parameter)
     //
-    func loadBuffer(ofPlayer player_to_be_loaded: Int, withFile file_to_load: Int) {
+    func loadBuffer(ofPlayer playerIndex: Int, withFile fileIndex: Int) {
         
         //
         // MARK: Loading buffer - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
         //
-        let path_normal = Bundle.main.path(forResource: seq.fileNames.normal[file_to_load], ofType: nil)!
-        let path_soft = Bundle.main.path(forResource: seq.fileNames.soft[file_to_load], ofType: nil)!
+        let path_normal = Bundle.main.path(forResource: seq.fileNames.normal[fileIndex], ofType: nil)!
+        let path_soft = Bundle.main.path(forResource: seq.fileNames.soft[fileIndex], ofType: nil)!
         //let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
         
         let url_normal = URL(fileURLWithPath: path_normal)
         let url_soft = URL(fileURLWithPath: path_soft)
         
         do {
-            seq.files.normal[file_to_load] = try AVAudioFile(forReading: url_normal)
-            seq.soundBuffers.normal[player_to_be_loaded] = AVAudioPCMBuffer(
-                pcmFormat: seq.files.normal[file_to_load].processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded)))!
+            seq.files.normal[fileIndex] = try AVAudioFile(forReading: url_normal)
+            seq.soundBuffers.normal[playerIndex] = AVAudioPCMBuffer(
+                pcmFormat: seq.files.normal[fileIndex].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
             
-            seq.files.soft[file_to_load] = try AVAudioFile(forReading: url_soft)
-            seq.soundBuffers.soft[player_to_be_loaded] = AVAudioPCMBuffer(
-                pcmFormat: seq.files.soft[file_to_load].processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded)))!
+            seq.files.soft[fileIndex] = try AVAudioFile(forReading: url_soft)
+            seq.soundBuffers.soft[playerIndex] = AVAudioPCMBuffer(
+                pcmFormat: seq.files.soft[fileIndex].processingFormat,
+                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
             
-            try seq.files.normal[file_to_load].read(into: seq.soundBuffers.normal[player_to_be_loaded])
-            try seq.files.soft[file_to_load].read(into: seq.soundBuffers.soft[player_to_be_loaded])
+            try seq.files.normal[fileIndex].read(into: seq.soundBuffers.normal[playerIndex])
+            try seq.files.soft[fileIndex].read(into: seq.soundBuffers.soft[playerIndex])
             
-            seq.soundBuffers.normal[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded))
-            seq.soundBuffers.soft[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded))
+            seq.soundBuffers.normal[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
+            seq.soundBuffers.soft[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
             
-        } catch { print("Error loading buffer \(player_to_be_loaded) \(error)") }
+        } catch { print("Error loading buffer \(playerIndex) \(error)") }
         
         
         //
@@ -274,13 +280,13 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         let urlSilence = URL(fileURLWithPath: pathSilence)
         do {
             seq.fileSilence = try AVAudioFile(forReading: urlSilence)
-            seq.silenceBuffers[player_to_be_loaded] = AVAudioPCMBuffer(
+            seq.silenceBuffers[playerIndex] = AVAudioPCMBuffer(
                 pcmFormat: seq.fileSilence.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded)))!
-            try seq.fileSilence.read(into: seq.silenceBuffers[player_to_be_loaded])
-            seq.silenceBuffers[player_to_be_loaded].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: player_to_be_loaded))
+                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
+            try seq.fileSilence.read(into: seq.silenceBuffers[playerIndex])
+            seq.silenceBuffers[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
         } catch {
-            print("Error loading buffer0 \(player_to_be_loaded) \(error)")
+            print("Error loading buffer0 \(playerIndex) \(error)")
         }
         
         
@@ -1562,11 +1568,41 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == "goToTrackSettingsVC" {
+        if segue.identifier == "goToTrackSettingsVC0" {
             let trackSettingsVC = segue.destination as! TrackSettingsVC
             trackSettingsVC.popoverPresentationController?.delegate = self
             
-            trackSettingsVC.selectedSound = seq.fileNames.normal[0]
+            trackSettingsVC.selectedSound = seq.selectedSounds[0]
+            trackSettingsVC.fileNames = seq.fileNames.normal
+            trackSettingsVC.delegate = self
+            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+            
+        }
+        if segue.identifier == "goToTrackSettingsVC1" {
+            let trackSettingsVC = segue.destination as! TrackSettingsVC
+            trackSettingsVC.popoverPresentationController?.delegate = self
+            
+            trackSettingsVC.selectedSound = seq.selectedSounds[1]
+            trackSettingsVC.fileNames = seq.fileNames.normal
+            trackSettingsVC.delegate = self
+            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+            
+        }
+        if segue.identifier == "goToTrackSettingsVC2" {
+            let trackSettingsVC = segue.destination as! TrackSettingsVC
+            trackSettingsVC.popoverPresentationController?.delegate = self
+            
+            trackSettingsVC.selectedSound = seq.selectedSounds[2]
+            trackSettingsVC.fileNames = seq.fileNames.normal
+            trackSettingsVC.delegate = self
+            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+            
+        }
+        if segue.identifier == "goToTrackSettingsVC3" {
+            let trackSettingsVC = segue.destination as! TrackSettingsVC
+            trackSettingsVC.popoverPresentationController?.delegate = self
+            
+            trackSettingsVC.selectedSound = seq.selectedSounds[3]
             trackSettingsVC.fileNames = seq.fileNames.normal
             trackSettingsVC.delegate = self
             trackSettingsVC.currentPlayer = (sender as! UIButton).tag

@@ -31,6 +31,7 @@ struct Sequencer {
     
     let fileNameSilence = "silence.wav"
     
+    var selectedSounds: [String]
     let fileNames = FileNames(
         normal: ["440KICK1.wav",
                  "440SN1.wav",
@@ -67,6 +68,12 @@ struct Sequencer {
             let track = Track()
             self.displayedTracks.append(track)
         }
+        
+        selectedSounds = [
+            "440KICK1.wav",
+            "440SN1.wav",
+            "hihat_2154samples.wav",
+            "open_hihat_2181samples.wav"]
         
         
 //        var aaa = parts[.A]?.patterns[0]
@@ -166,7 +173,7 @@ struct Sequencer {
         
         files = Files(normal: Array(repeating: AVAudioFile(), count: fileNames.normal.count),
                       soft: Array(repeating: AVAudioFile(), count: fileNames.normal.count))
-        soundBuffers = SoundBuffers(normal: Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count), soft: Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count))
+        soundBuffers = SoundBuffers(normal: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks), soft: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks))
         
         silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count)
         
