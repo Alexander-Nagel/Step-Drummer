@@ -32,6 +32,8 @@ struct Sequencer {
     let fileNameSilence = "silence.wav"
     
     var selectedSounds: [String]
+    var volumes: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
+    
     let fileNames = FileNames(
         normal: ["440KICK1.wav",
                  "440SN1.wav",
@@ -41,7 +43,9 @@ struct Sequencer {
                  "440KICK3.wav",
                  "440CLAP.wav",
                  "440SN2.wav",
-                 "440SN3.wav"
+                 "440SN3.wav",
+                 "440CLHH.wav",
+                 "440OHH.wav"
                  
         ],
         soft: ["kick_2156samples_SOFT.wav",
@@ -53,6 +57,8 @@ struct Sequencer {
                "snare_2152samples_SOFT.wav",
                "snare_2152samples_SOFT.wav",
                "snare_2152samples_SOFT.wav",
+               "hihat_2154samples_SOFT.wav",
+               "open_hihat_2181samples_SOFT.wav"
         ])
     
     var files = Files()

@@ -11,7 +11,7 @@ struct Track {
     
     var numberOfCellsActive: Int = 16
     var selectedSound: String?
-    var volume: Double = 1
+    //var volume: Double = 1
     var muted: Bool = false
     var soloed: Bool = false
     var isReverbOn = true

@@ -1456,7 +1456,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             seq.players[sender.tag].volume = 0
             muteButtons[sender.tag].backgroundColor = .none
-            muteButtons[sender.tag].tintColor = K.Color.blue_brightest
+//            muteButtons[sender.tag].tintColor = K.Color.blue_brightest
             
             let buttonRowToBeMuted = trackButtonMatrix[sender.tag]
             for button in buttonRowToBeMuted {
@@ -1467,9 +1467,9 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             // Un-mute row / player
             //
-            seq.players[sender.tag].volume = Float(seq.displayedTracks[sender.tag].volume)
+            seq.players[sender.tag].volume = Float(seq.volumes[sender.tag])
             muteButtons[sender.tag].backgroundColor = K.Color.muteButtonColor
-            muteButtons[sender.tag].tintColor = K.Color.blue_brightest
+//            muteButtons[sender.tag].tintColor = K.Color.blue_brightest
             
             let buttonRowToBeUnmuted = trackButtonMatrix[sender.tag]
             for button in buttonRowToBeUnmuted {
@@ -1555,59 +1555,80 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         //
         // Set Vol / Rev / Delay sliders to values in tracks Array
         //
-        for (index, slider) in trackVolumeSliders.enumerated() {
-            slider.value = Float(seq.displayedTracks[index].volume)
-        }
-        for (index, slider) in trackReverbSliders.enumerated() {
-            slider.value = Float(seq.displayedTracks[index].reverbMix)
-        }
-        for (index, slider) in trackDelaySliders.enumerated() {
-            slider.value = Float(seq.displayedTracks[index].delayMix)
-        }
+//        for (index, slider) in trackVolumeSliders.enumerated() {
+//            slider.value = Float(seq.displayedTracks[index].volume)
+//        }
+//        for (index, slider) in trackReverbSliders.enumerated() {
+//            slider.value = Float(seq.displayedTracks[index].reverbMix)
+//        }
+//        for (index, slider) in trackDelaySliders.enumerated() {
+//            slider.value = Float(seq.displayedTracks[index].delayMix)
+//        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == "goToTrackSettingsVC0" {
-            let trackSettingsVC = segue.destination as! TrackSettingsVC
-            trackSettingsVC.popoverPresentationController?.delegate = self
-            
-            trackSettingsVC.selectedSound = seq.selectedSounds[0]
-            trackSettingsVC.fileNames = seq.fileNames.normal
-            trackSettingsVC.delegate = self
-            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-            
+        let segueNames = ["goToTrackSettingsVC0", "goToTrackSettingsVC1", "goToTrackSettingsVC2", "goToTrackSettingsVC3"]
+        
+        for (index, segueName) in segueNames.enumerated() {
+            if segue.identifier == segueName {
+                let trackSettingsVC = segue.destination as! TrackSettingsVC
+                trackSettingsVC.popoverPresentationController?.delegate = self
+                trackSettingsVC.selectedSound = seq.selectedSounds[index]
+                trackSettingsVC.fileNames = seq.fileNames.normal
+                trackSettingsVC.delegate = self
+                trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+                trackSettingsVC.volume = seq.volumes[index]
+            }
         }
-        if segue.identifier == "goToTrackSettingsVC1" {
-            let trackSettingsVC = segue.destination as! TrackSettingsVC
-            trackSettingsVC.popoverPresentationController?.delegate = self
-            
-            trackSettingsVC.selectedSound = seq.selectedSounds[1]
-            trackSettingsVC.fileNames = seq.fileNames.normal
-            trackSettingsVC.delegate = self
-            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-            
-        }
-        if segue.identifier == "goToTrackSettingsVC2" {
-            let trackSettingsVC = segue.destination as! TrackSettingsVC
-            trackSettingsVC.popoverPresentationController?.delegate = self
-            
-            trackSettingsVC.selectedSound = seq.selectedSounds[2]
-            trackSettingsVC.fileNames = seq.fileNames.normal
-            trackSettingsVC.delegate = self
-            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-            
-        }
-        if segue.identifier == "goToTrackSettingsVC3" {
-            let trackSettingsVC = segue.destination as! TrackSettingsVC
-            trackSettingsVC.popoverPresentationController?.delegate = self
-            
-            trackSettingsVC.selectedSound = seq.selectedSounds[3]
-            trackSettingsVC.fileNames = seq.fileNames.normal
-            trackSettingsVC.delegate = self
-            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-            
-        }
+        
+//        if segue.identifier == "goToTrackSettingsVC0" {
+//            let trackSettingsVC = segue.destination as! TrackSettingsVC
+//            trackSettingsVC.popoverPresentationController?.delegate = self
+//
+//            trackSettingsVC.selectedSound = seq.selectedSounds[0]
+//            trackSettingsVC.fileNames = seq.fileNames.normal
+//            trackSettingsVC.delegate = self
+//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+//            trackSettingsVC.volume = seq.volumes[0]
+//
+//
+//        }
+//        if segue.identifier == "goToTrackSettingsVC1" {
+//            let trackSettingsVC = segue.destination as! TrackSettingsVC
+//            trackSettingsVC.popoverPresentationController?.delegate = self
+//
+//            trackSettingsVC.selectedSound = seq.selectedSounds[1]
+//            trackSettingsVC.fileNames = seq.fileNames.normal
+//            trackSettingsVC.delegate = self
+//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+//            trackSettingsVC.volume = seq.volumes[1]
+//
+//        }
+//        if segue.identifier == "goToTrackSettingsVC2" {
+//            let trackSettingsVC = segue.destination as! TrackSettingsVC
+//            trackSettingsVC.popoverPresentationController?.delegate = self
+//
+//            trackSettingsVC.selectedSound = seq.selectedSounds[2]
+//            trackSettingsVC.fileNames = seq.fileNames.normal
+//            trackSettingsVC.delegate = self
+//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+//            trackSettingsVC.volume = seq.volumes[2]
+//
+//
+//        }
+//        if segue.identifier == "goToTrackSettingsVC3" {
+//            let trackSettingsVC = segue.destination as! TrackSettingsVC
+//            trackSettingsVC.popoverPresentationController?.delegate = self
+//
+//            trackSettingsVC.selectedSound = seq.selectedSounds[3]
+//            trackSettingsVC.fileNames = seq.fileNames.normal
+//            trackSettingsVC.delegate = self
+//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+//            trackSettingsVC.volume = seq.volumes[3]
+//
+//
+//        }
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -1733,7 +1754,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         //
         // Write new volume to seq struct
         //
-        seq.displayedTracks[sender.tag].volume = Double(sender.value)
+        seq.volumes[sender.tag] = Float(Double(sender.value))
         
         //
         // Only change player volume if not muted

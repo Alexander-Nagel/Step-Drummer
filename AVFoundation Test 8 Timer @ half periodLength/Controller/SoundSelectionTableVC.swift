@@ -18,8 +18,8 @@ class SoundSelectionTableVC: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("here i am")
-        print(fileNames)
+        view.backgroundColor = K.Color.blue
+        tableView.backgroundColor = K.Color.blue
         //delegate?.loadFile(name: "ööööö!")
       
     }
