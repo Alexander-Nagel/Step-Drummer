@@ -81,16 +81,38 @@ struct Sequencer {
             "hihat_2154samples.wav",
             "open_hihat_2181samples.wav"]
         
+    
         
 //        var aaa = parts[.A]?.patterns[0]
 //        print(aaa!)
-        parts[.A]?.patterns[0].length = 16
-        parts[.A]?.patterns[0].cells = [
-            .ON, .ON, .ON, .OFF,
-            .OFF, .OFF, .OFF, .OFF,
-            .ON, .OFF, .OFF, .OFF,
-            .OFF, .OFF, .OFF, .OFF
-        ]
+//        parts[.A]?.patterns[0].length = 16
+//        parts[.A]?.patterns[0].cells = [
+//            .ON, .OFF, .OFF, .OFF,
+//            .OFF, .OFF, .OFF, .OFF,
+//            .ON, .OFF, .OFF, .OFF,
+//            .OFF, .OFF, .OFF, .OFF
+//        ]
+//        parts[.A]?.patterns[1].length = 16
+//        parts[.A]?.patterns[1].cells = [
+//            .OFF, .OFF, .OFF, .OFF,
+//            .ON, .OFF, .OFF, .OFF,
+//            .OFF, .OFF, .OFF, .OFF,
+//            .ON, .OFF, .OFF, .OFF
+//        ]
+//        parts[.A]?.patterns[2].length = 16
+//        parts[.A]?.patterns[2].cells = [
+//            .ON, .OFF, .ON, .OFF,
+//            .ON, .OFF, .ON, .OFF,
+//            .ON, .OFF, .ON, .OFF,
+//            .ON, .OFF, .OFF, .OFF,
+//        ]
+//        parts[.A]?.patterns[3].length = 16
+//        parts[.A]?.patterns[3].cells = [
+//            .OFF, .OFF, .OFF, .OFF,
+//            .OFF, .OFF, .OFF, .OFF,
+//            .OFF, .OFF, .OFF, .OFF,
+//            .OFF, .OFF, .ON, .OFF,
+//        ]
 //        aaa = parts[.A]?.patterns[0]
 //        print(aaa!)
         
@@ -196,7 +218,7 @@ struct Sequencer {
     
     mutating func loadPart(partName: PartNames) {
         
-        let number = partName.rawValue
+        //let number = partName.rawValue
 //        displayedTracks[0].numberOfCellsActive = defaultPatterns.kick[number].length
 //        displayedTracks[0].cells = defaultPatterns.kick[number].cells
         
@@ -223,7 +245,7 @@ struct Sequencer {
     
     mutating func saveToPart(partName: PartNames) {
         
-        let number = partName.rawValue
+        //let number = partName.rawValue
 //        defaultPatterns.kick[number].length = displayedTracks[0].numberOfCellsActive
 //        defaultPatterns.kick[number].cells = displayedTracks[0].cells
         for i in 0...3 {

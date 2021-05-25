@@ -4,10 +4,13 @@
 
 import UIKit
 import AVFoundation
+import RealmSwift
 
 fileprivate let DEBUG = false
 
 class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
+        
+    let realm = try! Realm()
     
     var seq = Sequencer()
     var settingsVC = SettingsVC()
@@ -211,6 +214,13 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         
         setupUI() // one time setup
     
+    
+        loadSnapShot(fileName: "default")
+        seq.displayedTracks[0].cells = (seq.parts[.A]?.patterns[0].cells)!
+        seq.displayedTracks[1].cells = (seq.parts[.A]?.patterns[1].cells)!
+        seq.displayedTracks[2].cells = (seq.parts[.A]?.patterns[2].cells)!
+        seq.displayedTracks[3].cells = (seq.parts[.A]?.patterns[3].cells)!
+
         updateUI()
         
         for i in 0...(K.Sequencer.numberOfTracks - 1){
@@ -219,10 +229,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             }
         }
         
-//        loadBuffer(ofPlayer: 0, withFile: 0)
-//        loadBuffer(ofPlayer: 1, withFile: 1)
-//        loadBuffer(ofPlayer: 2, withFile: 2)
-//        loadBuffer(ofPlayer: 3, withFile: 3)
+
         loadGuideBuffer()
     
         preScheduleFirstBuffer(forPlayer: 0)
@@ -300,9 +307,9 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         //
         // MARK: Loading buffer - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
         //
-        let path = Bundle.main.path(forResource: seq.fileNameSilence, ofType: nil)!
+        //let path = Bundle.main.path(forResource: seq.fileNameSilence, ofType: nil)!
         
-        let url = URL(fileURLWithPath: path)
+        //let url = URL(fileURLWithPath: path)
         
         do {
             seq.guideBuffer = AVAudioPCMBuffer(
@@ -547,7 +554,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             
             if let source = copyModeSource {
                 let copyCompleteAlert = UIAlertController(title: "Copied Part \(source) to \(destinationPart)", message: nil, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default) { [unowned copyCompleteAlert] _ in }
+                let action = UIAlertAction(title: "OK", style: .default) /*{ [unowned copyCompleteAlert] _ in }*/
                 copyCompleteAlert.addAction(action)
                 present(copyCompleteAlert, animated: true)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -568,7 +575,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             endDeleteMode()
             
             let deleteCompleteAlert = UIAlertController(title: "Part \(destinationPart) deleted!", message: nil, preferredStyle: .alert)
-            let deleteAction = UIAlertAction(title: "OK", style: .default) { [unowned deleteCompleteAlert] _ in }
+            let deleteAction = UIAlertAction(title: "OK", style: .default) /*{ [unowned deleteCompleteAlert] _ in }*/
             deleteCompleteAlert.addAction(deleteAction)
             present(deleteCompleteAlert, animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -1197,6 +1204,8 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             print("not gonna happen")
         }
         //print("swipeCellState: ", swipeCellState)
+        seq.saveToPart(partName: seq.activePart)
+        saveSnapShot(fileName: "default")
     }
     
     fileprivate func changeCell(_ track: Int, _ cell: Int) {
@@ -1238,6 +1247,9 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             
         }
         print(drawSoftNotes)
+        seq.saveToPart(partName: seq.activePart)
+        saveSnapShot(fileName: "default")
+
     }
     
     
@@ -1394,22 +1406,23 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             let superMaxY = loc.y + myViewLocation.height
             
             
-            let minX = button.frame.minX
+           /* let minX = button.frame.minX
             let maxX = button.frame.maxX
             let minY = button.frame.minY
             let maxY = button.frame.maxY
-            
+            */
             // superview (horizontal stack view)
-            let minX2 = button.superview?.frame.minX
+           /* let minX2 = button.superview?.frame.minX
             let maxX2 = button.superview?.frame.maxX
-            let minY2 = button.superview?.frame.minY
-            let maxY2 = button.superview?.frame.maxY
-            
+             let minY2 = button.superview?.frame.minY
+             let maxY2 = button.superview?.frame.maxY
+             */
             // super - superview ("player" / horizontal stack view)
-            let minX3 = button.superview?.superview?.frame.minX
-            let maxX3 = button.superview?.superview?.frame.maxX
-            let minY3 = button.superview?.superview?.frame.minY // these y coordinates give the real y of button inside view
-            let maxY3 = button.superview?.superview?.frame.maxY // // these y coordinates give the real y of button inside view
+            /* let minX3 = button.superview?.superview?.frame.minX
+             let maxX3 = button.superview?.superview?.frame.maxX
+             */
+            /*     let minY3 = button.superview?.superview?.frame.minY */ // these y coordinates give the real y of button inside view
+            /*      let maxY3 = button.superview?.superview?.frame.maxY */ // // these y coordinates give the real y of button inside view
             
             var isInX = false
             var isInY = false
@@ -1581,6 +1594,18 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 trackSettingsVC.volume = seq.volumes[index]
             }
         }
+        
+        
+            if segue.identifier == "goToSettings" {
+                let settingsTableVC = segue.destination as! SettingsTableVC
+               settingsTableVC.popoverPresentationController?.delegate = self
+                settingsTableVC.delegate = self
+//                trackSettingsVC.selectedSound = seq.selectedSounds[index]
+//                trackSettingsVC.fileNames = seq.fileNames.normal
+//                trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+//                trackSettingsVC.volume = seq.volumes[index]
+            }
+    
         
 //        if segue.identifier == "goToTrackSettingsVC0" {
 //            let trackSettingsVC = segue.destination as! TrackSettingsVC

@@ -1,55 +1,47 @@
 //
-//  SoundSelectionTableVC.swift
+//  SettingsTableVC.swift
 //  AVFoundation Test 8 Timer @ half periodLength
 //
-//  Created by Alexander Nagel on 20.05.21.
+//  Created by Alexander Nagel on 23.05.21.
 //
-
-protocol SoundSelectionTableVCDelegate {
-    func loadFile(name: String)
-}
 
 import UIKit
 
-class SoundSelectionTableVC: UITableViewController {
+class SettingsTableVC: UITableViewController {
 
-    var fileNames = [String?]()
-    var delegate: SoundSelectionTableVCDelegate?
-        
+   var delegate: SettingsTableVCDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = K.Color.blue
-//        tableView.backgroundColor = K.Color.blue
-        //delegate?.loadFile(name: "ööööö!")
-      
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fileNames.count
-    }
-
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
-        cell.textLabel?.text = fileNames[indexPath.row]
-        
+
+        // Configure the cell...
+
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let name = fileNames[indexPath.row] {
-            delegate?.loadFile(name: name)
-            dismiss(animated: true, completion: nil)
-        }
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -96,4 +88,48 @@ class SoundSelectionTableVC: UITableViewController {
     }
     */
 
+}
+
+//
+// MARK:- Events
+//
+extension SettingsTableVC {
+    
+    @IBAction func loadButtonPressed(_ sender: UIButton) {
+        print(#function)
+        delegate?.loadSnapShot(fileName: "default")
+        dismiss(animated: true, completion: nil)
+
+    }
+    
+    
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
+        print(#function)
+        delegate?.saveSnapShot(fileName: "default")
+        dismiss(animated: true, completion: nil)
+        
+
+    }
+}
+
+//
+// Delegate
+//
+
+protocol SettingsTableVCDelegate {
+    func loadSnapShot(fileName: String)
+    func saveSnapShot(fileName: String)
+}
+
+
+
+//
+// Display as popover on iPhone instead of fullscreen
+//
+extension SettingsTableVC {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+    
 }

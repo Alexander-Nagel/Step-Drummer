@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13245D7722B11CB0D4E20C58 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */; };
+		1B5912817CA00580E1ED31FC /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A060EBD22970B52618BED7C /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework */; };
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
 		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
 		FA12A3332655C25E00439FA3 /* PickerView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A3322655C25E00439FA3 /* PickerView Extension.swift */; };
@@ -20,6 +22,12 @@
 		FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30E2653F24E005D2A2F /* Cell.swift */; };
 		FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D3122653F26F005D2A2F /* Tempo.swift */; };
 		FA18D31726542B09005D2A2F /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D31626542B09005D2A2F /* VerticalButton.swift */; };
+		FA2B383C265AEA8B00E602F6 /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B383B265AEA8B00E602F6 /* CRUD.swift */; };
+		FA2B3840265AEAE500E602F6 /* SnapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B383F265AEAE500E602F6 /* SnapShot.swift */; };
+		FA2B3846265AF23900E602F6 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3845265AF23900E602F6 /* SettingsTableVC.swift */; };
+		FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */; };
+		FA2B3854265C5AD800E602F6 /* cellArrayToStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */; };
+		FA2B385C265C5DF500E602F6 /* stringListToCellArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B385B265C5DF500E602F6 /* stringListToCellArray.swift */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
 		FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */; };
 		FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D44264933BD000497C8 /* SequencerTests.swift */; };
@@ -76,6 +84,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A060EBD22970B52618BED7C /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_AVFoundation_Test_8_Timer___half_periodLength.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2630E1FB3071F3801D941201 /* Pods-AVFoundation Test 8 Timer @ half periodLength.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength.release.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength/Pods-AVFoundation Test 8 Timer @ half periodLength.release.xcconfig"; sourceTree = "<group>"; };
+		37A5A2CA7317703B3913ECF1 /* Pods-AVFoundation Test 8 Timer @ half periodLength.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength.debug.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength/Pods-AVFoundation Test 8 Timer @ half periodLength.debug.xcconfig"; sourceTree = "<group>"; };
+		88E47327787823C34AE7A188 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength Tests/Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C68E0FE36BF6F605877E7D6 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength Tests/Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; sourceTree = "<group>"; };
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
 		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
 		FA12A3322655C25E00439FA3 /* PickerView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickerView Extension.swift"; sourceTree = "<group>"; };
@@ -89,6 +103,12 @@
 		FA18D30E2653F24E005D2A2F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		FA18D3122653F26F005D2A2F /* Tempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
 		FA18D31626542B09005D2A2F /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
+		FA2B383B265AEA8B00E602F6 /* CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
+		FA2B383F265AEAE500E602F6 /* SnapShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShot.swift; sourceTree = "<group>"; };
+		FA2B3845265AF23900E602F6 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
+		FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC SettingsTableVCDelegate.swift"; sourceTree = "<group>"; };
+		FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellArrayToStringArray.swift; sourceTree = "<group>"; };
+		FA2B385B265C5DF500E602F6 /* stringListToCellArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringListToCellArray.swift; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		FA562D38264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation_Test_8_Timer___half_periodLength_Tests.swift"; sourceTree = "<group>"; };
@@ -143,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13245D7722B11CB0D4E20C58 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,12 +171,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B5912817CA00580E1ED31FC /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA4D594C5C7B350EF55400DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37A5A2CA7317703B3913ECF1 /* Pods-AVFoundation Test 8 Timer @ half periodLength.debug.xcconfig */,
+				2630E1FB3071F3801D941201 /* Pods-AVFoundation Test 8 Timer @ half periodLength.release.xcconfig */,
+				88E47327787823C34AE7A188 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig */,
+				9C68E0FE36BF6F605877E7D6 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA2B385F265C5DFB00E602F6 /* Realm Helper */ = {
+			isa = PBXGroup;
+			children = (
+				FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */,
+				FA2B385B265C5DF500E602F6 /* stringListToCellArray.swift */,
+			);
+			path = "Realm Helper";
+			sourceTree = "<group>";
+		};
+		FA2B3862265C5EC400E602F6 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		FA562D39264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,13 +219,16 @@
 		FA6C96062641B63100114B08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FA2B3862265C5EC400E602F6 /* Realm */,
 				FA8D6E9B263EF2E8000FFFE3 /* MainVC.swift */,
 				FA12A34C2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift */,
 				FA12A33E2656627100439FA3 /* TrackSettingsVC.swift */,
 				FA12A3422656B4CC00439FA3 /* SoundSelectionTableVC.swift */,
+				FA2B3845265AF23900E602F6 /* SettingsTableVC.swift */,
 				FA12A33626564D4300439FA3 /* SettingsVC.swift */,
 				FA12A3322655C25E00439FA3 /* PickerView Extension.swift */,
 				FA18D3062653E3C0005D2A2F /* setupUI.swift */,
+				FA2B383B265AEA8B00E602F6 /* CRUD.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,11 +236,12 @@
 		FA6C96082641B64000114B08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA2B385F265C5DFB00E602F6 /* Realm Helper */,
 				FA30281026433C0D00406561 /* Sequencer.swift */,
 				FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */,
 				FA18D30A2653F206005D2A2F /* Track.swift */,
-				FA18D30E2653F24E005D2A2F /* Cell.swift */,
 				FAB47AC92654FFBB006281CE /* Part.swift */,
+				FA18D30E2653F24E005D2A2F /* Cell.swift */,
 				FAB47AC12654F9D2006281CE /* PartNames.swift */,
 				FA18D3122653F26F005D2A2F /* Tempo.swift */,
 				FA0E89442646218200B7CD45 /* DefaultPatterns.swift */,
@@ -196,6 +250,7 @@
 				FAB47AD72655ACC1006281CE /* ChainModeNames.swift */,
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 				FA12A3462656B60E00439FA3 /* Shared.swift */,
+				FA2B383F265AEAE500E602F6 /* SnapShot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,6 +302,8 @@
 				FA8D6E74263EF2B4000FFFE3 /* AVFoundation Test 8 Timer @ half periodLength */,
 				FA562D39264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests */,
 				FA8D6E73263EF2B4000FFFE3 /* Products */,
+				CA4D594C5C7B350EF55400DA /* Pods */,
+				FFCA6A8D55CCE503FF0C6B0E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -311,6 +368,15 @@
 			path = "Neuer Ordner mit Objekten/440";
 			sourceTree = "<group>";
 		};
+		FFCA6A8D55CCE503FF0C6B0E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A060EBD22970B52618BED7C /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework */,
+				90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,6 +384,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA562D41264932C4000497C8 /* Build configuration list for PBXNativeTarget "AVFoundation Test 8 Timer @ half periodLength Tests" */;
 			buildPhases = (
+				B876B04F34556E6AB5ACB29C /* [CP] Check Pods Manifest.lock */,
 				FA562D34264932C4000497C8 /* Sources */,
 				FA562D35264932C4000497C8 /* Frameworks */,
 				FA562D36264932C4000497C8 /* Resources */,
@@ -336,9 +403,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA8D6E86263EF2B5000FFFE3 /* Build configuration list for PBXNativeTarget "AVFoundation Test 8 Timer @ half periodLength" */;
 			buildPhases = (
+				9FA0F2742EE06D14C9CFC9B3 /* [CP] Check Pods Manifest.lock */,
 				FA8D6E6E263EF2B4000FFFE3 /* Sources */,
 				FA8D6E6F263EF2B4000FFFE3 /* Frameworks */,
 				FA8D6E70263EF2B4000FFFE3 /* Resources */,
+				1608520EB6927E9D3C06249F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -427,6 +496,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1608520EB6927E9D3C06249F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength/Pods-AVFoundation Test 8 Timer @ half periodLength-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength/Pods-AVFoundation Test 8 Timer @ half periodLength-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength/Pods-AVFoundation Test 8 Timer @ half periodLength-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FA0F2742EE06D14C9CFC9B3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AVFoundation Test 8 Timer @ half periodLength-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B876B04F34556E6AB5ACB29C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AVFoundation Test 8 Timer @ half periodLength Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FA562D34264932C4000497C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -441,6 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA2B3854265C5AD800E602F6 /* cellArrayToStringArray.swift in Sources */,
 				FAFEA995264BD45B002807DC /* FileNames.swift in Sources */,
 				FA8D6E9C263EF2E8000FFFE3 /* MainVC.swift in Sources */,
 				FA12A3332655C25E00439FA3 /* PickerView Extension.swift in Sources */,
@@ -454,18 +588,23 @@
 				FAB47AD426552C50006281CE /* ClickableSegmentedControl.swift in Sources */,
 				FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */,
 				FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */,
+				FA2B3840265AEAE500E602F6 /* SnapShot.swift in Sources */,
 				FA12A34D2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift in Sources */,
 				FA12A33726564D4300439FA3 /* SettingsVC.swift in Sources */,
+				FA2B3846265AF23900E602F6 /* SettingsTableVC.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
 				FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */,
 				FA18D30B2653F206005D2A2F /* Track.swift in Sources */,
+				FA2B383C265AEA8B00E602F6 /* CRUD.swift in Sources */,
 				FAB47AD82655ACC1006281CE /* ChainModeNames.swift in Sources */,
+				FA2B385C265C5DF500E602F6 /* stringListToCellArray.swift in Sources */,
 				FA12A3472656B60E00439FA3 /* Shared.swift in Sources */,
 				FA30281126433C0D00406561 /* Sequencer.swift in Sources */,
 				FAB47AC22654F9D2006281CE /* PartNames.swift in Sources */,
 				FAB47ACE26550223006281CE /* Pattern.swift in Sources */,
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
 				FA12A3432656B4CD00439FA3 /* SoundSelectionTableVC.swift in Sources */,
+				FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */,
 				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,
 				FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */,
 				FA12A33F2656627100439FA3 /* TrackSettingsVC.swift in Sources */,
@@ -498,6 +637,7 @@
 /* Begin XCBuildConfiguration section */
 		FA562D3F264932C4000497C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88E47327787823C34AE7A188 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -519,6 +659,7 @@
 		};
 		FA562D40264932C4000497C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C68E0FE36BF6F605877E7D6 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -656,6 +797,7 @@
 		};
 		FA8D6E87263EF2B5000FFFE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37A5A2CA7317703B3913ECF1 /* Pods-AVFoundation Test 8 Timer @ half periodLength.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -676,6 +818,7 @@
 		};
 		FA8D6E88263EF2B5000FFFE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2630E1FB3071F3801D941201 /* Pods-AVFoundation Test 8 Timer @ half periodLength.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

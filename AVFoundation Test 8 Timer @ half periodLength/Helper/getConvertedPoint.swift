@@ -11,6 +11,11 @@
 import Foundation
 import UIKit
 
+/// Returns Coordinates in relation to the most superest superview :-)
+/// - Parameters:
+///   - targetView: The View for which the coordinates shall be expressed in relation to the highest order super view.
+///   - baseView: Name of the super view.
+/// - Returns: Coordinates in CGPoint format
 func getConvertedPoint(_ targetView: UIView, baseView: UIView)->CGPoint{
     var pnt = targetView.frame.origin
     if nil == targetView.superview{

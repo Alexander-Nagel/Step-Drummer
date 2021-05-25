@@ -12,5 +12,3 @@ final class Shared {
     
     var selectedSound: String?
 }
-// comment from master branch
-// comment from realm branch

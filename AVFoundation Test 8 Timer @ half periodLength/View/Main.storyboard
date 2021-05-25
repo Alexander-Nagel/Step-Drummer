@@ -763,7 +763,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Step Drummer" id="sgi-Mi-7DK">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" image="gear" catalog="system" id="ee4-Vj-f0H"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" image="gear" catalog="system" id="ee4-Vj-f0H">
+                            <connections>
+                                <segue destination="aG4-OW-QYo" kind="popoverPresentation" identifier="goToSettings" popoverAnchorBarButtonItem="ee4-Vj-f0H" id="2Us-hM-5C1">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="button0_0" destination="WYm-1J-Ehh" id="Xp6-80-RfL"/>
@@ -860,6 +866,82 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1591.9014084507041" y="16.875"/>
+        </scene>
+        <!--Settings TableVC-->
+        <scene sceneID="Ayq-1r-kAk">
+            <objects>
+                <tableViewController id="aG4-OW-QYo" customClass="SettingsTableVC" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="OT3-3K-Lxr">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Settings" id="WVk-Pv-37T">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mCh-EU-LGc">
+                                        <rect key="frame" x="0.0" y="28" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mCh-EU-LGc" id="3BV-2I-3kz">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeV-sr-vJk">
+                                                    <rect key="frame" x="120" y="7" width="40" height="30"/>
+                                                    <state key="normal" title="LOAD"/>
+                                                    <connections>
+                                                        <action selector="loadButtonPressed:" destination="aG4-OW-QYo" eventType="touchUpInside" id="9yr-DT-Nik"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KeV-sr-vJk" firstAttribute="centerX" secondItem="3BV-2I-3kz" secondAttribute="centerX" id="L9x-pi-7KG"/>
+                                                <constraint firstItem="KeV-sr-vJk" firstAttribute="centerY" secondItem="3BV-2I-3kz" secondAttribute="centerY" id="O2K-aq-RKX"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="dou-Cn-bgM">
+                                        <rect key="frame" x="0.0" y="71.5" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dou-Cn-bgM" id="pfZ-eL-pKc">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Scj-sS-Zyt">
+                                                    <rect key="frame" x="121.5" y="7" width="37" height="30"/>
+                                                    <state key="normal" title="SAVE"/>
+                                                    <connections>
+                                                        <action selector="saveButtonPressed:" destination="aG4-OW-QYo" eventType="touchUpInside" id="RDE-DV-v2p"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Scj-sS-Zyt" firstAttribute="centerY" secondItem="pfZ-eL-pKc" secondAttribute="centerY" id="9cf-m8-e5o"/>
+                                                <constraint firstItem="Scj-sS-Zyt" firstAttribute="centerX" secondItem="pfZ-eL-pKc" secondAttribute="centerX" id="SL7-yv-66V"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="bjb-wa-Fb0">
+                                        <rect key="frame" x="0.0" y="115" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bjb-wa-Fb0" id="cfy-R2-vMV">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="aG4-OW-QYo" id="L4k-9e-WKf"/>
+                            <outlet property="delegate" destination="aG4-OW-QYo" id="pVh-TZ-rf8"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="280" height="300"/>
+                    <size key="freeformSize" width="280" height="300"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yze-WT-b3R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1907" y="-752"/>
         </scene>
         <!--Track SettingsVC-->
         <scene sceneID="F0K-Hd-9lj">
@@ -1043,7 +1125,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mzx-FB-cSx"/>
+        <segue reference="CSp-mk-Alq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>

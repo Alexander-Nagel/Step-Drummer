@@ -17,6 +17,7 @@ class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDel
         
         if let player = currentPlayer {
             delegate?.loadFile(name: name, toPlayer: player)
+            (delegate as! MainVC).saveSnapShot(fileName: "default")
             selectedSoundLabel.text = name
         }
     }
@@ -35,7 +36,7 @@ class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = K.Color.blue
+        //view.backgroundColor = K.Color.blue
 
         
         // Uncomment the following line to preserve selection between presentations
@@ -78,9 +79,9 @@ class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDel
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.contentView.backgroundColor = K.Color.blue
+       //     headerView.contentView.backgroundColor = K.Color.blue
           //  headerView.backgroundView?.backgroundColor = K.Color.blue_brighter
-            headerView.textLabel?.textColor = K.Color.white
+       //     headerView.textLabel?.textColor = K.Color.white
         }
     }
     
