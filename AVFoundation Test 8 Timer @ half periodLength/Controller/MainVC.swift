@@ -823,7 +823,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             //            if self.timerEventCounter0 % 2 == 0 {
             //                for label in self.beatLabels {label.text = ""}
-            DispatchQueue.main.async {
+DispatchQueue.main.async {
                 //self.track0buttons[self.currentStep0-1].text = String(self.currentStep0)
                 self.track0Buttons[self.currentStep0 - 1].flash()
             }
@@ -837,6 +837,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 print()
             }
         }
+        RunLoop.current.add(timer0, forMode: .common)
         
         //
         //  Timer for player1
@@ -901,7 +902,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             //                        if self.timerEventCounter0 % 2 == 0 {
             //                for label in self.beatLabels {label.text = ""}
-            DispatchQueue.main.async {
+DispatchQueue.main.async {
                 //self.beatLabels[self.currentStep0-1].text = String(self.currentStep0)
                 self.track1Buttons[self.currentStep1 - 1].flash()
             }
@@ -915,6 +916,8 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 print()
             }
         }
+        RunLoop.current.add(timer1, forMode: .common)
+
         
         //
         //  Timer for player2
@@ -982,7 +985,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             //            if self.timerEventCounter0 % 2 == 0 {
             //                for label in self.beatLabels {label.text = ""}
-            DispatchQueue.main.async {
+DispatchQueue.main.async {
                 //                    self.beatLabels[self.currentStep0-1].text = String(self.currentStep0)
                 self.track2Buttons[self.currentStep2 - 1].flash()
             }
@@ -996,6 +999,8 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 print()
             }
         }
+        RunLoop.current.add(timer2, forMode: .common)
+
         
         //
         //  Timer for player3
@@ -1063,7 +1068,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             //            if self.timerEventCounter0 % 2 == 0 {
             //                for label in self.beatLabels {label.text = ""}
-            DispatchQueue.main.async {
+DispatchQueue.main.async {
                 //                    self.beatLabels[self.currentStep0-1].text = String(self.currentStep0)
                 self.track3Buttons[self.currentStep3 - 1].flash()
             }
@@ -1077,6 +1082,8 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 print()
             }
         }
+        RunLoop.current.add(timer3, forMode: .common)
+
         
         
     }

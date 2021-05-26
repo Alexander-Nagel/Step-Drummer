@@ -38,9 +38,7 @@ class SoundSelectionTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
         cell.textLabel?.text = fileNames[indexPath.row]
-        
         return cell
     }
     
