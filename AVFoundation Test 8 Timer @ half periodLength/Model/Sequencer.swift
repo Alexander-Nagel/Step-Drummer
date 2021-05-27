@@ -33,6 +33,9 @@ struct Sequencer {
     
     var selectedSounds: [String]
     var volumes: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
+    var wetDryMixesReverb: [Float] = Array(repeating: 25, count: K.Sequencer.numberOfTracks)
+    var reverbTypes: [Int] = Array(repeating: 1, count: K.Sequencer.numberOfTracks)
+    var wetDryMixesDelay: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
     
     let fileNames = FileNames(
         normal: ["440KICK1.wav",
@@ -80,42 +83,6 @@ struct Sequencer {
             "440SN1.wav",
             "hihat_2154samples.wav",
             "open_hihat_2181samples.wav"]
-        
-    
-        
-//        var aaa = parts[.A]?.patterns[0]
-//        print(aaa!)
-//        parts[.A]?.patterns[0].length = 16
-//        parts[.A]?.patterns[0].cells = [
-//            .ON, .OFF, .OFF, .OFF,
-//            .OFF, .OFF, .OFF, .OFF,
-//            .ON, .OFF, .OFF, .OFF,
-//            .OFF, .OFF, .OFF, .OFF
-//        ]
-//        parts[.A]?.patterns[1].length = 16
-//        parts[.A]?.patterns[1].cells = [
-//            .OFF, .OFF, .OFF, .OFF,
-//            .ON, .OFF, .OFF, .OFF,
-//            .OFF, .OFF, .OFF, .OFF,
-//            .ON, .OFF, .OFF, .OFF
-//        ]
-//        parts[.A]?.patterns[2].length = 16
-//        parts[.A]?.patterns[2].cells = [
-//            .ON, .OFF, .ON, .OFF,
-//            .ON, .OFF, .ON, .OFF,
-//            .ON, .OFF, .ON, .OFF,
-//            .ON, .OFF, .OFF, .OFF,
-//        ]
-//        parts[.A]?.patterns[3].length = 16
-//        parts[.A]?.patterns[3].cells = [
-//            .OFF, .OFF, .OFF, .OFF,
-//            .OFF, .OFF, .OFF, .OFF,
-//            .OFF, .OFF, .OFF, .OFF,
-//            .OFF, .OFF, .ON, .OFF,
-//        ]
-//        aaa = parts[.A]?.patterns[0]
-//        print(aaa!)
-        
         
         //
         // MARK:- Configure + start engine
@@ -168,17 +135,17 @@ struct Sequencer {
         engine.connect(delays[3], to: reverbs[3], format: format)
         engine.connect(reverbs[3], to: engine.mainMixerNode, format: format)
         
-        reverbs[0].loadFactoryPreset(.mediumHall)
-        reverbs[0].wetDryMix = 0
+        reverbs[0].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[0])!)
+        reverbs[0].wetDryMix = wetDryMixesReverb[1]
         
-        reverbs[1].loadFactoryPreset(.mediumHall)
-        reverbs[1].wetDryMix = 0
+        reverbs[1].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[1])!)
+        reverbs[1].wetDryMix = wetDryMixesReverb[1]
         
-        reverbs[2].loadFactoryPreset(.mediumHall)
-        reverbs[2].wetDryMix = 0
+        reverbs[2].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[2])!)
+        reverbs[2].wetDryMix = wetDryMixesReverb[2]
         
-        reverbs[3].loadFactoryPreset(.mediumHall)
-        reverbs[3].wetDryMix = 0
+        reverbs[3].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[3])!)
+        reverbs[3].wetDryMix = wetDryMixesReverb[3]
         
         delays[0].delayTime = 0.375
         delays[0].feedback = 5

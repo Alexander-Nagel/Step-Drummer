@@ -16,4 +16,6 @@ extension MainVC: TrackSettingsVCDelegate {
             seq.selectedSounds[player] = seq.fileNames.normal[index]
         }
     }
+    
+    
 }

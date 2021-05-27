@@ -31,6 +31,4 @@ class SnapShot: Object {
     let patternD1 = List<String>()
     let patternD2 = List<String>()
     let patternD3 = List<String>()
-    
-    
 }

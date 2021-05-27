@@ -19,13 +19,19 @@ extension MainVC: SettingsTableVCDelegate  {
             //
             // exists
             //
+            
+            //
+            // Load sounds:
+            //
             for (index, sound) in defaultSnapShot.soundsArray.enumerated() {
                 //seq.selectedSounds[index] = sound
                 print("index: \(index), sound: \(sound)")
                 loadFile(name: sound, toPlayer: index)
             }
-           print()
-            
+          
+            //
+            // Load parts:
+            //
             seq.parts[.A]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternA0)
             seq.parts[.A]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternA1)
             seq.parts[.A]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternA2)

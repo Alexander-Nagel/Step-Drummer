@@ -1599,6 +1599,10 @@ DispatchQueue.main.async {
                 trackSettingsVC.delegate = self
                 trackSettingsVC.currentPlayer = (sender as! UIButton).tag
                 trackSettingsVC.volume = seq.volumes[index]
+                trackSettingsVC.reverbWetDryMix = seq.wetDryMixesReverb[index]
+                trackSettingsVC.reverbType = seq.reverbTypes[index]
+                print("REV01 mix \(seq.wetDryMixesReverb[index])")
+                print("REV01 type  \(seq.reverbTypes[index])")
             }
         }
         
@@ -1614,53 +1618,7 @@ DispatchQueue.main.async {
             }
     
         
-//        if segue.identifier == "goToTrackSettingsVC0" {
-//            let trackSettingsVC = segue.destination as! TrackSettingsVC
-//            trackSettingsVC.popoverPresentationController?.delegate = self
-//
-//            trackSettingsVC.selectedSound = seq.selectedSounds[0]
-//            trackSettingsVC.fileNames = seq.fileNames.normal
-//            trackSettingsVC.delegate = self
-//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-//            trackSettingsVC.volume = seq.volumes[0]
-//
-//
-//        }
-//        if segue.identifier == "goToTrackSettingsVC1" {
-//            let trackSettingsVC = segue.destination as! TrackSettingsVC
-//            trackSettingsVC.popoverPresentationController?.delegate = self
-//
-//            trackSettingsVC.selectedSound = seq.selectedSounds[1]
-//            trackSettingsVC.fileNames = seq.fileNames.normal
-//            trackSettingsVC.delegate = self
-//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-//            trackSettingsVC.volume = seq.volumes[1]
-//
-//        }
-//        if segue.identifier == "goToTrackSettingsVC2" {
-//            let trackSettingsVC = segue.destination as! TrackSettingsVC
-//            trackSettingsVC.popoverPresentationController?.delegate = self
-//
-//            trackSettingsVC.selectedSound = seq.selectedSounds[2]
-//            trackSettingsVC.fileNames = seq.fileNames.normal
-//            trackSettingsVC.delegate = self
-//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-//            trackSettingsVC.volume = seq.volumes[2]
-//
-//
-//        }
-//        if segue.identifier == "goToTrackSettingsVC3" {
-//            let trackSettingsVC = segue.destination as! TrackSettingsVC
-//            trackSettingsVC.popoverPresentationController?.delegate = self
-//
-//            trackSettingsVC.selectedSound = seq.selectedSounds[3]
-//            trackSettingsVC.fileNames = seq.fileNames.normal
-//            trackSettingsVC.delegate = self
-//            trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-//            trackSettingsVC.volume = seq.volumes[3]
-//
-//
-//        }
+
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -1801,8 +1759,8 @@ DispatchQueue.main.async {
     @IBAction func trackReverbChanged(_ sender: UISlider) {
         print(#function)
         print(sender.tag, sender.value)
-        seq.displayedTracks[sender.tag].reverbMix = Double(sender.value * 100)
-        seq.reverbs[sender.tag].wetDryMix = sender.value * 100
+        seq.displayedTracks[sender.tag].reverbMix = Double(sender.value * K.Sequencer.reverbScalingFactor)
+        seq.reverbs[sender.tag].wetDryMix = sender.value * K.Sequencer.reverbScalingFactor
     }
     
     //
