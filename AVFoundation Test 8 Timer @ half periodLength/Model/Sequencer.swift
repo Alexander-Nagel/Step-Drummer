@@ -27,6 +27,7 @@ struct Sequencer {
                    AVAudioUnitReverb(), AVAudioUnitReverb()]
     var delays = [AVAudioUnitDelay(), AVAudioUnitDelay(),
                   AVAudioUnitDelay(), AVAudioUnitDelay()]
+    var distortions = [AVAudioUnitDistortion(), AVAudioUnitDistortion(), AVAudioUnitDistortion(), AVAudioUnitDistortion()]
     var mixer = AVAudioMixerNode()
     
     let fileNameSilence = "silence.wav"
@@ -171,6 +172,7 @@ struct Sequencer {
                 delays[i].delayTime = delayTimes[i]
                 delays[i].feedback = delayFeedbacks[i]
                 delays[i].wetDryMix = delayWetDryMixes[i]
+               // delays[i].lowPassCutoff
             }
         }
         

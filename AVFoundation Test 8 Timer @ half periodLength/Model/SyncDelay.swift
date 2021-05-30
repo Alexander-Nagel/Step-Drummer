@@ -9,22 +9,22 @@ import Foundation
 
 enum SyncDelay: Int, CaseIterable {
     
-    case bar = 0
-    case half = 1
-    case quarter = 2
-    case eighth = 3
-    case sixteenth = 4
-    case thirtysecond = 5
-    case dottedHalf = 6
-    case dottedQuarter = 7
-    case dottedEighth = 8
-    case dottedSixteenth = 9
-    case dottedThirtysecond = 10
-    case tripletHalf = 11
-    case tripletQuarter = 12
-    case tripletEighth = 13
-    case tripletSixteenth = 14
-    case tripletThirtysecond = 15
+    case bar = 0                    // 1
+    case half = 3                   // 0.5
+    case quarter = 6                // 0.25
+    case eighth = 9                 // 0.125
+    case sixteenth = 12             // 0.0625
+    case thirtysecond = 15          // 0.03125
+    case dottedHalf = 1             // 0.75
+    case dottedQuarter = 4          // 0.375
+    case dottedEighth = 7           // 0.1875
+    case dottedSixteenth = 10       // 0.09375
+    case dottedThirtysecond = 13    // 0.046875
+    case tripletHalf = 2            // 0.666666
+    case tripletQuarter = 5         // 0.333333
+    case tripletEighth = 8          // 0.166666
+    case tripletSixteenth = 11      // 0.083333
+    case tripletThirtysecond = 14   // 0.0416666
     
    var description: String {
         switch self {
