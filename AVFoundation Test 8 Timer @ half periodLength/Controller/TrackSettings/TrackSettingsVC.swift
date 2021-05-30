@@ -12,49 +12,32 @@ protocol TrackSettingsVCDelegate {
     func loadFile(name: String, toPlayer: Int)
 }
 
-class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDelegate, SoundSelectionTableVCDelegate, ReverbTableVCDelegate {
-   
-    
-    
-    
-    func loadFile(name: String) {
-        
-        if let player = currentPlayer {
-            delegate?.loadFile(name: name, toPlayer: player)
-            (delegate as! MainVC).saveSnapShot(fileName: "default")
-            selectedSoundLabel.text = name
-        }
-    }
+class TrackSettingsVC: UITableViewController {
     
     @IBOutlet weak var volumeSlider: UISlider!
-    
-    
     @IBOutlet weak var selectedSoundLabel: UILabel!
-    
     @IBOutlet weak var reverbEditLabel: UILabel!
-    
     @IBOutlet weak var delayEditLabel: UILabel!
     
     var fileNames = [String?]()
     var currentPlayer: Int?
     var selectedSound: String?
+    
     var volume: Float?
+    
     var reverbWetDryMix: Float?
     var reverbPreset: AVAudioUnitReverbPreset?
     var reverbType: Int?
+    
+    var delayWetDryMix: Float?
+    var delayFeedback: Float?
+    var delayPreset: SyncDelay?
+    var delayTime: Double?
+    
     var delegate: TrackSettingsVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //view.backgroundColor = K.Color.blue
-
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,11 +46,9 @@ class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDel
         if let vol = volume {
             volumeSlider.value = vol
         }
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         
         if segue.identifier == "goToSoundSelectionVC" {
             let ssVC = segue.destination as! SoundSelectionTableVC
@@ -82,22 +63,27 @@ class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDel
             rtVC.popoverPresentationController?.delegate = self
             
             rtVC.delegate = self
+            
             rtVC.reverbWetDryMix = self.reverbWetDryMix
             rtVC.reverbType = self.reverbType
+            
             print("REV02 mix \(self.reverbWetDryMix)")
             print("REV02 type  \(self.reverbType)")
-
+            
         }
         
-//        if segue.identifier == "goToDelayTableVC" {
-//            let dtVC = segue.destination as! DelayTableVC
-//            dtVC.popoverPresentationController?.delegate = self
-//        }
+        if segue.identifier == "goToDelayTableVC" {
+            let dtVC = segue.destination as! DelayTableVC
+            dtVC.popoverPresentationController?.delegate = self
+            
+            dtVC.delegate = self
+
+            dtVC.delayWetDryMix = self.delayWetDryMix
+            dtVC.delayFeedback = self.delayFeedback
+            dtVC.delayTime = self.delayTime
+            dtVC.delayPreset = self.delayPreset
+        }
         
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
     }
     
     @IBAction func volumeSliderChanged(_ sender: UISlider) {
@@ -105,12 +91,64 @@ class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDel
         (delegate as! MainVC).seq.volumes[currentPlayer!] = sender.value
         (delegate as! MainVC).seq.players[currentPlayer!].volume = sender.value
     }
+}
+
+//
+// MARK:- Popover
+//
+extension TrackSettingsVC: UIPopoverPresentationControllerDelegate {
     
-    func changeDryWet(toValue value: Float) {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+//
+// MARK:- SoundSelectionTableVCDelegate
+//
+extension TrackSettingsVC: SoundSelectionTableVCDelegate {
+    
+    func loadFile(name: String) {
+        
+        if let player = currentPlayer {
+            delegate?.loadFile(name: name, toPlayer: player)
+            (delegate as! MainVC).saveSnapShot(fileName: "default")
+            selectedSoundLabel.text = name
+        }
+    }
+}
+
+//
+// MARK:- Table View 
+//
+//extension TrackSettingsVC {
+//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        if let headerView = view as? UITableViewHeaderFooterView {
+//            //     headerView.contentView.backgroundColor = K.Color.blue
+//            //  headerView.backgroundView?.backgroundColor = K.Color.blue_brighter
+//            //     headerView.textLabel?.textColor = K.Color.white
+//        }
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        // cell.contentView.backgroundColor = K.Color.blue
+//        //cell.accessoryView?.backgroundColor = K.Color.blue
+//        
+//    }
+//    
+//}
+
+//
+// MARK:- ReverbTableVC Delegate
+//
+extension TrackSettingsVC: ReverbTableVCDelegate {
+    
+    func changeWetDryMix(toValue value: Float) {
         print("Setting player \(currentPlayer!) to WetDryMix of \(value)")
-        (delegate as! MainVC).seq.wetDryMixesReverb[currentPlayer!] = value
+        (delegate as! MainVC).seq.reverbWetDryMixes[currentPlayer!] = value
         (delegate as! MainVC).seq.reverbs[currentPlayer!].wetDryMix = value
     }
+    
     func changeReverbType(to value: Int) {
         print("Setting player \(currentPlayer!) reverb typ to \(value)")
         (delegate as! MainVC).seq.reverbTypes[currentPlayer!] = value
@@ -123,21 +161,42 @@ class TrackSettingsVC: UITableViewController, UIPopoverPresentationControllerDel
 }
 
 //
-// MARK:- Table View 
+// MARK:- DelayTableVC Delegate
 //
-extension TrackSettingsVC {
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let headerView = view as? UITableViewHeaderFooterView {
-       //     headerView.contentView.backgroundColor = K.Color.blue
-          //  headerView.backgroundView?.backgroundColor = K.Color.blue_brighter
-       //     headerView.textLabel?.textColor = K.Color.white
-        }
+extension TrackSettingsVC: DelayTableVCDelegate {
+    
+    func changeDelayWetDryMix(toValue value: Float) {
+        print(#function)
+        print("Setting player \(currentPlayer!) to WetDryMix of \(value)")
+        (delegate as! MainVC).seq.delayWetDryMixes[currentPlayer!] = value
+        (delegate as! MainVC).seq.delays[currentPlayer!].wetDryMix = value
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-       // cell.contentView.backgroundColor = K.Color.blue
-        //cell.accessoryView?.backgroundColor = K.Color.blue
-
+    func changeDelayFeedback(toValue value: Float) {
+        print(#function)
+        print("Setting player \(currentPlayer!) to Feedback of \(value)")
+        (delegate as! MainVC).seq.delayFeedbacks[currentPlayer!] = value
+        (delegate as! MainVC).seq.delays[currentPlayer!].feedback = value
     }
+    
+    func changeDelayPreset(to newPreset: SyncDelay) {
+        print(#function)
+        print("Setting player \(currentPlayer!) delay type to \(newPreset)")
+        
+        if let barDuration = (delegate as! MainVC).seq.tempo?.fourBeatsInSeconds {
+            let newTime = newPreset.factor * barDuration
+            print("newTime: \(newTime)")
+            (delegate as! MainVC).seq.delays[currentPlayer!].delayTime = newTime
+            (delegate as! MainVC).seq.delayPresets[currentPlayer!] = newPreset
+        }
+
+
+
+        
+        
+        
+    }
+    
+    
     
 }

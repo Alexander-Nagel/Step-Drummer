@@ -10,9 +10,28 @@ import Foundation
 struct Tempo {
     var bpm: Double = 120
     var sampleRate: Double
-    var periodLengthInSamples: Double {
+    var oneBeatInSamples: Double {
         get {
             60 / self.bpm * self.sampleRate
         }
     }
+    var oneBeatInSeconds: Double {
+        get {
+            60 / self.bpm
+        }
+    }
+    
+    var fourBeatsInSamples: Double {
+        get {
+            60 / self.bpm * self.sampleRate * 4.0
+        }
+    
+    }
+    var fourBeatsInSeconds: Double {
+        get {
+            60 / self.bpm * 4.0
+        }
+    
+    }
+
 }

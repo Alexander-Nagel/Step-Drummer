@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 
 protocol ReverbTableVCDelegate {
-    func changeDryWet(toValue: Float)
+    func changeWetDryMix(toValue: Float)
     func changeReverbType(to: Int)
 }
 
@@ -58,8 +58,9 @@ class ReverbTableVC: UITableViewController {
 // MARK:- Events
 //
 extension ReverbTableVC {
+   
     @IBAction func wetDryMixChanged(_ sender: UISlider) {
-        delegate?.changeDryWet(toValue: sender.value * K.Sequencer.reverbScalingFactor)
+        delegate?.changeWetDryMix(toValue: sender.value * K.Sequencer.reverbScalingFactor)
         
     }
     

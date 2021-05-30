@@ -1599,9 +1599,16 @@ DispatchQueue.main.async {
                 trackSettingsVC.delegate = self
                 trackSettingsVC.currentPlayer = (sender as! UIButton).tag
                 trackSettingsVC.volume = seq.volumes[index]
-                trackSettingsVC.reverbWetDryMix = seq.wetDryMixesReverb[index]
+
+                trackSettingsVC.reverbWetDryMix = seq.reverbWetDryMixes[index]
                 trackSettingsVC.reverbType = seq.reverbTypes[index]
-                print("REV01 mix \(seq.wetDryMixesReverb[index])")
+
+                trackSettingsVC.delayWetDryMix = seq.delayWetDryMixes[index]
+                trackSettingsVC.delayFeedback = seq.delayFeedbacks[index]
+                trackSettingsVC.delayTime = seq.delayTimes[index]
+                trackSettingsVC.delayPreset = seq.delayPresets[index]
+
+                print("REV01 mix \(seq.reverbWetDryMixes[index])")
                 print("REV01 type  \(seq.reverbTypes[index])")
             }
         }

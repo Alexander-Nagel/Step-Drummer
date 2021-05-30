@@ -30,6 +30,8 @@
 		FA2B3854265C5AD800E602F6 /* cellArrayToStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */; };
 		FA2B385C265C5DF500E602F6 /* stringListToCellArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B385B265C5DF500E602F6 /* stringListToCellArray.swift */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
+		FA425DFB26628519007D8977 /* SyncDelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA425DFA26628519007D8977 /* SyncDelay.swift */; };
+		FA425DFF2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */; };
 		FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */; };
 		FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D44264933BD000497C8 /* SequencerTests.swift */; };
 		FA70CD84264829EA007A212F /* hihat_2154samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD80264829E9007A212F /* hihat_2154samples.wav */; };
@@ -114,6 +116,8 @@
 		FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellArrayToStringArray.swift; sourceTree = "<group>"; };
 		FA2B385B265C5DF500E602F6 /* stringListToCellArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringListToCellArray.swift; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
+		FA425DFA26628519007D8977 /* SyncDelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDelay.swift; sourceTree = "<group>"; };
+		FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKeysOfDictionary2StringArray.swift; sourceTree = "<group>"; };
 		FA562D38264932C4000497C8 /* AVFoundation Test 8 Timer @ half periodLength Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AVFoundation Test 8 Timer @ half periodLength Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation_Test_8_Timer___half_periodLength_Tests.swift"; sourceTree = "<group>"; };
 		FA562D3C264932C4000497C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 				FA12A3462656B60E00439FA3 /* Shared.swift */,
 				FA2B383F265AEAE500E602F6 /* SnapShot.swift */,
 				FA0DDA0E265E8B3B00D155D6 /* AVAudioUnitReverbPresets.swift */,
+				FA425DFA26628519007D8977 /* SyncDelay.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 				FAE3DF372651BABA0000DD9F /* getConvertedPoint.swift */,
 				FA18D31626542B09005D2A2F /* VerticalButton.swift */,
 				FAB47AD326552C50006281CE /* ClickableSegmentedControl.swift */,
+				FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -613,6 +619,7 @@
 				FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */,
 				FA18D30B2653F206005D2A2F /* Track.swift in Sources */,
 				FA2B383C265AEA8B00E602F6 /* CRUD.swift in Sources */,
+				FA425DFB26628519007D8977 /* SyncDelay.swift in Sources */,
 				FAB47AD82655ACC1006281CE /* ChainModeNames.swift in Sources */,
 				FA2B385C265C5DF500E602F6 /* stringListToCellArray.swift in Sources */,
 				FA12A3472656B60E00439FA3 /* Shared.swift in Sources */,
@@ -622,6 +629,7 @@
 				FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */,
 				FA715BBE265E7FFE00F4CFDC /* DelayTableVC.swift in Sources */,
 				FA12A3432656B4CD00439FA3 /* SoundSelectionTableVC.swift in Sources */,
+				FA425DFF2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift in Sources */,
 				FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */,
 				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,
 				FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */,

@@ -33,9 +33,15 @@ struct Sequencer {
     
     var selectedSounds: [String]
     var volumes: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
-    var wetDryMixesReverb: [Float] = Array(repeating: 25, count: K.Sequencer.numberOfTracks)
+    
+    var reverbWetDryMixes: [Float] = Array(repeating: 25, count: K.Sequencer.numberOfTracks) // range: 0...100
     var reverbTypes: [Int] = Array(repeating: 1, count: K.Sequencer.numberOfTracks)
-    var wetDryMixesDelay: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
+    
+    var delayWetDryMixes: [Float] = Array(repeating: 0.0, count: K.Sequencer.numberOfTracks) // range: 0...100
+    var delayFeedbacks: [Float] = Array(repeating: 50.0, count: K.Sequencer.numberOfTracks) // range: -100...100 %
+    var delayTimes: [Double] = Array(repeating: 1.0, count: K.Sequencer.numberOfTracks) // range: 0...2 seconds
+    var delayPresets: [SyncDelay] = Array(repeating: SyncDelay.dottedEighth, count: K.Sequencer.numberOfTracks)
+    var delaySyncOn: [Bool] = Array(repeating: false, count: K.Sequencer.numberOfTracks)
     
     let fileNames = FileNames(
         normal: ["440KICK1.wav",
@@ -77,6 +83,8 @@ struct Sequencer {
             let track = Track()
             self.displayedTracks.append(track)
         }
+        
+        tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         
         selectedSounds = [
             "440KICK1.wav",
@@ -135,33 +143,53 @@ struct Sequencer {
         engine.connect(delays[3], to: reverbs[3], format: format)
         engine.connect(reverbs[3], to: engine.mainMixerNode, format: format)
         
-        reverbs[0].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[0])!)
-        reverbs[0].wetDryMix = wetDryMixesReverb[1]
+        for i in 0...K.Sequencer.numberOfTracks-1 {
+            reverbs[i].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[i])!)
+            reverbs[i].wetDryMix = reverbWetDryMixes[i]
+        }
+//        reverbs[0].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[0])!)
+//        reverbs[0].wetDryMix = reverbWetDryMixes[1]
+//
+//        reverbs[1].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[1])!)
+//        reverbs[1].wetDryMix = reverbWetDryMixes[1]
+//
+//        reverbs[2].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[2])!)
+//        reverbs[2].wetDryMix = reverbWetDryMixes[2]
+//
+//        reverbs[3].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[3])!)
+//        reverbs[3].wetDryMix = reverbWetDryMixes[3]
         
-        reverbs[1].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[1])!)
-        reverbs[1].wetDryMix = wetDryMixesReverb[1]
+        //
+        // Populate delayTimes array with actual times & init to delay units
+        //
+        for i in 0...(K.Sequencer.numberOfTracks-1) {
+            let delayPreset = delayPresets[i]
+            if let tempo = tempo?.fourBeatsInSeconds {
+                let time = delayPreset.factor * tempo
+                delayTimes[i] = time
+                print(time)
+                delays[i].delayTime = delayTimes[i]
+                delays[i].feedback = delayFeedbacks[i]
+                delays[i].wetDryMix = delayWetDryMixes[i]
+            }
+        }
         
-        reverbs[2].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[2])!)
-        reverbs[2].wetDryMix = wetDryMixesReverb[2]
         
-        reverbs[3].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[3])!)
-        reverbs[3].wetDryMix = wetDryMixesReverb[3]
-        
-        delays[0].delayTime = 0.375
-        delays[0].feedback = 5
-        delays[0].wetDryMix = 0
-        
-        delays[1].delayTime = 0.375
-        delays[1].feedback = 5
-        delays[1].wetDryMix = 0
-        
-        delays[2].delayTime = 0.375
-        delays[2].feedback = 5
-        delays[2].wetDryMix = 0
-        
-        delays[3].delayTime = 0.375
-        delays[3].feedback = 5
-        delays[3].wetDryMix = 0
+//        delays[0].delayTime = delayTimes[0]
+//        delays[0].feedback = delayFeedbacks[0]
+//        delays[0].wetDryMix = delayWetDryMixes[0]
+//
+//        delays[1].delayTime = delayTimes[1]
+//        delays[1].feedback = delayFeedbacks[1]
+//        delays[1].wetDryMix = delayWetDryMixes[1]
+//
+//        delays[2].delayTime = delayTimes[2]
+//        delays[2].feedback = delayFeedbacks[2]
+//        delays[2].wetDryMix = delayWetDryMixes[2]
+//
+//        delays[3].delayTime = delayTimes[3]
+//        delays[3].feedback = delayFeedbacks[3]
+//        delays[3].wetDryMix = delayWetDryMixes[3]
         
         engine.prepare()
         do { try engine.start() } catch { print(error) }
@@ -172,7 +200,6 @@ struct Sequencer {
         
         silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count)
         
-        tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         loadPart(partName: .A)
         
         print(durationOf16thNoteInSamples(forTrack: 0))

@@ -18,6 +18,8 @@ struct K {
         static let numberOfCellsPerTrack = 16
         static let sampleRate = 44100.0
         static let reverbScalingFactor: Float = 50.0
+        static let delayScalingFactor: Float = 100.0
+
     }
     
     struct BpmDtctr {
