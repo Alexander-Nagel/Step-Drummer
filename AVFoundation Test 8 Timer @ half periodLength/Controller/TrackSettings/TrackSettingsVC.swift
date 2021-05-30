@@ -61,6 +61,8 @@ class TrackSettingsVC: UITableViewController {
         if segue.identifier == "goToReverbTableVC" {
             let rtVC = segue.destination as! ReverbTableVC
             rtVC.popoverPresentationController?.delegate = self
+            rtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
+
             
             rtVC.delegate = self
             
@@ -75,6 +77,7 @@ class TrackSettingsVC: UITableViewController {
         if segue.identifier == "goToDelayTableVC" {
             let dtVC = segue.destination as! DelayTableVC
             dtVC.popoverPresentationController?.delegate = self
+            dtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
             
             dtVC.delegate = self
 
@@ -86,12 +89,24 @@ class TrackSettingsVC: UITableViewController {
         
     }
     
+    
+}
+
+//
+// MARK:- Events
+//
+extension TrackSettingsVC {
     @IBAction func volumeSliderChanged(_ sender: UISlider) {
         print(sender.value)
         (delegate as! MainVC).seq.volumes[currentPlayer!] = sender.value
         (delegate as! MainVC).seq.players[currentPlayer!].volume = sender.value
     }
+    
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }
+
 
 //
 // MARK:- Popover

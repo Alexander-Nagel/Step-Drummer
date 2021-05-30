@@ -86,5 +86,9 @@ extension DelayTableVC {
         }
     }
     
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 }

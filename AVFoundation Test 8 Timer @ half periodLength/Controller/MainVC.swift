@@ -1594,6 +1594,9 @@ DispatchQueue.main.async {
             if segue.identifier == segueName {
                 let trackSettingsVC = segue.destination as! TrackSettingsVC
                 trackSettingsVC.popoverPresentationController?.delegate = self
+                
+                trackSettingsVC.popoverPresentationController?.passthroughViews = [self.view]
+
                 trackSettingsVC.selectedSound = seq.selectedSounds[index]
                 trackSettingsVC.fileNames = seq.fileNames.normal
                 trackSettingsVC.delegate = self

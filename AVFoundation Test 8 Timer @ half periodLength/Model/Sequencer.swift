@@ -35,14 +35,14 @@ struct Sequencer {
     var selectedSounds: [String]
     var volumes: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
     
-    var reverbWetDryMixes: [Float] = Array(repeating: 25, count: K.Sequencer.numberOfTracks) // range: 0...100
+    var reverbWetDryMixes: [Float] = Array(repeating: 0.0, count: K.Sequencer.numberOfTracks) // range: 0...100
     var reverbTypes: [Int] = Array(repeating: 1, count: K.Sequencer.numberOfTracks)
     
     var delayWetDryMixes: [Float] = Array(repeating: 0.0, count: K.Sequencer.numberOfTracks) // range: 0...100
     var delayFeedbacks: [Float] = Array(repeating: 50.0, count: K.Sequencer.numberOfTracks) // range: -100...100 %
     var delayTimes: [Double] = Array(repeating: 1.0, count: K.Sequencer.numberOfTracks) // range: 0...2 seconds
     var delayPresets: [SyncDelay] = Array(repeating: SyncDelay.dottedEighth, count: K.Sequencer.numberOfTracks)
-    var delaySyncOn: [Bool] = Array(repeating: false, count: K.Sequencer.numberOfTracks)
+    //var delaySyncOn: [Bool] = Array(repeating: false, count: K.Sequencer.numberOfTracks)
     
     let fileNames = FileNames(
         normal: ["440KICK1.wav",
