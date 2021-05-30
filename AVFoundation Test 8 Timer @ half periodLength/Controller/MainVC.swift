@@ -1103,9 +1103,16 @@ DispatchQueue.main.async {
     //
     private func loadAllBuffers() {
         
-        for i in 0...(seq.players.count - 1) {
-            loadBuffer(ofPlayer: i, withFile: i)
+//        for i in 0...(seq.players.count - 1) {
+//            loadBuffer(ofPlayer: i, withFile: i)
+//        }
+        for i in 0...(K.Sequencer.numberOfTracks - 1){
+            if let file = seq.fileNames.normal.firstIndex(of: seq.selectedSounds[i]) {
+                loadBuffer(ofPlayer: i, withFile: file)
+            }
         }
+        
+        
     }
     
     //

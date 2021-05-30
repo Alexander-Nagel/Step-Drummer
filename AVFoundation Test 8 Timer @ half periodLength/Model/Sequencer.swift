@@ -35,8 +35,8 @@ struct Sequencer {
     var selectedSounds: [String]
     var volumes: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
     
-    var distortionWetDryMixes: [Float] = Array(repeating: 50, count: K.Sequencer.numberOfTracks) // range: 0...100
-    var distortionPreGains: [Float] = Array(repeating: -70, count: K.Sequencer.numberOfTracks) // range: -80...20
+    var distortionWetDryMixes: [Float] = Array(repeating: 0, count: K.Sequencer.numberOfTracks) // range: 0...100
+    var distortionPreGains: [Float] = Array(repeating: 6, count: K.Sequencer.numberOfTracks) // range: -80...20
     var distortionPresets: [AVAudioUnitDistortionPreset] = Array(repeating: AVAudioUnitDistortionPreset.drumsBitBrush, count: K.Sequencer.numberOfTracks)
     
     var reverbWetDryMixes: [Float] = Array(repeating: 0.0, count: K.Sequencer.numberOfTracks) // range: 0...100
@@ -180,12 +180,13 @@ struct Sequencer {
         }
        
         //
-        // Init distorion units
+        // Init distortion units
         //
         for i in 0...(K.Sequencer.numberOfTracks-1) {
             distortions[i].loadFactoryPreset(distortionPresets[i])
             distortions[i].wetDryMix = distortionWetDryMixes[i]
             distortions[i].preGain = distortionPreGains[i]
+
         }
         
         

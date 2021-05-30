@@ -96,7 +96,7 @@ class TrackSettingsVC: UITableViewController {
         if segue.identifier == "goToDistortionTableVC" {
             let ditVC = segue.destination as! DistortionTableVC
             ditVC.popoverPresentationController?.delegate = self
-            //ditVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
+            ditVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
             
             ditVC.delegate = self
 
@@ -175,12 +175,14 @@ extension TrackSettingsVC: ReverbTableVCDelegate {
     
     func changeWetDryMix(toValue value: Float) {
         print("Setting player \(currentPlayer!) to WetDryMix of \(value)")
+        reverbWetDryMix = value
         (delegate as! MainVC).seq.reverbWetDryMixes[currentPlayer!] = value
         (delegate as! MainVC).seq.reverbs[currentPlayer!].wetDryMix = value
     }
     
     func changeReverbType(to value: Int) {
         print("Setting player \(currentPlayer!) reverb typ to \(value)")
+        reverbType = value
         (delegate as! MainVC).seq.reverbTypes[currentPlayer!] = value
         
         guard let newPreset = AVAudioUnitReverbPreset(rawValue: value) else {
@@ -198,6 +200,7 @@ extension TrackSettingsVC: DelayTableVCDelegate {
     func changeDelayWetDryMix(toValue value: Float) {
         print(#function)
         print("Setting player \(currentPlayer!) to WetDryMix of \(value)")
+        delayWetDryMix = value
         (delegate as! MainVC).seq.delayWetDryMixes[currentPlayer!] = value
         (delegate as! MainVC).seq.delays[currentPlayer!].wetDryMix = value
     }
@@ -205,6 +208,7 @@ extension TrackSettingsVC: DelayTableVCDelegate {
     func changeDelayFeedback(toValue value: Float) {
         print(#function)
         print("Setting player \(currentPlayer!) to Feedback of \(value)")
+        delayFeedback = value
         (delegate as! MainVC).seq.delayFeedbacks[currentPlayer!] = value
         (delegate as! MainVC).seq.delays[currentPlayer!].feedback = value
     }
@@ -212,6 +216,7 @@ extension TrackSettingsVC: DelayTableVCDelegate {
     func changeDelayPreset(to newPreset: SyncDelay) {
         print(#function)
         print("Setting player \(currentPlayer!) delay type to \(newPreset)")
+        delayPreset = newPreset
         
         if let barDuration = (delegate as! MainVC).seq.tempo?.fourBeatsInSeconds {
             let newTime = newPreset.factor * barDuration
@@ -230,6 +235,7 @@ extension TrackSettingsVC: DistortionTableVCDelegate {
     func changeDistortionWetDryMix(toValue value: Float) {
         print(#function)
         print("Setting player \(currentPlayer!) to WetDryMix of \(value)")
+        distortionWetDryMix = value
         (delegate as! MainVC).seq.distortionWetDryMixes[currentPlayer!] = value
         (delegate as! MainVC).seq.distortions[currentPlayer!].wetDryMix = value
         
@@ -238,6 +244,7 @@ extension TrackSettingsVC: DistortionTableVCDelegate {
     func changeDistortionPreGain(to value: Float) {
         print(#function)
         print("Setting player \(currentPlayer!) to PreGain of \(value)")
+        distortionPreGain = value
         (delegate as! MainVC).seq.distortionPreGains[currentPlayer!] = value
         (delegate as! MainVC).seq.distortions[currentPlayer!].preGain = value
         
@@ -249,6 +256,8 @@ extension TrackSettingsVC: DistortionTableVCDelegate {
         guard let newPreset = AVAudioUnitDistortionPreset(rawValue: value) else {
             fatalError("Error changing distortion preset!")
         }
+        
+        distortionPreset = newPreset
        
         (delegate as! MainVC).seq.distortionPresets[currentPlayer!] = newPreset
         (delegate as! MainVC).seq.distortions[currentPlayer!].loadFactoryPreset(newPreset)

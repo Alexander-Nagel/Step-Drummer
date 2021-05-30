@@ -315,9 +315,9 @@
 				FA12A34C2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift */,
 				FA12A33E2656627100439FA3 /* TrackSettingsVC.swift */,
 				FA12A3422656B4CC00439FA3 /* SoundSelectionTableVC.swift */,
+				FA715BB9265E7FED00F4CFDC /* ReverbTableVC.swift */,
 				FA715BBD265E7FFE00F4CFDC /* DelayTableVC.swift */,
 				FA6D27BE2663EAFC00AE6D5B /* DistortionTableVC.swift */,
-				FA715BB9265E7FED00F4CFDC /* ReverbTableVC.swift */,
 			);
 			path = TrackSettings;
 			sourceTree = "<group>";
