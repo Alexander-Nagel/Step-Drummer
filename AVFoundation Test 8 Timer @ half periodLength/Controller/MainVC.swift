@@ -1597,12 +1597,19 @@ DispatchQueue.main.async {
                 
                 trackSettingsVC.popoverPresentationController?.passthroughViews = [self.view]
 
+                trackSettingsVC.delegate = self
+                
+                trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+                
                 trackSettingsVC.selectedSound = seq.selectedSounds[index]
                 trackSettingsVC.fileNames = seq.fileNames.normal
-                trackSettingsVC.delegate = self
-                trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+                
                 trackSettingsVC.volume = seq.volumes[index]
 
+                trackSettingsVC.distortionWetDryMix = seq.distortionWetDryMixes[index]
+                trackSettingsVC.distortionPreGain = seq.distortionPreGains[index]
+                trackSettingsVC.distortionPreset = seq.distortionPresets[index]
+                
                 trackSettingsVC.reverbWetDryMix = seq.reverbWetDryMixes[index]
                 trackSettingsVC.reverbType = seq.reverbTypes[index]
 
@@ -1769,8 +1776,8 @@ DispatchQueue.main.async {
     @IBAction func trackReverbChanged(_ sender: UISlider) {
         print(#function)
         print(sender.tag, sender.value)
-        seq.displayedTracks[sender.tag].reverbMix = Double(sender.value * K.Sequencer.reverbScalingFactor)
-        seq.reverbs[sender.tag].wetDryMix = sender.value * K.Sequencer.reverbScalingFactor
+        seq.displayedTracks[sender.tag].reverbMix = Double(sender.value)
+        seq.reverbs[sender.tag].wetDryMix = sender.value
     }
     
     //

@@ -17,7 +17,9 @@ class DelayTableVC: UITableViewController {
     
     var delegate: DelayTableVCDelegate?
 
-    
+    //
+    // MARK:- Outlets
+    //
     @IBOutlet weak var delayWetDryMixSlider: UISlider!
     @IBOutlet weak var delayFeedBackSlider: UISlider!
     @IBOutlet weak var delayTimeLabel: UILabel!
@@ -28,6 +30,9 @@ class DelayTableVC: UITableViewController {
     var delayPreset: SyncDelay?
     var delayTime: Double?
     
+    //
+    // MARK:- Life cycle
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,8 +44,8 @@ class DelayTableVC: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         if let wetdrymix = delayWetDryMix {
-            delayWetDryMixSlider.value = wetdrymix / K.Sequencer.delayScalingFactor
-            print("DEL03 mix \(wetdrymix / K.Sequencer.delayScalingFactor)")
+            delayWetDryMixSlider.value = wetdrymix
+            print("DEL03 mix \(wetdrymix)")
             
         }
         if let feedback = delayFeedback {
@@ -68,7 +73,7 @@ extension DelayTableVC {
     
     @IBAction func delayWetDryMixChanged(_ sender: UISlider) {
         print(#function)
-        delegate?.changeDelayWetDryMix(toValue: sender.value * K.Sequencer.delayScalingFactor)
+        delegate?.changeDelayWetDryMix(toValue: sender.value)
     }
     
     @IBAction func delayFeedbackChanged(_ sender: UISlider) {

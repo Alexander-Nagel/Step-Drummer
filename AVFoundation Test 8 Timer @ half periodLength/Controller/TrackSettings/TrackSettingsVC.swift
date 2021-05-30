@@ -14,6 +14,8 @@ protocol TrackSettingsVCDelegate {
 
 class TrackSettingsVC: UITableViewController {
     
+    
+    
     @IBOutlet weak var volumeSlider: UISlider!
     @IBOutlet weak var selectedSoundLabel: UILabel!
     @IBOutlet weak var reverbEditLabel: UILabel!
@@ -33,6 +35,10 @@ class TrackSettingsVC: UITableViewController {
     var delayFeedback: Float?
     var delayPreset: SyncDelay?
     var delayTime: Double?
+
+    var distortionWetDryMix: Float?
+    var distortionPreGain: Float?
+    var distortionPreset: AVAudioUnitDistortionPreset?
     
     var delegate: TrackSettingsVCDelegate?
     
@@ -87,9 +93,18 @@ class TrackSettingsVC: UITableViewController {
             dtVC.delayPreset = self.delayPreset
         }
         
+        if segue.identifier == "goToDistortionTableVC" {
+            let ditVC = segue.destination as! DistortionTableVC
+            ditVC.popoverPresentationController?.delegate = self
+            //ditVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
+            
+            ditVC.delegate = self
+
+            ditVC.distortionWetDryMix = self.distortionWetDryMix
+            ditVC.distortionPreGain = self.distortionPreGain
+            ditVC.distortionPreset = self.distortionPreset
+        }
     }
-    
-    
 }
 
 //
@@ -204,14 +219,42 @@ extension TrackSettingsVC: DelayTableVCDelegate {
             (delegate as! MainVC).seq.delays[currentPlayer!].delayTime = newTime
             (delegate as! MainVC).seq.delayPresets[currentPlayer!] = newPreset
         }
+    }
+}
 
-
-
-        
-        
+//
+// MARK:- DistortionTableVC Delegate
+//
+extension TrackSettingsVC: DistortionTableVCDelegate {
+    
+    func changeDistortionWetDryMix(toValue value: Float) {
+        print(#function)
+        print("Setting player \(currentPlayer!) to WetDryMix of \(value)")
+        (delegate as! MainVC).seq.distortionWetDryMixes[currentPlayer!] = value
+        (delegate as! MainVC).seq.distortions[currentPlayer!].wetDryMix = value
         
     }
     
+    func changeDistortionPreGain(to value: Float) {
+        print(#function)
+        print("Setting player \(currentPlayer!) to PreGain of \(value)")
+        (delegate as! MainVC).seq.distortionPreGains[currentPlayer!] = value
+        (delegate as! MainVC).seq.distortions[currentPlayer!].preGain = value
+        
+    }
     
+    func changeDistortionPreset(to value: Int) {
+       
+        print("Setting player \(currentPlayer!) distortion preset to \(value)")
+        guard let newPreset = AVAudioUnitDistortionPreset(rawValue: value) else {
+            fatalError("Error changing distortion preset!")
+        }
+       
+        (delegate as! MainVC).seq.distortionPresets[currentPlayer!] = newPreset
+        (delegate as! MainVC).seq.distortions[currentPlayer!].loadFactoryPreset(newPreset)
+        
+        
+
+    }
     
 }

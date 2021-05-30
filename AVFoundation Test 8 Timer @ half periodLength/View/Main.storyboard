@@ -968,7 +968,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="pDX-9G-RRt">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="pDX-9G-RRt">
                                                     <rect key="frame" x="148" y="6" width="118" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
@@ -1185,29 +1185,58 @@
                                             </segue>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XZQ-PP-6SP" userLabel="CLOSE">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="q7U-cI-UtI" detailTextLabel="LuT-tZ-ofd" style="IBUITableViewCellStyleValue1" id="YU6-eZ-IL9" userLabel="Distortion">
                                         <rect key="frame" x="0.0" y="202" width="280" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XZQ-PP-6SP" id="U2k-uG-zFv">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YU6-eZ-IL9" id="4mG-Kk-nDB">
+                                            <rect key="frame" x="0.0" y="0.0" width="253" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Distortion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q7U-cI-UtI" userLabel="Distortion">
+                                                    <rect key="frame" x="16" y="12" width="74.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Edit" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LuT-tZ-ofd" userLabel="DistortionEditLabel">
+                                                    <rect key="frame" x="215.5" y="12" width="29.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="xOW-V3-Tau" kind="popoverPresentation" identifier="goToDistortionTableVC" popoverAnchorView="LuT-tZ-ofd" id="KYG-wn-EpQ">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RZw-br-NVL" userLabel="CLOSE">
+                                        <rect key="frame" x="0.0" y="245.5" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RZw-br-NVL" id="oMO-cq-f9l">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xp4-vJ-EYx">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8L-RR-fR6">
                                                     <rect key="frame" x="10" y="7" width="260" height="30"/>
                                                     <color key="backgroundColor" name="custom_blue_brightest"/>
                                                     <state key="normal" title="CLOSE">
                                                         <color key="titleColor" name="custom_white"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="closeButtonPressed:" destination="2w5-Nv-DYW" eventType="touchUpInside" id="ue6-gt-bq6"/>
+                                                        <action selector="closeButtonPressed:" destination="2w5-Nv-DYW" eventType="touchUpInside" id="OPY-SB-GpB"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="xp4-vJ-EYx" firstAttribute="centerX" secondItem="U2k-uG-zFv" secondAttribute="centerX" id="K1b-0r-feR"/>
-                                                <constraint firstItem="xp4-vJ-EYx" firstAttribute="centerY" secondItem="U2k-uG-zFv" secondAttribute="centerY" id="fZ3-3R-LrX"/>
-                                                <constraint firstAttribute="trailing" secondItem="xp4-vJ-EYx" secondAttribute="trailing" constant="10" id="h31-yO-hoZ"/>
-                                                <constraint firstItem="xp4-vJ-EYx" firstAttribute="leading" secondItem="U2k-uG-zFv" secondAttribute="leading" constant="10" id="rxc-6g-ciV"/>
+                                                <constraint firstAttribute="trailing" secondItem="k8L-RR-fR6" secondAttribute="trailing" constant="10" id="FVC-Dz-fsP"/>
+                                                <constraint firstItem="k8L-RR-fR6" firstAttribute="leading" secondItem="oMO-cq-f9l" secondAttribute="leading" constant="10" id="VjI-Uc-RYh"/>
+                                                <constraint firstItem="k8L-RR-fR6" firstAttribute="centerY" secondItem="oMO-cq-f9l" secondAttribute="centerY" id="bJC-cX-pLO"/>
+                                                <constraint firstItem="k8L-RR-fR6" firstAttribute="centerX" secondItem="oMO-cq-f9l" secondAttribute="centerX" id="kxn-7f-P2f"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1427,7 +1456,152 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0W-fP-KRe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2612.323943661972" y="1005"/>
+            <point key="canvasLocation" x="2336" y="1144"/>
+        </scene>
+        <!--Distortion TableVC-->
+        <scene sceneID="siO-oJ-PTd">
+            <objects>
+                <tableViewController id="xOW-V3-Tau" userLabel="Distortion TableVC" customClass="DistortionTableVC" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DF9-yM-CKP">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="DIstortion Settings" id="ksv-iK-ub9" userLabel="Distortion Settings">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="549-MC-ngO" style="IBUITableViewCellStyleDefault" id="CNs-W5-5PX" userLabel="Wet Dry Mix">
+                                        <rect key="frame" x="0.0" y="28" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CNs-W5-5PX" id="tGi-E1-MaS">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Wet Dry Mix" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="549-MC-ngO" userLabel="Distortion Wet Dry Mix">
+                                                    <rect key="frame" x="16" y="0.0" width="248" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="c1V-Ej-7bX" userLabel="Distortion Wet Dry Mix Slider">
+                                                    <rect key="frame" x="148" y="6" width="118" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="distortionWetDryMixChanged:" destination="xOW-V3-Tau" eventType="valueChanged" id="yco-0S-hvP"/>
+                                                    </connections>
+                                                </slider>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="7Uo-Yj-wWZ" style="IBUITableViewCellStyleDefault" id="amx-DP-vBL" userLabel="Preamp">
+                                        <rect key="frame" x="0.0" y="71.5" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="amx-DP-vBL" id="ccQ-AO-F3E">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Preamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Uo-Yj-wWZ" userLabel="Preamp">
+                                                    <rect key="frame" x="16" y="0.0" width="248" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="-80" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="lhb-DP-gSn" userLabel="Preamp Slider">
+                                                    <rect key="frame" x="148" y="6" width="118" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="distortionPreGainChanged:" destination="xOW-V3-Tau" eventType="valueChanged" id="01m-Yr-FP6"/>
+                                                    </connections>
+                                                </slider>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XZE-Kf-iWc" userLabel="Distortion Type Label">
+                                        <rect key="frame" x="0.0" y="115" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XZE-Kf-iWc" id="Uup-KB-J3u">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nke-9y-Gwy" userLabel="Distortion Type Label">
+                                                    <rect key="frame" x="26" y="11.5" width="228" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Nke-9y-Gwy" secondAttribute="trailing" constant="10" id="AqI-Kt-1hM"/>
+                                                <constraint firstItem="Nke-9y-Gwy" firstAttribute="centerY" secondItem="Uup-KB-J3u" secondAttribute="centerY" id="VMd-iv-GNg"/>
+                                                <constraint firstItem="Nke-9y-Gwy" firstAttribute="centerX" secondItem="Uup-KB-J3u" secondAttribute="centerX" id="Y3G-GG-XyO"/>
+                                                <constraint firstItem="Nke-9y-Gwy" firstAttribute="leading" secondItem="Uup-KB-J3u" secondAttribute="leadingMargin" constant="10" id="ZSd-oj-qje"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="U3H-vT-wxk" userLabel="Ditortion Type Stepper">
+                                        <rect key="frame" x="0.0" y="158.5" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U3H-vT-wxk" id="xIF-1X-gnc">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="21" translatesAutoresizingMaskIntoConstraints="NO" id="CEH-GM-tX0">
+                                                    <rect key="frame" x="93" y="5" width="94" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="distortionPresetChanged:" destination="xOW-V3-Tau" eventType="valueChanged" id="8lB-TO-K2S"/>
+                                                    </connections>
+                                                </stepper>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Kxr-dZ-4ou" userLabel="CLOSE">
+                                        <rect key="frame" x="0.0" y="202" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kxr-dZ-4ou" id="sGh-U2-iS0">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9U-pJ-2Zq">
+                                                    <rect key="frame" x="10" y="7" width="260" height="30"/>
+                                                    <color key="backgroundColor" name="custom_blue_brightest"/>
+                                                    <state key="normal" title="CLOSE">
+                                                        <color key="titleColor" name="custom_white"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="closeButtonPressed:" destination="xOW-V3-Tau" eventType="touchUpInside" id="pFL-Js-Zw7"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Z9U-pJ-2Zq" firstAttribute="leading" secondItem="sGh-U2-iS0" secondAttribute="leading" constant="10" id="FYt-jP-iiI"/>
+                                                <constraint firstAttribute="trailing" secondItem="Z9U-pJ-2Zq" secondAttribute="trailing" constant="10" id="H7s-wY-KEV"/>
+                                                <constraint firstItem="Z9U-pJ-2Zq" firstAttribute="centerY" secondItem="sGh-U2-iS0" secondAttribute="centerY" id="lJ4-qo-Ju2"/>
+                                                <constraint firstItem="Z9U-pJ-2Zq" firstAttribute="centerX" secondItem="sGh-U2-iS0" secondAttribute="centerX" id="z7B-5O-Bdg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="xOW-V3-Tau" id="rzL-lZ-ezy"/>
+                            <outlet property="delegate" destination="xOW-V3-Tau" id="3Wc-BE-wpL"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="280" height="300"/>
+                    <size key="freeformSize" width="280" height="320"/>
+                    <connections>
+                        <outlet property="distortionPreGainSlider" destination="lhb-DP-gSn" id="CpL-ku-51P"/>
+                        <outlet property="distortionPresetLabel" destination="Nke-9y-Gwy" id="yBK-Nk-tTN"/>
+                        <outlet property="distortionPresetStepper" destination="CEH-GM-tX0" id="pOb-3n-vdf"/>
+                        <outlet property="distortionWetDryMixSlider" destination="c1V-Ej-7bX" id="56p-Gn-16U"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OwZ-oL-eRF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2701" y="1013"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

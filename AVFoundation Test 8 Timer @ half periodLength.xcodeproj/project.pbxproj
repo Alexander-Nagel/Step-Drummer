@@ -10,7 +10,7 @@
 		13245D7722B11CB0D4E20C58 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */; };
 		1B5912817CA00580E1ED31FC /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A060EBD22970B52618BED7C /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework */; };
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
-		FA0DDA0F265E8B3B00D155D6 /* AVAudioUnitReverbPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DDA0E265E8B3B00D155D6 /* AVAudioUnitReverbPresets.swift */; };
+		FA0DDA0F265E8B3B00D155D6 /* AV FX Presets Description Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */; };
 		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
 		FA12A3332655C25E00439FA3 /* PickerView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A3322655C25E00439FA3 /* PickerView Extension.swift */; };
 		FA12A33726564D4300439FA3 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA12A33626564D4300439FA3 /* SettingsVC.swift */; };
@@ -34,6 +34,7 @@
 		FA425DFF2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */; };
 		FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */; };
 		FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D44264933BD000497C8 /* SequencerTests.swift */; };
+		FA6D27BF2663EAFC00AE6D5B /* DistortionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D27BE2663EAFC00AE6D5B /* DistortionTableVC.swift */; };
 		FA70CD84264829EA007A212F /* hihat_2154samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD80264829E9007A212F /* hihat_2154samples.wav */; };
 		FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD81264829E9007A212F /* kick_2156samples.wav */; };
 		FA70CD86264829EA007A212F /* open_hihat_2181samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD82264829EA007A212F /* open_hihat_2181samples.wav */; };
@@ -96,7 +97,7 @@
 		90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C68E0FE36BF6F605877E7D6 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength Tests/Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; sourceTree = "<group>"; };
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
-		FA0DDA0E265E8B3B00D155D6 /* AVAudioUnitReverbPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioUnitReverbPresets.swift; sourceTree = "<group>"; };
+		FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AV FX Presets Description Extension.swift"; sourceTree = "<group>"; };
 		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
 		FA12A3322655C25E00439FA3 /* PickerView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickerView Extension.swift"; sourceTree = "<group>"; };
 		FA12A33626564D4300439FA3 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 		FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation_Test_8_Timer___half_periodLength_Tests.swift"; sourceTree = "<group>"; };
 		FA562D3C264932C4000497C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA562D44264933BD000497C8 /* SequencerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerTests.swift; sourceTree = "<group>"; };
+		FA6D27BE2663EAFC00AE6D5B /* DistortionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistortionTableVC.swift; sourceTree = "<group>"; };
 		FA70CD80264829E9007A212F /* hihat_2154samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat_2154samples.wav; sourceTree = "<group>"; };
 		FA70CD81264829E9007A212F /* kick_2156samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick_2156samples.wav; sourceTree = "<group>"; };
 		FA70CD82264829EA007A212F /* open_hihat_2181samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = open_hihat_2181samples.wav; sourceTree = "<group>"; };
@@ -259,7 +261,7 @@
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 				FA12A3462656B60E00439FA3 /* Shared.swift */,
 				FA2B383F265AEAE500E602F6 /* SnapShot.swift */,
-				FA0DDA0E265E8B3B00D155D6 /* AVAudioUnitReverbPresets.swift */,
+				FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */,
 				FA425DFA26628519007D8977 /* SyncDelay.swift */,
 			);
 			path = Model;
@@ -314,6 +316,7 @@
 				FA12A33E2656627100439FA3 /* TrackSettingsVC.swift */,
 				FA12A3422656B4CC00439FA3 /* SoundSelectionTableVC.swift */,
 				FA715BBD265E7FFE00F4CFDC /* DelayTableVC.swift */,
+				FA6D27BE2663EAFC00AE6D5B /* DistortionTableVC.swift */,
 				FA715BB9265E7FED00F4CFDC /* ReverbTableVC.swift */,
 			);
 			path = TrackSettings;
@@ -611,6 +614,7 @@
 				FAB47AD426552C50006281CE /* ClickableSegmentedControl.swift in Sources */,
 				FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */,
 				FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */,
+				FA6D27BF2663EAFC00AE6D5B /* DistortionTableVC.swift in Sources */,
 				FA2B3840265AEAE500E602F6 /* SnapShot.swift in Sources */,
 				FA12A34D2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift in Sources */,
 				FA12A33726564D4300439FA3 /* SettingsVC.swift in Sources */,
@@ -636,7 +640,7 @@
 				FA12A33F2656627100439FA3 /* TrackSettingsVC.swift in Sources */,
 				FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */,
 				FA715BBA265E7FED00F4CFDC /* ReverbTableVC.swift in Sources */,
-				FA0DDA0F265E8B3B00D155D6 /* AVAudioUnitReverbPresets.swift in Sources */,
+				FA0DDA0F265E8B3B00D155D6 /* AV FX Presets Description Extension.swift in Sources */,
 				FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
