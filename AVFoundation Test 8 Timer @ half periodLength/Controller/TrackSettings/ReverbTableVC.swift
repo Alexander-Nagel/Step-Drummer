@@ -40,18 +40,24 @@ class ReverbTableVC: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         if let wetdrymix = reverbWetDryMix {
-            wetDryMixSlider.value = wetdrymix / K.Sequencer.reverbScalingFactor
-            print("REV03 mix \(wetdrymix / K.Sequencer.reverbScalingFactor)")
+            wetDryMixSlider.value = wetdrymix
+            print("REV03 mix \(wetdrymix)")
 
         }
         if let revType = reverbType {
-            if let revString = AVAudioUnitReverbPreset(rawValue: revType)?.string {
+            if let revString = AVAudioUnitReverbPreset(rawValue: revType)?.description {
                 reverbTypeLabel.text = revString
                 print("REV03 type  \(revString)")
             }
             reverbTypeStepper.value = Double(revType)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+    }
+    
 }
 
 //
@@ -60,14 +66,14 @@ class ReverbTableVC: UITableViewController {
 extension ReverbTableVC {
    
     @IBAction func wetDryMixChanged(_ sender: UISlider) {
-        delegate?.changeWetDryMix(toValue: sender.value * K.Sequencer.reverbScalingFactor)
+        delegate?.changeWetDryMix(toValue: sender.value)
         
     }
     
     @IBAction func changeReverbType(_ sender: UIStepper) {
         let newReverbType = Int(sender.value)
         delegate?.changeReverbType(to: newReverbType)
-        if let revString = AVAudioUnitReverbPreset(rawValue: newReverbType)?.string {
+        if let revString = AVAudioUnitReverbPreset(rawValue: newReverbType)?.description {
             reverbTypeLabel.text = revString
             print("Changing to rev type  \(revString)")
             

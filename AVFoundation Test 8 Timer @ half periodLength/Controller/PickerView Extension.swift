@@ -30,7 +30,7 @@ extension MainVC: UIPickerViewDataSource, UIPickerViewDelegate {
         var pickerLabel: UILabel? = (view as? UILabel)
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            pickerLabel?.font = UIFont(name: "Arial", size: 25)
+            pickerLabel?.font = UIFont(name: "Arial", size: 22)
             switch component {
             case 0:
                 pickerLabel?.textAlignment = .right
@@ -43,7 +43,7 @@ extension MainVC: UIPickerViewDataSource, UIPickerViewDelegate {
             }
         }
         pickerLabel?.text = pickerDataArray[component][row]
-        pickerLabel?.textColor = UIColor(named: "Your Color Name")
+        pickerLabel?.textColor = K.Color.white
         
         return pickerLabel!
     }
@@ -51,11 +51,11 @@ extension MainVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         if component == 0 {
-            return 60
+            return 40
         } else if component == 1 {
             return 15
         } else if component == 2 {
-            return 30
+            return 25
         } else {
             print("This is quite unlikely to happen.")
             return 30

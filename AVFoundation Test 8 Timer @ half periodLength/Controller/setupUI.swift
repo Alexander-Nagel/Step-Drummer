@@ -38,8 +38,8 @@ extension MainVC {
         
         muteButtons = [mute0Button, mute1Button, mute2Button, mute3Button]
         trackSettingsButtons = [settingsButton0, settingsButton1, settingsButton2, settingsButton3 ]
-        stepperButtons = [stepper0Button, stepper1Button, stepper2Button, stepper3Button]
-        stepperViews = [stepper0View, stepper1View, stepper2View, stepper3View ]
+        stepperButtons = [/*stepper0Button, stepper1Button, stepper2Button, stepper3Button */]
+        stepperViews = [/*stepper0View, stepper1View, stepper2View, stepper3View */]
         controlButtons = [playPauseButton, tapButton,/*  bpmLabel, bpmStepper, */ picker]
 //        trackVolumeSliders = [volumeSlider0, volumeSlider1, volumeSlider2, volumeSlider3]
 //        trackReverbSliders = [reverbSlider0, reverbSlider1, reverbSlider2, reverbSlider3]
@@ -100,35 +100,35 @@ extension MainVC {
         //
         for (index, button) in muteButtons.enumerated() {
             //print("Index: \(index)")
-            button.backgroundColor = K.Color.muteButtonColor
-            button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
-            button.layer.borderWidth = 1.0
+//            button.backgroundColor = K.Color.muteButtonColor
+//            button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
+//            button.layer.borderWidth = 1.0
             button.tintColor = K.Color.white
             button.isHidden = false
             //            button.titleLabel?.text = "AA"
            // button.setTitleColor(K.Color.black, for: .normal)
-            button.layer.cornerRadius = 15
+            button.layer.cornerRadius = 5
             // button.layer.cornerRadius = 0.5 * button.bounds.size.width
             button.tag = index
-            button.widthAnchor.constraint(equalToConstant: 50).isActive = true
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
+           // button.widthAnchor.constraint(equalToConstant: 35).isActive = true
+          //  button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
         }
         // TRACK SETTINGS buttons:
         //
         for (index, button) in trackSettingsButtons.enumerated() {
             //print("Index: \(index)")
-            button.backgroundColor = K.Color.muteButtonColor
+//            button.backgroundColor = K.Color.muteButtonColor
             //button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
-            button.layer.borderWidth = 1.0
+//            button.layer.borderWidth = 1.0
             button.tintColor = K.Color.white
             button.isHidden = false
             //            button.titleLabel?.text = "AA"
            // button.setTitleColor(K.Color.black, for: .normal)
-            button.layer.cornerRadius = 15
+            button.layer.cornerRadius = 5
             // button.layer.cornerRadius = 0.5 * button.bounds.size.width
             button.tag = index
-            button.widthAnchor.constraint(equalToConstant: 50).isActive = true
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
+           // button.widthAnchor.constraint(equalToConstant: 35).isActive = true
+           // button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
         }
         
         
@@ -148,8 +148,12 @@ extension MainVC {
             button.titleLabel?.text = ""
             button.layer.cornerRadius = 5
             button.tag = index
-            //button.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
+           //button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            // button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
+            if let superview = button.superview {
+                //button.topAnchor.constraint(equalTo: superview.topAnchor, constant: 10).isActive = true
+               // button.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 20).isActive = true
+            }
             //button.addGestureRecognizer(leftSwipeButton)
             // button.addTarget(self, action: #selector(btnPressedAction), for: .allTouchEvents)
         }
@@ -171,6 +175,18 @@ extension MainVC {
         //
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
         partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
+        partSegmentedControl.tintColor = K.Color.white
+        // partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: K.Color.white], for: .selected)
+        //partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: K.Color.white], for: .selected)
+        //partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 28)], for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes(
+            [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24),
+                NSAttributedString.Key.foregroundColor: K.Color.white
+            ]
+            , for: .normal
+        )
+       
         
         // SOFT MODE button:
         //
@@ -204,29 +220,15 @@ extension MainVC {
         //
 //        chainButton.setTitleColor(.black, for: .normal)
         chainButton.backgroundColor = K.Color.blue_brighter
-        chainButton.layer.cornerRadius = 0.125 * tapButton.bounds.size.width
+        chainButton.layer.cornerRadius = 0.125 * chainButton.bounds.size.width
         chainButton.titleLabel?.adjustsFontSizeToFitWidth = true
         chainButton.tintColor = K.Color.white
         chainButton.titleLabel?.textColor = K.Color.white
         chainButton.setTitle(ChainModeNames.OFF.description, for: .normal)
 
-//        let font = UIFont.systemFont(ofSize: 20)
-//        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
-        let font = UIFont.systemFont(ofSize: 24)
-        partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
-
-//        bpmStepper.minimumValue = 30
-//        bpmStepper.maximumValue = 300
-//        bpmStepper.stepValue = 1
-//        bpmStepper.value = seq.tempo!.bpm
-//        bpmLabel.text = String(seq.tempo!.bpm)
-//        bpmStepperView.backgroundColor = K.Color.controlButtonsColor
-//        bpmStepper.isHidden = true
-//        bpmStepperView.isHidden = true
-        
         // TAP button:
         //
-//        tapButton.setTitleColor(.black, for: .normal)
+        tapButton.setTitleColor(K.Color.white, for: .normal)
         tapButton.backgroundColor = K.Color.blue_brighter
         tapButton.layer.cornerRadius = 0.125 * tapButton.bounds.size.width
         tapButton.tintColor = K.Color.white
@@ -234,7 +236,6 @@ extension MainVC {
         
         // BPM picker:
         //
-        
         picker.delegate = self
         picker.dataSource = self
         picker.selectRow(90, inComponent: 0, animated: true) // start at 120 bpm

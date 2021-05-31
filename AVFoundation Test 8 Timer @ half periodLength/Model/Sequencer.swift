@@ -35,6 +35,10 @@ struct Sequencer {
     var selectedSounds: [String]
     var volumes: [Float] = Array(repeating: 0.5, count: K.Sequencer.numberOfTracks)
     
+    var distortionWetDryMixes: [Float] = Array(repeating: 0, count: K.Sequencer.numberOfTracks) // range: 0...100
+    var distortionPreGains: [Float] = Array(repeating: 6, count: K.Sequencer.numberOfTracks) // range: -80...20
+    var distortionPresets: [AVAudioUnitDistortionPreset] = Array(repeating: AVAudioUnitDistortionPreset.drumsBitBrush, count: K.Sequencer.numberOfTracks)
+    
     var reverbWetDryMixes: [Float] = Array(repeating: 0.0, count: K.Sequencer.numberOfTracks) // range: 0...100
     var reverbTypes: [Int] = Array(repeating: 1, count: K.Sequencer.numberOfTracks)
     
@@ -118,29 +122,39 @@ struct Sequencer {
         engine.attach(players[3])
         engine.attach(guidePlayer)
         
-        engine.attach(reverbs[0])
-        engine.attach(reverbs[1])
-        engine.attach(reverbs[2])
-        engine.attach(reverbs[3])
+        engine.attach(distortions[0])
+        engine.attach(distortions[1])
+        engine.attach(distortions[2])
+        engine.attach(distortions[3])
         
         engine.attach(delays[0])
         engine.attach(delays[1])
         engine.attach(delays[2])
         engine.attach(delays[3])
         
-        engine.connect(players[0], to: delays[0], format: format)
+        engine.attach(reverbs[0])
+        engine.attach(reverbs[1])
+        engine.attach(reverbs[2])
+        engine.attach(reverbs[3])
+        
+      
+        engine.connect(players[0], to: distortions[0], format: format)
+        engine.connect(distortions[0], to: delays[0], format: format)
         engine.connect(delays[0], to: reverbs[0], format: format)
         engine.connect(reverbs[0], to: engine.mainMixerNode, format: format)
         
-        engine.connect(players[1], to: delays[1], format: format)
+        engine.connect(players[1], to: distortions[1], format: format)
+        engine.connect(distortions[1], to: delays[1], format: format)
         engine.connect(delays[1], to: reverbs[1], format: format)
         engine.connect(reverbs[1], to: engine.mainMixerNode, format: format)
         
-        engine.connect(players[2], to: delays[2], format: format)
+        engine.connect(players[2], to: distortions[2], format: format)
+        engine.connect(distortions[2], to: delays[2], format: format)
         engine.connect(delays[2], to: reverbs[2], format: format)
         engine.connect(reverbs[2], to: engine.mainMixerNode, format: format)
         
-        engine.connect(players[3], to: delays[3], format: format)
+        engine.connect(players[3], to: distortions[3], format: format)
+        engine.connect(distortions[3], to: delays[3], format: format)
         engine.connect(delays[3], to: reverbs[3], format: format)
         engine.connect(reverbs[3], to: engine.mainMixerNode, format: format)
         
@@ -148,17 +162,6 @@ struct Sequencer {
             reverbs[i].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[i])!)
             reverbs[i].wetDryMix = reverbWetDryMixes[i]
         }
-//        reverbs[0].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[0])!)
-//        reverbs[0].wetDryMix = reverbWetDryMixes[1]
-//
-//        reverbs[1].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[1])!)
-//        reverbs[1].wetDryMix = reverbWetDryMixes[1]
-//
-//        reverbs[2].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[2])!)
-//        reverbs[2].wetDryMix = reverbWetDryMixes[2]
-//
-//        reverbs[3].loadFactoryPreset(AVAudioUnitReverbPreset(rawValue: reverbTypes[3])!)
-//        reverbs[3].wetDryMix = reverbWetDryMixes[3]
         
         //
         // Populate delayTimes array with actual times & init to delay units
@@ -175,23 +178,16 @@ struct Sequencer {
                // delays[i].lowPassCutoff
             }
         }
-        
-        
-//        delays[0].delayTime = delayTimes[0]
-//        delays[0].feedback = delayFeedbacks[0]
-//        delays[0].wetDryMix = delayWetDryMixes[0]
-//
-//        delays[1].delayTime = delayTimes[1]
-//        delays[1].feedback = delayFeedbacks[1]
-//        delays[1].wetDryMix = delayWetDryMixes[1]
-//
-//        delays[2].delayTime = delayTimes[2]
-//        delays[2].feedback = delayFeedbacks[2]
-//        delays[2].wetDryMix = delayWetDryMixes[2]
-//
-//        delays[3].delayTime = delayTimes[3]
-//        delays[3].feedback = delayFeedbacks[3]
-//        delays[3].wetDryMix = delayWetDryMixes[3]
+       
+        //
+        // Init distortion units
+        //
+        for i in 0...(K.Sequencer.numberOfTracks-1) {
+            distortions[i].loadFactoryPreset(distortionPresets[i])
+            distortions[i].wetDryMix = distortionWetDryMixes[i]
+            distortions[i].preGain = distortionPreGains[i]
+
+        }
         
         engine.prepare()
         do { try engine.start() } catch { print(error) }
@@ -208,8 +204,6 @@ struct Sequencer {
         print(durationOf16thNoteInSamples(forTrack: 1))
         print(durationOf16thNoteInSamples(forTrack: 2))
         print( durationOf16thNoteInSamples(forTrack: 3))
-      
-        
     }
     
     mutating func loadPart(partName: PartNames) {
