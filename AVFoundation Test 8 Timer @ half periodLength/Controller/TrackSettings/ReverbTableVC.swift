@@ -52,6 +52,12 @@ class ReverbTableVC: UITableViewController {
             reverbTypeStepper.value = Double(revType)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+    }
+    
 }
 
 //

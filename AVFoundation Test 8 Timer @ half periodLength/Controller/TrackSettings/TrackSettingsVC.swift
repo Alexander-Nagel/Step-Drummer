@@ -67,7 +67,7 @@ class TrackSettingsVC: UITableViewController {
         if segue.identifier == "goToReverbTableVC" {
             let rtVC = segue.destination as! ReverbTableVC
             rtVC.popoverPresentationController?.delegate = self
-            rtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
+        //    rtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
 
             
             rtVC.delegate = self
@@ -83,7 +83,7 @@ class TrackSettingsVC: UITableViewController {
         if segue.identifier == "goToDelayTableVC" {
             let dtVC = segue.destination as! DelayTableVC
             dtVC.popoverPresentationController?.delegate = self
-            dtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
+        //    dtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
             
             dtVC.delegate = self
 
@@ -96,7 +96,7 @@ class TrackSettingsVC: UITableViewController {
         if segue.identifier == "goToDistortionTableVC" {
             let ditVC = segue.destination as! DistortionTableVC
             ditVC.popoverPresentationController?.delegate = self
-            ditVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
+            //ditVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
             
             ditVC.delegate = self
 
@@ -127,7 +127,7 @@ extension TrackSettingsVC {
 // MARK:- Popover
 //
 extension TrackSettingsVC: UIPopoverPresentationControllerDelegate {
-    
+
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
@@ -151,7 +151,7 @@ extension TrackSettingsVC: SoundSelectionTableVCDelegate {
 //
 // MARK:- Table View 
 //
-//extension TrackSettingsVC {
+extension TrackSettingsVC {
 //    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 //        if let headerView = view as? UITableViewHeaderFooterView {
 //            //     headerView.contentView.backgroundColor = K.Color.blue
@@ -165,8 +165,14 @@ extension TrackSettingsVC: SoundSelectionTableVCDelegate {
 //        //cell.accessoryView?.backgroundColor = K.Color.blue
 //        
 //    }
-//    
-//}
+//
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+    }
+    
+}
 
 //
 // MARK:- ReverbTableVC Delegate
@@ -261,7 +267,12 @@ extension TrackSettingsVC: DistortionTableVCDelegate {
        
         (delegate as! MainVC).seq.distortionPresets[currentPlayer!] = newPreset
         (delegate as! MainVC).seq.distortions[currentPlayer!].loadFactoryPreset(newPreset)
+
+        let newWetDry = (delegate as! MainVC).seq.distortions[currentPlayer!].wetDryMix
+        let newPreGain = (delegate as! MainVC).seq.distortions[currentPlayer!].preGain
         
+        print("New wetDry: \(newWetDry), new preGain: \(newPreGain)")
+
         
 
     }

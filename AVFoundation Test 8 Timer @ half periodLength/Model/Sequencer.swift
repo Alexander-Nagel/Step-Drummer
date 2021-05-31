@@ -189,7 +189,6 @@ struct Sequencer {
 
         }
         
-        
         engine.prepare()
         do { try engine.start() } catch { print(error) }
         

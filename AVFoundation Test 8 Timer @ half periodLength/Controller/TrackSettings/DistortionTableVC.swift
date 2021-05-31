@@ -61,7 +61,14 @@ class DistortionTableVC: UITableViewController {
             distortionPresetStepper.value = Double(newStepperValue)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+    }
 }
+
+
 
 //
 // MARK:- Events
@@ -89,18 +96,18 @@ extension DistortionTableVC {
         //
         // Update wetDryMix & PreGain Slider after switching of presets
         //
-        let mainVC = ((delegate as! TrackSettingsVC).delegate as! MainVC) // ugly...
-        let trackSettingsVC = (delegate as! TrackSettingsVC) // ugly...
-        let currentplayer = trackSettingsVC.currentPlayer! // ugly...
-        
-        let newWetDry = mainVC.seq.distortions[currentplayer].wetDryMix
-        let newPreGain = mainVC.seq.distortions[currentplayer].preGain
-        
-        print("New wetDry: \(newWetDry), new preGain: \(newPreGain)")
-        
-        distortionWetDryMixSlider.value = newWetDry
-        distortionPreGainSlider.value = newPreGain
-        
+//        let mainVC = ((delegate as! TrackSettingsVC).delegate as! MainVC) // ugly...
+//        let trackSettingsVC = (delegate as! TrackSettingsVC) // ugly...
+//        let currentplayer = trackSettingsVC.currentPlayer! // ugly...
+//        
+//        let newWetDry = mainVC.seq.distortions[currentplayer].wetDryMix
+//        let newPreGain = mainVC.seq.distortions[currentplayer].preGain
+//        
+//        print("New wetDry: \(newWetDry), new preGain: \(newPreGain)")
+//        
+//        distortionWetDryMixSlider.value = newWetDry
+//        distortionPreGainSlider.value = newPreGain
+//        
         
         
     }

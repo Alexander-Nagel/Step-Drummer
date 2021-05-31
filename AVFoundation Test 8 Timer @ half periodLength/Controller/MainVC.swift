@@ -338,7 +338,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             drawSoftNotes = false
             //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-            softModeButton.backgroundColor = K.Color.blue
+            softModeButton.backgroundColor = K.Color.blue_brighter
         } else {
             //
             // switch soft note mode  ON
@@ -601,25 +601,6 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         updateUI()
     }
     
-    
-    
-    //
-    // MARK:- Stepper action
-    //
-//    @IBAction func stepperPressed(_ sender: UIStepper) {
-//
-//        let newTempo = bpmStepper.value
-//        seq.tempo?.bpm = newTempo
-//
-//        preScheduleFirstBuffer(forPlayer: 0)
-//        preScheduleFirstBuffer(forPlayer: 1)
-//        preScheduleFirstBuffer(forPlayer: 2)
-//        preScheduleFirstBuffer(forPlayer: 3)
-//        preScheduleFirstGuideBuffer()
-//
-//        updateUIAfterTempoChange(to: newTempo)
-//    }
-    
     //
     // MARK:- PLAY / PAUSE button action
     //
@@ -699,13 +680,13 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             // Values at begin of timer event
             var currentTime = round(self.seq.players[0].currentTimeInSeconds, toDigits: 3)
             
-            print(#function)
-            
-            print(self.seq.soundBuffers.normal[0].frameLength, self.seq.silenceBuffers[0].frameLength, "  ",
-                  self.seq.soundBuffers.normal[1].frameLength, self.seq.silenceBuffers[1].frameLength, "  ",
-                  self.seq.soundBuffers.normal[2].frameLength, self.seq.silenceBuffers[2].frameLength, "  ",
-                  self.seq.soundBuffers.normal[3].frameLength, self.seq.silenceBuffers[3].frameLength
-            )
+//            print(#function)
+//
+//            print(self.seq.soundBuffers.normal[0].frameLength, self.seq.silenceBuffers[0].frameLength, "  ",
+//                  self.seq.soundBuffers.normal[1].frameLength, self.seq.silenceBuffers[1].frameLength, "  ",
+//                  self.seq.soundBuffers.normal[2].frameLength, self.seq.silenceBuffers[2].frameLength, "  ",
+//                  self.seq.soundBuffers.normal[3].frameLength, self.seq.silenceBuffers[3].frameLength
+//            )
             
             if DEBUG {
                 print("player 0 timerEvent #\(self.timerEventCounter0) at \(self.seq.tempo!.bpm) BPM")
@@ -725,6 +706,10 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 if nextStep == self.seq.displayedTracks[0].numberOfCellsActive {
                     nextStep = 0
                 }
+                if nextStep == 0 {
+                    print("*** ", self.seq.distortions[0].wetDryMix, self.seq.distortions[0].preGain, self.seq.distortions[0].self)
+                }
+                
                 let nextCell = self.seq.displayedTracks[0].cells[nextStep]
                 
                 if nextCell == .ON {
@@ -1123,7 +1108,7 @@ DispatchQueue.main.async {
         
         print(#function)
         
-        printFrameLengths()
+       // printFrameLengths()
         
         seq.players[seletedPlayer].stop()
         if seq.displayedTracks[seletedPlayer].cells[0] == .ON {
@@ -1145,7 +1130,7 @@ DispatchQueue.main.async {
         
         print(#function)
         
-        printFrameLengths()
+      //  printFrameLengths()
         
         seq.guidePlayer.stop()
         
@@ -1482,8 +1467,8 @@ DispatchQueue.main.async {
             // Mute row / player
             //
             seq.players[sender.tag].volume = 0
-            muteButtons[sender.tag].backgroundColor = .none
-//            muteButtons[sender.tag].tintColor = K.Color.blue_brightest
+//            muteButtons[sender.tag].backgroundColor = .none
+            muteButtons[sender.tag].tintColor = K.Color.blue_brighter
             
             let buttonRowToBeMuted = trackButtonMatrix[sender.tag]
             for button in buttonRowToBeMuted {
@@ -1495,8 +1480,8 @@ DispatchQueue.main.async {
             // Un-mute row / player
             //
             seq.players[sender.tag].volume = Float(seq.volumes[sender.tag])
-            muteButtons[sender.tag].backgroundColor = K.Color.muteButtonColor
-//            muteButtons[sender.tag].tintColor = K.Color.blue_brightest
+//            muteButtons[sender.tag].backgroundColor = K.Color.muteButtonColor
+            muteButtons[sender.tag].tintColor = K.Color.white
             
             let buttonRowToBeUnmuted = trackButtonMatrix[sender.tag]
             for button in buttonRowToBeUnmuted {
@@ -1600,9 +1585,9 @@ DispatchQueue.main.async {
         for (index, segueName) in segueNames.enumerated() {
             if segue.identifier == segueName {
                 let trackSettingsVC = segue.destination as! TrackSettingsVC
-                trackSettingsVC.popoverPresentationController?.delegate = self
                 
-                trackSettingsVC.popoverPresentationController?.passthroughViews = [self.view]
+                trackSettingsVC.popoverPresentationController?.delegate = self
+                //trackSettingsVC.popoverPresentationController?.passthroughViews = [self.view]
 
                 trackSettingsVC.delegate = self
                 

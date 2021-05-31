@@ -64,6 +64,11 @@ class DelayTableVC: UITableViewController {
            // print(currentDelayPresetIndex)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+    }
 }
 
 //
@@ -74,6 +79,7 @@ extension DelayTableVC {
     @IBAction func delayWetDryMixChanged(_ sender: UISlider) {
         print(#function)
         delegate?.changeDelayWetDryMix(toValue: sender.value)
+        print("Setting wet dry to \(sender.value)")
     }
     
     @IBAction func delayFeedbackChanged(_ sender: UISlider) {
