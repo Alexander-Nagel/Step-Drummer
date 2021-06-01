@@ -1584,13 +1584,15 @@ DispatchQueue.main.async {
         
         for (index, segueName) in segueNames.enumerated() {
             if segue.identifier == segueName {
-                let trackSettingsVC = segue.destination as! TrackSettingsVC
+                let navVC = segue.destination
+                let  trackSettingsVC = navVC.children.first as! TrackSettingsVC
+//                let trackSettingsVC = segue.destination as! TrackSettingsVC
                 
                 trackSettingsVC.popoverPresentationController?.delegate = self
                 //trackSettingsVC.popoverPresentationController?.passthroughViews = [self.view]
 
                 trackSettingsVC.delegate = self
-                
+               
                 trackSettingsVC.currentPlayer = (sender as! UIButton).tag
                 
                 trackSettingsVC.selectedSound = seq.selectedSounds[index]
@@ -1630,9 +1632,9 @@ DispatchQueue.main.async {
 
     }
     
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }
+//    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+//        return UIModalPresentationStyle.none
+//    }
     
     //
     // MARK:- TRACK SETTINGS

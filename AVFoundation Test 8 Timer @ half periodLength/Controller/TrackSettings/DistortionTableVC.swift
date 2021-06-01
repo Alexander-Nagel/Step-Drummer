@@ -115,4 +115,10 @@ extension DistortionTableVC {
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        print(#function)
+        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
 }

@@ -48,6 +48,12 @@ class SoundSelectionTableVC: UITableViewController {
             dismiss(animated: true, completion: nil)
         }
     }
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        print(#function)
+        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.

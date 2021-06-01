@@ -15,7 +15,11 @@ class LoadSaveVC: UIViewController {
         title = "Load / Save"
     }
     
-
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        print(#function)
+        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
     /*
     // MARK: - Navigation
 

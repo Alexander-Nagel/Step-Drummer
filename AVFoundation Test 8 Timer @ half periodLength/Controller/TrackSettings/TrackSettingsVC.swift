@@ -44,21 +44,39 @@ class TrackSettingsVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let backButton = UIBarButtonItem()
+//        backButton.title = "Back"
+//        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+//
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
+//          title = "Track \(currentPlayer) Settings"
+        if let player = currentPlayer {
+            self.navigationItem.title = "Track \(player + 1) Settings"
+        }
         selectedSoundLabel.text = selectedSound ?? "-"
         if let vol = volume {
             volumeSlider.value = vol
         }
     }
     
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        guard let player = currentPlayer else {
+//            fatalError("ooops")}
+//
+//        return "Track \(player+1) Settings"
+//
+//    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "goToSoundSelectionVC" {
             let ssVC = segue.destination as! SoundSelectionTableVC
-            ssVC.popoverPresentationController?.delegate = self
+           // ssVC.popoverPresentationController?.delegate = self
             
             ssVC.fileNames = fileNames
             ssVC.delegate = self
@@ -66,7 +84,7 @@ class TrackSettingsVC: UITableViewController {
         
         if segue.identifier == "goToReverbTableVC" {
             let rtVC = segue.destination as! ReverbTableVC
-            rtVC.popoverPresentationController?.delegate = self
+            //rtVC.popoverPresentationController?.delegate = self
         //    rtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
 
             
@@ -75,14 +93,14 @@ class TrackSettingsVC: UITableViewController {
             rtVC.reverbWetDryMix = self.reverbWetDryMix
             rtVC.reverbType = self.reverbType
             
-            print("REV02 mix \(self.reverbWetDryMix)")
-            print("REV02 type  \(self.reverbType)")
+            print("REV02 mix \(String(describing: self.reverbWetDryMix))")
+            print("REV02 type  \(String(describing: self.reverbType))")
             
         }
         
         if segue.identifier == "goToDelayTableVC" {
             let dtVC = segue.destination as! DelayTableVC
-            dtVC.popoverPresentationController?.delegate = self
+           // dtVC.popoverPresentationController?.delegate = self
         //    dtVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
             
             dtVC.delegate = self
@@ -95,7 +113,7 @@ class TrackSettingsVC: UITableViewController {
         
         if segue.identifier == "goToDistortionTableVC" {
             let ditVC = segue.destination as! DistortionTableVC
-            ditVC.popoverPresentationController?.delegate = self
+            //ditVC.popoverPresentationController?.delegate = self
             //ditVC.popoverPresentationController?.passthroughViews = [self.view, (delegate as! MainVC).view]
             
             ditVC.delegate = self
@@ -120,18 +138,25 @@ extension TrackSettingsVC {
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        print(#function)
+        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 
 //
 // MARK:- Popover
 //
-extension TrackSettingsVC: UIPopoverPresentationControllerDelegate {
-
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }
-}
+//extension TrackSettingsVC: UIPopoverPresentationControllerDelegate {
+//
+//    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+//        return UIModalPresentationStyle.none
+//    }
+//}
 
 //
 // MARK:- SoundSelectionTableVCDelegate

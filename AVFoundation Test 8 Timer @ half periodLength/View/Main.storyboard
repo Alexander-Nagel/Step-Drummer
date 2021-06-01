@@ -35,9 +35,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="39.5"/>
                                                                 <state key="normal" image="gear" catalog="system"/>
                                                                 <connections>
-                                                                    <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC0" popoverAnchorView="hpU-p6-0s9" id="CSp-mk-Alq">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
+                                                                    <segue destination="pUJ-In-M6m" kind="presentation" identifier="goToTrackSettingsVC0" id="Msn-Wx-rW8"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeX-1k-eb4" userLabel="MUTE 0">
@@ -183,9 +181,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="39.5"/>
                                                                 <state key="normal" image="gear" catalog="system"/>
                                                                 <connections>
-                                                                    <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC1" popoverAnchorView="jpJ-Z9-ymI" id="c7c-uu-yDE">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
+                                                                    <segue destination="Pe4-hW-bwG" kind="presentation" identifier="goToTrackSettingsVC1" id="PzV-XP-FBh"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OF7-ES-xHR" userLabel="MUTE 1">
@@ -343,9 +339,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="39.5"/>
                                                                 <state key="normal" image="gear" catalog="system"/>
                                                                 <connections>
-                                                                    <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC2" popoverAnchorView="tAm-PS-FVt" id="H1j-Fq-xGq">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
+                                                                    <segue destination="43X-gK-80r" kind="presentation" identifier="goToTrackSettingsVC2" id="8vi-OU-7B9"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5V-ph-Iwo" userLabel="MUTE 2">
@@ -503,9 +497,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="39.5"/>
                                                                 <state key="normal" image="gear" catalog="system"/>
                                                                 <connections>
-                                                                    <segue destination="2w5-Nv-DYW" kind="popoverPresentation" identifier="goToTrackSettingsVC3" popoverAnchorView="UdF-W0-Xvb" id="mzx-FB-cSx">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
+                                                                    <segue destination="JN8-w7-doD" kind="presentation" identifier="goToTrackSettingsVC3" id="MG0-16-L03"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqU-q8-OOg" userLabel="MUTE 3">
@@ -794,7 +786,7 @@
                             </barButtonItem>
                             <barButtonItem title="Load / Save" id="IMi-oM-Bth">
                                 <connections>
-                                    <segue destination="D9S-lc-cVJ" kind="show" id="xY5-AG-eHo"/>
+                                    <segue destination="jnB-ym-qfv" kind="presentation" id="Cfg-m6-Vtl"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -885,7 +877,39 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591.9014084507041" y="16.875"/>
+            <point key="canvasLocation" x="964" y="-236"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jjk-IL-ue3">
+            <objects>
+                <navigationController id="pUJ-In-M6m" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ji6-Kd-pXY">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2w5-Nv-DYW" kind="relationship" relationship="rootViewController" id="Mwy-Sb-5MR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mX3-oQ-9uF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-132" y="1005"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jWz-7r-4Tn">
+            <objects>
+                <navigationController id="Pe4-hW-bwG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HaA-lZ-ydr">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2w5-Nv-DYW" kind="relationship" relationship="rootViewController" id="VkZ-Me-Qpo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q1M-kP-dci" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="562" y="1005"/>
         </scene>
         <!--Settings TableVC-->
         <scene sceneID="Ayq-1r-kAk">
@@ -961,18 +985,34 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yze-WT-b3R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1689" y="-954"/>
+            <point key="canvasLocation" x="1910" y="-330"/>
         </scene>
-        <!--Load SaveVC-->
+        <!--Navigation Controller-->
+        <scene sceneID="k5t-Xd-fs2">
+            <objects>
+                <navigationController id="jnB-ym-qfv" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4gc-Hx-zAJ">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="D9S-lc-cVJ" kind="relationship" relationship="rootViewController" id="4w1-L7-mEe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Po-Nj-sdI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1571" y="-1176"/>
+        </scene>
+        <!--Load / Save Snapshots-->
         <scene sceneID="YLz-K8-oGS">
             <objects>
                 <viewController id="D9S-lc-cVJ" customClass="LoadSaveVC" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TBH-Jx-VpC">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9zf-hf-qRi">
-                                <rect key="frame" x="5" y="5" width="558" height="278"/>
+                                <rect key="frame" x="5" y="37" width="558" height="278"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0bA-ad-FmC">
                                         <rect key="frame" x="0.0" y="0.0" width="558" height="243"/>
@@ -1021,24 +1061,30 @@
                             <constraint firstItem="9zf-hf-qRi" firstAttribute="leading" secondItem="Uz0-jZ-bR6" secondAttribute="leading" constant="5" id="taS-L9-Xb0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bjl-qQ-Vvr"/>
+                    <navigationItem key="navigationItem" title="Load / Save Snapshots" id="bjl-qQ-Vvr">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="C4t-Pg-A2t">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="D9S-lc-cVJ" id="RTf-8f-hfg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufx-88-PGf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2300" y="-883"/>
+            <point key="canvasLocation" x="2258" y="-1178"/>
         </scene>
         <!--Reverb TableVC-->
         <scene sceneID="DOa-Tz-opc">
             <objects>
                 <tableViewController id="6dQ-FY-hVm" customClass="ReverbTableVC" customModule="AVFoundation_Test_8_Timer___half_periodLength" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1mE-Tp-shg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1mE-Tp-shg">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Reverb Settings" id="1l0-i1-bIP">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Y23-Rh-QHU" style="IBUITableViewCellStyleDefault" id="kh4-up-fzW" userLabel="Wet Dry Mix">
+                                    <tableViewCell clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Y23-Rh-QHU" style="IBUITableViewCellStyleDefault" id="kh4-up-fzW" userLabel="Wet Dry Mix">
                                         <rect key="frame" x="0.0" y="28" width="280" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kh4-up-fzW" id="bKI-BF-jY1">
@@ -1062,8 +1108,33 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="FR6-d3-ao9" userLabel="Reverb Type Label">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ftv-mw-BSX" userLabel="Wet Dry Mix 2">
                                         <rect key="frame" x="0.0" y="71.5" width="280" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ftv-mw-BSX" id="R09-UP-cnU">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="91" translatesAutoresizingMaskIntoConstraints="NO" id="v29-3z-NeA">
+                                                    <rect key="frame" x="-69.5" y="7" width="419" height="29.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhh-tu-tqA">
+                                                    <rect key="frame" x="0.0" y="7" width="41" height="29.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rYz-yI-FEo">
+                                                    <rect key="frame" x="86" y="7" width="196" height="30.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </slider>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="FR6-d3-ao9" userLabel="Reverb Type Label">
+                                        <rect key="frame" x="0.0" y="115" width="280" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FR6-d3-ao9" id="OhR-Ww-bmf">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
@@ -1085,24 +1156,27 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qLn-U1-wF7" userLabel="Reverb Type Stepper">
-                                        <rect key="frame" x="0.0" y="115" width="280" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="158.5" width="280" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qLn-U1-wF7" id="XwS-qF-0te">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="FTO-cv-hnv">
-                                                    <rect key="frame" x="93" y="5" width="94" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="FTO-cv-hnv">
+                                                    <rect key="frame" x="93" y="6" width="94" height="32"/>
                                                     <connections>
                                                         <action selector="changeReverbType:" destination="6dQ-FY-hVm" eventType="valueChanged" id="dKC-Ff-nVJ"/>
                                                     </connections>
                                                 </stepper>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FTO-cv-hnv" firstAttribute="centerY" secondItem="XwS-qF-0te" secondAttribute="centerY" id="FnT-PR-5Ct"/>
+                                                <constraint firstItem="FTO-cv-hnv" firstAttribute="centerX" secondItem="XwS-qF-0te" secondAttribute="centerX" id="LPI-nn-Lfg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Nvc-xp-uKa" userLabel="CLOSE">
-                                        <rect key="frame" x="0.0" y="158.5" width="280" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="202" width="280" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nvc-xp-uKa" id="Ocd-rr-Uab">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
@@ -1135,6 +1209,13 @@
                             <outlet property="delegate" destination="6dQ-FY-hVm" id="CVp-ml-3aO"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="J1g-8X-Qho">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="uaF-Mr-NTv">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="6dQ-FY-hVm" id="dq0-NR-Xmr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="280" height="300"/>
                     <size key="freeformSize" width="280" height="320"/>
                     <connections>
@@ -1145,7 +1226,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WiH-3i-DgT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2765" y="83"/>
+            <point key="canvasLocation" x="1419" y="3615"/>
         </scene>
         <!--Track SettingsVC-->
         <scene sceneID="F0K-Hd-9lj">
@@ -1156,7 +1237,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Track Settings" id="muX-6u-7K1">
+                            <tableViewSection id="muX-6u-7K1">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="fFL-Oz-p7w" detailTextLabel="KuB-Yk-xJu" style="IBUITableViewCellStyleValue1" id="U5I-Dq-jPK" userLabel="Sound">
                                         <rect key="frame" x="0.0" y="28" width="280" height="43.5"/>
@@ -1182,9 +1263,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="NLg-xe-dlb" kind="popoverPresentation" identifier="goToSoundSelectionVC" popoverAnchorView="U5I-Dq-jPK" id="uYp-4p-Kwa">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="NLg-xe-dlb" kind="show" identifier="goToSoundSelectionVC" id="uYp-4p-Kwa"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="F4H-Mg-oEr" style="IBUITableViewCellStyleDefault" id="eaM-Xk-A6L" userLabel="Volume">
@@ -1235,9 +1314,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="6dQ-FY-hVm" kind="popoverPresentation" identifier="goToReverbTableVC" popoverAnchorView="T1i-ef-nDk" id="TPl-fL-mbf">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="6dQ-FY-hVm" kind="show" identifier="goToReverbTableVC" id="TPl-fL-mbf"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="HAM-hf-gEl" detailTextLabel="7uL-B8-Tap" style="IBUITableViewCellStyleValue1" id="7Cv-W9-v1b" userLabel="Delay">
@@ -1264,9 +1341,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="dCg-ee-91O" kind="popoverPresentation" identifier="goToDelayTableVC" popoverAnchorView="7uL-B8-Tap" id="7Vj-eu-vLT">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="dCg-ee-91O" kind="show" identifier="goToDelayTableVC" id="7Vj-eu-vLT"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="q7U-cI-UtI" detailTextLabel="LuT-tZ-ofd" style="IBUITableViewCellStyleValue1" id="YU6-eZ-IL9" userLabel="Distortion">
@@ -1293,9 +1368,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="xOW-V3-Tau" kind="popoverPresentation" identifier="goToDistortionTableVC" popoverAnchorView="LuT-tZ-ofd" id="KYG-wn-EpQ">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="xOW-V3-Tau" kind="show" identifier="goToDistortionTableVC" id="KYG-wn-EpQ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RZw-br-NVL" userLabel="CLOSE">
@@ -1332,6 +1405,13 @@
                             <outlet property="delegate" destination="2w5-Nv-DYW" id="aTM-ln-35V"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="9dp-kD-U5m">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="P2F-Do-Yco">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="2w5-Nv-DYW" id="5u1-ic-C9a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="280" height="300"/>
                     <size key="freeformSize" width="280" height="300"/>
                     <connections>
@@ -1343,7 +1423,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAv-Fq-URv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2199" y="64"/>
+            <point key="canvasLocation" x="1304" y="2359"/>
         </scene>
         <!--Sound Selection TableVC-->
         <scene sceneID="DEZ-g1-uaj">
@@ -1368,13 +1448,19 @@
                             <outlet property="delegate" destination="NLg-xe-dlb" id="suq-zS-TbK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eLX-wt-UBO"/>
+                    <navigationItem key="navigationItem" id="eLX-wt-UBO">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="QMC-ps-36c">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="NLg-xe-dlb" id="pzv-1A-dkp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="280" height="300"/>
                     <size key="freeformSize" width="280" height="300"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oEl-xK-zru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2835" y="-634"/>
+            <point key="canvasLocation" x="1092" y="3452"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UrF-0X-HrK">
@@ -1392,7 +1478,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eD9-3T-36t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767.95774647887322" y="16.875"/>
+            <point key="canvasLocation" x="211" y="-664"/>
         </scene>
         <!--Delay TableVC-->
         <scene sceneID="FgN-W2-Zym">
@@ -1529,6 +1615,13 @@
                             <outlet property="delegate" destination="dCg-ee-91O" id="ubB-NM-RMD"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="3so-Wv-Dyx">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="5tP-Oy-yDe">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="dCg-ee-91O" id="9FX-FX-KAc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="280" height="300"/>
                     <size key="freeformSize" width="280" height="320"/>
                     <connections>
@@ -1540,7 +1633,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0W-fP-KRe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2336" y="1144"/>
+            <point key="canvasLocation" x="1756" y="3615"/>
         </scene>
         <!--Distortion TableVC-->
         <scene sceneID="siO-oJ-PTd">
@@ -1630,14 +1723,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="21" translatesAutoresizingMaskIntoConstraints="NO" id="CEH-GM-tX0">
-                                                    <rect key="frame" x="93" y="5" width="94" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="21" translatesAutoresizingMaskIntoConstraints="NO" id="CEH-GM-tX0">
+                                                    <rect key="frame" x="93" y="6" width="94" height="32"/>
                                                     <connections>
                                                         <action selector="distortionPresetChanged:" destination="xOW-V3-Tau" eventType="valueChanged" id="8lB-TO-K2S"/>
                                                     </connections>
                                                 </stepper>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CEH-GM-tX0" firstAttribute="centerY" secondItem="xIF-1X-gnc" secondAttribute="centerY" id="Lfr-CP-pV6"/>
+                                                <constraint firstItem="CEH-GM-tX0" firstAttribute="centerX" secondItem="xIF-1X-gnc" secondAttribute="centerX" id="dR8-yB-1QX"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Kxr-dZ-4ou" userLabel="CLOSE">
@@ -1674,6 +1770,13 @@
                             <outlet property="delegate" destination="xOW-V3-Tau" id="3Wc-BE-wpL"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="QSk-CQ-8xO">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="GUx-M1-hOU">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="xOW-V3-Tau" id="Npb-HT-UU6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="280" height="300"/>
                     <size key="freeformSize" width="280" height="320"/>
                     <connections>
@@ -1685,11 +1788,43 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OwZ-oL-eRF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2701" y="1013"/>
+            <point key="canvasLocation" x="2086" y="3452"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Sbe-Gq-Xk8">
+            <objects>
+                <navigationController id="43X-gK-80r" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uen-gx-a47">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2w5-Nv-DYW" kind="relationship" relationship="rootViewController" id="fQR-WD-vlw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="59r-mF-xfz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1229" y="1005"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7Ur-yD-NPm">
+            <objects>
+                <navigationController id="JN8-w7-doD" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nzx-pW-B10">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2w5-Nv-DYW" kind="relationship" relationship="rootViewController" id="DBn-8g-qy8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qcI-Nu-19E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1879" y="1005"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CSp-mk-Alq"/>
+        <segue reference="DBn-8g-qy8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>

@@ -150,10 +150,10 @@ extension MainVC {
             button.tag = index
            //button.heightAnchor.constraint(equalToConstant: 50).isActive = true
             // button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
-            if let superview = button.superview {
+          //  if let superview = button.superview {
                 //button.topAnchor.constraint(equalTo: superview.topAnchor, constant: 10).isActive = true
                // button.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 20).isActive = true
-            }
+          //  }
             //button.addGestureRecognizer(leftSwipeButton)
             // button.addTarget(self, action: #selector(btnPressedAction), for: .allTouchEvents)
         }

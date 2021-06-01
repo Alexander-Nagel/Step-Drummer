@@ -19,8 +19,6 @@ func cellArrayToStringArray(cellArray: [Cell]) -> [String] {
             stringArray.append("OFF")
         case .SOFT:
             stringArray.append("SOFT")
-        default:
-            print("pattern contains strange things!")
         }
     }
     

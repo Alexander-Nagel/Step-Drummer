@@ -55,6 +55,7 @@
 		FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */; };
 		FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */; };
 		FAA4C607266534B5005CC23C /* LoadSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4C606266534B5005CC23C /* LoadSaveVC.swift */; };
+		FAA4C61926664276005CC23C /* todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FAA4C61826664275005CC23C /* todo.rtf */; };
 		FAB22319264413D300708387 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAB22318264413D300708387 /* silence.wav */; };
 		FAB47AC22654F9D2006281CE /* PartNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AC12654F9D2006281CE /* PartNames.swift */; };
 		FAB47ACA2654FFBB006281CE /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB47AC92654FFBB006281CE /* Part.swift */; };
@@ -147,6 +148,7 @@
 		FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashExtension.swift; sourceTree = "<group>"; };
 		FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BpmDetector.swift; sourceTree = "<group>"; };
 		FAA4C606266534B5005CC23C /* LoadSaveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadSaveVC.swift; sourceTree = "<group>"; };
+		FAA4C61826664275005CC23C /* todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = todo.rtf; sourceTree = "<group>"; };
 		FAB22318264413D300708387 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
 		FAB47AC12654F9D2006281CE /* PartNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartNames.swift; sourceTree = "<group>"; };
 		FAB47AC92654FFBB006281CE /* Part.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Part.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				FA8D6E83263EF2B5000FFFE3 /* Info.plist */,
 				FA8D6E8E263EF2CF000FFFE3 /* sounds */,
 				FA70CD8B26482B25007A212F /* Notes.rtf */,
+				FAA4C61826664275005CC23C /* todo.rtf */,
 			);
 			path = "AVFoundation Test 8 Timer @ half periodLength";
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				FAFEA98F264BD34E002807DC /* open_hihat_2181samples_SOFT.wav in Resources */,
 				FAFEA98E264BD34E002807DC /* hihat_2154samples_SOFT.wav in Resources */,
 				FAC71DF4264F37AE007FE152 /* 440SN2.wav in Resources */,
+				FAA4C61926664276005CC23C /* todo.rtf in Resources */,
 				FAC71DF2264F37AE007FE152 /* 440OHH.wav in Resources */,
 				FAC71DFA264F37AE007FE152 /* 440KICK2.wav in Resources */,
 				FAC71DF3264F37AE007FE152 /* 440SN1.wav in Resources */,
