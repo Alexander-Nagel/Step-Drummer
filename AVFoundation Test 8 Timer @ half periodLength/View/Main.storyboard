@@ -786,7 +786,7 @@
                             </barButtonItem>
                             <barButtonItem title="Load / Save" id="IMi-oM-Bth">
                                 <connections>
-                                    <segue destination="jnB-ym-qfv" kind="presentation" id="Cfg-m6-Vtl"/>
+                                    <segue destination="jnB-ym-qfv" kind="presentation" identifier="goToLoadSaveVC" id="Cfg-m6-Vtl"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

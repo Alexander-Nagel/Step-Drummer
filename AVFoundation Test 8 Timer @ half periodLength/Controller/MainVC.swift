@@ -1617,6 +1617,17 @@ DispatchQueue.main.async {
             }
         }
         
+        if segue.identifier == "goToLoadSaveVC" {
+            let navVC = segue.destination
+            let loadSaveVC = navVC.children.first as! LoadSaveVC
+            //loadSaveVC.realm = self.realm
+            
+            
+            guard let snapShot = realm.objects(SnapShot.self).first else {return}
+            print(snapShot.name)
+            print(snapShot.soundsArray)
+        }
+        
         
             if segue.identifier == "goToSettings" {
                 let settingsTableVC = segue.destination as! SettingsTableVC

@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class LoadSaveVC: UIViewController {
+    
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +23,12 @@ class LoadSaveVC: UIViewController {
             self.isModalInPresentation = true
         } else {}
         
+        guard let snapShot = realm.objects(SnapShot.self).first else {return}
+        print(snapShot.name)
+        print(snapShot.soundsArray)
         
+        
+       
     }
 
     
