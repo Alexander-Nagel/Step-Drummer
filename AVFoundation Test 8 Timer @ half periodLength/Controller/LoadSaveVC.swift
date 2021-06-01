@@ -12,9 +12,15 @@ class LoadSaveVC: UIViewController {
     
     let realm = try! Realm()
     
+    var snapshots: Results<SnapShot>?
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+
         //        title = "Load / Save"
         
         // Disables dismissing by swiping down:
@@ -23,12 +29,20 @@ class LoadSaveVC: UIViewController {
             self.isModalInPresentation = true
         } else {}
         
-        guard let snapShot = realm.objects(SnapShot.self).first else {return}
-        print(snapShot.name)
-        print(snapShot.soundsArray)
+        loadSnapshots()
+
+//        guard let snapShot = realm.objects(SnapShot.self).first else {return}
+//        print(snapShot.name)
+//        print(snapShot.soundsArray)
         
-        
+
        
+    }
+    
+    func loadSnapshots() {
+        
+        snapshots = realm.objects(SnapShot.self)
+        tableView.reloadData()
     }
 
     
@@ -41,16 +55,83 @@ class LoadSaveVC: UIViewController {
     
 }
 
-extension LoadSaveVC: UITableViewDelegate, UITableViewDataSource {
+extension LoadSaveVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return snapshots?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "snapshotCell", for: indexPath)
-        cell.textLabel?.text = "test"
+        
+        if let snapshot = snapshots?[indexPath.row] {
+            
+            cell.textLabel?.text = snapshot.name
+        }
+//        cell.textLabel?.text = "test"
         return cell
+    }
+}
+
+extension LoadSaveVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(#function)
+    }
+    
+}
+
+extension LoadSaveVC {
+    //
+    //MARK: - Add New Snapshots
+    //
+    @IBAction func addButtonPressed(_ sender: UIButton) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Snaphot", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+            
+            //let newCategory = Category(context: self.context)
+            let newSnapShot = SnapShot()
+            
+            newSnapShot.name = textField.text!
+            //newSnapShot.soundsArray = TODO!!!!
+        
+            self.save(snapshot: newSnapShot)
+        }
+        
+        alert.addAction(action)
+        
+        alert.addTextField { (field) in
+            textField = field  
+            field.placeholder = "Add a new snapshot"
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+//
+//MARK: - Data Manipulation Methods - save, load
+//
+extension LoadSaveVC {
+    
+    func save(snapshot: SnapShot) {
+        do {
+            
+            try realm.write {
+                realm.add(snapshot)
+            }
+        } catch {
+            print("Error saving snapshot \(error)")
+        }
+        
+        tableView.reloadData()
+        
     }
 }
