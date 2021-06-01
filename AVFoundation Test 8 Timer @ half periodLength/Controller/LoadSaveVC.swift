@@ -8,32 +8,33 @@
 import UIKit
 
 class LoadSaveVC: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "Load / Save"
+        
+        //        title = "Load / Save"
+        
+        // Disables dismissing by swiping down:
+        //
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        } else {}
+        
+        
     }
+
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         print(#function)
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
 }
 
 extension LoadSaveVC: UITableViewDelegate, UITableViewDataSource {
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -43,10 +44,5 @@ extension LoadSaveVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "snapshotCell", for: indexPath)
         cell.textLabel?.text = "test"
         return cell
-        
     }
-    
-    
-    
-    
 }
