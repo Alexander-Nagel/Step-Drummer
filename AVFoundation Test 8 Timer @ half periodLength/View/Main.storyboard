@@ -1035,16 +1035,26 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Xgm-5v-NFb">
                                         <rect key="frame" x="0.0" y="248" width="558" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wb0-A9-vNB">
-                                                <rect key="frame" x="0.0" y="0.0" width="279" height="30"/>
-                                                <state key="normal" title="Add"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wb0-A9-vNB" userLabel="Load">
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
+                                                <state key="normal" title="Load Selected"/>
                                                 <connections>
-                                                    <action selector="addButtonPressed:" destination="D9S-lc-cVJ" eventType="touchUpInside" id="sZv-8o-1Da"/>
+                                                    <action selector="loadButtonPressed:" destination="D9S-lc-cVJ" eventType="touchUpInside" id="C8S-7A-NeB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-11-L76" userLabel="Save">
+                                                <rect key="frame" x="186" y="0.0" width="186" height="30"/>
+                                                <state key="normal" title="Save Current State As..."/>
+                                                <connections>
+                                                    <action selector="saveButtonPressed:" destination="D9S-lc-cVJ" eventType="touchUpInside" id="I8T-Vz-ut6"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWp-zb-9hY">
-                                                <rect key="frame" x="279" y="0.0" width="279" height="30"/>
+                                                <rect key="frame" x="372" y="0.0" width="186" height="30"/>
                                                 <state key="normal" title="Delete"/>
+                                                <connections>
+                                                    <action selector="deleteButtonPressed:" destination="D9S-lc-cVJ" eventType="touchUpInside" id="fiu-Dq-Sj4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

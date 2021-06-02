@@ -23,8 +23,7 @@
 		FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30E2653F24E005D2A2F /* Cell.swift */; };
 		FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D3122653F26F005D2A2F /* Tempo.swift */; };
 		FA18D31726542B09005D2A2F /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D31626542B09005D2A2F /* VerticalButton.swift */; };
-		FA2B383C265AEA8B00E602F6 /* CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B383B265AEA8B00E602F6 /* CRUD.swift */; };
-		FA2B3840265AEAE500E602F6 /* SnapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B383F265AEAE500E602F6 /* SnapShot.swift */; };
+		FA2B3840265AEAE500E602F6 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B383F265AEAE500E602F6 /* Snapshot.swift */; };
 		FA2B3846265AF23900E602F6 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3845265AF23900E602F6 /* SettingsTableVC.swift */; };
 		FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */; };
 		FA2B3854265C5AD800E602F6 /* cellArrayToStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */; };
@@ -112,8 +111,7 @@
 		FA18D30E2653F24E005D2A2F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		FA18D3122653F26F005D2A2F /* Tempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
 		FA18D31626542B09005D2A2F /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
-		FA2B383B265AEA8B00E602F6 /* CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUD.swift; sourceTree = "<group>"; };
-		FA2B383F265AEAE500E602F6 /* SnapShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapShot.swift; sourceTree = "<group>"; };
+		FA2B383F265AEAE500E602F6 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		FA2B3845265AF23900E602F6 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC SettingsTableVCDelegate.swift"; sourceTree = "<group>"; };
 		FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellArrayToStringArray.swift; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 				FA12A33626564D4300439FA3 /* SettingsVC.swift */,
 				FA12A3322655C25E00439FA3 /* PickerView Extension.swift */,
 				FA18D3062653E3C0005D2A2F /* setupUI.swift */,
-				FA2B383B265AEA8B00E602F6 /* CRUD.swift */,
 				FAA4C606266534B5005CC23C /* LoadSaveVC.swift */,
 			);
 			path = Controller;
@@ -265,7 +262,7 @@
 				FAB47AD72655ACC1006281CE /* ChainModeNames.swift */,
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 				FA12A3462656B60E00439FA3 /* Shared.swift */,
-				FA2B383F265AEAE500E602F6 /* SnapShot.swift */,
+				FA2B383F265AEAE500E602F6 /* Snapshot.swift */,
 				FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */,
 				FA425DFA26628519007D8977 /* SyncDelay.swift */,
 			);
@@ -623,14 +620,13 @@
 				FAA4C607266534B5005CC23C /* LoadSaveVC.swift in Sources */,
 				FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */,
 				FA6D27BF2663EAFC00AE6D5B /* DistortionTableVC.swift in Sources */,
-				FA2B3840265AEAE500E602F6 /* SnapShot.swift in Sources */,
+				FA2B3840265AEAE500E602F6 /* Snapshot.swift in Sources */,
 				FA12A34D2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift in Sources */,
 				FA12A33726564D4300439FA3 /* SettingsVC.swift in Sources */,
 				FA2B3846265AF23900E602F6 /* SettingsTableVC.swift in Sources */,
 				FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */,
 				FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */,
 				FA18D30B2653F206005D2A2F /* Track.swift in Sources */,
-				FA2B383C265AEA8B00E602F6 /* CRUD.swift in Sources */,
 				FA425DFB26628519007D8977 /* SyncDelay.swift in Sources */,
 				FAB47AD82655ACC1006281CE /* ChainModeNames.swift in Sources */,
 				FA2B385C265C5DF500E602F6 /* stringListToCellArray.swift in Sources */,

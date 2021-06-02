@@ -12,7 +12,8 @@ class LoadSaveVC: UIViewController {
     
     let realm = try! Realm()
     
-    var snapshots: Results<SnapShot>?
+    var snapshots: Results<Snapshot>?
+    var selectedSnapshotName: String?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -41,7 +42,7 @@ class LoadSaveVC: UIViewController {
     
     func loadSnapshots() {
         
-        snapshots = realm.objects(SnapShot.self)
+        snapshots = realm.objects(Snapshot.self)
         tableView.reloadData()
     }
 
@@ -52,6 +53,15 @@ class LoadSaveVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        print (indexPath.row)
+        print(snapshots?[0].name)
+        print(snapshots?[1].name)
+        guard let results = snapshots?[indexPath.row] else { return }
+        
+        selectedSnapshotName = results.name
+    }
     
 }
 
@@ -88,31 +98,47 @@ extension LoadSaveVC {
     //
     //MARK: - Add New Snapshots
     //
-    @IBAction func addButtonPressed(_ sender: UIButton) {
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
         
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add New Snaphot", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Save Snapshot Of Current State", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+        let action = UIAlertAction(title: "Save", style: .default) { (action) in
             
             //let newCategory = Category(context: self.context)
-            let newSnapShot = SnapShot()
+            let newSnapShot = Snapshot()
             
             newSnapShot.name = textField.text!
             //newSnapShot.soundsArray = TODO!!!!
         
-            self.save(snapshot: newSnapShot)
+            self.saveSnapshot(snapshot: newSnapShot)
         }
-        
         alert.addAction(action)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        alert.addAction(cancelAction)
         
         alert.addTextField { (field) in
             textField = field  
-            field.placeholder = "Add a new snapshot"
+            field.placeholder = "Please Enter Snapshot Name"
         }
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func loadButtonPressed(_ sender: UIButton) {
+        
+        guard let name = selectedSnapshotName else { return }
+        print("Loading \(name)")
+        
+    }
+    
+    @IBAction func deleteButtonPressed(_ sender: UIButton) {
+        
+        
     }
 }
 
@@ -121,7 +147,7 @@ extension LoadSaveVC {
 //
 extension LoadSaveVC {
     
-    func save(snapshot: SnapShot) {
+    func saveSnapshot(snapshot: Snapshot) {
         do {
             
             try realm.write {

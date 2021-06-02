@@ -9,67 +9,15 @@ import Foundation
 
 extension MainVC: SettingsTableVCDelegate  {
     
-    func loadSnapShot(fileName: String) {
-        print("loooood \(fileName)")
-        
-        //
-        // Check if defaultSnapShot exits
-        //
-        if let defaultSnapShot = realm.objects(SnapShot.self).filter("name == \"default\"").first {
-            //
-            // exists
-            //
-            
-            //
-            // Load sounds:
-            //
-            for (index, sound) in defaultSnapShot.soundsArray.enumerated() {
-                //seq.selectedSounds[index] = sound
-                print("index: \(index), sound: \(sound)")
-                loadFile(name: sound, toPlayer: index)
-            }
-          
-            //
-            // Load parts:
-            //
-            seq.parts[.A]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternA0)
-            seq.parts[.A]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternA1)
-            seq.parts[.A]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternA2)
-            seq.parts[.A]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternA3)
-            
-            seq.parts[.B]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternB0)
-            seq.parts[.B]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternB1)
-            seq.parts[.B]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternB2)
-            seq.parts[.B]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternB3)
-            
-            seq.parts[.C]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternC0)
-            seq.parts[.C]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternC1)
-            seq.parts[.C]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternC2)
-            seq.parts[.C]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternC3)
-            
-            seq.parts[.D]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternD0)
-            seq.parts[.D]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternD1)
-            seq.parts[.D]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternD2)
-            seq.parts[.D]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternD3)
-           
-            
-            
-        } else {
-            
-            //
-            // doesn't exist
-            //
-            
-        }
-        
-    }
-    
+    //
+    // Create
+    //
     func saveSnapShot(fileName: String) {
         
         //
         // Check if defaultSnapShot already exits, if yes modify it, otherwise create it:
         //
-        if let defaultSnapShot = realm.objects(SnapShot.self).filter("name == \"default\"").first {
+        if let defaultSnapShot = realm.objects(Snapshot.self).filter("name == \"default\"").first {
             //
             // if defaultSnapShot already exists, modify it:
             //
@@ -139,7 +87,7 @@ extension MainVC: SettingsTableVCDelegate  {
             //
             // otherwise create it:
             //
-            let defaultSnapShot = SnapShot()
+            let defaultSnapShot = Snapshot()
             defaultSnapShot.name = fileName
             defaultSnapShot.soundsArray.append(objectsIn: seq.selectedSounds)
             
@@ -200,4 +148,64 @@ extension MainVC: SettingsTableVCDelegate  {
             }
         }
     }
+    
+    //
+    // Read
+    //
+    func loadSnapShot(fileName: String) {
+        print("loooood \(fileName)")
+        
+        //
+        // Check if defaultSnapShot exits
+        //
+        if let defaultSnapShot = realm.objects(Snapshot.self).filter("name == \"default\"").first {
+            //
+            // exists
+            //
+            
+            //
+            // Load sounds:
+            //
+            for (index, sound) in defaultSnapShot.soundsArray.enumerated() {
+                //seq.selectedSounds[index] = sound
+                print("index: \(index), sound: \(sound)")
+                loadFile(name: sound, toPlayer: index)
+            }
+          
+            //
+            // Load parts:
+            //
+            seq.parts[.A]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternA0)
+            seq.parts[.A]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternA1)
+            seq.parts[.A]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternA2)
+            seq.parts[.A]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternA3)
+            
+            seq.parts[.B]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternB0)
+            seq.parts[.B]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternB1)
+            seq.parts[.B]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternB2)
+            seq.parts[.B]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternB3)
+            
+            seq.parts[.C]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternC0)
+            seq.parts[.C]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternC1)
+            seq.parts[.C]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternC2)
+            seq.parts[.C]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternC3)
+            
+            seq.parts[.D]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternD0)
+            seq.parts[.D]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternD1)
+            seq.parts[.D]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternD2)
+            seq.parts[.D]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternD3)
+           
+            
+            
+        } else {
+            
+            //
+            // doesn't exist
+            //
+            
+        }
+        
+    }
+    
+
 }

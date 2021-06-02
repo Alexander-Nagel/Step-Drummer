@@ -1623,7 +1623,7 @@ DispatchQueue.main.async {
             //loadSaveVC.realm = self.realm
             
             
-            guard let snapShot = realm.objects(SnapShot.self).first else {return}
+            guard let snapShot = realm.objects(Snapshot.self).first else {return}
             print(snapShot.name)
             print(snapShot.soundsArray)
         }
