@@ -32,12 +32,30 @@ class LoadSaveVC: UIViewController {
         
         loadSnapshots()
 
+        render()
+        
 //        guard let snapShot = realm.objects(SnapShot.self).first else {return}
 //        print(snapShot.name)
 //        print(snapShot.soundsArray)
         
 
        
+    }
+    
+    func render() {
+        
+        let snaps = realm.objects(Snapshot.self)
+        for shot in snaps {
+            let name = shot.name
+            
+            print(name)
+//            let label = UILabel(frame: view.bounds)
+//            label.text = name
+//            //label.textAlignment = .center
+//            label.numberOfLines = 0
+//            view.addSubview(label)
+//            label.font = UIFont(name: "Helvetica", size: 42)
+        }
     }
     
     func loadSnapshots() {
@@ -53,18 +71,13 @@ class LoadSaveVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-        print (indexPath.row)
-        print(snapshots?[0].name)
-        print(snapshots?[1].name)
-        guard let results = snapshots?[indexPath.row] else { return }
-        
-        selectedSnapshotName = results.name
-    }
+    
     
 }
 
+//
+// MARK:- TableView Data Source
+//
 extension LoadSaveVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,8 +85,6 @@ extension LoadSaveVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "snapshotCell", for: indexPath)
         
@@ -86,20 +97,32 @@ extension LoadSaveVC: UITableViewDataSource {
     }
 }
 
+//
+// MARK:- TableView Delegate
+//
 extension LoadSaveVC: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(#function)
-    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        guard let results = snapshots?[indexPath.row] else { return }
+        selectedSnapshotName = results.name
+    }
 }
 
+//
+//MARK: - Actions
+//
 extension LoadSaveVC {
-    //
-    //MARK: - Add New Snapshots
-    //
-    @IBAction func saveButtonPressed(_ sender: UIButton) {
         
+    @IBAction func loadButtonPressed(_ sender: UIButton) {
+        
+        guard let name = selectedSnapshotName else { return }
+        print("Loading \(name)")
+        
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
         var textField = UITextField()
         
         let alert = UIAlertController(title: "Save Snapshot Of Current State", message: "", preferredStyle: .alert)
@@ -122,24 +145,31 @@ extension LoadSaveVC {
         alert.addAction(cancelAction)
         
         alert.addTextField { (field) in
-            textField = field  
+            textField = field
             field.placeholder = "Please Enter Snapshot Name"
         }
         
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func loadButtonPressed(_ sender: UIButton) {
-        
-        guard let name = selectedSnapshotName else { return }
-        print("Loading \(name)")
-        
-    }
     
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         
-        
+        guard let toBeDeleted = selectedSnapshotName else {
+            print("No File Selected")
+            return
+        }
+        if let snapshot = realm.objects(Snapshot.self).filter(NSPredicate(format: "name = %@", toBeDeleted)).first   {
+            try! realm.write{
+                realm.delete(snapshot)
+            }
+            print(realm.objects(Snapshot.self).first)
+        } else {
+            print("Snapshot not found!")
+        }
+        tableView.reloadData()
     }
+    
 }
 
 //

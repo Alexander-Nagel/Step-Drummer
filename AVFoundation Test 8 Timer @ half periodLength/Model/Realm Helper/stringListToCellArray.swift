@@ -24,7 +24,7 @@ func stringListToCellArray(stringList: List<String>) -> [Cell] {
             print("Pattern contains strange things!")
         }
     }
-    print(stringList, "converted to: ", cellArray)
+    //print(stringList, "converted to: ", cellArray)
     return cellArray
 }
 

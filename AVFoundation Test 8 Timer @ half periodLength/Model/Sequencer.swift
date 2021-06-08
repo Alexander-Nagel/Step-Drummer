@@ -109,7 +109,7 @@ struct Sequencer {
         catch {
             fatalError("Can't set preferred buffer size")
         }
-        print("BufferDuration: \(round(session.ioBufferDuration, toDigits: 3)) s")
+      //  print("BufferDuration: \(round(session.ioBufferDuration, toDigits: 3)) s")
         
         //var mixer = engine.mainMixerNode
         //var input = engine.inputNode
@@ -171,7 +171,7 @@ struct Sequencer {
             if let tempo = tempo?.fourBeatsInSeconds {
                 let time = delayPreset.factor * tempo
                 delayTimes[i] = time
-                print(time)
+                //print(time)
                 delays[i].delayTime = delayTimes[i]
                 delays[i].feedback = delayFeedbacks[i]
                 delays[i].wetDryMix = delayWetDryMixes[i]
@@ -200,10 +200,10 @@ struct Sequencer {
         
         loadPart(partName: .A)
         
-        print(durationOf16thNoteInSamples(forTrack: 0))
-        print(durationOf16thNoteInSamples(forTrack: 1))
-        print(durationOf16thNoteInSamples(forTrack: 2))
-        print( durationOf16thNoteInSamples(forTrack: 3))
+        //print(durationOf16thNoteInSamples(forTrack: 0))
+       // print(durationOf16thNoteInSamples(forTrack: 1))
+       // print(durationOf16thNoteInSamples(forTrack: 2))
+       // print( durationOf16thNoteInSamples(forTrack: 3))
     }
     
     mutating func loadPart(partName: PartNames) {

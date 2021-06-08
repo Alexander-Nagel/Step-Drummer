@@ -140,7 +140,7 @@ extension MainVC {
         //
         let allButtons = track0Buttons + track1Buttons + track2Buttons + track3Buttons
         for (index, button) in allButtons.enumerated() {
-            print("Index: \(index)")
+            //print("Index: \(index)")
             //button.backgroundColor = .none
             button.layer.borderColor = K.Color.blue_brighter.cgColor
             button.layer.borderWidth = 1.0

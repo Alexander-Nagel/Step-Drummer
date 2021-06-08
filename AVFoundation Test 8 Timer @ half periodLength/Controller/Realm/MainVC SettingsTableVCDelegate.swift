@@ -153,7 +153,7 @@ extension MainVC: SettingsTableVCDelegate  {
     // Read
     //
     func loadSnapShot(fileName: String) {
-        print("loooood \(fileName)")
+        //print("loooood \(fileName)")
         
         //
         // Check if defaultSnapShot exits
@@ -168,7 +168,7 @@ extension MainVC: SettingsTableVCDelegate  {
             //
             for (index, sound) in defaultSnapShot.soundsArray.enumerated() {
                 //seq.selectedSounds[index] = sound
-                print("index: \(index), sound: \(sound)")
+                //print("index: \(index), sound: \(sound)")
                 loadFile(name: sound, toPlayer: index)
             }
           
