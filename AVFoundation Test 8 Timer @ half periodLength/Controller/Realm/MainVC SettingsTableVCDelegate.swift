@@ -10,71 +10,6 @@ import RealmSwift
 
 extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
     
-    //    fileprivate func copyDataToSnapshot(_ snapshot: Snapshot, _ snapshotName: String) {
-    //
-    //        snapshot.name = snapshotName
-    //        snapshot.soundsArray.append(objectsIn: seq.selectedSounds)
-    //
-    //        //
-    //        // Copy parts to snapshot.parts
-    //        //
-    //        // Iterate over parts
-    //        //
-    //        for currentPartIndex in 0...(PartNames.numberOfParts - 1) {
-    //
-    //           // let patterns = List<SnapshotPattern>()
-    //            let patterns = List<SNPattern>()
-    //
-    //
-    //            //
-    //            // Iterate over patterns in part, append pattern to currentSnapshotPart
-    //            //
-    //            for patternIndex in 0...(K.Sequencer.numberOfTracks - 1) {
-    //
-    //                if let currentPartName = PartNames(rawValue: currentPartIndex),
-    //                   let currentPart = seq.parts[currentPartName]
-    //                {
-    //                    let currentPattern = currentPart.patterns[patternIndex]
-    //                    let currentCellArray = currentPattern.cells
-    //
-    //                    //
-    //                    // Convert to array of String for Realm
-    //                    //
-    //                    let currentStringArray = cellArrayToStringArray(cellArray: currentCellArray)
-    //
-    //                    //
-    //                    // Create new pattern
-    //                    //
-    //                    let cells = List<String>()
-    //                    cells.append(objectsIn: currentStringArray)
-    //                    print("cells: ", cells)
-    //
-    //                    //
-    //                    // Append pattern to patterns
-    //                    //
-    //                    //patterns.append(SnapshotPattern(value: ["cells": cells]))
-    //                    patterns.append(SNPattern(value: ["cells": cells]))
-    //                    print("patterns: ", patterns)
-    //                }
-    //            }
-    //            //            let patternsToDelete = realm.objects(SnapshotPattern.self)
-    //            //            realm.delete(patternsToDelete)
-    //
-    //            //
-    //            // Append part to parts
-    //            //
-    //            //snapshot.parts.append(SnapshotPart(value: ["patterns": patterns]))
-    //            snapshot.snParts.append(SNPart(value: ["patterns": patterns]))
-    //            //print("snapshot.parts: ", snapshot.parts)
-    //            print("snapshot.snParts: ", snapshot.snParts)
-    //
-    //        }
-    //
-    //        //        let partsToDelete = realm.objects(SnapshotPart.self)
-    //        //        realm.delete(partsToDelete)
-    //
-    //    }
-    
     //
     // MARK:- Saves all data to snapshot named "name". Will NOT first check if snapshot already exists!
     //
@@ -84,6 +19,10 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
         // Simply saving new snapshot if not there
         //
         print("Saving new snapshot named \(name)")
+        
+        //
+        // Add patterns to snapshot
+        //
         var snParts = [SNPart]()
         for snPartIndex in 0...(K.Sequencer.numberOfParts - 1) {
             var snPatterns = [SNPattern]()
@@ -105,8 +44,21 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
         }
         let snapshot = Snapshot.create(withName: name, snParts: snParts)
         
+        //
+        // Add sound to snapshot
+        //
         snapshot.soundsArray.append(objectsIn: seq.selectedSounds)
         
+        //
+        // Add tempo to snapshot
+        //
+        if let tempo = seq.tempo {
+            snapshot.bpm = tempo.bpm
+        }
+        
+        //
+        // Write snapshot
+        //
         try! realm.write {
             realm.add(snapshot)
         }
@@ -128,6 +80,10 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
             //
             print("Snapshot named \(name) already there!")
             
+            
+            //
+            // Write patterns to snapshot
+            //
             if let prt = partThatHasChanged, let pttrn = patternThatHasChanged {
                 
                 //
@@ -172,74 +128,6 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
     }
     
     
-    
-  
-    //    internal func saveSnapShot(fileName: String) {
-    //
-    //        //
-    //        // Check if snapshot already exits, if yes modify it, otherwise create it:
-    //        //
-    //        if let snapshot = realm.objects(Snapshot.self).filter("name == %@", fileName).first {
-    //            //
-    //            // if defaultSnapShot already exists, modify it:
-    //            //
-    //            do {
-    //                try realm.write {
-    //                    //realm.delete(snapshot)
-    //
-    //                    // let newSnapshot = Snapshot()
-    //                    snapshot.name = ""
-    //                    snapshot.soundsArray.removeAll()
-    //                    //snapshot.parts.removeAll()
-    //
-    //
-    //
-    //                    copyDataToSnapshot(snapshot, fileName)
-    //
-    //                    realm.add(snapshot)
-    //
-    //                    //
-    //                    // Clean up, only Snaphot objects will be left in Realm
-    //                    //
-    //                    //                    let parts = realm.objects(SnapshotPart.self)
-    //                    //                    realm.delete(parts)
-    //                    //                    let patterns = realm.objects(SnapshotPattern.self)
-    //                    //                    realm.delete(patterns)
-    //
-    //                }
-    //            } catch {
-    //                print("error writing to realm \(error)")
-    //            }
-    //        } else {
-    //            //
-    //            // otherwise create it:
-    //            //
-    //            let snapshot = Snapshot()
-    //            //            let cells = List<String>()
-    //            //            let patterns = List<SnapshotPattern>()
-    //
-    //            copyDataToSnapshot(snapshot, fileName)
-    //
-    //            do {
-    //                try realm.write {
-    //                    realm.add(snapshot)
-    //
-    //                    //
-    //                    // Clean up, only Snaphot objects will be left in Realm
-    //                    //
-    //                    //                    let parts = realm.objects(SnapshotPart.self)
-    //                    //                    realm.delete(parts)
-    //                    //                    let patterns = realm.objects(SnapshotPattern.self)
-    //                    //                    realm.delete(patterns)
-    //                }
-    //            } catch {
-    //                print("error writing to realm \(error)")
-    //            }
-    //        }
-    //    }
-    
-   
-    
     //
     // MARK:- LOAD
     //
@@ -256,6 +144,13 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
             }
             
             //
+            // Load bpm:
+            //
+//            seq.tempo?.bpm = snapshot.bpm
+            seq.changeTempoAndPrescheduleBuffers(bpm: snapshot.bpm)
+            updateUIAfterTempoChange(to: snapshot.bpm)
+            
+            //
             // Load patterns:
             //
             for partIndex in 0...(K.Sequencer.numberOfParts - 1) {
@@ -270,9 +165,7 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
                     //
                     // Write pattern to Array
                     //
-                    //                    allParts[partIndex][patternIndex].removeAll()
-                    //                    allParts[partIndex][patternIndex].append(contentsOf: patternAslistOfString)
-                    
+                    //
                     if let partName = PartNames(rawValue: partIndex) {
                         seq.parts[partName]?.patterns[patternIndex].cells = stringListToCellArray(stringList: patternAslistOfString)
                     }
@@ -284,54 +177,6 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
         }
         
     }
-    
-    
-    //    func loadSnapShot(fileName: String) {
-    //        //print("loooood \(fileName)")
-    //
-    //        //
-    //        // Check if defaultSnapShot exits
-    //        //
-    //        if let defaultSnapShot = realm.objects(Snapshot.self).filter("name == \"default\"").first {
-    //
-    //            //
-    //            // exists
-    //            //
-    //
-    //            //
-    //            // Load sounds:
-    //            //
-    //            for (index, sound) in defaultSnapShot.soundsArray.enumerated() {
-    //                //seq.selectedSounds[index] = sound
-    //                //print("index: \(index), sound: \(sound)")
-    //                loadFile(name: sound, toPlayer: index)
-    //            }
-    //
-    //
-    //            //
-    //            // Load parts:
-    //            //
-    //            // Iterate over parts
-    //            //
-    //            for partIndex in 0...(PartNames.numberOfParts - 1) {
-    //
-    //                // Iterate over patterns in current part
-    //                //
-    //                for patternIndex in 0...(K.Sequencer.numberOfTracks - 1 ) {
-    //
-    //                    if let partName = PartNames(rawValue: partIndex) {
-    //                        seq.parts[partName]?.patterns[patternIndex].cells = stringListToCellArray(stringList: defaultSnapShot.parts[partIndex].patterns[patternIndex].cells)
-    //                    }
-    //                }
-    //            }
-    //
-    //        } else {
-    //
-    //            //
-    //            // doesn't exist
-    //            //
-    //        }
-    //    }
     
     //
     // MARK:- DELETE snaphot and its parts and patterns

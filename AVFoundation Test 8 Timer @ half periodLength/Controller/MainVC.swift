@@ -229,10 +229,11 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
 
         loadGuideBuffer()
     
-        preScheduleFirstBuffer(forPlayer: 0)
-        preScheduleFirstBuffer(forPlayer: 1)
-        preScheduleFirstBuffer(forPlayer: 2)
-        preScheduleFirstBuffer(forPlayer: 3)
+        seq.changeTempoAndPrescheduleBuffers(bpm: 120)
+//        seq.preScheduleFirstBuffer(forPlayer: 0)
+//        seq.preScheduleFirstBuffer(forPlayer: 1)
+//        seq.preScheduleFirstBuffer(forPlayer: 2)
+//        seq.preScheduleFirstBuffer(forPlayer: 3)
         preScheduleFirstGuideBuffer()
     }
     
@@ -485,16 +486,17 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             
             //state = .stop
             //playPauseButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-            
-            seq.tempo?.bpm = newTempo
-            
-            preScheduleFirstBuffer(forPlayer: 0)
-            preScheduleFirstBuffer(forPlayer: 1)
-            preScheduleFirstBuffer(forPlayer: 2)
-            preScheduleFirstBuffer(forPlayer: 3)
+        
+            seq.changeTempoAndPrescheduleBuffers(bpm: newTempo)
+//            seq.tempo?.bpm = newTempo
+//            seq.preScheduleFirstBuffer(forPlayer: 0)
+//            seq.preScheduleFirstBuffer(forPlayer: 1)
+//            seq.preScheduleFirstBuffer(forPlayer: 2)
+//            seq.preScheduleFirstBuffer(forPlayer: 3)
             preScheduleFirstGuideBuffer()
             
             updateUIAfterTempoChange(to: newTempo, restart: true)
+            saveSnapshot(name: "default")
             
             print(newTempo)
             
@@ -611,10 +613,14 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             currentStep3 = 1
             
             //            preScheduleFirstBuffer_OLD()
-            preScheduleFirstBuffer(forPlayer: 0)
-            preScheduleFirstBuffer(forPlayer: 1)
-            preScheduleFirstBuffer(forPlayer: 2)
-            preScheduleFirstBuffer(forPlayer: 3)
+            if let tempo = seq.tempo {
+                seq.changeTempoAndPrescheduleBuffers(bpm: tempo.bpm)
+            }
+
+//            seq.preScheduleFirstBuffer(forPlayer: 0)
+//            seq.preScheduleFirstBuffer(forPlayer: 1)
+//            seq.preScheduleFirstBuffer(forPlayer: 2)
+//            seq.preScheduleFirstBuffer(forPlayer: 3)
             preScheduleFirstGuideBuffer()
             
             
@@ -1075,30 +1081,7 @@ DispatchQueue.main.async {
         
     }
     
-    //
-    // MARK:- PRE SCHEDULE FIRST BUFFER
-    //
-    
-    func preScheduleFirstBuffer(forPlayer seletedPlayer: Int) {
-        
-        print(#function)
-        
-       // printFrameLengths()
-        
-        seq.players[seletedPlayer].stop()
-        if seq.displayedTracks[seletedPlayer].cells[0] == .ON {
-            //
-            // Schedule sound
-            //
-            seq.players[seletedPlayer].scheduleBuffer(seq.soundBuffers.normal[seletedPlayer], at: nil, options: [], completionHandler: nil)
-        } else {
-            //
-            // Schedule silence
-            //
-            seq.players[seletedPlayer].scheduleBuffer(seq.silenceBuffers[seletedPlayer], at: nil, options: [], completionHandler: nil)
-        }
-        seq.players[seletedPlayer].prepare(withFrameCount: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: seletedPlayer)))
-    }
+   
     
     
     private func preScheduleFirstGuideBuffer() {
@@ -1739,10 +1722,15 @@ DispatchQueue.main.async {
         
         loadAllBuffers()
         printFrameLengths()
-        preScheduleFirstBuffer(forPlayer: 0)
-        preScheduleFirstBuffer(forPlayer: 1)
-        preScheduleFirstBuffer(forPlayer: 2)
-        preScheduleFirstBuffer(forPlayer: 3)
+        
+        if let tempo = seq.tempo {
+            seq.changeTempoAndPrescheduleBuffers(bpm: tempo.bpm)
+        }
+
+//        seq.preScheduleFirstBuffer(forPlayer: 0)
+//        seq.preScheduleFirstBuffer(forPlayer: 1)
+//        seq.preScheduleFirstBuffer(forPlayer: 2)
+//        seq.preScheduleFirstBuffer(forPlayer: 3)
         stopAndRestartAllTimers()
     }
     

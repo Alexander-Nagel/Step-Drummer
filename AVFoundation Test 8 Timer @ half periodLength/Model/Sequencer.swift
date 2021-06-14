@@ -258,6 +258,42 @@ struct Sequencer {
         }
     }
     
+    mutating func changeTempoAndPrescheduleBuffers(bpm: Double) {
+        
+        tempo?.bpm = bpm
+        
+        for trackIndex in 0...(K.Sequencer.numberOfTracks-1) {
+            preScheduleFirstBuffer(forPlayer: trackIndex)
+        }
+       
+        
+    }
+    
+    //
+    // MARK:- PRE SCHEDULE FIRST BUFFER
+    //
+    
+    func preScheduleFirstBuffer(forPlayer seletedPlayer: Int) {
+        
+        print(#function)
+        
+       // printFrameLengths()
+        
+        players[seletedPlayer].stop()
+        if displayedTracks[seletedPlayer].cells[0] == .ON {
+            //
+            // Schedule sound
+            //
+            players[seletedPlayer].scheduleBuffer(soundBuffers.normal[seletedPlayer], at: nil, options: [], completionHandler: nil)
+        } else {
+            //
+            // Schedule silence
+            //
+            players[seletedPlayer].scheduleBuffer(silenceBuffers[seletedPlayer], at: nil, options: [], completionHandler: nil)
+        }
+        players[seletedPlayer].prepare(withFrameCount: AVAudioFrameCount(durationOf16thNoteInSamples(forTrack: seletedPlayer)))
+    }
+    
     //
     // Computes duration in samples of 16th note depending on BPM / samplerate (44100 kHz)
     //

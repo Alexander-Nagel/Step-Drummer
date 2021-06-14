@@ -78,13 +78,15 @@ extension MainVC: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         let newTempo = Double(pickedLeft) + Double(pickedRight) / 10.0
 //        if DEBUG {print(newTempo)}
-        seq.tempo?.bpm = newTempo
         
-        preScheduleFirstBuffer(forPlayer: 0)
-        preScheduleFirstBuffer(forPlayer: 1)
-        preScheduleFirstBuffer(forPlayer: 2)
-        preScheduleFirstBuffer(forPlayer: 3)
+        seq.changeTempoAndPrescheduleBuffers(bpm: newTempo)
+//        seq.tempo?.bpm = newTempo
+//        seq.preScheduleFirstBuffer(forPlayer: 0)
+//        seq.preScheduleFirstBuffer(forPlayer: 1)
+//        seq.preScheduleFirstBuffer(forPlayer: 2)
+//        seq.preScheduleFirstBuffer(forPlayer: 3)
         
         updateUIAfterTempoChange(to: newTempo)
+        saveSnapshot(name: "default")
     }
 }
