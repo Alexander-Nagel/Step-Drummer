@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		13245D7722B11CB0D4E20C58 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */; };
 		1B5912817CA00580E1ED31FC /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A060EBD22970B52618BED7C /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework */; };
-		FA0207FE2677885B00BE5610 /* Snaphot2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0207FD2677885B00BE5610 /* Snaphot2.swift */; };
+		FA0207FE2677885B00BE5610 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0207FD2677885B00BE5610 /* Snapshot.swift */; };
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
 		FA0DDA0F265E8B3B00D155D6 /* AV FX Presets Description Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */; };
 		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
@@ -98,7 +98,7 @@
 		88E47327787823C34AE7A188 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength Tests/Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C68E0FE36BF6F605877E7D6 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength Tests/Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; sourceTree = "<group>"; };
-		FA0207FD2677885B00BE5610 /* Snaphot2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snaphot2.swift; sourceTree = "<group>"; };
+		FA0207FD2677885B00BE5610 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
 		FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AV FX Presets Description Extension.swift"; sourceTree = "<group>"; };
 		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 				FA12A3462656B60E00439FA3 /* Shared.swift */,
 				FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */,
 				FA425DFA26628519007D8977 /* SyncDelay.swift */,
-				FA0207FD2677885B00BE5610 /* Snaphot2.swift */,
+				FA0207FD2677885B00BE5610 /* Snapshot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -642,7 +642,7 @@
 				FA425DFF2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift in Sources */,
 				FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */,
 				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,
-				FA0207FE2677885B00BE5610 /* Snaphot2.swift in Sources */,
+				FA0207FE2677885B00BE5610 /* Snapshot.swift in Sources */,
 				FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */,
 				FA12A33F2656627100439FA3 /* TrackSettingsVC.swift in Sources */,
 				FA63745626709C8100373A7D /* Alert.swift in Sources */,

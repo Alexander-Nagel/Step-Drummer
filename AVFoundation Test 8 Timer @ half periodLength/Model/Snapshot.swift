@@ -1,34 +1,61 @@
 //
-//  realmPart.swift
+//  Snaphot2.swift
 //  AVFoundation Test 8 Timer @ half periodLength
 //
-//  Created by Alexander Nagel on 23.05.21.
+//  Created by Alexander Nagel on 14.06.21.
 //
 
 import Foundation
 import RealmSwift
 
-class Snapshot: Object {
+//final class SnapshotPattern: Object {
+//    let cells = List<String>()
+//}
+
+final class SNPattern: Object {
+    @objc dynamic var name = ""
+    var cells = List<String>()
     
-    @objc dynamic var name: String = ""
-    let soundsArray = List<String>()
-    let patternA0 = List<String>()
-    let patternA1 = List<String>()
-    let patternA2 = List<String>()
-    let patternA3 = List<String>()
+    static func create(withName name: String, cells: [String]) -> SNPattern {
+        let snPattern = SNPattern()
+        snPattern.name = name
+        snPattern.cells.append(objectsIn: cells)
+        return snPattern
+    }
+}
+
+//final class SnapshotPart: Object {
+//    let patterns = List<SnapshotPattern>()
+//}
+
+final class SNPart: Object {
+    @objc dynamic var name = ""
+    var snPatterns = List<SNPattern>()
     
-    let patternB0 = List<String>()
-    let patternB1 = List<String>()
-    let patternB2 = List<String>()
-    let patternB3 = List<String>()
+    static func create(withName name: String, snPatterns: [SNPattern]) -> SNPart {
+        let snPart = SNPart()
+        snPart.name = name
+        snPart.snPatterns.append(objectsIn: snPatterns)
+        return snPart
+    }
+}
+
+
+//final class Snapshot: Object {
+//    @objc dynamic var name: String = ""
+//    let soundsArray = List<String>()
+//    let parts = List<SnapshotPart>()
+//}
+
+final class Snapshot: Object {
+    @objc dynamic var name = ""
+    var soundsArray = List<String>()
+    var snParts = List<SNPart>()
     
-    let patternC0 = List<String>()
-    let patternC1 = List<String>()
-    let patternC2 = List<String>()
-    let patternC3 = List<String>()
-    
-    let patternD0 = List<String>()
-    let patternD1 = List<String>()
-    let patternD2 = List<String>()
-    let patternD3 = List<String>()
+    static func create(withName name: String, snParts: [SNPart]) -> Snapshot {
+        let snapshot = Snapshot()
+        snapshot.name = name
+        snapshot.snParts.append(objectsIn: snParts)
+        return snapshot
+    }
 }
