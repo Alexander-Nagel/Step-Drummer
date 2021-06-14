@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13245D7722B11CB0D4E20C58 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */; };
 		1B5912817CA00580E1ED31FC /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A060EBD22970B52618BED7C /* Pods_AVFoundation_Test_8_Timer___half_periodLength.framework */; };
+		FA0207FE2677885B00BE5610 /* Snaphot2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0207FD2677885B00BE5610 /* Snaphot2.swift */; };
 		FA02EC8A26447E9100B416D3 /* setBackgroundColor UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */; };
 		FA0DDA0F265E8B3B00D155D6 /* AV FX Presets Description Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */; };
 		FA0E89452646218200B7CD45 /* DefaultPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E89442646218200B7CD45 /* DefaultPatterns.swift */; };
@@ -23,7 +24,6 @@
 		FA18D30F2653F24E005D2A2F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D30E2653F24E005D2A2F /* Cell.swift */; };
 		FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D3122653F26F005D2A2F /* Tempo.swift */; };
 		FA18D31726542B09005D2A2F /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18D31626542B09005D2A2F /* VerticalButton.swift */; };
-		FA2B3840265AEAE500E602F6 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B383F265AEAE500E602F6 /* Snapshot.swift */; };
 		FA2B3846265AF23900E602F6 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3845265AF23900E602F6 /* SettingsTableVC.swift */; };
 		FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */; };
 		FA2B3854265C5AD800E602F6 /* cellArrayToStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */; };
@@ -98,6 +98,7 @@
 		88E47327787823C34AE7A188 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength Tests/Pods-AVFoundation Test 8 Timer @ half periodLength Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		90E9D47BAE965BB5D2FEF550 /* Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_AVFoundation_Test_8_Timer___half_periodLength_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C68E0FE36BF6F605877E7D6 /* Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; path = "Target Support Files/Pods-AVFoundation Test 8 Timer @ half periodLength Tests/Pods-AVFoundation Test 8 Timer @ half periodLength Tests.release.xcconfig"; sourceTree = "<group>"; };
+		FA0207FD2677885B00BE5610 /* Snaphot2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snaphot2.swift; sourceTree = "<group>"; };
 		FA02EC8926447E9100B416D3 /* setBackgroundColor UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setBackgroundColor UIButton Extension.swift"; sourceTree = "<group>"; };
 		FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AV FX Presets Description Extension.swift"; sourceTree = "<group>"; };
 		FA0E89442646218200B7CD45 /* DefaultPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPatterns.swift; sourceTree = "<group>"; };
@@ -112,7 +113,6 @@
 		FA18D30E2653F24E005D2A2F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		FA18D3122653F26F005D2A2F /* Tempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
 		FA18D31626542B09005D2A2F /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
-		FA2B383F265AEAE500E602F6 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		FA2B3845265AF23900E602F6 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC SettingsTableVCDelegate.swift"; sourceTree = "<group>"; };
 		FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellArrayToStringArray.swift; sourceTree = "<group>"; };
@@ -264,9 +264,9 @@
 				FAB47AD72655ACC1006281CE /* ChainModeNames.swift */,
 				FA8D6E9F263F3262000FFFE3 /* Constants.swift */,
 				FA12A3462656B60E00439FA3 /* Shared.swift */,
-				FA2B383F265AEAE500E602F6 /* Snapshot.swift */,
 				FA0DDA0E265E8B3B00D155D6 /* AV FX Presets Description Extension.swift */,
 				FA425DFA26628519007D8977 /* SyncDelay.swift */,
+				FA0207FD2677885B00BE5610 /* Snaphot2.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -623,7 +623,6 @@
 				FAA4C607266534B5005CC23C /* LoadSaveVC.swift in Sources */,
 				FA18D3072653E3C0005D2A2F /* setupUI.swift in Sources */,
 				FA6D27BF2663EAFC00AE6D5B /* DistortionTableVC.swift in Sources */,
-				FA2B3840265AEAE500E602F6 /* Snapshot.swift in Sources */,
 				FA12A34D2656CC5900439FA3 /* MainVC TrackSettingsVCDelegate.swift in Sources */,
 				FA12A33726564D4300439FA3 /* SettingsVC.swift in Sources */,
 				FA2B3846265AF23900E602F6 /* SettingsTableVC.swift in Sources */,
@@ -643,6 +642,7 @@
 				FA425DFF2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift in Sources */,
 				FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */,
 				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,
+				FA0207FE2677885B00BE5610 /* Snaphot2.swift in Sources */,
 				FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */,
 				FA12A33F2656627100439FA3 /* TrackSettingsVC.swift in Sources */,
 				FA63745626709C8100373A7D /* Alert.swift in Sources */,
