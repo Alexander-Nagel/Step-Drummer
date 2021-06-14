@@ -14,6 +14,7 @@ import UIKit
 struct K {
     
     struct Sequencer {
+        static let numberOfParts = 4
         static let numberOfTracks = 4
         static let numberOfCellsPerTrack = 16
         static let sampleRate = 44100.0

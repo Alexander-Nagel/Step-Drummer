@@ -6,206 +6,360 @@
 //
 
 import Foundation
+import RealmSwift
 
-extension MainVC: SettingsTableVCDelegate  {
+extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
+    
+    //    fileprivate func copyDataToSnapshot(_ snapshot: Snapshot, _ snapshotName: String) {
+    //
+    //        snapshot.name = snapshotName
+    //        snapshot.soundsArray.append(objectsIn: seq.selectedSounds)
+    //
+    //        //
+    //        // Copy parts to snapshot.parts
+    //        //
+    //        // Iterate over parts
+    //        //
+    //        for currentPartIndex in 0...(PartNames.numberOfParts - 1) {
+    //
+    //           // let patterns = List<SnapshotPattern>()
+    //            let patterns = List<SNPattern>()
+    //
+    //
+    //            //
+    //            // Iterate over patterns in part, append pattern to currentSnapshotPart
+    //            //
+    //            for patternIndex in 0...(K.Sequencer.numberOfTracks - 1) {
+    //
+    //                if let currentPartName = PartNames(rawValue: currentPartIndex),
+    //                   let currentPart = seq.parts[currentPartName]
+    //                {
+    //                    let currentPattern = currentPart.patterns[patternIndex]
+    //                    let currentCellArray = currentPattern.cells
+    //
+    //                    //
+    //                    // Convert to array of String for Realm
+    //                    //
+    //                    let currentStringArray = cellArrayToStringArray(cellArray: currentCellArray)
+    //
+    //                    //
+    //                    // Create new pattern
+    //                    //
+    //                    let cells = List<String>()
+    //                    cells.append(objectsIn: currentStringArray)
+    //                    print("cells: ", cells)
+    //
+    //                    //
+    //                    // Append pattern to patterns
+    //                    //
+    //                    //patterns.append(SnapshotPattern(value: ["cells": cells]))
+    //                    patterns.append(SNPattern(value: ["cells": cells]))
+    //                    print("patterns: ", patterns)
+    //                }
+    //            }
+    //            //            let patternsToDelete = realm.objects(SnapshotPattern.self)
+    //            //            realm.delete(patternsToDelete)
+    //
+    //            //
+    //            // Append part to parts
+    //            //
+    //            //snapshot.parts.append(SnapshotPart(value: ["patterns": patterns]))
+    //            snapshot.snParts.append(SNPart(value: ["patterns": patterns]))
+    //            //print("snapshot.parts: ", snapshot.parts)
+    //            print("snapshot.snParts: ", snapshot.snParts)
+    //
+    //        }
+    //
+    //        //        let partsToDelete = realm.objects(SnapshotPart.self)
+    //        //        realm.delete(partsToDelete)
+    //
+    //    }
     
     //
-    // Create
+    // MARK:- Saves all data to snapshot named "name". Will NOT first check if snapshot already exists!
     //
-    func saveSnapShot(fileName: String) {
+    internal func saveSnapshotIfNotThere(_ name: String) {
         
         //
-        // Check if defaultSnapShot already exits, if yes modify it, otherwise create it:
+        // Simply saving new snapshot if not there
         //
-        if let defaultSnapShot = realm.objects(Snapshot.self).filter("name == \"default\"").first {
-            //
-            // if defaultSnapShot already exists, modify it:
-            //
-            do {
-                try realm.write {
-                    defaultSnapShot.name = fileName
-                    defaultSnapShot.soundsArray.removeAll()
-                    defaultSnapShot.soundsArray.append(objectsIn: seq.selectedSounds)
+        print("Saving new snapshot named \(name)")
+        var snParts = [SNPart]()
+        for snPartIndex in 0...(K.Sequencer.numberOfParts - 1) {
+            var snPatterns = [SNPattern]()
+            for snPatternIndex in 0...(K.Sequencer.numberOfTracks - 1) {
+                if let currentPartName = PartNames(rawValue: snPartIndex),
+                   let currentPart = seq.parts[currentPartName]
+                {
+                    let currentArrayOfCells = currentPart.patterns[snPatternIndex].cells
+                    print("currentArrayOfCells: \(currentArrayOfCells)")
                     
-                    //
-                    // copy seq.parts[.A] to realmPatternsA
-                    //
-                    if let pattern = seq.parts[.A]?.patterns {
-                        let realmPatterns = [defaultSnapShot.patternA0, defaultSnapShot.patternA1, defaultSnapShot.patternA2, defaultSnapShot.patternA3]
-                        for (index, realmPattern) in realmPatterns.enumerated() {
-                            let cellArray = pattern[index].cells
-                            let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                            realmPattern.removeAll()
-                            realmPattern.append(objectsIn: stringArray)
-                        }
-                    }
+                    let currentArrayOfStrings = cellArrayToStringArray(cellArray: currentArrayOfCells)
+                    print("currentArrayOfStrings: \(currentArrayOfStrings)")
                     
-                    //
-                    // copy seq.parts[.B] to realmPatternsB
-                    //
-                    if let pattern = seq.parts[.B]?.patterns {
-                        let realmPatterns = [defaultSnapShot.patternB0, defaultSnapShot.patternB1, defaultSnapShot.patternB2, defaultSnapShot.patternB3]
-                        for (index, realmPattern) in realmPatterns.enumerated() {
-                            let cellArray = pattern[index].cells
-                            let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                            realmPattern.removeAll()
-                            realmPattern.append(objectsIn: stringArray)
-                        }
-                    }
-                    
-                    //
-                    // copy seq.parts[.C] to realmPatternsC
-                    //
-                    if let pattern = seq.parts[.C]?.patterns {
-                        let realmPatterns = [defaultSnapShot.patternC0, defaultSnapShot.patternC1, defaultSnapShot.patternC2, defaultSnapShot.patternC3]
-                        for (index, realmPattern) in realmPatterns.enumerated() {
-                            let cellArray = pattern[index].cells
-                            let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                            realmPattern.removeAll()
-                            realmPattern.append(objectsIn: stringArray)
-                        }
-                    }
-                    
-                    //
-                    // copy seq.parts[.D] to realmPatternsD
-                    //
-                    if let pattern = seq.parts[.D]?.patterns {
-                        let realmPatterns = [defaultSnapShot.patternD0, defaultSnapShot.patternD1, defaultSnapShot.patternD2, defaultSnapShot.patternD3]
-                        for (index, realmPattern) in realmPatterns.enumerated() {
-                            let cellArray = pattern[index].cells
-                            let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                            realmPattern.removeAll()
-                            realmPattern.append(objectsIn: stringArray)
-                        }
-                    }
-                   
+                    snPatterns.append(SNPattern.create(withName: "\(name) SNPattern \(snPartIndex) \(snPatternIndex)", cells: currentArrayOfStrings))
                 }
-            } catch {
-                print("error writing to realm \(error)")
             }
-        } else {
-            //
-            // otherwise create it:
-            //
-            let defaultSnapShot = Snapshot()
-            defaultSnapShot.name = fileName
-            defaultSnapShot.soundsArray.append(objectsIn: seq.selectedSounds)
+            snParts.append(SNPart.create(withName: "\(name) SNPart \(snPartIndex)", snPatterns: snPatterns))
             
-            //
-            // copy seq.parts[.A] to realmPatternsA
-            //
-            if let pattern = seq.parts[.A]?.patterns {
-                let realmPatterns = [defaultSnapShot.patternA0, defaultSnapShot.patternA1, defaultSnapShot.patternA2, defaultSnapShot.patternA3]
-                for (index, realmPattern) in realmPatterns.enumerated() {
-                    let cellArray = pattern[index].cells
-                    let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                    realmPattern.append(objectsIn: stringArray)
-                }
-            }
-            
-            //
-            // copy seq.parts[.B] to realmPatternsB
-            //
-            if let pattern = seq.parts[.B]?.patterns {
-                let realmPatterns = [defaultSnapShot.patternB0, defaultSnapShot.patternB1, defaultSnapShot.patternB2, defaultSnapShot.patternB3]
-                for (index, realmPattern) in realmPatterns.enumerated() {
-                    let cellArray = pattern[index].cells
-                    let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                    realmPattern.append(objectsIn: stringArray)
-                }
-            }
-            
-            //
-            // copy seq.parts[.C] to realmPatternsC
-            //
-            if let pattern = seq.parts[.C]?.patterns {
-                let realmPatterns = [defaultSnapShot.patternC0, defaultSnapShot.patternC1, defaultSnapShot.patternC2, defaultSnapShot.patternC3]
-                for (index, realmPattern) in realmPatterns.enumerated() {
-                    let cellArray = pattern[index].cells
-                    let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                    realmPattern.append(objectsIn: stringArray)
-                }
-            }
-            
-            //
-            // copy seq.parts[.D] to realmPatternsD
-            //
-            if let pattern = seq.parts[.D]?.patterns {
-                let realmPatterns = [defaultSnapShot.patternD0, defaultSnapShot.patternD1, defaultSnapShot.patternD2, defaultSnapShot.patternD3]
-                for (index, realmPattern) in realmPatterns.enumerated() {
-                    let cellArray = pattern[index].cells
-                    let stringArray = cellArrayToStringArray(cellArray: cellArray)
-                    realmPattern.append(objectsIn: stringArray)
-                }
-            }
-            
-            do {
-                try realm.write {
-                    realm.add(defaultSnapShot)
-                }
-            } catch {
-                print("error writing to realm \(error)")
-            }
+        }
+        let snapshot = Snapshot.create(withName: name, snParts: snParts)
+        
+        snapshot.soundsArray.append(objectsIn: seq.selectedSounds)
+        
+        try! realm.write {
+            realm.add(snapshot)
         }
     }
     
     //
-    // Read
+    // MARK:- SAVE
     //
-    func loadSnapShot(fileName: String) {
-        //print("loooood \(fileName)")
+    // If snapshot named "name" doesn't yet exist, saves all data to new snapshot.
+    // If it exists, and partThatHasChanged and patternThatHasChanged are not provided, it will be deleted and overwritten
+    //  If patternThatHasChanged and patternThatHasChanged are provided: Only that part/pattern of existing snapshot will be changed.
+    //
+    internal func saveSnapshot(name: String, partThatHasChanged: Int? = nil, patternThatHasChanged: Int? = nil) {
         
-        //
-        // Check if defaultSnapShot exits
-        //
-        if let defaultSnapShot = realm.objects(Snapshot.self).filter("name == \"default\"").first {
+        if let handleToSnapshot = realm.objects(Snapshot.self).filter("name = %@", name).first {
+            
             //
-            // exists
+            // Snapshot does already exist
             //
+            print("Snapshot named \(name) already there!")
+            
+            if let prt = partThatHasChanged, let pttrn = patternThatHasChanged {
+                
+                //
+                // Only changing partThatHasChanged / patternThatHasChanged
+                //
+                print("Will only change part \(prt) pattern \(pttrn).")
+                try! realm.write {
+                    handleToSnapshot.snParts[prt].snPatterns[pttrn].cells.removeAll()
+                    //                    let data = allParts[prt][pttrn]
+                    
+                    if let partName = PartNames(rawValue: prt),
+                       let dataAsArrayOfCell = seq.parts[partName]?.patterns[pttrn].cells {
+                        
+                        let dataAsArrayOfString = cellArrayToStringArray(cellArray: dataAsArrayOfCell)
+                        
+                        handleToSnapshot.snParts[prt].snPatterns[pttrn].cells.append(objectsIn:dataAsArrayOfString)
+                    }
+                }
+                
+            } else {
+                
+                //
+                // Deleting old
+                //
+                print("Overwriting old file \(name).")
+                
+                deleteSnapshot(name)
+                
+                //
+                // Writing new
+                //
+                saveSnapshotIfNotThere(name)
+            }
+            
+        } else {
+            
+            //
+            // Snapshot does not yet exist, so save it!
+            //
+            saveSnapshotIfNotThere(name)
+        }
+    }
+    
+    
+    
+  
+    //    internal func saveSnapShot(fileName: String) {
+    //
+    //        //
+    //        // Check if snapshot already exits, if yes modify it, otherwise create it:
+    //        //
+    //        if let snapshot = realm.objects(Snapshot.self).filter("name == %@", fileName).first {
+    //            //
+    //            // if defaultSnapShot already exists, modify it:
+    //            //
+    //            do {
+    //                try realm.write {
+    //                    //realm.delete(snapshot)
+    //
+    //                    // let newSnapshot = Snapshot()
+    //                    snapshot.name = ""
+    //                    snapshot.soundsArray.removeAll()
+    //                    //snapshot.parts.removeAll()
+    //
+    //
+    //
+    //                    copyDataToSnapshot(snapshot, fileName)
+    //
+    //                    realm.add(snapshot)
+    //
+    //                    //
+    //                    // Clean up, only Snaphot objects will be left in Realm
+    //                    //
+    //                    //                    let parts = realm.objects(SnapshotPart.self)
+    //                    //                    realm.delete(parts)
+    //                    //                    let patterns = realm.objects(SnapshotPattern.self)
+    //                    //                    realm.delete(patterns)
+    //
+    //                }
+    //            } catch {
+    //                print("error writing to realm \(error)")
+    //            }
+    //        } else {
+    //            //
+    //            // otherwise create it:
+    //            //
+    //            let snapshot = Snapshot()
+    //            //            let cells = List<String>()
+    //            //            let patterns = List<SnapshotPattern>()
+    //
+    //            copyDataToSnapshot(snapshot, fileName)
+    //
+    //            do {
+    //                try realm.write {
+    //                    realm.add(snapshot)
+    //
+    //                    //
+    //                    // Clean up, only Snaphot objects will be left in Realm
+    //                    //
+    //                    //                    let parts = realm.objects(SnapshotPart.self)
+    //                    //                    realm.delete(parts)
+    //                    //                    let patterns = realm.objects(SnapshotPattern.self)
+    //                    //                    realm.delete(patterns)
+    //                }
+    //            } catch {
+    //                print("error writing to realm \(error)")
+    //            }
+    //        }
+    //    }
+    
+   
+    
+    //
+    // MARK:- LOAD
+    //
+    internal func loadSnapshot(_ name: String) {
+        
+        if let snapshot = realm.objects(Snapshot.self).filter("name = %@", name).first {
+            print("Loading snapshot \(name)")
             
             //
             // Load sounds:
             //
-            for (index, sound) in defaultSnapShot.soundsArray.enumerated() {
-                //seq.selectedSounds[index] = sound
-                //print("index: \(index), sound: \(sound)")
+            for (index, sound) in snapshot.soundsArray.enumerated() {
                 loadFile(name: sound, toPlayer: index)
             }
-          
+            
             //
-            // Load parts:
+            // Load patterns:
             //
-            seq.parts[.A]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternA0)
-            seq.parts[.A]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternA1)
-            seq.parts[.A]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternA2)
-            seq.parts[.A]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternA3)
-            
-            seq.parts[.B]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternB0)
-            seq.parts[.B]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternB1)
-            seq.parts[.B]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternB2)
-            seq.parts[.B]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternB3)
-            
-            seq.parts[.C]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternC0)
-            seq.parts[.C]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternC1)
-            seq.parts[.C]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternC2)
-            seq.parts[.C]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternC3)
-            
-            seq.parts[.D]?.patterns[0].cells = stringListToCellArray(stringList: defaultSnapShot.patternD0)
-            seq.parts[.D]?.patterns[1].cells = stringListToCellArray(stringList: defaultSnapShot.patternD1)
-            seq.parts[.D]?.patterns[2].cells = stringListToCellArray(stringList: defaultSnapShot.patternD2)
-            seq.parts[.D]?.patterns[3].cells = stringListToCellArray(stringList: defaultSnapShot.patternD3)
-           
-            
-            
+            for partIndex in 0...(K.Sequencer.numberOfParts - 1) {
+                for patternIndex in 0...(K.Sequencer.numberOfTracks - 1){
+                    
+                    //
+                    // Read pattern from snapshot
+                    //
+                    let patternAslistOfString = snapshot.snParts[partIndex].snPatterns[patternIndex].cells
+                    print("patternAslistOfString: \(patternAslistOfString)")
+                    
+                    //
+                    // Write pattern to Array
+                    //
+                    //                    allParts[partIndex][patternIndex].removeAll()
+                    //                    allParts[partIndex][patternIndex].append(contentsOf: patternAslistOfString)
+                    
+                    if let partName = PartNames(rawValue: partIndex) {
+                        seq.parts[partName]?.patterns[patternIndex].cells = stringListToCellArray(stringList: patternAslistOfString)
+                    }
+                }
+            }
         } else {
-            
-            //
-            // doesn't exist
-            //
-            
+            print("Snapshot \(name) does not exist")
+            return
         }
         
     }
     
-
+    
+    //    func loadSnapShot(fileName: String) {
+    //        //print("loooood \(fileName)")
+    //
+    //        //
+    //        // Check if defaultSnapShot exits
+    //        //
+    //        if let defaultSnapShot = realm.objects(Snapshot.self).filter("name == \"default\"").first {
+    //
+    //            //
+    //            // exists
+    //            //
+    //
+    //            //
+    //            // Load sounds:
+    //            //
+    //            for (index, sound) in defaultSnapShot.soundsArray.enumerated() {
+    //                //seq.selectedSounds[index] = sound
+    //                //print("index: \(index), sound: \(sound)")
+    //                loadFile(name: sound, toPlayer: index)
+    //            }
+    //
+    //
+    //            //
+    //            // Load parts:
+    //            //
+    //            // Iterate over parts
+    //            //
+    //            for partIndex in 0...(PartNames.numberOfParts - 1) {
+    //
+    //                // Iterate over patterns in current part
+    //                //
+    //                for patternIndex in 0...(K.Sequencer.numberOfTracks - 1 ) {
+    //
+    //                    if let partName = PartNames(rawValue: partIndex) {
+    //                        seq.parts[partName]?.patterns[patternIndex].cells = stringListToCellArray(stringList: defaultSnapShot.parts[partIndex].patterns[patternIndex].cells)
+    //                    }
+    //                }
+    //            }
+    //
+    //        } else {
+    //
+    //            //
+    //            // doesn't exist
+    //            //
+    //        }
+    //    }
+    
+    //
+    // MARK:- DELETE snaphot and its parts and patterns
+    //
+    internal func deleteSnapshot(_ snapshotName: String) {
+        
+        if let handleToSnapshot = realm.objects(Snapshot.self).filter("name = %@", snapshotName).first {
+            
+            try! realm.write {
+                // Delete snapshot
+                realm.delete(handleToSnapshot)
+                
+                // Delete parts & patterns too
+                let snapshotNamePlusSpace = snapshotName + " "
+                
+                let handleToParts = realm.objects(SNPart.self).filter("name BEGINSWITH %@", snapshotNamePlusSpace)
+                realm.delete(handleToParts)
+                
+                let handleToPatterns = realm.objects(SNPattern.self).filter("name BEGINSWITH %@", snapshotNamePlusSpace)
+                realm.delete(handleToPatterns)
+            }
+            
+        } else {
+            print("Snapshot not found!")
+        }
+    }
+    
+    
+    
+    
 }

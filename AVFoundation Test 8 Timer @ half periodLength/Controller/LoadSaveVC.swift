@@ -5,13 +5,20 @@
 //  Created by Alexander Nagel on 31.05.21.
 //
 
+protocol LoadSaveVCDelegate {
+    func loadSnapshot(_ name: String)
+    func saveSnapshot(name: String, partThatHasChanged: Int?, patternThatHasChanged: Int?)
+    func deleteSnapshot(_ name: String)
+    func updateUI()
+}
+
 import UIKit
 import RealmSwift
 
 class LoadSaveVC: UIViewController {
     
     let realm = try! Realm()
-    
+    var delegate: LoadSaveVCDelegate?
     var snapshots: Results<Snapshot>?
     var selectedSnapshotName: String?
     
@@ -30,7 +37,7 @@ class LoadSaveVC: UIViewController {
             self.isModalInPresentation = true
         } else {}
         
-        loadSnapshots()
+        fetchSnapshots()
 
         render()
         
@@ -58,11 +65,7 @@ class LoadSaveVC: UIViewController {
         }
     }
     
-    func loadSnapshots() {
-        
-        snapshots = realm.objects(Snapshot.self)
-        tableView.reloadData()
-    }
+    
 
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
@@ -111,83 +114,92 @@ extension LoadSaveVC: UITableViewDelegate {
 }
 
 //
-//MARK: - Actions
+//MARK: - Realm CRUD Actions
 //
 extension LoadSaveVC {
-        
-    @IBAction func loadButtonPressed(_ sender: UIButton) {
-        
-        guard let name = selectedSnapshotName else { return }
-        print("Loading \(name)")
-        
-    }
-    
+     
+    //
+    // MARK:- CREATE NEW
+    //
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        var textField = UITextField()
         
-        let alert = UIAlertController(title: "Save Snapshot Of Current State", message: "", preferredStyle: .alert)
+    var textField = UITextField()
         
+        // Create Alert, fetch snapshot name & create new Realm object
+        //
+        let alert = UIAlertController(title: "Save snapshot of current state", message: "Saves all patterns, all parts, track settings (selected sounds, volume, reverb, delay, distortion)", preferredStyle: .alert)
         let action = UIAlertAction(title: "Save", style: .default) { (action) in
             
-            //let newCategory = Category(context: self.context)
-            let newSnapShot = Snapshot()
+            // Create new Realm object
+            //
+            self.delegate?.saveSnapshot(name: textField.text!, partThatHasChanged: nil, patternThatHasChanged: nil)
+            self.tableView.reloadData()
             
-            newSnapShot.name = textField.text!
-            //newSnapShot.soundsArray = TODO!!!!
-        
-            self.saveSnapshot(snapshot: newSnapShot)
+//            let newSnapShot = Snapshot()
+//            newSnapShot.name = textField.text!
+//            self.saveSnapshot(snapshot: newSnapShot)
         }
         alert.addAction(action)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in }
         alert.addAction(cancelAction)
-        
         alert.addTextField { (field) in
             textField = field
             field.placeholder = "Please Enter Snapshot Name"
         }
-        
         present(alert, animated: true, completion: nil)
     }
     
+    //
+    // MARK:- READ ALL
+    //
+    func fetchSnapshots() {
+        
+        snapshots = realm.objects(Snapshot.self)
+        tableView.reloadData()
+    }
     
+    //
+    // MARK:- READ SELECTED
+    //
+    @IBAction func loadButtonPressed(_ sender: UIButton) {
+        
+        guard let name = selectedSnapshotName else { return }
+        print("Loading \(name)")
+        delegate?.loadSnapshot(name)
+        delegate?.updateUI()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    //
+    // MARK:- UPDATE
+    //
+    func update() {
+        
+    }
+    
+    //
+    // MARK:- DELETE
+    //
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         
         guard let toBeDeleted = selectedSnapshotName else {
-            print("No File Selected")
+            showAlert(alertText: "No file selected!", alertMessage: "Select A file before pressing the Delete button!")
             return
         }
+        
         if let snapshot = realm.objects(Snapshot.self).filter(NSPredicate(format: "name = %@", toBeDeleted)).first   {
-            try! realm.write{
-                realm.delete(snapshot)
-            }
-            print(realm.objects(Snapshot.self).first)
+            
+//            try! realm.write{
+//                realm.delete(snapshot)
+//            }
+//            print(realm.objects(Snapshot.self).first)
+            
+            delegate?.deleteSnapshot(toBeDeleted)
+            
         } else {
             print("Snapshot not found!")
         }
         tableView.reloadData()
     }
     
-}
-
-//
-//MARK: - Data Manipulation Methods - save, load
-//
-extension LoadSaveVC {
-    
-    func saveSnapshot(snapshot: Snapshot) {
-        do {
-            
-            try realm.write {
-                realm.add(snapshot)
-            }
-        } catch {
-            print("Error saving snapshot \(error)")
-        }
-        
-        tableView.reloadData()
-        
-    }
 }

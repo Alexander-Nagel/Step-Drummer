@@ -215,12 +215,9 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         setupUI() // one time setup
     
     
-        loadSnapShot(fileName: "default")
-        seq.displayedTracks[0].cells = (seq.parts[.A]?.patterns[0].cells)!
-        seq.displayedTracks[1].cells = (seq.parts[.A]?.patterns[1].cells)!
-        seq.displayedTracks[2].cells = (seq.parts[.A]?.patterns[2].cells)!
-        seq.displayedTracks[3].cells = (seq.parts[.A]?.patterns[3].cells)!
-
+        //loadSnapShot(fileName: "default")
+        loadSnapshot("default")
+     
         updateUI()
         
         for i in 0...(K.Sequencer.numberOfTracks - 1){
@@ -379,28 +376,6 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             partSegmentedControl.flashPermanently()
         }
-        
-//        //let activePart =
-//        let ac = UIAlertController(title: "Delete Part \(seq.activePart)?", message: "This will delete all 4 tracks of the current part.", preferredStyle: .alert)
-//        //ac.addTextField()
-//
-//        let deleteAction = UIAlertAction(title: "Delete", style: .default) { [unowned ac] _ in
-//
-//            self.seq.deletePart(partName: self.seq.activePart)
-//            self.seq.loadPart(partName: self.seq.activePart)
-//            self.updateUI()
-//            print("Deleting")
-//
-//        }
-//
-//        ac.addAction(deleteAction)
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { [unowned ac] _ in
-//
-//       }
-//        ac.addAction(cancelAction)
-//
-//        present(ac, animated: true)
         
     }
     
@@ -1204,7 +1179,8 @@ DispatchQueue.main.async {
         }
         //print("swipeCellState: ", swipeCellState)
         seq.saveToPart(partName: seq.activePart)
-        saveSnapShot(fileName: "default")
+//        saveSnapShot(fileName: "default")
+        saveSnapshot(name: "default")
     }
     
     fileprivate func changeCell(_ track: Int, _ cell: Int) {
@@ -1247,7 +1223,8 @@ DispatchQueue.main.async {
         }
         print(drawSoftNotes)
         seq.saveToPart(partName: seq.activePart)
-        saveSnapShot(fileName: "default")
+//        saveSnapShot(fileName: "default")
+        saveSnapshot(name: "default")
 
     }
     
@@ -1283,9 +1260,9 @@ DispatchQueue.main.async {
             
             changeCell(selectedTrack, numberOfCell)
         }
-        print()
-        print("--------------------------------------------------------------")
-        print("01: ","isSwiping: ",isSwiping,"\tswipeStart: ",swipeStart ?? "nil","\tswipeStartMinY: ",swipeStartMinY ?? "nil","\tswipeStartMaxY: ",swipeStartMaxY ?? "nil","\tswipeCellState: ",swipeCellState ?? "nil")
+//        print()
+//        print("--------------------------------------------------------------")
+//        print("01: ","isSwiping: ",isSwiping,"\tswipeStart: ",swipeStart ?? "nil","\tswipeStartMinY: ",swipeStartMinY ?? "nil","\tswipeStartMaxY: ",swipeStartMaxY ?? "nil","\tswipeCellState: ",swipeCellState ?? "nil")
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -1503,6 +1480,19 @@ DispatchQueue.main.async {
         // color player buttons according to state of seq.tracks[...].cells[...]
         // state .ON = backgroundColor = .orange, state .OFF = backgroundColor .none
         
+        let activePart = seq.activePart
+        for trackIndex in 0...(K.Sequencer.numberOfTracks - 1) {
+            if let part = seq.parts[activePart] {
+                seq.displayedTracks[trackIndex].cells = (part.patterns[trackIndex].cells)
+            }
+        }
+        
+//        seq.displayedTracks[0].cells = (seq.parts[.A]?.patterns[0].cells)!
+//        seq.displayedTracks[1].cells = (seq.parts[.A]?.patterns[1].cells)!
+//        seq.displayedTracks[2].cells = (seq.parts[.A]?.patterns[2].cells)!
+//        seq.displayedTracks[3].cells = (seq.parts[.A]?.patterns[3].cells)!
+
+        
         for (index, button) in track0Buttons.enumerated() {
             
             if seq.displayedTracks[0].cells[index] == .ON {
@@ -1620,24 +1610,24 @@ DispatchQueue.main.async {
         if segue.identifier == "goToLoadSaveVC" {
             let navVC = segue.destination
             let loadSaveVC = navVC.children.first as! LoadSaveVC
+//            let loadSaveVC = segue.destination as! LoadSaveVC
             //loadSaveVC.realm = self.realm
-            
+            loadSaveVC.delegate = self
             
             guard let snapShot = realm.objects(Snapshot.self).first else {return}
             print(snapShot.name)
             print(snapShot.soundsArray)
         }
         
-        
-            if segue.identifier == "goToSettings" {
-                let settingsTableVC = segue.destination as! SettingsTableVC
-               settingsTableVC.popoverPresentationController?.delegate = self
-                settingsTableVC.delegate = self
-//                trackSettingsVC.selectedSound = seq.selectedSounds[index]
-//                trackSettingsVC.fileNames = seq.fileNames.normal
-//                trackSettingsVC.currentPlayer = (sender as! UIButton).tag
-//                trackSettingsVC.volume = seq.volumes[index]
-            }
+        if segue.identifier == "goToSettings" {
+            let settingsTableVC = segue.destination as! SettingsTableVC
+            settingsTableVC.popoverPresentationController?.delegate = self
+            settingsTableVC.delegate = self
+            //                trackSettingsVC.selectedSound = seq.selectedSounds[index]
+            //                trackSettingsVC.fileNames = seq.fileNames.normal
+            //                trackSettingsVC.currentPlayer = (sender as! UIButton).tag
+            //                trackSettingsVC.volume = seq.volumes[index]
+        }
     
         
 

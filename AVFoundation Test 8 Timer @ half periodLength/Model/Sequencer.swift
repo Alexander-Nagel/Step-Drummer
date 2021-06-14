@@ -208,9 +208,6 @@ struct Sequencer {
     
     mutating func loadPart(partName: PartNames) {
         
-        //let number = partName.rawValue
-//        displayedTracks[0].numberOfCellsActive = defaultPatterns.kick[number].length
-//        displayedTracks[0].cells = defaultPatterns.kick[number].cells
         
         for i in 0...3 {
            if let length = parts[partName]?.patterns[i].length,
@@ -223,35 +220,15 @@ struct Sequencer {
         
         
         
-//        displayedTracks[1].numberOfCellsActive = defaultPatterns.snare[number].length
-//        displayedTracks[1].cells = defaultPatterns.snare[number].cells
-//
-//        displayedTracks[2].numberOfCellsActive = defaultPatterns.closed_hihat[number].length
-//        displayedTracks[2].cells = defaultPatterns.closed_hihat[number].cells
-//
-//        displayedTracks[3].numberOfCellsActive = defaultPatterns.open_hihat[number].length
-//        displayedTracks[3].cells = defaultPatterns.open_hihat[number].cells
+
     }
     
     mutating func saveToPart(partName: PartNames) {
         
-        //let number = partName.rawValue
-//        defaultPatterns.kick[number].length = displayedTracks[0].numberOfCellsActive
-//        defaultPatterns.kick[number].cells = displayedTracks[0].cells
         for i in 0...3 {
             parts[partName]?.patterns[i].length = displayedTracks[i].numberOfCellsActive
             parts[partName]?.patterns[i].cells = displayedTracks[i].cells
         }
-        
-        
-//        defaultPatterns.snare[number].length = displayedTracks[1].numberOfCellsActive
-//        defaultPatterns.snare[number].cells = displayedTracks[1].cells
-//
-//        defaultPatterns.closed_hihat[number].length = displayedTracks[2].numberOfCellsActive
-//        defaultPatterns.closed_hihat[number].cells = displayedTracks[2].cells
-//
-//        defaultPatterns.open_hihat[number].length = displayedTracks[3].numberOfCellsActive
-//        defaultPatterns.open_hihat[number].cells = displayedTracks[3].cells
     }
     
     mutating func deletePart(partName: PartNames) {

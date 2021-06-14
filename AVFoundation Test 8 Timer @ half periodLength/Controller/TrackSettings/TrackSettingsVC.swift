@@ -167,7 +167,8 @@ extension TrackSettingsVC: SoundSelectionTableVCDelegate {
         
         if let player = currentPlayer {
             delegate?.loadFile(name: name, toPlayer: player)
-            (delegate as! MainVC).saveSnapShot(fileName: "default")
+//            (delegate as! MainVC).saveSnapShot(fileName: "default")
+            (delegate as! MainVC).saveSnapshot(name: "default", partThatHasChanged: nil, patternThatHasChanged: nil)
             selectedSoundLabel.text = name
         }
     }

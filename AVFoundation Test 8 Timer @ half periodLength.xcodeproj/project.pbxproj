@@ -33,6 +33,7 @@
 		FA425DFF2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */; };
 		FA562D3B264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */; };
 		FA562D45264933BD000497C8 /* SequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA562D44264933BD000497C8 /* SequencerTests.swift */; };
+		FA63745626709C8100373A7D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63745526709C8100373A7D /* Alert.swift */; };
 		FA6D27BF2663EAFC00AE6D5B /* DistortionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D27BE2663EAFC00AE6D5B /* DistortionTableVC.swift */; };
 		FA70CD84264829EA007A212F /* hihat_2154samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD80264829E9007A212F /* hihat_2154samples.wav */; };
 		FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA70CD81264829E9007A212F /* kick_2156samples.wav */; };
@@ -123,6 +124,7 @@
 		FA562D3A264932C4000497C8 /* AVFoundation_Test_8_Timer___half_periodLength_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation_Test_8_Timer___half_periodLength_Tests.swift"; sourceTree = "<group>"; };
 		FA562D3C264932C4000497C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA562D44264933BD000497C8 /* SequencerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerTests.swift; sourceTree = "<group>"; };
+		FA63745526709C8100373A7D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		FA6D27BE2663EAFC00AE6D5B /* DistortionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistortionTableVC.swift; sourceTree = "<group>"; };
 		FA70CD80264829E9007A212F /* hihat_2154samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hihat_2154samples.wav; sourceTree = "<group>"; };
 		FA70CD81264829E9007A212F /* kick_2156samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick_2156samples.wav; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				FA18D31626542B09005D2A2F /* VerticalButton.swift */,
 				FAB47AD326552C50006281CE /* ClickableSegmentedControl.swift */,
 				FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */,
+				FA63745526709C8100373A7D /* Alert.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				FAB47ACA2654FFBB006281CE /* Part.swift in Sources */,
 				FA18D3132653F26F005D2A2F /* Tempo.swift in Sources */,
 				FA12A33F2656627100439FA3 /* TrackSettingsVC.swift in Sources */,
+				FA63745626709C8100373A7D /* Alert.swift in Sources */,
 				FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */,
 				FA715BBA265E7FED00F4CFDC /* ReverbTableVC.swift in Sources */,
 				FA0DDA0F265E8B3B00D155D6 /* AV FX Presets Description Extension.swift in Sources */,

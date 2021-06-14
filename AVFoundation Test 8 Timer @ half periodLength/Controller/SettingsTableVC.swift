@@ -97,15 +97,20 @@ extension SettingsTableVC {
     
     @IBAction func loadButtonPressed(_ sender: UIButton) {
         print(#function)
-        delegate?.loadSnapShot(fileName: "default")
+        //delegate?.loadSnapShot(fileName: "default")
+        delegate?.loadSnapshot("default")
+
         dismiss(animated: true, completion: nil)
+        
 
     }
     
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         print(#function)
-        delegate?.saveSnapShot(fileName: "default")
+//        delegate?.saveSnapShot(fileName: "default")
+        delegate?.saveSnapshot(name: "default", partThatHasChanged: nil, patternThatHasChanged: nil)
+
         dismiss(animated: true, completion: nil)
         
 
@@ -117,8 +122,10 @@ extension SettingsTableVC {
 //
 
 protocol SettingsTableVCDelegate {
-    func loadSnapShot(fileName: String)
-    func saveSnapShot(fileName: String)
+    //func loadSnapShot(fileName: String)
+    func loadSnapshot(_ name: String)
+    //func saveSnapShot(fileName: String)
+    func saveSnapshot(name: String, partThatHasChanged: Int?, patternThatHasChanged: Int?)
 }
 
 

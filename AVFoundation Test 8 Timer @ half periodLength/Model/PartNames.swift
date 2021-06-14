@@ -8,6 +8,10 @@
 enum PartNames: Int, CaseIterable {
     case A, B, C, D
     
+    static var numberOfParts: Int {
+        return PartNames.allCases.count
+    }
+    
     func next() -> PartNames {
         let currentIndex = self.rawValue
         var nextIndex = currentIndex + 1
