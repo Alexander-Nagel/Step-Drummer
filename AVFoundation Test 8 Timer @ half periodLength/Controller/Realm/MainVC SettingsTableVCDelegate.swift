@@ -45,8 +45,17 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
         let snapshot = Snapshot.create(withName: name, snParts: snParts)
         
         //
+        // Add track volumes to snapshot
+        //
+        for trackIndex in 0...(K.Sequencer.numberOfTracks-1) {
+            snapshot.volumesArray[trackIndex] = seq.volumes[trackIndex]
+        }
+        
+        
+        //
         // Add sound to snapshot
         //
+        snapshot.soundsArray.removeAll()
         snapshot.soundsArray.append(objectsIn: seq.selectedSounds)
         
         //
@@ -151,6 +160,14 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
             updateUIAfterTempoChange(to: snapshot.bpm)
             
             //
+            // Load volumes
+            //
+            for trackIndex in 0...(K.Sequencer.numberOfTracks-1) {
+                seq.volumes[trackIndex] = snapshot.volumesArray[trackIndex]
+                seq.players[trackIndex].volume = snapshot.volumesArray[trackIndex]
+            }
+            
+            //
             // Load patterns:
             //
             for partIndex in 0...(K.Sequencer.numberOfParts - 1) {
@@ -171,6 +188,9 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
                     }
                 }
             }
+            
+            saveSnapshot(name: "default")
+            
         } else {
             print("Snapshot \(name) does not exist")
             return

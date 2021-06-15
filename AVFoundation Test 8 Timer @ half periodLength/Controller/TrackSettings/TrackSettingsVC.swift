@@ -133,6 +133,7 @@ extension TrackSettingsVC {
         print(sender.value)
         (delegate as! MainVC).seq.volumes[currentPlayer!] = sender.value
         (delegate as! MainVC).seq.players[currentPlayer!].volume = sender.value
+        (delegate as! MainVC).saveSnapshot(name: "default")
     }
     
     @IBAction func closeButtonPressed(_ sender: UIButton) {

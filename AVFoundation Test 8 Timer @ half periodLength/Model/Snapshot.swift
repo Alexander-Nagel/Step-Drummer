@@ -1,5 +1,6 @@
+NEW!
 //
-//  Snaphot2.swift
+//  Snaphot.swift
 //  AVFoundation Test 8 Timer @ half periodLength
 //
 //  Created by Alexander Nagel on 14.06.21.
@@ -7,10 +8,6 @@
 
 import Foundation
 import RealmSwift
-
-//final class SnapshotPattern: Object {
-//    let cells = List<String>()
-//}
 
 final class SNPattern: Object {
     @objc dynamic var name = ""
@@ -24,10 +21,6 @@ final class SNPattern: Object {
     }
 }
 
-//final class SnapshotPart: Object {
-//    let patterns = List<SnapshotPattern>()
-//}
-
 final class SNPart: Object {
     @objc dynamic var name = ""
     var snPatterns = List<SNPattern>()
@@ -40,21 +33,22 @@ final class SNPart: Object {
     }
 }
 
-
-//final class Snapshot: Object {
-//    @objc dynamic var name: String = ""
-//    let soundsArray = List<String>()
-//    let parts = List<SnapshotPart>()
-//}
-
 final class Snapshot: Object {
     @objc dynamic var name = ""
+    
+    @objc dynamic var bpm: Double = 120.0
+    
+    var volumesArray = List<Float>()
+
     var soundsArray = List<String>()
+    
     var snParts = List<SNPart>()
     
     static func create(withName name: String, snParts: [SNPart]) -> Snapshot {
         let snapshot = Snapshot()
         snapshot.name = name
+        snapshot.volumesArray.append(objectsIn: Array(repeating: 0.0, count: K.Sequencer.numberOfTracks))
+        snapshot.soundsArray.append(objectsIn: Array(repeating: "", count: K.Sequencer.numberOfTracks))
         snapshot.snParts.append(objectsIn: snParts)
         return snapshot
     }
