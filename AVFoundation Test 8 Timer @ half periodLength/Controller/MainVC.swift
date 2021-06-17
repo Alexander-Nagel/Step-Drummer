@@ -240,6 +240,17 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         
         showOrHideControls()
+        
+        
+        print("settingsButton0.frame.size.width: \(settingsButton0.frame.size.width)")
+        print("settingsButton0.frame.size.height: \(settingsButton0.frame.size.height)")
+        print("settingsButton0.imageView?.frame.size.width: \(settingsButton0.imageView?.frame.size.width)")
+        print("settingsButton0.imageView?.frame.size.height: \(settingsButton0.imageView?.frame.size.height)")
+        
+        print("mute0Button.frame.size.width: \(mute0Button.frame.size.width)")
+        print("mute0Button.frame.size.height: \(mute0Button.frame.size.height)")
+        print("mute0Button.imageView?.frame.size.width: \(mute0Button.imageView?.frame.size.width)")
+        print("mute0Button.imageView?.frame.size.height: \(mute0Button.imageView?.frame.size.height)")
     }
     
     

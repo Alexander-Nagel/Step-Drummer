@@ -103,7 +103,7 @@ extension MainVC {
 //            button.backgroundColor = K.Color.muteButtonColor
 //            button.layer.borderColor = K.Color.muteButtonBorderColor.cgColor
 //            button.layer.borderWidth = 1.0
-            button.tintColor = K.Color.white
+            button.tintColor = K.Color.orange
             button.isHidden = false
             //            button.titleLabel?.text = "AA"
            // button.setTitleColor(K.Color.black, for: .normal)
@@ -124,9 +124,18 @@ extension MainVC {
             button.isHidden = false
             //            button.titleLabel?.text = "AA"
            // button.setTitleColor(K.Color.black, for: .normal)
-            button.layer.cornerRadius = 5
+            //button.layer.cornerRadius = 5
             // button.layer.cornerRadius = 0.5 * button.bounds.size.width
             button.tag = index
+            //button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+            //button.imageView?.layer.transform = CATransform3DMakeScale(0.8, 0.8, 0.8)
+           // button.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+            //button.imageView?.contentMode = .scaleAspectFit
+            //button.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+            //button.imageEdgeInsets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+
+           // button.imageView?.widthAnchor.constraint(equalToConstant: 20).isActive = true
+           // button.imageView?.heightAnchor.constraint(equalToConstant: 20).isActive = true
            // button.widthAnchor.constraint(equalToConstant: 35).isActive = true
            // button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1.0/1.0).isActive = true
         }
@@ -175,64 +184,71 @@ extension MainVC {
         //
         partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
         partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
-        partSegmentedControl.tintColor = K.Color.white
+        partSegmentedControl.tintColor = K.Color.blue
         // partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: K.Color.white], for: .selected)
         //partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: K.Color.white], for: .selected)
         //partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 28)], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24),
-                NSAttributedString.Key.foregroundColor: K.Color.white
+                NSAttributedString.Key.foregroundColor: K.Color.blue_brighter
             ]
             , for: .normal
+        )
+        UISegmentedControl.appearance().setTitleTextAttributes(
+            [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24),
+                NSAttributedString.Key.foregroundColor: K.Color.blue
+            ]
+            , for: .selected
         )
        
         
         // SOFT MODE button:
         //
-//        softModeButton.setTitleColor(.black, for: .normal)
+      softModeButton.setTitleColor(K.Color.blue, for: .normal)
         softModeButton.backgroundColor = K.Color.blue_brighter
         softModeButton.layer.cornerRadius = 0.125 * softModeButton.bounds.size.width
-        softModeButton.tintColor = K.Color.white
-        softModeButton.titleLabel?.textColor = K.Color.white
+       softModeButton.tintColor = K.Color.blue
+        softModeButton.titleLabel?.textColor = K.Color.blue
 
         
         // DELETE button:
         //
-//        deleteButton.setTitleColor(.black, for: .normal)
+       deleteButton.setTitleColor(K.Color.blue, for: .normal)
         deleteButton.backgroundColor = K.Color.blue_brighter
         deleteButton.layer.cornerRadius = 0.125 * deleteButton.bounds.size.width
         deleteButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        deleteButton.tintColor = K.Color.white
-        deleteButton.titleLabel?.textColor = K.Color.white
+        deleteButton.tintColor = K.Color.blue
+        deleteButton.titleLabel?.textColor = K.Color.blue
 
         
         // COPY button:
         //
-//        copyButton.setTitleColor(.black, for: .normal)
+        copyButton.setTitleColor(K.Color.blue, for: .normal)
         copyButton.backgroundColor = K.Color.blue_brighter
         copyButton.layer.cornerRadius = 0.125 * copyButton.bounds.size.width
         copyButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        copyButton.tintColor = K.Color.white
-        copyButton.titleLabel?.textColor = K.Color.white
+        copyButton.tintColor = K.Color.blue
+        copyButton.titleLabel?.textColor = K.Color.blue
         
         // CHAIN button:
         //
-//        chainButton.setTitleColor(.black, for: .normal)
+        chainButton.setTitleColor(K.Color.blue, for: .normal)
         chainButton.backgroundColor = K.Color.blue_brighter
         chainButton.layer.cornerRadius = 0.125 * chainButton.bounds.size.width
         chainButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        chainButton.tintColor = K.Color.white
-        chainButton.titleLabel?.textColor = K.Color.white
+        //chainButton.tintColor = K.Color.white
+        chainButton.titleLabel?.textColor = K.Color.blue
         chainButton.setTitle(ChainModeNames.OFF.description, for: .normal)
 
         // TAP button:
         //
-        tapButton.setTitleColor(K.Color.white, for: .normal)
+        tapButton.setTitleColor(K.Color.blue, for: .normal)
         tapButton.backgroundColor = K.Color.blue_brighter
         tapButton.layer.cornerRadius = 0.125 * tapButton.bounds.size.width
-        tapButton.tintColor = K.Color.white
-        tapButton.titleLabel?.textColor = K.Color.white
+        tapButton.tintColor = K.Color.blue
+        tapButton.titleLabel?.textColor = K.Color.blue
         
         // BPM picker:
         //
@@ -241,16 +257,29 @@ extension MainVC {
         picker.selectRow(90, inComponent: 0, animated: true) // start at 120 bpm
         picker.selectRow(0, inComponent: 1, animated: true) // decimal point
         picker.selectRow(0, inComponent: 2, animated: true) // start at 0 as decimal
-        picker.tintColor = .white
+        picker.tintColor = K.Color.blue
+        
         picker.backgroundColor = K.Color.controlButtonsColor
         picker.layer.cornerRadius = 0.125 * picker.bounds.size.width
+        picker.pickerTextColor = K.Color.blue
+        
         
         // PLAY button:
         //
         playPauseButton.setTitleColor(.white, for: .normal)
         playPauseButton.backgroundColor = K.Color.blue_brighter
         playPauseButton.layer.cornerRadius = 0.125 * playPauseButton.bounds.size.width
-        playPauseButton.tintColor = K.Color.white
-        playPauseButton.titleLabel?.textColor = K.Color.white
+        playPauseButton.tintColor = K.Color.blue
+        playPauseButton.titleLabel?.textColor = K.Color.blue
     }
 }
+
+extension UIPickerView {
+@IBInspectable var pickerTextColor:UIColor? {
+    get {
+        return self.pickerTextColor
+    }
+    set {
+        self.setValue(newValue, forKeyPath: "textColor")
+    }
+}}
