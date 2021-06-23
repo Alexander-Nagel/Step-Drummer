@@ -199,9 +199,9 @@ struct Sequencer {
         print("fileNames.normal.count: \(fileNames.normal.count)")
         //silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count)
         silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks)
-        for buffer in silenceBuffers {
-            print("buffer: \(buffer.frameCapacity)")
-        }
+//        for buffer in silenceBuffers {
+//            print("buffer: \(buffer.frameCapacity)")
+//        }
         
         loadPart(partName: .A)
         
