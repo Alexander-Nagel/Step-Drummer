@@ -182,8 +182,9 @@ extension MainVC {
         
         // PART A/B/C/D segmented control:
         //
-        partSegmentedControl.selectedSegmentTintColor = K.Color.controlButtonsSelectedColor
-        partSegmentedControl.backgroundColor = K.Color.controlButtonsColor
+        partSegmentedControl.selectedSegmentTintColor = K.Color.orange
+        partSegmentedControl.backgroundColor = K.Color.blue
+        
         partSegmentedControl.tintColor = K.Color.blue
         // partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: K.Color.white], for: .selected)
         //partSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: K.Color.white], for: .selected)
@@ -207,7 +208,7 @@ extension MainVC {
         // SOFT MODE button:
         //
       softModeButton.setTitleColor(K.Color.blue, for: .normal)
-        softModeButton.backgroundColor = K.Color.blue_brighter
+        softModeButton.backgroundColor = K.Color.orange
         softModeButton.layer.cornerRadius = 0.125 * softModeButton.bounds.size.width
        softModeButton.tintColor = K.Color.blue
         softModeButton.titleLabel?.textColor = K.Color.blue
@@ -216,7 +217,7 @@ extension MainVC {
         // DELETE button:
         //
        deleteButton.setTitleColor(K.Color.blue, for: .normal)
-        deleteButton.backgroundColor = K.Color.blue_brighter
+        deleteButton.backgroundColor = K.Color.orange
         deleteButton.layer.cornerRadius = 0.125 * deleteButton.bounds.size.width
         deleteButton.titleLabel?.adjustsFontSizeToFitWidth = true
         deleteButton.tintColor = K.Color.blue
@@ -226,7 +227,7 @@ extension MainVC {
         // COPY button:
         //
         copyButton.setTitleColor(K.Color.blue, for: .normal)
-        copyButton.backgroundColor = K.Color.blue_brighter
+        copyButton.backgroundColor = K.Color.orange
         copyButton.layer.cornerRadius = 0.125 * copyButton.bounds.size.width
         copyButton.titleLabel?.adjustsFontSizeToFitWidth = true
         copyButton.tintColor = K.Color.blue
@@ -235,7 +236,7 @@ extension MainVC {
         // CHAIN button:
         //
         chainButton.setTitleColor(K.Color.blue, for: .normal)
-        chainButton.backgroundColor = K.Color.blue_brighter
+        chainButton.backgroundColor = K.Color.orange
         chainButton.layer.cornerRadius = 0.125 * chainButton.bounds.size.width
         chainButton.titleLabel?.adjustsFontSizeToFitWidth = true
         //chainButton.tintColor = K.Color.white
@@ -245,7 +246,7 @@ extension MainVC {
         // TAP button:
         //
         tapButton.setTitleColor(K.Color.blue, for: .normal)
-        tapButton.backgroundColor = K.Color.blue_brighter
+        tapButton.backgroundColor = K.Color.orange
         tapButton.layer.cornerRadius = 0.125 * tapButton.bounds.size.width
         tapButton.tintColor = K.Color.blue
         tapButton.titleLabel?.textColor = K.Color.blue
@@ -258,19 +259,22 @@ extension MainVC {
         picker.selectRow(0, inComponent: 1, animated: true) // decimal point
         picker.selectRow(0, inComponent: 2, animated: true) // start at 0 as decimal
         picker.tintColor = K.Color.blue
-        
-        picker.backgroundColor = K.Color.controlButtonsColor
+        picker.backgroundColor = K.Color.orange
         picker.layer.cornerRadius = 0.125 * picker.bounds.size.width
-        picker.pickerTextColor = K.Color.blue
+        //picker.pickerTextColor = K.Color.blue
+        //picker.setValue(UIColor.yellow, forKeyPath: "textColor")
         
         
         // PLAY button:
         //
         playPauseButton.setTitleColor(.white, for: .normal)
-        playPauseButton.backgroundColor = K.Color.blue_brighter
+        playPauseButton.backgroundColor = K.Color.orange
         playPauseButton.layer.cornerRadius = 0.125 * playPauseButton.bounds.size.width
         playPauseButton.tintColor = K.Color.blue
         playPauseButton.titleLabel?.textColor = K.Color.blue
+        
+       
+        
     }
 }
 

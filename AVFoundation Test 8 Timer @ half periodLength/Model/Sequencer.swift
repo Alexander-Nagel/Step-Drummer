@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 
 struct Sequencer {
-
+    
     var bpmDetector = BpmDetector()
     
     var displayedTracks = [Track]()
@@ -109,7 +109,7 @@ struct Sequencer {
         catch {
             fatalError("Can't set preferred buffer size")
         }
-      //  print("BufferDuration: \(round(session.ioBufferDuration, toDigits: 3)) s")
+        //  print("BufferDuration: \(round(session.ioBufferDuration, toDigits: 3)) s")
         
         //var mixer = engine.mainMixerNode
         //var input = engine.inputNode
@@ -137,7 +137,7 @@ struct Sequencer {
         engine.attach(reverbs[2])
         engine.attach(reverbs[3])
         
-      
+        
         engine.connect(players[0], to: distortions[0], format: format)
         engine.connect(distortions[0], to: delays[0], format: format)
         engine.connect(delays[0], to: reverbs[0], format: format)
@@ -175,10 +175,10 @@ struct Sequencer {
                 delays[i].delayTime = delayTimes[i]
                 delays[i].feedback = delayFeedbacks[i]
                 delays[i].wetDryMix = delayWetDryMixes[i]
-               // delays[i].lowPassCutoff
+                // delays[i].lowPassCutoff
             }
         }
-       
+        
         //
         // Init distortion units
         //
@@ -186,7 +186,7 @@ struct Sequencer {
             distortions[i].loadFactoryPreset(distortionPresets[i])
             distortions[i].wetDryMix = distortionWetDryMixes[i]
             distortions[i].preGain = distortionPreGains[i]
-
+            
         }
         
         engine.prepare()
@@ -196,31 +196,36 @@ struct Sequencer {
                       soft: Array(repeating: AVAudioFile(), count: fileNames.normal.count))
         soundBuffers = SoundBuffers(normal: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks), soft: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks))
         
-        silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count)
+        print("fileNames.normal.count: \(fileNames.normal.count)")
+        //silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count)
+        silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks)
+        for buffer in silenceBuffers {
+            print("buffer: \(buffer.frameCapacity)")
+        }
         
         loadPart(partName: .A)
         
         //print(durationOf16thNoteInSamples(forTrack: 0))
-       // print(durationOf16thNoteInSamples(forTrack: 1))
-       // print(durationOf16thNoteInSamples(forTrack: 2))
-       // print( durationOf16thNoteInSamples(forTrack: 3))
+        // print(durationOf16thNoteInSamples(forTrack: 1))
+        // print(durationOf16thNoteInSamples(forTrack: 2))
+        // print( durationOf16thNoteInSamples(forTrack: 3))
     }
     
     mutating func loadPart(partName: PartNames) {
         
         
         for i in 0...3 {
-           if let length = parts[partName]?.patterns[i].length,
-              let cells = parts[partName]?.patterns[i].cells {
-              displayedTracks[i].numberOfCellsActive = length
-              displayedTracks[i].cells = cells
+            if let length = parts[partName]?.patterns[i].length,
+               let cells = parts[partName]?.patterns[i].cells {
+                displayedTracks[i].numberOfCellsActive = length
+                displayedTracks[i].cells = cells
             }
         }
         
         
         
         
-
+        
     }
     
     mutating func saveToPart(partName: PartNames) {
@@ -265,7 +270,7 @@ struct Sequencer {
         for trackIndex in 0...(K.Sequencer.numberOfTracks-1) {
             preScheduleFirstBuffer(forPlayer: trackIndex)
         }
-       
+        
         
     }
     
@@ -273,25 +278,29 @@ struct Sequencer {
     // MARK:- PRE SCHEDULE FIRST BUFFER
     //
     
-    func preScheduleFirstBuffer(forPlayer seletedPlayer: Int) {
+    func preScheduleFirstBuffer(forPlayer selectedPlayer: Int) {
         
         print(#function)
         
-       // printFrameLengths()
+        // printFrameLengths()
         
-        players[seletedPlayer].stop()
-        if displayedTracks[seletedPlayer].cells[0] == .ON {
+        players[selectedPlayer].stop()
+        if displayedTracks[selectedPlayer].cells[0] == .ON {
             //
             // Schedule sound
             //
-            players[seletedPlayer].scheduleBuffer(soundBuffers.normal[seletedPlayer], at: nil, options: [], completionHandler: nil)
+            players[selectedPlayer].scheduleBuffer(soundBuffers.normal[selectedPlayer], at: nil, options: [], completionHandler: nil)
         } else {
             //
             // Schedule silence
             //
-            players[seletedPlayer].scheduleBuffer(silenceBuffers[seletedPlayer], at: nil, options: [], completionHandler: nil)
+            print("selectedPlayer: \(selectedPlayer)")
+            print("players[selectedPlayer]: \(players[selectedPlayer])")
+            print("silenceBuffers[selectedPlayer]: \(silenceBuffers[selectedPlayer])")
+
+            players[selectedPlayer].scheduleBuffer(silenceBuffers[selectedPlayer], at: nil, options: [], completionHandler: nil)
         }
-        players[seletedPlayer].prepare(withFrameCount: AVAudioFrameCount(durationOf16thNoteInSamples(forTrack: seletedPlayer)))
+        players[selectedPlayer].prepare(withFrameCount: AVAudioFrameCount(durationOf16thNoteInSamples(forTrack: selectedPlayer)))
     }
     
     //

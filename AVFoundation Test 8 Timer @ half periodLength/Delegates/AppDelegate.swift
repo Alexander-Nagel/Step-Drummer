@@ -18,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print(Realm.Configuration.defaultConfiguration.fileURL as Any)
         
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : K.Color.blue]
+        UINavigationBar.appearance().barTintColor = K.Color.orange
+        UINavigationBar.appearance().tintColor = K.Color.blue
+
+
+        
 //        let data = Data()
 //        data.name = "Alex"
 //        data.age = 46

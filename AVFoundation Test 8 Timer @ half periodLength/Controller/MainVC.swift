@@ -241,6 +241,11 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         
         showOrHideControls()
         
+        //
+        // MARK: - Title Navigation bar
+        //
+       title = "Step Drummer"
+     
         
         print("settingsButton0.frame.size.width: \(settingsButton0.frame.size.width)")
         print("settingsButton0.frame.size.height: \(settingsButton0.frame.size.height)")
@@ -347,14 +352,14 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             drawSoftNotes = false
             //chainButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-            softModeButton.backgroundColor = K.Color.blue_brighter
+            softModeButton.backgroundColor = K.Color.orange
         } else {
             //
             // switch soft note mode  ON
             //
             drawSoftNotes = true
             //chainButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
-            softModeButton.backgroundColor = K.Color.blue_brightest
+            softModeButton.backgroundColor = K.Color.orange_brighter
         }
     }
     
@@ -379,7 +384,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             deleteMode = true
             deleteModeSource = seq.activePart
-            deleteButton.backgroundColor = K.Color.blue_brightest
+            deleteButton.backgroundColor = K.Color.orange_brighter
             deleteButton.flashPermanently()
             
             //
@@ -394,7 +399,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     func endDeleteMode() {
         
         deleteMode = false
-        deleteButton.backgroundColor = K.Color.blue_brighter
+        deleteButton.backgroundColor = K.Color.orange
         deleteButton.layer.removeAllAnimations()
         partSegmentedControl.layer.removeAllAnimations()
         if let sourcePart = deleteModeSource {
@@ -405,7 +410,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     func endCopyMode() {
         
         copyMode = false
-        copyButton.backgroundColor = K.Color.blue_brighter
+        copyButton.backgroundColor = K.Color.orange
         copyButton.layer.removeAllAnimations()
         partSegmentedControl.layer.removeAllAnimations()
         if let sourcePart = copyModeSource {
@@ -434,7 +439,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             copyMode = true
             copyModeSource = seq.activePart
-            copyButton.backgroundColor = K.Color.blue_brightest
+            copyButton.backgroundColor = K.Color.orange_brighter
             copyButton.flashPermanently()
             
             //
@@ -603,7 +608,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             state = .stop
             playPauseButton.setImage(UIImage(systemName: K.Image.playImage), for: .normal)
-            playPauseButton.backgroundColor = K.Color.blue_brighter
+            playPauseButton.backgroundColor = K.Color.orange
 
             //for label in self.beatLabels {label.text = ""}
             
@@ -642,7 +647,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             state = .run
             playPauseButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
-            playPauseButton.backgroundColor = K.Color.blue_brightest
+            playPauseButton.backgroundColor = K.Color.orange_brighter
             
             startPlayers()
             
@@ -1790,6 +1795,11 @@ DispatchQueue.main.async {
         print(notification)
         print()
     }
+    
+//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+//        return NSAttributedString(string: parksPickerData[row], attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+//    }
+    
     
     //
     // MARK:- Tempo changed, update UI Tempo Elements

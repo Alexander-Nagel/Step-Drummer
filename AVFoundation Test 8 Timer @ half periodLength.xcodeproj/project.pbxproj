@@ -28,6 +28,7 @@
 		FA2B384C265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */; };
 		FA2B3854265C5AD800E602F6 /* cellArrayToStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */; };
 		FA2B385C265C5DF500E602F6 /* stringListToCellArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2B385B265C5DF500E602F6 /* stringListToCellArray.swift */; };
+		FA2FAA25268354E300C1EDBA /* 440BASS2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA2FAA24268354E300C1EDBA /* 440BASS2.wav */; };
 		FA30281126433C0D00406561 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30281026433C0D00406561 /* Sequencer.swift */; };
 		FA425DFB26628519007D8977 /* SyncDelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA425DFA26628519007D8977 /* SyncDelay.swift */; };
 		FA425DFF2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */; };
@@ -117,6 +118,7 @@
 		FA2B384B265AFD1500E602F6 /* MainVC SettingsTableVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC SettingsTableVCDelegate.swift"; sourceTree = "<group>"; };
 		FA2B3853265C5AD800E602F6 /* cellArrayToStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellArrayToStringArray.swift; sourceTree = "<group>"; };
 		FA2B385B265C5DF500E602F6 /* stringListToCellArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringListToCellArray.swift; sourceTree = "<group>"; };
+		FA2FAA24268354E300C1EDBA /* 440BASS2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440BASS2.wav; sourceTree = "<group>"; };
 		FA30281026433C0D00406561 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		FA425DFA26628519007D8977 /* SyncDelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDelay.swift; sourceTree = "<group>"; };
 		FA425DFE2662FA04007D8977 /* AllKeysOfDictionary2StringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKeysOfDictionary2StringArray.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				FAC71DE7264F37AD007FE152 /* 440CLHH.wav */,
 				FAC71DEC264F37AE007FE152 /* 440CRASH.wav */,
 				FAC71DEE264F37AE007FE152 /* 440CLAP.wav */,
+				FA2FAA24268354E300C1EDBA /* 440BASS2.wav */,
 				FAC71DEB264F37AE007FE152 /* 440KICK1.wav */,
 				FAC71DF0264F37AE007FE152 /* 440KICK2.wav */,
 				FAC71DEF264F37AE007FE152 /* 440KICK3.wav */,
@@ -504,6 +507,7 @@
 				FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */,
 				FAC71DF7264F37AE007FE152 /* 440SN3.wav in Resources */,
 				FA70CD87264829EA007A212F /* snare_2152samples.wav in Resources */,
+				FA2FAA25268354E300C1EDBA /* 440BASS2.wav in Resources */,
 				FAC71DF8264F37AE007FE152 /* 440CLAP.wav in Resources */,
 				FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */,
 				FAC71DF1264F37AE007FE152 /* 440CLHH.wav in Resources */,
