@@ -59,7 +59,9 @@ struct Sequencer {
                  "440SN2.wav",
                  "440SN3.wav",
                  "440CLHH.wav",
-                 "440OHH.wav"
+                 "440OHH.wav",
+                 "440CRASH.wav",
+                 "440BASS2.wav"
                  
         ],
         soft: ["kick_2156samples_SOFT.wav",
@@ -72,7 +74,9 @@ struct Sequencer {
                "snare_2152samples_SOFT.wav",
                "snare_2152samples_SOFT.wav",
                "hihat_2154samples_SOFT.wav",
-               "open_hihat_2181samples_SOFT.wav"
+               "open_hihat_2181samples_SOFT.wav",
+               "440CRASH.wav",
+               "440BASS2.wav"
         ])
     
     var files = Files()
