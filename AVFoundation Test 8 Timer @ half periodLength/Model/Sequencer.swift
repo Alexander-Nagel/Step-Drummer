@@ -83,6 +83,7 @@ struct Sequencer {
     var fileSilence: AVAudioFile! = nil
     
     var soundBuffers = SoundBuffers()
+    //var soundBuffer = [SoundBuffers]()
     var silenceBuffers = [AVAudioPCMBuffer]()
     
     var guideBuffer = AVAudioPCMBuffer()
@@ -96,7 +97,7 @@ struct Sequencer {
         tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         
         selectedSounds = [
-            "440KICK1.wav",
+            "440OHH.wav",
             "440SN1.wav",
             "hihat_2154samples.wav",
             "open_hihat_2181samples.wav"]
@@ -198,7 +199,14 @@ struct Sequencer {
         
         files = Files(normal: Array(repeating: AVAudioFile(), count: fileNames.normal.count),
                       soft: Array(repeating: AVAudioFile(), count: fileNames.normal.count))
-        soundBuffers = SoundBuffers(normal: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks), soft: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks))
+
+        //        soundBuffers = SoundBuffers(normal: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks), soft: Array(repeating: AVAudioPCMBuffer(), count: K.Sequencer.numberOfTracks))
+        soundBuffers = SoundBuffers(
+            normal: Array(repeating: Array(repeating: AVAudioPCMBuffer(), count: 16),
+                          count: K.Sequencer.numberOfTracks),
+            soft: Array(repeating: Array(repeating: AVAudioPCMBuffer(), count: 16),
+                        count: K.Sequencer.numberOfTracks),
+            lengthOfBufferInWholeCells: Array(repeating: 0, count: 16))
         
         print("fileNames.normal.count: \(fileNames.normal.count)")
         //silenceBuffers = Array(repeating: AVAudioPCMBuffer(), count: fileNames.normal.count)
@@ -282,18 +290,47 @@ struct Sequencer {
     // MARK:- PRE SCHEDULE FIRST BUFFER
     //
     
+//    func preScheduleFirstBuffer(forPlayer selectedPlayer: Int) {
+//
+//        print(#function)
+//
+//        // printFrameLengths()
+//
+//        players[selectedPlayer].stop()
+//        if displayedTracks[selectedPlayer].cells[0] == .ON {
+//            //
+//            // Schedule sound
+//            //
+//            players[selectedPlayer].scheduleBuffer(soundBuffers.normal[selectedPlayer], at: nil, options: [], completionHandler: nil)
+//        } else {
+//            //
+//            // Schedule silence
+//            //
+//            print("selectedPlayer: \(selectedPlayer)")
+//            print("players[selectedPlayer]: \(players[selectedPlayer])")
+//            print("silenceBuffers[selectedPlayer]: \(silenceBuffers[selectedPlayer])")
+//
+//            players[selectedPlayer].scheduleBuffer(silenceBuffers[selectedPlayer], at: nil, options: [], completionHandler: nil)
+//        }
+//        players[selectedPlayer].prepare(withFrameCount: AVAudioFrameCount(durationOf16thNoteInSamples(forTrack: selectedPlayer)))
+//    }
+    
+    //
+    // MARK:- PRE SCHEDULE FIRST BUFFER - NEW!!!
+    //
+    
     func preScheduleFirstBuffer(forPlayer selectedPlayer: Int) {
-        
+
         print(#function)
-        
+
         // printFrameLengths()
-        
+
         players[selectedPlayer].stop()
         if displayedTracks[selectedPlayer].cells[0] == .ON {
             //
             // Schedule sound
             //
-            players[selectedPlayer].scheduleBuffer(soundBuffers.normal[selectedPlayer], at: nil, options: [], completionHandler: nil)
+            players[selectedPlayer].scheduleBuffer(soundBuffers.normal[selectedPlayer] [0], at: nil, options: [], completionHandler: nil)
         } else {
             //
             // Schedule silence
@@ -306,6 +343,8 @@ struct Sequencer {
         }
         players[selectedPlayer].prepare(withFrameCount: AVAudioFrameCount(durationOf16thNoteInSamples(forTrack: selectedPlayer)))
     }
+    
+    
     
     //
     // Computes duration in samples of 16th note depending on BPM / samplerate (44100 kHz)

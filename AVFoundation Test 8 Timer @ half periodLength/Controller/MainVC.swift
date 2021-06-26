@@ -6,7 +6,7 @@ import UIKit
 import AVFoundation
 import RealmSwift
 
-fileprivate let DEBUG = false
+fileprivate let DEBUG = true
 
 class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         
@@ -30,12 +30,16 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     
     private var timerEventCounter0: Int = 1
     private var currentStep0: Int = 1
+    private var cellsToWaitBeforeRescheduling0 = 0
     private var timerEventCounter1: Int = 1
     private var currentStep1: Int = 1
+    private var cellsToWaitBeforeRescheduling1 = 0
     private var timerEventCounter2: Int = 1
     private var currentStep2: Int = 1
+    private var cellsToWaitBeforeRescheduling2 = 0
     private var timerEventCounter3: Int = 1
     private var currentStep3: Int = 1
+    private var cellsToWaitBeforeRescheduling3 = 0
     
     private var timerEventCounterGuide: Int = 1
     private var currentStepGuide: Int = 1
@@ -259,59 +263,151 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     }
     
     
-    //
-    // MARK:- Load buffers (with parameter)
-    //
-    func loadBuffer(ofPlayer playerIndex: Int, withFile fileIndex: Int) {
-        
+//    //
+//    // Load buffers (with parameter)
+//    //
+//    func loadBuffer(ofPlayer playerIndex: Int, withFile fileIndex: Int) {
+//
+//        //
+//        // Loading buffer - attached to player0 - to do: file0 / file1 / ... will be made variable later!
+//        //
+//        let path_normal = Bundle.main.path(forResource: seq.fileNames.normal[fileIndex], ofType: nil)!
+//        let path_soft = Bundle.main.path(forResource: seq.fileNames.soft[fileIndex], ofType: nil)!
+//        //let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
+//
+//        let url_normal = URL(fileURLWithPath: path_normal)
+//        let url_soft = URL(fileURLWithPath: path_soft)
+//
+//        do {
+//            seq.files.normal[fileIndex] = try AVAudioFile(forReading: url_normal)
+//            seq.soundBuffers.normal[playerIndex] = AVAudioPCMBuffer(
+//                pcmFormat: seq.files.normal[fileIndex].processingFormat,
+//                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
+//
+//            seq.files.soft[fileIndex] = try AVAudioFile(forReading: url_soft)
+//            seq.soundBuffers.soft[playerIndex] = AVAudioPCMBuffer(
+//                pcmFormat: seq.files.soft[fileIndex].processingFormat,
+//                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
+//
+//            try seq.files.normal[fileIndex].read(into: seq.soundBuffers.normal[playerIndex])
+//            try seq.files.soft[fileIndex].read(into: seq.soundBuffers.soft[playerIndex])
+//
+//            seq.soundBuffers.normal[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
+//            seq.soundBuffers.soft[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
+//
+//        } catch { print("Error loading buffer \(playerIndex) \(error)") }
+//
+//
+//        //
+//        // MARK: Loading silence buffer
+//        //
+//        let pathSilence = Bundle.main.path(forResource: seq.fileNameSilence, ofType: nil)!
+//        let urlSilence = URL(fileURLWithPath: pathSilence)
+//        do {
+//            seq.fileSilence = try AVAudioFile(forReading: urlSilence)
+//            seq.silenceBuffers[playerIndex] = AVAudioPCMBuffer(
+//                pcmFormat: seq.fileSilence.processingFormat,
+//                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
+//            try seq.fileSilence.read(into: seq.silenceBuffers[playerIndex])
+//            seq.silenceBuffers[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
+//        } catch {
+//            print("Error loading buffer0 \(playerIndex) \(error)")
+//        }
+//
+//
+//    }
+    
+    
+        // MARK:- Load buffers (with parameter) -- NEW: Creating up to 16 different length buffers (depending on file length)
         //
-        // MARK: Loading buffer - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
-        //
-        let path_normal = Bundle.main.path(forResource: seq.fileNames.normal[fileIndex], ofType: nil)!
-        let path_soft = Bundle.main.path(forResource: seq.fileNames.soft[fileIndex], ofType: nil)!
-        //let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
-        
-        let url_normal = URL(fileURLWithPath: path_normal)
-        let url_soft = URL(fileURLWithPath: path_soft)
-        
-        do {
-            seq.files.normal[fileIndex] = try AVAudioFile(forReading: url_normal)
-            seq.soundBuffers.normal[playerIndex] = AVAudioPCMBuffer(
-                pcmFormat: seq.files.normal[fileIndex].processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
+        func loadBuffer(ofPlayer playerIndex: Int, withFile fileIndex: Int) {
+    
+            //
+            // MARK: Loading buffer - attached to player0 - TODO: file0 / file1 / ... will be made variable later!
+            //
             
-            seq.files.soft[fileIndex] = try AVAudioFile(forReading: url_soft)
-            seq.soundBuffers.soft[playerIndex] = AVAudioPCMBuffer(
-                pcmFormat: seq.files.soft[fileIndex].processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
-            
-            try seq.files.normal[fileIndex].read(into: seq.soundBuffers.normal[playerIndex])
-            try seq.files.soft[fileIndex].read(into: seq.soundBuffers.soft[playerIndex])
-            
-            seq.soundBuffers.normal[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
-            seq.soundBuffers.soft[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
-            
-        } catch { print("Error loading buffer \(playerIndex) \(error)") }
-        
-        
-        //
-        // MARK: Loading silence buffer
-        //
-        let pathSilence = Bundle.main.path(forResource: seq.fileNameSilence, ofType: nil)!
-        let urlSilence = URL(fileURLWithPath: pathSilence)
-        do {
-            seq.fileSilence = try AVAudioFile(forReading: urlSilence)
-            seq.silenceBuffers[playerIndex] = AVAudioPCMBuffer(
-                pcmFormat: seq.fileSilence.processingFormat,
-                frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
-            try seq.fileSilence.read(into: seq.silenceBuffers[playerIndex])
-            seq.silenceBuffers[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
-        } catch {
-            print("Error loading buffer0 \(playerIndex) \(error)")
+            print()
+            print("Loading Buffer of Player \(playerIndex) with file # \(fileIndex):")
+            let path_normal = Bundle.main.path(forResource: seq.fileNames.normal[fileIndex], ofType: nil)!
+            let path_soft = Bundle.main.path(forResource: seq.fileNames.soft[fileIndex], ofType: nil)!
+            //let path = Bundle.main.path(forResource: fileNames[file_to_load], ofType: nil)!
+    
+            let url_normal = URL(fileURLWithPath: path_normal)
+            let url_soft = URL(fileURLWithPath: path_soft)
+    
+            do {
+                seq.files.normal[fileIndex] = try AVAudioFile(forReading: url_normal)
+                seq.files.soft[fileIndex] = try AVAudioFile(forReading: url_soft)
+                
+                //
+                // Determine length of soundfile in whole cells
+                //
+                let lengthOfFileInSamples = seq.files.normal[fileIndex].length
+                    print("lengthOfFileInSamples: \(lengthOfFileInSamples)")
+                let lengthOf16thNoteInSamples = seq.durationOf16thNoteInSamples(forTrack: playerIndex)
+                    print("lengthOf16thNote: \(lengthOf16thNoteInSamples)")
+                let numberOf16thCellsNeededToPlayWholeFile: Int = Int(ceil(Double(lengthOfFileInSamples) / lengthOf16thNoteInSamples))
+                    print("numberOf16thCellsNeededToPlayWholeFile: \(numberOf16thCellsNeededToPlayWholeFile)")
+                
+                seq.soundBuffers.lengthOfBufferInWholeCells[playerIndex] = numberOf16thCellsNeededToPlayWholeFile
+                
+                //
+                // Create snippets of 1 cell, 2 cells, 3 cells.... until numberOf16thCellsNeededToPlayWholeFile
+                //
+                for i in 0..<numberOf16thCellsNeededToPlayWholeFile {
+//
+                    let cellsToFill =  i + 1
+                    let numberOfCellsToFillInSamples = Double(cellsToFill) * lengthOf16thNoteInSamples
+                    
+                    print("Filling \(cellsToFill) cells (\(numberOfCellsToFillInSamples) samples.)")
+                    
+                    if let normal_buffer = AVAudioPCMBuffer(pcmFormat: seq.files.normal[fileIndex].processingFormat, frameCapacity: AVAudioFrameCount(numberOfCellsToFillInSamples)) {
+
+                        seq.soundBuffers.normal[playerIndex][i] = normal_buffer
+                       
+                    } else {
+                        fatalError("Could not create normal buffer")
+                    }
+                    
+                    if let soft_buffer = AVAudioPCMBuffer(pcmFormat: seq.files.soft[fileIndex].processingFormat, frameCapacity: AVAudioFrameCount(numberOfCellsToFillInSamples)) {
+
+                        seq.soundBuffers.soft[playerIndex][i] = soft_buffer
+                    } else {
+                        fatalError("Could not create soft buffer")
+                    }
+                    //
+                    // Reset read position to beginning and read into buffer
+                    //
+                    seq.files.normal[fileIndex].framePosition = 0
+                    try seq.files.normal[fileIndex].read(into: seq.soundBuffers.normal[playerIndex][i])
+                    seq.files.soft[fileIndex].framePosition = 0
+                    try seq.files.soft[fileIndex].read(into: seq.soundBuffers.soft[playerIndex][i])
+                      
+                    seq.soundBuffers.normal[playerIndex][i].frameLength = AVAudioFrameCount(numberOfCellsToFillInSamples)
+                    seq.soundBuffers.soft[playerIndex][i].frameLength = AVAudioFrameCount(numberOfCellsToFillInSamples)
+
+                }
+            } catch { print("Error loading buffer \(playerIndex) \(error)") }
+    
+    
+            //
+            // MARK: Loading silence buffer
+            //
+            let pathSilence = Bundle.main.path(forResource: seq.fileNameSilence, ofType: nil)!
+            let urlSilence = URL(fileURLWithPath: pathSilence)
+            do {
+                seq.fileSilence = try AVAudioFile(forReading: urlSilence)
+                seq.silenceBuffers[playerIndex] = AVAudioPCMBuffer(
+                    pcmFormat: seq.fileSilence.processingFormat,
+                    frameCapacity: AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex)))!
+                try seq.fileSilence.read(into: seq.silenceBuffers[playerIndex])
+                seq.silenceBuffers[playerIndex].frameLength = AVAudioFrameCount(seq.durationOf16thNoteInSamples(forTrack: playerIndex))
+            } catch {
+                print("Error loading silence buffer0 \(playerIndex) \(error)")
+            }
+    
+    
         }
-        
-        
-    }
     
     //
     // MARK:- LOAD GUIDE BUFFER
@@ -662,11 +758,167 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         
         if DEBUG {
             print("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  ")
-            print(seq.soundBuffers.normal[0].frameLength, seq.soundBuffers.normal[1].frameLength, seq.soundBuffers.normal[2].frameLength, seq.soundBuffers.normal[3].frameLength)
+//            print(seq.soundBuffers.normal[0].frameLength, seq.soundBuffers.normal[1].frameLength, seq.soundBuffers.normal[2].frameLength, seq.soundBuffers.normal[3].frameLength)
         }
         
+//        //
+//        //  Timer for player0
+//        //
+//        let timerIntervallInSeconds0 = self.seq.durationOf16thNoteInSamples(forTrack: 0) / (2 * K.Sequencer.sampleRate) // 1/2 of 16th note in seconds
+//        timer0 = Timer.scheduledTimer(withTimeInterval: timerIntervallInSeconds0, repeats: true) { timer in
+//
+//            //
+//            // Compute & dump debug values
+//            //
+//            // Values at begin of timer event
+//            var currentTime = round(self.seq.players[0].currentTimeInSeconds, toDigits: 3)
+//
+////            print(#function)
+////
+////            print(self.seq.soundBuffers.normal[0].frameLength, self.seq.silenceBuffers[0].frameLength, "  ",
+////                  self.seq.soundBuffers.normal[1].frameLength, self.seq.silenceBuffers[1].frameLength, "  ",
+////                  self.seq.soundBuffers.normal[2].frameLength, self.seq.silenceBuffers[2].frameLength, "  ",
+////                  self.seq.soundBuffers.normal[3].frameLength, self.seq.silenceBuffers[3].frameLength
+////            )
+//
+//            if DEBUG {
+//                print("player 0 timerEvent #\(self.timerEventCounter0) at \(self.seq.tempo!.bpm) BPM")
+//                print("Entering \ttimerEvent: \(self.timerEventCounter0) \tstep: \(self.currentStep0) \tcurrTime: \(currentTime)")
+//            }
+//            //
+//            // Schedule next buffer on odd events / increase beat conter on even events
+//            //
+//            var bufferScheduled: String = "" // only needed for debugging / console output
+//
+//            if self.timerEventCounter0 % 2 == 1 {
+//
+//                //
+//                // ODD event (1, 3, 5, 7, 9, 11, 13, 15...): schedule next buffer
+//                //
+//                var nextStep = self.currentStep0
+//                if nextStep == self.seq.displayedTracks[0].numberOfCellsActive {
+//                    nextStep = 0
+//                }
+//                if nextStep == 0 {
+//                    print("*** ", self.seq.distortions[0].wetDryMix, self.seq.distortions[0].preGain, self.seq.distortions[0].self)
+//                }
+//
+//                let nextCell = self.seq.displayedTracks[0].cells[nextStep]
+//
+//                if nextCell == .ON {
+//                    self.seq.players[0].scheduleBuffer(self.seq.soundBuffers.normal[0][1], at: nil, options: [], completionHandler: nil)
+//                    bufferScheduled = "buffer0"
+//                } else if nextCell == .SOFT {
+//                    self.seq.players[0].scheduleBuffer(self.seq.soundBuffers.soft[0][1], at: nil, options: [], completionHandler: nil)
+//                    bufferScheduled = "buffer0 soft"
+//                } else {
+//
+//                    self.seq.players[0].scheduleBuffer(self.seq.silenceBuffers[0], at: nil, options: [], completionHandler: nil)
+//                    bufferScheduled = "buffer0Silence"
+//                }
+//            } else {
+//                //
+//                // EVEN event (2, 4, 6, 8, 10, 12, 14, 16...): increase stepCounter
+//                //
+//                self.currentStep0 += 1
+//                if self.currentStep0 > self.seq.displayedTracks[0].numberOfCellsActive {
+//                    self.currentStep0 = 1
+//
+//                    if self.seq.chainMode == .ABCD {
+//                        var nextPart = self.seq.activePart.rawValue + 1
+//                        if nextPart == 4 { nextPart = 0 }
+//                        self.changeToPart(PartNames(rawValue: nextPart)!)
+//                    }
+//                    if self.seq.chainMode == .AB {
+//                        let currentPart = self.seq.activePart
+//                        var nextPart: PartNames
+//                        if currentPart == .A {
+//                            nextPart = .B
+//                        } else {
+//                            nextPart = .A
+//                        }
+//                        self.changeToPart(nextPart)
+//                    }
+//                    if self.seq.chainMode == .CD {
+//                        let currentPart = self.seq.activePart
+//                        var nextPart: PartNames
+//                        if currentPart == .C {
+//                            nextPart = .D
+//                        } else {
+//                            nextPart = .C
+//                        }
+//                        self.changeToPart(nextPart)
+//                    }
+////                    if self.seq.chainMode == .AD {
+////                        let currentPart = self.seq.activePart
+////                        var nextPart: PartNames
+////                        if currentPart == .A {
+////                            nextPart = .D
+////                        } else {
+////                            nextPart = .A
+////                        }
+////                        self.changeToPart(nextPart)
+////                    }
+////                    if self.seq.chainMode == .CB {
+////                        let currentPart = self.seq.activePart
+////                        var nextPart: PartNames
+////                        if currentPart == .C {
+////                            nextPart = .B
+////                        } else {
+////                            nextPart = .C
+////                        }
+////                        self.changeToPart(nextPart)
+////                    }
+////                    if self.seq.chainMode == .ABC {
+////                        let currentPart = self.seq.activePart
+////                        var nextPart: PartNames
+////                        if currentPart == .A {
+////                            nextPart = .B
+////                        } else if currentPart == .B{
+////                            nextPart = .C
+////                        } else {
+////                            nextPart = .A
+////                        }
+////                        self.changeToPart(nextPart)
+////                    }
+//
+//
+//                }
+//            }
+//
+//            //
+//            // Increase timerEventCounter, two events per beat.
+//            //
+//            self.timerEventCounter0 += 1
+//
+//            if self.timerEventCounter0 > (self.seq.displayedTracks[0].numberOfCellsActive * 2) {
+//                self.timerEventCounter0 = 1
+//            }
+//
+//            //
+//            //
+//            // Display current beat & increase currentBeat (1...4) at 2nd, 4th, 6th & 8th timerEvent
+//            //
+//            //            if self.timerEventCounter0 % 2 == 0 {
+//            //                for label in self.beatLabels {label.text = ""}
+//DispatchQueue.main.async {
+//                //self.track0buttons[self.currentStep0-1].text = String(self.currentStep0)
+//                self.track0Buttons[self.currentStep0 - 1].flash()
+//            }
+//            //                self.currentStep0 += 1; if self.currentStep0 > 4 {self.currentStep0 = 1}
+//            //            }
+//
+//            // Values at end of timer event
+//            if DEBUG {
+//                currentTime = round(self.seq.players[0].currentTimeInSeconds, toDigits: 3)
+//                print("Exiting \ttimerEvent: \(self.timerEventCounter0) \tstep: \(self.currentStep0) \tcurrTime: \(currentTime) \t\(bufferScheduled)")
+//                print()
+//            }
+//        }
+//        RunLoop.current.add(timer0, forMode: .common)
+        
         //
-        //  Timer for player0
+        //  MARK:- NEW Timer for player0
         //
         let timerIntervallInSeconds0 = self.seq.durationOf16thNoteInSamples(forTrack: 0) / (2 * K.Sequencer.sampleRate) // 1/2 of 16th note in seconds
         timer0 = Timer.scheduledTimer(withTimeInterval: timerIntervallInSeconds0, repeats: true) { timer in
@@ -697,7 +949,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             if self.timerEventCounter0 % 2 == 1 {
                 
                 //
-                // ODD event: schedule next buffer
+                // ODD event (1, 3, 5, 7, 9, 11, 13, 15...): schedule next buffer
                 //
                 var nextStep = self.currentStep0
                 if nextStep == self.seq.displayedTracks[0].numberOfCellsActive {
@@ -710,19 +962,51 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 let nextCell = self.seq.displayedTracks[0].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.seq.players[0].scheduleBuffer(self.seq.soundBuffers.normal[0], at: nil, options: [], completionHandler: nil)
-                    bufferScheduled = "buffer0"
+                    
+                    //
+                    // Compute distance to next .ON
+                    //
+                    var distance = 1
+                    for index in (nextStep + 1)...(self.seq.displayedTracks[0].numberOfCellsActive - 1) {
+                        print ("index: \(index) cell: \(self.seq.displayedTracks[0].cells[index])")
+                        if self.seq.displayedTracks[0].cells[index] == .OFF {
+                            distance += 1
+                        } else if self.seq.displayedTracks[0].cells[index] == .ON {
+                            break
+                        }
+                    }
+                    print("distance: \(distance)")
+                    
+                    let soundFileLengthInCells = self.seq.soundBuffers.lengthOfBufferInWholeCells[0]
+                    print("soundFileLengthInCells: \(soundFileLengthInCells)")
+                    
+                    let lengthToSchedule = min(distance, soundFileLengthInCells)
+                    print("lengthToSchedule: \(lengthToSchedule)")
+                    
+                    self.cellsToWaitBeforeRescheduling0 = lengthToSchedule - 1
+                    print("cellsToWaitBeforeRescheduling0: \(self.cellsToWaitBeforeRescheduling0)")
+
+                    let indexToSchedule = lengthToSchedule - 1
+                    self.seq.players[0].scheduleBuffer(self.seq.soundBuffers.normal[0][indexToSchedule], at: nil, options: [], completionHandler: nil)
+                    bufferScheduled = "soundBuffer[0][\(indexToSchedule)] "
+                    
+                    
+                    
                 } else if nextCell == .SOFT {
-                    self.seq.players[0].scheduleBuffer(self.seq.soundBuffers.soft[0], at: nil, options: [], completionHandler: nil)
+                    self.seq.players[0].scheduleBuffer(self.seq.soundBuffers.soft[0][1], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer0 soft"
                 } else {
                     
-                    self.seq.players[0].scheduleBuffer(self.seq.silenceBuffers[0], at: nil, options: [], completionHandler: nil)
-                    bufferScheduled = "buffer0Silence"
+                    if self.cellsToWaitBeforeRescheduling0 == 0 {
+                        self.seq.players[0].scheduleBuffer(self.seq.silenceBuffers[0], at: nil, options: [], completionHandler: nil)
+                        bufferScheduled = "buffer0Silence"
+                    } else {
+                        self.cellsToWaitBeforeRescheduling0 -= 1
+                    }
                 }
             } else {
                 //
-                // EVEN event: increase stepCounter
+                // EVEN event (2, 4, 6, 8, 10, 12, 14, 16...): increase stepCounter
                 //
                 self.currentStep0 += 1
                 if self.currentStep0 > self.seq.displayedTracks[0].numberOfCellsActive {
@@ -853,10 +1137,10 @@ DispatchQueue.main.async {
                 let nextCell = self.seq.displayedTracks[1].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.seq.players[1].scheduleBuffer(self.seq.soundBuffers.normal[1], at: nil, options: [], completionHandler: nil)
+                    self.seq.players[1].scheduleBuffer(self.seq.soundBuffers.normal[1][0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer1"
                 } else if nextCell == .SOFT {
-                    self.seq.players[1].scheduleBuffer(self.seq.soundBuffers.soft[1], at: nil, options: [], completionHandler: nil)
+                    self.seq.players[1].scheduleBuffer(self.seq.soundBuffers.soft[1][0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer1 soft"
                 } else {
                     self.seq.players[1].scheduleBuffer(self.seq.silenceBuffers[1], at: nil, options: [], completionHandler: nil)
@@ -933,10 +1217,10 @@ DispatchQueue.main.async {
                 let nextCell = self.seq.displayedTracks[2].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.seq.players[2].scheduleBuffer(self.seq.soundBuffers.normal[2], at: nil, options: [], completionHandler: nil)
+                    self.seq.players[2].scheduleBuffer(self.seq.soundBuffers.normal[2][0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer2"
                 } else if nextCell == .SOFT {
-                    self.seq.players[2].scheduleBuffer(self.seq.soundBuffers.soft[2], at: nil, options: [], completionHandler: nil)
+                    self.seq.players[2].scheduleBuffer(self.seq.soundBuffers.soft[2][0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer2 soft"
                 } else {
                     self.seq.players[2].scheduleBuffer(self.seq.silenceBuffers[2], at: nil, options: [], completionHandler: nil)
@@ -1016,10 +1300,10 @@ DispatchQueue.main.async {
                 let nextCell = self.seq.displayedTracks[3].cells[nextStep]
                 
                 if nextCell == .ON {
-                    self.seq.players[3].scheduleBuffer(self.seq.soundBuffers.normal[3], at: nil, options: [], completionHandler: nil)
+                    self.seq.players[3].scheduleBuffer(self.seq.soundBuffers.normal[3][0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer3"
                 } else if nextCell == .SOFT {
-                    self.seq.players[3].scheduleBuffer(self.seq.soundBuffers.soft[3], at: nil, options: [], completionHandler: nil)
+                    self.seq.players[3].scheduleBuffer(self.seq.soundBuffers.soft[3][0], at: nil, options: [], completionHandler: nil)
                     bufferScheduled = "buffer3 soft"
                 } else {
                     self.seq.players[3].scheduleBuffer(self.seq.silenceBuffers[3], at: nil, options: [], completionHandler: nil)
@@ -1885,12 +2169,12 @@ extension MainVC {
     
     func printFrameLengths() {
         
-        print(self.seq.soundBuffers.normal[0].frameLength, self.seq.silenceBuffers[0].frameLength, "  ",
-              self.seq.soundBuffers.normal[1].frameLength, self.seq.silenceBuffers[1].frameLength, "  ",
-              self.seq.soundBuffers.normal[2].frameLength, self.seq.silenceBuffers[2].frameLength, "  ",
-              self.seq.soundBuffers.normal[3].frameLength, self.seq.silenceBuffers[3].frameLength, "  ",
-              self.seq.guideBuffer.frameLength
-        )
+//        print(self.seq.soundBuffers.normal[0].frameLength, self.seq.silenceBuffers[0].frameLength, "  ",
+//              self.seq.soundBuffers.normal[1].frameLength, self.seq.silenceBuffers[1].frameLength, "  ",
+//              self.seq.soundBuffers.normal[2].frameLength, self.seq.silenceBuffers[2].frameLength, "  ",
+//              self.seq.soundBuffers.normal[3].frameLength, self.seq.silenceBuffers[3].frameLength, "  ",
+//              self.seq.guideBuffer.frameLength
+//        )
     }
 }
 
