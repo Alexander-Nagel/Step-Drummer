@@ -22,7 +22,7 @@ func cellArrayToStringArray(cellArray: [Cell]) -> [String] {
         }
     }
     
-    print(cellArray, "converted to: ", stringArray)
+    //print(cellArray, "converted to: ", stringArray)
     return stringArray
 }
 

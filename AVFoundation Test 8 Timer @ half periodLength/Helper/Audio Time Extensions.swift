@@ -12,9 +12,11 @@ extension AVAudioFile{
 }
 
 extension AVAudioPlayerNode{
-
+    
     var currentTimeInSeconds: TimeInterval{
-        if let nodeTime = lastRenderTime,let playerTime = playerTime(forNodeTime: nodeTime) {
+        if let nodeTime = lastRenderTime,
+           let playerTime = playerTime(forNodeTime: nodeTime)
+        {
             return Double(playerTime.sampleTime) / playerTime.sampleRate
         }
         return 0

@@ -31,10 +31,10 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
                    let currentPart = seq.parts[currentPartName]
                 {
                     let currentArrayOfCells = currentPart.patterns[snPatternIndex].cells
-                    print("currentArrayOfCells: \(currentArrayOfCells)")
+                    //print("currentArrayOfCells: \(currentArrayOfCells)")
                     
                     let currentArrayOfStrings = cellArrayToStringArray(cellArray: currentArrayOfCells)
-                    print("currentArrayOfStrings: \(currentArrayOfStrings)")
+                    //print("currentArrayOfStrings: \(currentArrayOfStrings)")
                     
                     snPatterns.append(SNPattern.create(withName: "\(name) SNPattern \(snPartIndex) \(snPatternIndex)", cells: currentArrayOfStrings))
                 }
@@ -177,7 +177,7 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
                     // Read pattern from snapshot
                     //
                     let patternAslistOfString = snapshot.snParts[partIndex].snPatterns[patternIndex].cells
-                    print("patternAslistOfString: \(patternAslistOfString)")
+                    //print("patternAslistOfString: \(patternAslistOfString)")
                     
                     //
                     // Write pattern to Array

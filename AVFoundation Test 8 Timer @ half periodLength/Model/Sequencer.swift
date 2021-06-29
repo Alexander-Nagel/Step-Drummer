@@ -61,7 +61,9 @@ struct Sequencer {
                  "440CLHH.wav",
                  "440OHH.wav",
                  "440CRASH.wav",
-                 "440BASS2.wav"
+                 "440BASS2.wav",
+                 "SINUS_1sec_44100samples.wav",
+                 "SINUS_INVERTED_1sec_44100samples.wav"
                  
         ],
         soft: ["kick_2156samples_SOFT.wav",
@@ -76,7 +78,9 @@ struct Sequencer {
                "hihat_2154samples_SOFT.wav",
                "open_hihat_2181samples_SOFT.wav",
                "440CRASH.wav",
-               "440BASS2.wav"
+               "440BASS2.wav",
+               "SINUS_1sec_44100samples.wav",
+               "SINUS_INVERTED_1sec_44100samples.wav"
         ])
     
     var files = Files()
@@ -97,8 +101,10 @@ struct Sequencer {
         tempo = Tempo(bpm: 120, sampleRate: K.Sequencer.sampleRate)
         
         selectedSounds = [
-            "440OHH.wav",
-            "440SN1.wav",
+           /* "440OHH.wav",
+            "440SN1.wav", */
+            "SINUS_1sec_44100samples.wav",
+            "SINUS_INVERTED_1sec_44100samples.wav",
             "hihat_2154samples.wav",
             "open_hihat_2181samples.wav"]
         
