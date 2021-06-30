@@ -74,6 +74,16 @@
 		FAC71DF9264F37AE007FE152 /* 440KICK3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DEF264F37AE007FE152 /* 440KICK3.wav */; };
 		FAC71DFA264F37AE007FE152 /* 440KICK2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC71DF0264F37AE007FE152 /* 440KICK2.wav */; };
 		FAC7FF73264A8D9E00041FEA /* HexColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC7FF72264A8D9E00041FEA /* HexColorExtension.swift */; };
+		FAC9639D268B88E100DCD2EA /* SN02_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC96393268B88E000DCD2EA /* SN02_SOFT.wav */; };
+		FAC9639E268B88E100DCD2EA /* OH01.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC96394268B88E000DCD2EA /* OH01.wav */; };
+		FAC9639F268B88E100DCD2EA /* SN02.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC96395268B88E000DCD2EA /* SN02.wav */; };
+		FAC963A0268B88E100DCD2EA /* SN01_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC96396268B88E000DCD2EA /* SN01_SOFT.wav */; };
+		FAC963A1268B88E100DCD2EA /* OH01_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC96397268B88E000DCD2EA /* OH01_SOFT.wav */; };
+		FAC963A2268B88E100DCD2EA /* CH01.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC96398268B88E000DCD2EA /* CH01.wav */; };
+		FAC963A3268B88E100DCD2EA /* CH01_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC96399268B88E000DCD2EA /* CH01_SOFT.wav */; };
+		FAC963A5268B88E100DCD2EA /* SN01.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC9639B268B88E000DCD2EA /* SN01.wav */; };
+		FAC963A6268B88E100DCD2EA /* BD01.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC9639C268B88E100DCD2EA /* BD01.wav */; };
+		FAC963AC268BC79900DCD2EA /* BD01_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAC963AB268BC79900DCD2EA /* BD01_SOFT.wav */; };
 		FAE3DF382651BABA0000DD9F /* getConvertedPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE3DF372651BABA0000DD9F /* getConvertedPoint.swift */; };
 		FAE9F049268B19880023521F /* SINUS_1sec_44100samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAE9F047268B19880023521F /* SINUS_1sec_44100samples.wav */; };
 		FAE9F04A268B19880023521F /* SINUS_INVERTED_1sec_44100samples.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAE9F048268B19880023521F /* SINUS_INVERTED_1sec_44100samples.wav */; };
@@ -171,6 +181,16 @@
 		FAC71DEF264F37AE007FE152 /* 440KICK3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440KICK3.wav; sourceTree = "<group>"; };
 		FAC71DF0264F37AE007FE152 /* 440KICK2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 440KICK2.wav; sourceTree = "<group>"; };
 		FAC7FF72264A8D9E00041FEA /* HexColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorExtension.swift; sourceTree = "<group>"; };
+		FAC96393268B88E000DCD2EA /* SN02_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SN02_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/SN02/export/SN02_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FAC96394268B88E000DCD2EA /* OH01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = OH01.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/OH01/export/OH01.wav"; sourceTree = SOURCE_ROOT; };
+		FAC96395268B88E000DCD2EA /* SN02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SN02.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/SN02/export/SN02.wav"; sourceTree = SOURCE_ROOT; };
+		FAC96396268B88E000DCD2EA /* SN01_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SN01_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/SN01/export/SN01_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FAC96397268B88E000DCD2EA /* OH01_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = OH01_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/OH01/export/OH01_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FAC96398268B88E000DCD2EA /* CH01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CH01.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/CH01/export/CH01.wav"; sourceTree = SOURCE_ROOT; };
+		FAC96399268B88E000DCD2EA /* CH01_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CH01_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/CH01/export/CH01_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FAC9639B268B88E000DCD2EA /* SN01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SN01.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/SN01/export/SN01.wav"; sourceTree = SOURCE_ROOT; };
+		FAC9639C268B88E100DCD2EA /* BD01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = BD01.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/BD01/export/BD01.wav"; sourceTree = SOURCE_ROOT; };
+		FAC963AB268BC79900DCD2EA /* BD01_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = BD01_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/Stereo Drums/converted/BD01/export/BD01_SOFT.wav"; sourceTree = SOURCE_ROOT; };
 		FAE3DF372651BABA0000DD9F /* getConvertedPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getConvertedPoint.swift; sourceTree = "<group>"; };
 		FAE9F047268B19880023521F /* SINUS_1sec_44100samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SINUS_1sec_44100samples.wav; sourceTree = "<group>"; };
 		FAE9F048268B19880023521F /* SINUS_INVERTED_1sec_44100samples.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SINUS_INVERTED_1sec_44100samples.wav; sourceTree = "<group>"; };
@@ -376,6 +396,7 @@
 		FA8D6E8E263EF2CF000FFFE3 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				FAC96392268B88CB00DCD2EA /* Stereo Drums */,
 				FACF84392684039A007C8CF5 /* loaded */,
 				FAC71DAE264F2E4E007FE152 /* 440 */,
 				FAB22318264413D300708387 /* silence.wav */,
@@ -396,6 +417,23 @@
 			);
 			name = 440;
 			path = "Neuer Ordner mit Objekten/440";
+			sourceTree = "<group>";
+		};
+		FAC96392268B88CB00DCD2EA /* Stereo Drums */ = {
+			isa = PBXGroup;
+			children = (
+				FAC9639C268B88E100DCD2EA /* BD01.wav */,
+				FAC963AB268BC79900DCD2EA /* BD01_SOFT.wav */,
+				FAC96399268B88E000DCD2EA /* CH01_SOFT.wav */,
+				FAC96398268B88E000DCD2EA /* CH01.wav */,
+				FAC96397268B88E000DCD2EA /* OH01_SOFT.wav */,
+				FAC96394268B88E000DCD2EA /* OH01.wav */,
+				FAC96396268B88E000DCD2EA /* SN01_SOFT.wav */,
+				FAC9639B268B88E000DCD2EA /* SN01.wav */,
+				FAC96393268B88E000DCD2EA /* SN02_SOFT.wav */,
+				FAC96395268B88E000DCD2EA /* SN02.wav */,
+			);
+			path = "Stereo Drums";
 			sourceTree = "<group>";
 		};
 		FACF84392684039A007C8CF5 /* loaded */ = {
@@ -520,31 +558,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAE9F049268B19880023521F /* SINUS_1sec_44100samples.wav in Resources */,
+				FAC963AC268BC79900DCD2EA /* BD01_SOFT.wav in Resources */,
+				FAC963A5268B88E100DCD2EA /* SN01.wav in Resources */,
+				FAC9639D268B88E100DCD2EA /* SN02_SOFT.wav in Resources */,
 				FAB22319264413D300708387 /* silence.wav in Resources */,
 				FAC71DF6264F37AE007FE152 /* 440CRASH.wav in Resources */,
 				FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */,
 				FAC71DF7264F37AE007FE152 /* 440SN3.wav in Resources */,
+				FAC963A0268B88E100DCD2EA /* SN01_SOFT.wav in Resources */,
 				FA70CD87264829EA007A212F /* snare_2152samples.wav in Resources */,
 				FA2FAA25268354E300C1EDBA /* 440BASS2.wav in Resources */,
 				FAC71DF8264F37AE007FE152 /* 440CLAP.wav in Resources */,
 				FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */,
 				FAC71DF1264F37AE007FE152 /* 440CLHH.wav in Resources */,
+				FAC963A2268B88E100DCD2EA /* CH01.wav in Resources */,
 				FA70CD86264829EA007A212F /* open_hihat_2181samples.wav in Resources */,
 				FAC71DF9264F37AE007FE152 /* 440KICK3.wav in Resources */,
 				FA8D6E8C263EF2C9000FFFE3 /* Main.storyboard in Resources */,
 				FAFEA991264BD34E002807DC /* kick_2156samples_SOFT.wav in Resources */,
 				FA70CD8C26482B25007A212F /* Notes.rtf in Resources */,
+				FAC9639E268B88E100DCD2EA /* OH01.wav in Resources */,
 				FA8D6E82263EF2B5000FFFE3 /* LaunchScreen.storyboard in Resources */,
 				FAC71DF5264F37AE007FE152 /* 440KICK1.wav in Resources */,
 				FA8D6E7F263EF2B5000FFFE3 /* Assets.xcassets in Resources */,
 				FAFEA98F264BD34E002807DC /* open_hihat_2181samples_SOFT.wav in Resources */,
 				FAFEA98E264BD34E002807DC /* hihat_2154samples_SOFT.wav in Resources */,
 				FAC71DF4264F37AE007FE152 /* 440SN2.wav in Resources */,
+				FAC963A6268B88E100DCD2EA /* BD01.wav in Resources */,
+				FAC9639F268B88E100DCD2EA /* SN02.wav in Resources */,
 				FAA4C61926664276005CC23C /* todo.rtf in Resources */,
 				FAC71DF2264F37AE007FE152 /* 440OHH.wav in Resources */,
 				FAC71DFA264F37AE007FE152 /* 440KICK2.wav in Resources */,
 				FAC71DF3264F37AE007FE152 /* 440SN1.wav in Resources */,
 				FA70CD84264829EA007A212F /* hihat_2154samples.wav in Resources */,
+				FAC963A3268B88E100DCD2EA /* CH01_SOFT.wav in Resources */,
+				FAC963A1268B88E100DCD2EA /* OH01_SOFT.wav in Resources */,
 				FAE9F04A268B19880023521F /* SINUS_INVERTED_1sec_44100samples.wav in Resources */,
 				FAFEA990264BD34E002807DC /* snare_2152samples_SOFT.wav in Resources */,
 			);
