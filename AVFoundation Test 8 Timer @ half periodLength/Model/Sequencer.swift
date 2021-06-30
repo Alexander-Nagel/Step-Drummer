@@ -292,11 +292,12 @@ struct Sequencer {
     
     mutating func changeTempoAndPrescheduleBuffers(bpm: Double) {
         
+        print(#function, "bpm: \(bpm)")
         tempo?.bpm = bpm
         
         for trackIndex in 0...(K.Sequencer.numberOfTracks-1) {
+            print("pre-scheduling track \(trackIndex):")
             preScheduleFirstBuffer(forPlayer: trackIndex)
-            
         }
     }
     
@@ -336,7 +337,8 @@ struct Sequencer {
 
     internal mutating func preScheduleFirstBuffer(forPlayer selectedPlayer: Int) {
         
-        print(#function)
+        print(#function, "player: \(selectedPlayer)")
+
         
         // printFrameLengths()
         players[selectedPlayer].stop()
@@ -347,7 +349,7 @@ struct Sequencer {
         //
         
         let lengthToSchedule = computeLengthToSchedule(nextStepIndex: 0, timerIndex: selectedPlayer)
-        
+        print("PRE SCHED\n")
         //
         // scheduleBuffer
         //
@@ -372,6 +374,7 @@ struct Sequencer {
             print("silenceBuffers[selectedPlayer]: \(silenceBuffers[selectedPlayer])")
             
             players[selectedPlayer].scheduleBuffer(silenceBuffers[selectedPlayer], at: nil, options: [], completionHandler: nil)
+            cellsToWaitBeforeReschedulingArray[selectedPlayer] = 0
         }
         
         
@@ -401,6 +404,8 @@ struct Sequencer {
     }
     
     public mutating func computeLengthToSchedule(nextStepIndex: Int, timerIndex: Int) -> Int{
+        
+        print(#function, "timer: \(timerIndex), nextStep: \(nextStepIndex)")
         
         //
         // Compute distance to next .ON

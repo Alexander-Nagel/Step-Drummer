@@ -152,12 +152,6 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
                 loadFile(name: sound, toPlayer: index)
             }
             
-            //
-            // Load bpm:
-            //
-//            seq.tempo?.bpm = snapshot.bpm
-            seq.changeTempoAndPrescheduleBuffers(bpm: snapshot.bpm)
-            updateUIAfterTempoChange(to: snapshot.bpm)
             
             //
             // Load volumes
@@ -190,6 +184,14 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
             }
             
             saveSnapshot(name: "default")
+            
+            //
+            // Load bpm:
+            //
+            //            seq.tempo?.bpm = snapshot.bpm
+            seq.changeTempoAndPrescheduleBuffers(bpm: 120)
+            //seq.changeTempoAndPrescheduleBuffers(bpm: snapshot.bpm)
+            updateUIAfterTempoChange(to: snapshot.bpm)
             
         } else {
             print("Snapshot \(name) does not exist")

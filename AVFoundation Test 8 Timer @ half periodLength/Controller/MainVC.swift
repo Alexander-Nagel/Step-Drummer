@@ -206,6 +206,17 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         
         super.viewDidLoad()
         
+        
+        
+        
+        // loadGuideBuffer()
+        
+        
+        //preScheduleFirstGuideBuffer()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
         setupUI() // one time setup
         
         
@@ -219,16 +230,6 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 loadBuffer(ofPlayer: i, withFile: file)
             }
         }
-        
-        
-        // loadGuideBuffer()
-        
-        seq.changeTempoAndPrescheduleBuffers(bpm: 120)
-        
-        //preScheduleFirstGuideBuffer()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         
         showOrHideControls()
         
@@ -247,6 +248,10 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
         print("mute0Button.frame.size.height: \(mute0Button.frame.size.height)")
         print("mute0Button.imageView?.frame.size.width: \(String(describing: mute0Button.imageView?.frame.size.width))")
         print("mute0Button.imageView?.frame.size.height: \(String(describing: mute0Button.imageView?.frame.size.height))")
+        
+        seq.changeTempoAndPrescheduleBuffers(bpm: 120)
+
+        
     }
     
     //
@@ -658,6 +663,13 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             //
             // Go!
             //
+//            for timerIndex in 0...(K.Sequencer.numberOfTracks-1) {
+//                timers[timerIndex].invalidate()
+//                timerEventCounterArray[timerIndex] = 0
+//                currentStepIndexArray[timerIndex] = 0
+//                seq.cellsToWaitBeforeReschedulingArray[timerIndex] = 0
+//            }
+            
             state = .run
             playPauseButton.setImage(UIImage(systemName: K.Image.pauseImage), for: .normal)
             playPauseButton.backgroundColor = K.Color.orange_brighter
@@ -677,7 +689,7 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
             // Compute distance to next .ON
             //
             let lengthToSchedule = seq.computeLengthToSchedule(nextStepIndex: nextStepIndex, timerIndex: timerIndex)
-            
+            print("SCHED NEXT\n")
             //
             // scheduleBuffer
             //
