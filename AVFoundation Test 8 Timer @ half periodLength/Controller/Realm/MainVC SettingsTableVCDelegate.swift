@@ -191,7 +191,8 @@ extension MainVC: SettingsTableVCDelegate, LoadSaveVCDelegate  {
             //            seq.tempo?.bpm = snapshot.bpm
             seq.changeTempoAndPrescheduleBuffers(bpm: 120)
             //seq.changeTempoAndPrescheduleBuffers(bpm: snapshot.bpm)
-            updateUIAfterTempoChange(to: snapshot.bpm)
+            //updateUIAfterTempoChange(to: snapshot.bpm)
+            updateUIAfterTempoChange(to: 120)
             
         } else {
             print("Snapshot \(name) does not exist")

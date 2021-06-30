@@ -349,7 +349,7 @@ struct Sequencer {
         //
         
         let lengthToSchedule = computeLengthToSchedule(nextStepIndex: 0, timerIndex: selectedPlayer)
-        print("PRE SCHED\n")
+        print("|   PRE SCHED\n")
         //
         // scheduleBuffer
         //
@@ -369,9 +369,9 @@ struct Sequencer {
             //
             // Schedule silence
             //
-            print("selectedPlayer: \(selectedPlayer)")
-            print("players[selectedPlayer]: \(players[selectedPlayer])")
-            print("silenceBuffers[selectedPlayer]: \(silenceBuffers[selectedPlayer])")
+            print("|   selectedPlayer: \(selectedPlayer)")
+            print("|   players[selectedPlayer]: \(players[selectedPlayer])")
+            print("|   silenceBuffers[selectedPlayer]: \(silenceBuffers[selectedPlayer])")
             
             players[selectedPlayer].scheduleBuffer(silenceBuffers[selectedPlayer], at: nil, options: [], completionHandler: nil)
             cellsToWaitBeforeReschedulingArray[selectedPlayer] = 0
