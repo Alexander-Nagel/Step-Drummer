@@ -337,7 +337,7 @@ struct Sequencer {
 
     internal mutating func preScheduleFirstBuffer(forPlayer selectedPlayer: Int) {
         
-        print(#function, "player: \(selectedPlayer)")
+        print("|   ",#function, "player: \(selectedPlayer)")
 
         
         // printFrameLengths()
