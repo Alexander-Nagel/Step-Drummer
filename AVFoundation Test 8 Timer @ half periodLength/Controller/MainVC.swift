@@ -797,14 +797,109 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                     var nextStepIndex = self.currentStepIndexArray[timerIndex] + 1
                     
                     //
-                    // If overflow, nextstep is equal first cell
+                    // If overflow, nextstep is equal to first cell
                     //
                     if nextStepIndex == (self.seq.displayedTracks[timerIndex].numberOfCellsActive) {
                         nextStepIndex = 0
                     }
                     
-                    let nextCell = self.seq.displayedTracks[timerIndex].cells[nextStepIndex]
                     
+                    //
+                    // Get next cell
+                    //
+                    // If we're at last step of a pattern && chain mode is on, look into next pattern according to selected chain mode
+                    //
+                    let nextCell: Cell
+                    
+                    if nextStepIndex != 0 {
+                        //
+                        // We're not at the last step: nextCell is taken of activePart
+                        //
+                        nextCell = self.seq.displayedTracks[timerIndex].cells[nextStepIndex]
+                    } else {
+                        //
+                        // We're at the last step...
+                        //
+                        if self.seq.chainMode == .OFF {
+                            //
+                            // Chain mode is off: Take first cell of activePart as nextCell
+                            //
+                            nextCell = self.seq.displayedTracks[timerIndex].cells[nextStepIndex]
+                            print("++++++ chainMode: OFF. Next cell will be of this Part: \(nextCell)")
+                        } else {
+                            //
+                            // Chain mode is on: Take first cell of chained next Part as nextCell
+                            //
+                            if self.seq.chainMode == .AB {
+                                if self.seq.activePart == .A {
+                                    //
+                                    // We're in Part A, so look into Part B
+                                    //
+                                    nextCell = (self.seq.parts[.B]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: ON.Next cell will be of Part B: \(nextCell)")
+                                } else {
+                                    //
+                                    // We're in Part B, so look into Part A
+                                    //
+                                    nextCell = (self.seq.parts[.A]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: ON. Next cell will be of Part A: \(nextCell)")
+                                }
+                                
+                            } else if self.seq.chainMode == .CD {
+                                if self.seq.activePart == .C {
+                                    //
+                                    // We're in Part C, so look into Part D
+                                    //
+                                    nextCell = (self.seq.parts[.D]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: ON.Next cell will be of Part B: \(nextCell)")
+                                } else {
+                                    //
+                                    // We're in Part D, so look into Part C
+                                    //
+                                    nextCell = (self.seq.parts[.C]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: ON. Next cell will be of Part A: \(nextCell)")
+                                }
+                                
+                            } else if self.seq.chainMode == .ABCD {
+                                if self.seq.activePart == .A {
+                                    //
+                                    // We're in Part A, so look into Part B
+                                    //
+                                    nextCell = (self.seq.parts[.B]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: \(self.seq.chainMode) Next cell will be of Part B: \(nextCell)")
+                                } else if self.seq.activePart == .B {
+                                    //
+                                    // We're in Part B, so look into Part C
+                                    //
+                                    nextCell = (self.seq.parts[.C]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: \(self.seq.chainMode) Next cell will be of Part C: \(nextCell)")
+                                } else if self.seq.activePart == .C {
+                                    //
+                                    // We're in Part C, so look into Part D
+                                    //
+                                    nextCell = (self.seq.parts[.D]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: \(self.seq.chainMode) Next cell will be of Part D: \(nextCell)")
+                                } else {
+                                    //
+                                    // We're in Part D, so look into Part A
+                                    //
+                                    nextCell = (self.seq.parts[.A]?.patterns[timerIndex].cells[0])!
+                                    print("++++++ chainMode: \(self.seq.chainMode) Next cell will be of Part A: \(nextCell)")
+                                }
+                                
+                                
+                                
+                            } else {
+                                //
+                                // DEFAULT CASE: FIX ME! TAKIN' part B as default. Should never be the case anyway!
+                                //
+                                nextCell = (self.seq.parts[.B]?.patterns[timerIndex].cells[0])!
+                                print("++++++ chainMode: UNCLEAR. SHOULD NOT HAPPEN! Next cell will be of Part B: \(nextCell)")
+                            }
+                            print("chain mode: ON")
+                        }
+                    }
+                        
                     if nextCell == .ON {
                         
                         //
@@ -856,36 +951,40 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
                     //
                     self.currentStepIndexArray[timerIndex] += 1
                     
+                    
                     //
                     // Check if last step (default: 15) reached
                     //
                     if self.currentStepIndexArray[timerIndex] > self.seq.displayedTracks[timerIndex].numberOfCellsActive - 1 {
                         self.currentStepIndexArray[timerIndex] = 0
                         
-                        if self.seq.chainMode == .ABCD {
-                            var nextPart = self.seq.activePart.rawValue + 1
-                            if nextPart == 4 { nextPart = 0 }
-                            self.changeToPart(PartNames(rawValue: nextPart)!)
-                        }
-                        if self.seq.chainMode == .AB {
-                            let currentPart = self.seq.activePart
-                            var nextPart: PartNames
-                            if currentPart == .A {
-                                nextPart = .B
-                            } else {
-                                nextPart = .A
+                        if timerIndex == 0 {  // (only check once, for timer 0!)
+                            if self.seq.chainMode == .ABCD {
+                                var nextPart = self.seq.activePart.rawValue + 1
+                                if nextPart == 4 { nextPart = 0 }
+                                self.changeToPart(PartNames(rawValue: nextPart)!)
                             }
-                            self.changeToPart(nextPart)
-                        }
-                        if self.seq.chainMode == .CD {
-                            let currentPart = self.seq.activePart
-                            var nextPart: PartNames
-                            if currentPart == .C {
-                                nextPart = .D
-                            } else {
-                                nextPart = .C
+                            if self.seq.chainMode == .AB {
+                                print("++++++++ AB Chain Mode +++++++++ ")
+                                let currentPart = self.seq.activePart
+                                var nextPart: PartNames
+                                if currentPart == .A {
+                                    nextPart = .B
+                                } else {
+                                    nextPart = .A
+                                }
+                                self.changeToPart(nextPart)
                             }
-                            self.changeToPart(nextPart)
+                            if self.seq.chainMode == .CD {
+                                let currentPart = self.seq.activePart
+                                var nextPart: PartNames
+                                if currentPart == .C {
+                                    nextPart = .D
+                                } else {
+                                    nextPart = .C
+                                }
+                                self.changeToPart(nextPart)
+                            }
                         }
                     }
                     

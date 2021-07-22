@@ -52,6 +52,14 @@ struct Sequencer {
     
     let fileNames = FileNames(
         normal: [
+            "BD5050.wav",
+            "SD5050.wav",
+            "CH.wav",
+            "OH50.wav",
+            "CP.wav",
+            "CL.wav",
+            "MA.wav",
+            "CB.wav",
             "BD01.wav",
             "SN01.wav",
             "SN02.wav",
@@ -75,6 +83,14 @@ struct Sequencer {
             
         ],
         soft: [
+            "BD5050_SOFT.wav",
+            "SD5050_SOFT.wav",
+            "CH_SOFT.wav",
+            "OH50_SOFT.wav",
+            "CP_SOFT.wav",
+            "CL_SOFT.wav",
+            "MA_SOFT.wav",
+            "CB_SOFT.wav",
             "BD01_SOFT.wav",
             "SN01_SOFT.wav",
             "SN02_SOFT.wav",
@@ -350,6 +366,8 @@ struct Sequencer {
         
         let lengthToSchedule = computeLengthToSchedule(nextStepIndex: 0, timerIndex: selectedPlayer)
         print("|   PRE SCHED\n")
+        print("|   lengthToSchedule: \(lengthToSchedule)")
+        print("|   selectedPlayer: \(selectedPlayer)")
         //
         // scheduleBuffer
         //
@@ -407,23 +425,148 @@ struct Sequencer {
         
         print(#function, "timer: \(timerIndex), nextStep: \(nextStepIndex)")
         
+        // nextStepIndex = the 'current' next cell that is .ON and needs to be scheduled.
+        // timerIndex = the current player (0 to 4)
         //
-        // Compute distance to next .ON
+        // In this function we're trying to determine how many empty cells come AFTER this next cell to return the maximum length in cells for this sound to play. If the sound file is shorter, this will be the length returned.
         //
-        var distance: Int = 1
-        var startIndex = nextStepIndex + 1
-        if startIndex > displayedTracks[timerIndex].numberOfCellsActive - 1 {startIndex = 0}
-        while displayedTracks[timerIndex].cells[startIndex] == .OFF && distance < 16{
-            distance += 1
-            startIndex += 1
-            if startIndex > displayedTracks[timerIndex].numberOfCellsActive - 1 {startIndex = 0}
+        
+        //
+        // Minimal sound length is 1 (cell)
+        //
+        var lengthToScheduleInCells: Int = 1
+        print("========== lengthToScheduleInCells: \(lengthToScheduleInCells)")
+
+        //
+        // Starting to search at the cell after the current cell
+        //
+        var lookAheadIndex = nextStepIndex + 1
+        
+        // If lookAheadIndex (first cell after nextCell to look at to determine the number of free cells after nextCell) is greater than number of available cells, set it back to 0 to start over at first cell
+        //
+        var overflowHasHappened = false
+        if nextStepIndex == 0 {overflowHasHappened = true}
+        
+        if lookAheadIndex > displayedTracks[timerIndex].numberOfCellsActive - 1 {
+            lookAheadIndex = 0
+            overflowHasHappened = true
         }
-        print("distance: \(distance)")
+        
+        // NEW LOOP START
+        var nextCellToLookAt: Cell
+        repeat {
+            print("========== lookAheadIndex: \(lookAheadIndex)")
+            //
+            // determine content of next cell:
+            //
+            if overflowHasHappened {
+                print("========== overflowHasHappend: \(overflowHasHappened)")
+                if  chainMode == .OFF {
+                    //
+                    // CHAIN MODE OFF, STAY IN CURRENT PART
+                    //
+                    print("========== chainMode: \(chainMode)")
+                    nextCellToLookAt = displayedTracks[timerIndex].cells[lookAheadIndex]
+                } else if chainMode == .AB {
+                    //
+                    // IF .AB CHAIN MODE - LOOK INTO CHAINED PART
+                    //
+                    print("========== chainMode: \(chainMode)")
+                    if activePart == .A {
+                        print("========== activePart: \(activePart)")
+                        nextCellToLookAt = (parts[.B]?.patterns[timerIndex].cells[lookAheadIndex])!
+                    } else {
+                        print("========== activePart: \(activePart)")
+                        nextCellToLookAt = (parts[.A]?.patterns[timerIndex].cells[lookAheadIndex])!
+                    }
+                    
+                } else if chainMode == .CD {
+                    //
+                    // IF .CD CHAIN MODE - LOOK INTO CHAINED PART
+                    //
+                    print("========== chainMode: \(chainMode)")
+                    if activePart == .C {
+                        print("========== activePart: \(activePart)")
+                        nextCellToLookAt = (parts[.D]?.patterns[timerIndex].cells[lookAheadIndex])!
+                    } else {
+                        print("========== activePart: \(activePart)")
+                        nextCellToLookAt = (parts[.C]?.patterns[timerIndex].cells[lookAheadIndex])!
+                    }
+                    
+                } else if chainMode == .ABCD {
+                    //
+                    // IF .ABCD CHAIN MODE - LOOK INTO CHAINED PART
+                    //
+                    print("========== chainMode: \(chainMode)")
+                    if activePart == .A {
+                        print("========== activePart: \(activePart)")
+                        nextCellToLookAt = (parts[.B]?.patterns[timerIndex].cells[lookAheadIndex])!
+                        
+                    } else if activePart == .B {
+                            print("========== activePart: \(activePart)")
+                            nextCellToLookAt = (parts[.C]?.patterns[timerIndex].cells[lookAheadIndex])!
+                    } else if activePart == .C {
+                            print("========== activePart: \(activePart)")
+                            nextCellToLookAt = (parts[.D]?.patterns[timerIndex].cells[lookAheadIndex])!
+                    } else {
+                        print("========== activePart: \(activePart)")
+                        nextCellToLookAt = (parts[.A]?.patterns[timerIndex].cells[lookAheadIndex])!
+                    }
+                    
+                    
+                } else {
+                    //
+                    // OTHER CHAIN MODE THAN .AB, .CD or .ABCD
+                    //
+                    print("========== chainMode: \(chainMode) FIXME TODO ")
+                    nextCellToLookAt = .ON // TODO: FIXME!
+                }
+            } else {
+                print("========== overflowHasHappend: \(overflowHasHappened)")
+                nextCellToLookAt = displayedTracks[timerIndex].cells[lookAheadIndex]
+            }
+            print("========== nextCellToLookAt: \(nextCellToLookAt)")
+            
+            //
+            // Proceed to next cell only if it's not .ON
+            //
+            if nextCellToLookAt == .OFF {
+                lengthToScheduleInCells += 1
+                print("========== lengthToScheduleInCells: \(lengthToScheduleInCells)")
+                lookAheadIndex += 1
+            }
+            
+            //
+            // If overflow, start over
+            //
+            if lookAheadIndex > displayedTracks[timerIndex].numberOfCellsActive - 1
+            {
+                lookAheadIndex = 0
+                overflowHasHappened = true
+            }
+            
+        } while lengthToScheduleInCells < 16 && nextCellToLookAt == .OFF
+        // NEW LOOP END
+        
+//        // OLD LOOP START
+//        //
+//        // If the cell is .OFF: increase counter of empty cells after
+//        //
+//        while displayedTracks[timerIndex].cells[lookAheadIndex] == .OFF && lengthToScheduleInCells < 16
+//        {
+//            lengthToScheduleInCells += 1
+//            lookAheadIndex += 1
+//            if lookAheadIndex > displayedTracks[timerIndex].numberOfCellsActive - 1 {lookAheadIndex = 0}
+//        }
+//        //OLD LOOP END
+        
+        
+        print("distance: \(lengthToScheduleInCells)")
         
         let soundFileLengthInCells = soundBuffers.lengthOfBufferInWholeCells[timerIndex]
         print("soundFileLengthInCells: \(soundFileLengthInCells)")
         
-        let lengthToSchedule = min(distance, soundFileLengthInCells)
+        let lengthToSchedule = min(lengthToScheduleInCells, soundFileLengthInCells)
         print("lengthToSchedule: \(lengthToSchedule)")
         
         cellsToWaitBeforeReschedulingArray[timerIndex] = lengthToSchedule - 1

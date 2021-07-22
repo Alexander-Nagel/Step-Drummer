@@ -55,6 +55,22 @@
 		FA8D6EA0263F3262000FFFE3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6E9F263F3262000FFFE3 /* Constants.swift */; };
 		FA8D6EA3263F4574000FFFE3 /* FlashExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */; };
 		FA8D6EA6263F6170000FFFE3 /* BpmDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */; };
+		FA9ECD5926A6ECBC0014E4EF /* CH_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD4926A6ECBA0014E4EF /* CH_SOFT.wav */; };
+		FA9ECD5A26A6ECBC0014E4EF /* SD5050_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD4A26A6ECBA0014E4EF /* SD5050_SOFT.wav */; };
+		FA9ECD5B26A6ECBC0014E4EF /* BD5050_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD4B26A6ECBB0014E4EF /* BD5050_SOFT.wav */; };
+		FA9ECD5C26A6ECBC0014E4EF /* SD5050.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD4C26A6ECBB0014E4EF /* SD5050.wav */; };
+		FA9ECD5D26A6ECBC0014E4EF /* CL_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD4D26A6ECBB0014E4EF /* CL_SOFT.wav */; };
+		FA9ECD5E26A6ECBC0014E4EF /* CL.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD4E26A6ECBB0014E4EF /* CL.wav */; };
+		FA9ECD5F26A6ECBC0014E4EF /* OH50_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD4F26A6ECBB0014E4EF /* OH50_SOFT.wav */; };
+		FA9ECD6026A6ECBC0014E4EF /* CP.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5026A6ECBB0014E4EF /* CP.wav */; };
+		FA9ECD6126A6ECBC0014E4EF /* CH.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5126A6ECBB0014E4EF /* CH.wav */; };
+		FA9ECD6226A6ECBC0014E4EF /* BD5050.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5226A6ECBB0014E4EF /* BD5050.wav */; };
+		FA9ECD6326A6ECBC0014E4EF /* MA_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5326A6ECBB0014E4EF /* MA_SOFT.wav */; };
+		FA9ECD6426A6ECBC0014E4EF /* OH50.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5426A6ECBB0014E4EF /* OH50.wav */; };
+		FA9ECD6526A6ECBC0014E4EF /* CP_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5526A6ECBB0014E4EF /* CP_SOFT.wav */; };
+		FA9ECD6626A6ECBC0014E4EF /* MA.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5626A6ECBB0014E4EF /* MA.wav */; };
+		FA9ECD6726A6ECBC0014E4EF /* CB.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5726A6ECBB0014E4EF /* CB.wav */; };
+		FA9ECD6826A6ECBC0014E4EF /* CB_SOFT.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA9ECD5826A6ECBB0014E4EF /* CB_SOFT.wav */; };
 		FAA4C607266534B5005CC23C /* LoadSaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4C606266534B5005CC23C /* LoadSaveVC.swift */; };
 		FAA4C61926664276005CC23C /* todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FAA4C61826664275005CC23C /* todo.rtf */; };
 		FAB22319264413D300708387 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAB22318264413D300708387 /* silence.wav */; };
@@ -162,6 +178,22 @@
 		FA8D6E9F263F3262000FFFE3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FA8D6EA2263F4574000FFFE3 /* FlashExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashExtension.swift; sourceTree = "<group>"; };
 		FA8D6EA5263F6170000FFFE3 /* BpmDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BpmDetector.swift; sourceTree = "<group>"; };
+		FA9ECD4926A6ECBA0014E4EF /* CH_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CH_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/CLOSED HIHAT/CH_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD4A26A6ECBA0014E4EF /* SD5050_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SD5050_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/SNARE/SD5050_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD4B26A6ECBB0014E4EF /* BD5050_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = BD5050_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/KICK/BD5050_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD4C26A6ECBB0014E4EF /* SD5050.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SD5050.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/SNARE/SD5050.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD4D26A6ECBB0014E4EF /* CL_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CL_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/CLAVE/CL_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD4E26A6ECBB0014E4EF /* CL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CL.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/CLAVE/CL.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD4F26A6ECBB0014E4EF /* OH50_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = OH50_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/OPEN HIHAT/OH50_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5026A6ECBB0014E4EF /* CP.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CP.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/CLAP/CP.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5126A6ECBB0014E4EF /* CH.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CH.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/CLOSED HIHAT/CH.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5226A6ECBB0014E4EF /* BD5050.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = BD5050.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/KICK/BD5050.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5326A6ECBB0014E4EF /* MA_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = MA_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/MARACAS/MA_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5426A6ECBB0014E4EF /* OH50.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = OH50.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/OPEN HIHAT/OH50.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5526A6ECBB0014E4EF /* CP_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CP_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/CLAP/CP_SOFT.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5626A6ECBB0014E4EF /* MA.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = MA.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/MARACAS/MA.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5726A6ECBB0014E4EF /* CB.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CB.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/COWBELL/CB.wav"; sourceTree = SOURCE_ROOT; };
+		FA9ECD5826A6ECBB0014E4EF /* CB_SOFT.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = CB_SOFT.wav; path = "AVFoundation Test 8 Timer @ half periodLength/sounds/final/TR-808/01 to stereo/COWBELL/CB_SOFT.wav"; sourceTree = SOURCE_ROOT; };
 		FAA4C606266534B5005CC23C /* LoadSaveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadSaveVC.swift; sourceTree = "<group>"; };
 		FAA4C61826664275005CC23C /* todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = todo.rtf; sourceTree = "<group>"; };
 		FAB22318264413D300708387 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
@@ -396,7 +428,8 @@
 		FA8D6E8E263EF2CF000FFFE3 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
-				FAC96392268B88CB00DCD2EA /* Stereo Drums */,
+				FA9ECD4826A6EC830014E4EF /* Analog */,
+				FAC96392268B88CB00DCD2EA /* Acoustic */,
 				FACF84392684039A007C8CF5 /* loaded */,
 				FAC71DAE264F2E4E007FE152 /* 440 */,
 				FAB22318264413D300708387 /* silence.wav */,
@@ -411,6 +444,29 @@
 			path = sounds;
 			sourceTree = "<group>";
 		};
+		FA9ECD4826A6EC830014E4EF /* Analog */ = {
+			isa = PBXGroup;
+			children = (
+				FA9ECD4B26A6ECBB0014E4EF /* BD5050_SOFT.wav */,
+				FA9ECD5226A6ECBB0014E4EF /* BD5050.wav */,
+				FA9ECD5826A6ECBB0014E4EF /* CB_SOFT.wav */,
+				FA9ECD5726A6ECBB0014E4EF /* CB.wav */,
+				FA9ECD4926A6ECBA0014E4EF /* CH_SOFT.wav */,
+				FA9ECD5126A6ECBB0014E4EF /* CH.wav */,
+				FA9ECD4D26A6ECBB0014E4EF /* CL_SOFT.wav */,
+				FA9ECD4E26A6ECBB0014E4EF /* CL.wav */,
+				FA9ECD5526A6ECBB0014E4EF /* CP_SOFT.wav */,
+				FA9ECD5026A6ECBB0014E4EF /* CP.wav */,
+				FA9ECD5326A6ECBB0014E4EF /* MA_SOFT.wav */,
+				FA9ECD5626A6ECBB0014E4EF /* MA.wav */,
+				FA9ECD4F26A6ECBB0014E4EF /* OH50_SOFT.wav */,
+				FA9ECD5426A6ECBB0014E4EF /* OH50.wav */,
+				FA9ECD4A26A6ECBA0014E4EF /* SD5050_SOFT.wav */,
+				FA9ECD4C26A6ECBB0014E4EF /* SD5050.wav */,
+			);
+			path = Analog;
+			sourceTree = "<group>";
+		};
 		FAC71DAE264F2E4E007FE152 /* 440 */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,7 +475,7 @@
 			path = "Neuer Ordner mit Objekten/440";
 			sourceTree = "<group>";
 		};
-		FAC96392268B88CB00DCD2EA /* Stereo Drums */ = {
+		FAC96392268B88CB00DCD2EA /* Acoustic */ = {
 			isa = PBXGroup;
 			children = (
 				FAC9639C268B88E100DCD2EA /* BD01.wav */,
@@ -433,7 +489,7 @@
 				FAC96393268B88E000DCD2EA /* SN02_SOFT.wav */,
 				FAC96395268B88E000DCD2EA /* SN02.wav */,
 			);
-			path = "Stereo Drums";
+			path = Acoustic;
 			sourceTree = "<group>";
 		};
 		FACF84392684039A007C8CF5 /* loaded */ = {
@@ -557,36 +613,51 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9ECD6626A6ECBC0014E4EF /* MA.wav in Resources */,
 				FAE9F049268B19880023521F /* SINUS_1sec_44100samples.wav in Resources */,
 				FAC963AC268BC79900DCD2EA /* BD01_SOFT.wav in Resources */,
 				FAC963A5268B88E100DCD2EA /* SN01.wav in Resources */,
+				FA9ECD5C26A6ECBC0014E4EF /* SD5050.wav in Resources */,
+				FA9ECD6826A6ECBC0014E4EF /* CB_SOFT.wav in Resources */,
 				FAC9639D268B88E100DCD2EA /* SN02_SOFT.wav in Resources */,
+				FA9ECD5B26A6ECBC0014E4EF /* BD5050_SOFT.wav in Resources */,
 				FAB22319264413D300708387 /* silence.wav in Resources */,
 				FAC71DF6264F37AE007FE152 /* 440CRASH.wav in Resources */,
+				FA9ECD6726A6ECBC0014E4EF /* CB.wav in Resources */,
 				FA70CD85264829EA007A212F /* kick_2156samples.wav in Resources */,
+				FA9ECD5A26A6ECBC0014E4EF /* SD5050_SOFT.wav in Resources */,
 				FAC71DF7264F37AE007FE152 /* 440SN3.wav in Resources */,
 				FAC963A0268B88E100DCD2EA /* SN01_SOFT.wav in Resources */,
 				FA70CD87264829EA007A212F /* snare_2152samples.wav in Resources */,
+				FA9ECD6026A6ECBC0014E4EF /* CP.wav in Resources */,
+				FA9ECD5E26A6ECBC0014E4EF /* CL.wav in Resources */,
 				FA2FAA25268354E300C1EDBA /* 440BASS2.wav in Resources */,
+				FA9ECD6426A6ECBC0014E4EF /* OH50.wav in Resources */,
 				FAC71DF8264F37AE007FE152 /* 440CLAP.wav in Resources */,
 				FA8D6E94263EF2CF000FFFE3 /* pcm stereo 16 bit 44.1kHz.wav in Resources */,
 				FAC71DF1264F37AE007FE152 /* 440CLHH.wav in Resources */,
 				FAC963A2268B88E100DCD2EA /* CH01.wav in Resources */,
+				FA9ECD5F26A6ECBC0014E4EF /* OH50_SOFT.wav in Resources */,
+				FA9ECD6126A6ECBC0014E4EF /* CH.wav in Resources */,
 				FA70CD86264829EA007A212F /* open_hihat_2181samples.wav in Resources */,
 				FAC71DF9264F37AE007FE152 /* 440KICK3.wav in Resources */,
+				FA9ECD5926A6ECBC0014E4EF /* CH_SOFT.wav in Resources */,
 				FA8D6E8C263EF2C9000FFFE3 /* Main.storyboard in Resources */,
 				FAFEA991264BD34E002807DC /* kick_2156samples_SOFT.wav in Resources */,
 				FA70CD8C26482B25007A212F /* Notes.rtf in Resources */,
 				FAC9639E268B88E100DCD2EA /* OH01.wav in Resources */,
+				FA9ECD6326A6ECBC0014E4EF /* MA_SOFT.wav in Resources */,
 				FA8D6E82263EF2B5000FFFE3 /* LaunchScreen.storyboard in Resources */,
 				FAC71DF5264F37AE007FE152 /* 440KICK1.wav in Resources */,
 				FA8D6E7F263EF2B5000FFFE3 /* Assets.xcassets in Resources */,
 				FAFEA98F264BD34E002807DC /* open_hihat_2181samples_SOFT.wav in Resources */,
+				FA9ECD6526A6ECBC0014E4EF /* CP_SOFT.wav in Resources */,
 				FAFEA98E264BD34E002807DC /* hihat_2154samples_SOFT.wav in Resources */,
 				FAC71DF4264F37AE007FE152 /* 440SN2.wav in Resources */,
 				FAC963A6268B88E100DCD2EA /* BD01.wav in Resources */,
 				FAC9639F268B88E100DCD2EA /* SN02.wav in Resources */,
 				FAA4C61926664276005CC23C /* todo.rtf in Resources */,
+				FA9ECD6226A6ECBC0014E4EF /* BD5050.wav in Resources */,
 				FAC71DF2264F37AE007FE152 /* 440OHH.wav in Resources */,
 				FAC71DFA264F37AE007FE152 /* 440KICK2.wav in Resources */,
 				FAC71DF3264F37AE007FE152 /* 440SN1.wav in Resources */,
@@ -595,6 +666,7 @@
 				FAC963A1268B88E100DCD2EA /* OH01_SOFT.wav in Resources */,
 				FAE9F04A268B19880023521F /* SINUS_INVERTED_1sec_44100samples.wav in Resources */,
 				FAFEA990264BD34E002807DC /* snare_2152samples_SOFT.wav in Resources */,
+				FA9ECD5D26A6ECBC0014E4EF /* CL_SOFT.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
