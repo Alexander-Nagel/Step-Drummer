@@ -11,6 +11,7 @@ import UIKit
 // MARK: - Setup UI
 //
 extension MainVC {
+    
     func setupUI() {
         
         //
@@ -34,6 +35,112 @@ extension MainVC {
                          button3_4, button3_5, button3_6, button3_7,
                          button3_8, button3_9, button3_10, button3_11,
                          button3_12, button3_13, button3_14, button3_15]
+        
+        // create buttons programmatically in existing stack view "track4StackView"
+        // from https://stackoverflow.com/a/58163607:
+        
+        func createButton() -> UIButton {
+            let button = UIButton()
+            //button.setTitle("btn 1", for: .normal)
+            //button.backgroundColor = UIColor.red
+            //button.translatesAutoresizingMaskIntoConstraints = false
+            button.layer.borderColor = K.Color.blue_brighter.cgColor
+            button.layer.borderWidth = 1.0
+            button.isHidden = false
+            button.titleLabel?.text = ""
+            button.layer.cornerRadius = 5
+            // button.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            //button.tag = index
+            return button
+        }
+        
+        func createStackView() -> UIStackView {
+            let stackView = UIStackView()
+            stackView.axis = .horizontal
+            return stackView
+        }
+        
+       // let childStackView = UIStackView()
+        //childStackView.axis = .horizontal
+       //        childStackView.spacing = 0.0
+       //        childStackView.alignment = .fill
+       //        childStackView.distribution = .fillEqually
+       //        childStackView.contentMode = .scaleToFill
+       //        childStackView.autoresizesSubviews = true
+       //        childStackView.backgroundColor = .yellow
+        
+        let numberOfBeats = 4
+        let numberOfSubdivisions = 3
+        
+        for j in 0..<numberOfBeats{
+            let stackView = createStackView()
+            for i in 0..<numberOfSubdivisions {
+                stackView.addArrangedSubview(createButton())
+            }
+            stackView.distribution = .fillEqually
+            XXX.addArrangedSubview(stackView)
+        }
+       // XXX.addArrangedSubview(childStackView)
+        XXX.distribution = .fillEqually
+        XXX.alignment = .fill
+        XXX.spacing = 12
+
+//        let button2 = UIButton()
+//        button2.setTitle("btn 2", for: .normal)
+//        button2.backgroundColor = UIColor.gray
+//        button2.translatesAutoresizingMaskIntoConstraints = false
+//        button2.layer.borderWidth = 1.0
+//        button2.isHidden = false
+//        button2.titleLabel?.text = ""
+
+//        let button3 = UIButton()
+//        button3.setTitle("btn 3", for: .normal)
+//        button3.backgroundColor = UIColor.brown
+//        button3.translatesAutoresizingMaskIntoConstraints = false
+//        button3.layer.borderWidth = 1.0
+//        button3.isHidden = false
+//        button3.titleLabel?.text = ""
+        
+//        let button4 = UIButton()
+//        button4.setTitle("btn 4", for: .normal)
+//        button4.backgroundColor = UIColor.green
+//        button4.translatesAutoresizingMaskIntoConstraints = false
+//        button4.layer.borderWidth = 1.0
+//        button4.isHidden = false
+//        button4.titleLabel?.text = ""
+
+//        track4StackView.alignment = .fill
+  //      track4StackView.distribution = .fillEqually
+    //    track4StackView.spacing = 0.0
+
+        // from: https://stackoverflow.com/a/58548253
+//        let childStackView = UIStackView()
+//        childStackView.axis = .horizontal
+//        childStackView.spacing = 0.0
+//        childStackView.alignment = .fill
+//        childStackView.distribution = .fillEqually
+//        childStackView.contentMode = .scaleToFill
+//        childStackView.autoresizesSubviews = true
+//        childStackView.backgroundColor = .yellow
+//
+        //track4StackView.addArrangedSubview(childStackView)
+//        track4StackView.alignment = .fill
+//        track4StackView.distribution = .fillEqually
+//        track4StackView.spacing = 0
+        
+        //childStackView.translatesAutoresizingMaskIntoConstraints = false
+        //childStackView.heightAnchor.constraint(equalTo: track4StackView.heightAnchor)
+        
+//        track0StackView.addArrangedSubview(button)
+       // button.widthAnchor.constraint(equalTo: track4StackView.widthAnchor).isActive = true
+//        track4StackView.addArrangedSubview(button2)
+//        track4StackView.addArrangedSubview(button3)
+//        track4StackView.addArrangedSubview(button4)
+     
+        
+        // stackoverflow end
+        
+        
         trackButtonMatrix = [track0Buttons, track1Buttons, track2Buttons, track3Buttons]
         
         muteButtons = [mute0Button, mute1Button, mute2Button, mute3Button]
@@ -145,7 +252,7 @@ extension MainVC {
         // MARK: - Cells:
         //
         
-        // Style & hide all step/"Cell" buttons:
+        // Style & show all step/"Cell" buttons:
         //
         let allButtons = track0Buttons + track1Buttons + track2Buttons + track3Buttons
         for (index, button) in allButtons.enumerated() {

@@ -131,7 +131,17 @@ class MainVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var button3_14: UIButton!
     @IBOutlet weak var button3_15: UIButton!
     var track3Buttons: [UIButton] = []
+    
     var trackButtonMatrix: [[UIButton]] = []
+    
+    //
+    // player4 steps
+    //
+    @IBOutlet weak var track4StackView: UIStackView!
+    var track4Buttons: [UIButton] = []
+    
+    
+    @IBOutlet weak var XXX: UIStackView!
     
     //
     // Track controls
